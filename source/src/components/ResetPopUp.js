@@ -1,4 +1,9 @@
 /** Reset modal component */
+/**
+ * The class is extend HTMLElement function. This function call the reset function which is
+ * reset all the time. and call the closepopup function which is close all the pop up windows.
+ * @constructor The constructor would reset and show everything in pages
+ */
 class ResetPopUp extends HTMLElement {
     /** Reset current Pomodoro session */
     reset() {

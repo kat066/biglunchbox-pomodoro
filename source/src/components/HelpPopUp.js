@@ -1,4 +1,9 @@
 /** Help documentation modal component */
+/**
+ * The class is create a shadow dom and add every elements or detail in the dom and
+ * include the style of the web.
+ * @constructor The constructor would reset and show everything in pages
+ */
 class HelpPopUp extends HTMLElement {
     /** Closes the modal */
     closePopUp() {

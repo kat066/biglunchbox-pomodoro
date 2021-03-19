@@ -19,6 +19,11 @@ let longBreakTime = localStorage.getItem('long-break-length');
 
 timerDisplayDuration.innerHTML = `${pomoTime}:00`;
 
+/**
+ * The sitchMode function would sitch the time mode if the pomo time is over.
+ * the function would switch short break time mode. After three times of short
+ * break time, the function would switch to long break time.
+ */
 function switchMode() {
     const pomoButton = document.getElementById('pomo-btn');
     const breakButton = document.getElementById('break-btn');
@@ -49,6 +54,11 @@ function switchMode() {
     }
 }
 
+/**
+ * The function would call the switchMode function if the time mode counter
+ * down to 0 and the alarm sound would be call. The counter down would be call
+ * in this function.
+ */
 async function timerFunction() {
     let timerText = timerDisplayDuration.innerHTML;
 
@@ -80,11 +90,17 @@ async function timerFunction() {
     timerDisplayDuration.innerHTML = `${minutes}:${seconds}`;
 }
 
+/** The function would be call when the click start button and the stop button
+ * would be show in the web.
+*/
 async function start() {
     startButton.innerHTML = 'Stop';
     timer = setInterval(timerFunction, SECOND);
 }
 
+/** The function would be call when the click stop button the start button
+ * would be show in the web. The time would be reset.
+*/
 async function stop() {
     pomoTime = localStorage.getItem('pomo-length');
     breakTime = localStorage.getItem('short-break-length');
@@ -96,6 +112,7 @@ async function stop() {
     startButton.innerHTML = 'Start';
 }
 
+/** The function to check if the status stop */
 async function stopChecker() {
     if (localStorage.getItem('stop') === 'true') {
         stop();
@@ -103,6 +120,10 @@ async function stopChecker() {
     }
 }
 
+/** The function check if the start button click then call start function
+ * if the stop button click then call stop function. The sound of button would
+ * be play.
+ */
 async function startAndStopButton() {
     btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
     btnSound.play();

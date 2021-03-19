@@ -1,6 +1,12 @@
 // const TaskItem = require('./TaskItem');
 
-/** create class for popup to add task */
+/**
+ * The class is extend the HTMlElement function. The addTask function would be call for
+ * add the tasks in the focus mode. the closePopup function would
+ * be called for close all pop up windows.
+ *
+ * @constructor The constructor would reset and show everything in pages
+ */
 class TaskPopUp extends HTMLElement {
     // add TaskItem element to DOM
     addTask() {
@@ -16,6 +22,7 @@ class TaskPopUp extends HTMLElement {
             };
             const taskItem = document.createElement('task-item');
             taskItem.setAttribute('id', task.id);
+            taskItem.setAttribute('title', 'Click to toggle task completion')
             taskItem.setAttribute('checked', task.checked);
             taskItem.setAttribute('text', task.text);
             taskItem.setAttribute('focused', task.focused);
