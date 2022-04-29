@@ -2448,10 +2448,6 @@ class SettingsPopUp extends HTMLElement {
     const style = (cov_f3gyl445a().s[137]++, document.createElement('style'));
     cov_f3gyl445a().s[138]++;
     style.textContent = `
-        /* Smoothen Animation */
-        button {
-          transition: transform .3s ease;
-        }
         h4 {
                 font-size: 1.15vw;
         }
@@ -2629,7 +2625,6 @@ class SettingsPopUp extends HTMLElement {
                 right:0;
                 cursor: pointer;
                 opacity: 0.33;
-                transition: transform .3s ease;
         }
         #close-icon:hover {
                 opacity: 1;

@@ -2396,7 +2396,6 @@ let breakTime = (cov_oxxexp8us().s[12]++, localStorage.getItem('short-break-leng
 let longBreakTime = (cov_oxxexp8us().s[13]++, localStorage.getItem('long-break-length'));
 cov_oxxexp8us().s[14]++;
 timerDisplayDuration.innerHTML = `${pomoTime}:00`;
-
 /**
  * The sitchMode function would sitch the time mode if the pomo time is over.
  * the function would switch short break time mode. After three times of short
@@ -2480,8 +2479,8 @@ function switchMode() {
  * in this function.
  */
 
+
 async function timerFunction() {
-  const pomoButton = (cov_oxxexp8us().s[15]++, document.getElementById('pomo-btn'));
   cov_oxxexp8us().f[1]++;
   let timerText = (cov_oxxexp8us().s[36]++, timerDisplayDuration.innerHTML);
   cov_oxxexp8us().s[37]++;
@@ -2537,18 +2536,6 @@ async function timerFunction() {
 
   cov_oxxexp8us().s[51]++;
   timerDisplayDuration.innerHTML = `${minutes}:${seconds}`;
-  // sync title time
-  if (startButton.innerHTML === 'Start') {
-    // sync title
-    document.title = `Pomodoro Timer`;
-  }
-  else if (pomoButton.getAttribute('class') !== 'toggle') {
-    document.title = `Focus: ${minutes}:${seconds}`;
-  }
-  else {
-    document.title = `Break: ${minutes}:${seconds}`;
-  }
-
 }
 /** The function would be call when the click start button and the stop button
  * would be show in the web.
