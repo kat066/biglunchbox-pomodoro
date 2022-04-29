@@ -1141,6 +1141,7 @@ class TaskPopUp extends HTMLElement {
             right:0;
             cursor: pointer;
             opacity: 0.33;
+            transition: transform .3s ease;
         }
         #close-icon:hover {
             opacity: 1;
@@ -1221,6 +1222,7 @@ class TaskPopUp extends HTMLElement {
             font-size: 1.25vw;
             font-weight: 500;
             outline: none;
+            transition: transform .3s ease;
         }
         .popup-btns:hover {
             filter: brightness(105%);
