@@ -138,6 +138,11 @@ img#dash {
 }
 /* Code BELOW is for Clock */
 /* CSS for Pomo/Break button dispaly */
+/* Smoothen Buttons */
+button {
+    transition: transform .3s ease;
+}
+
 .timer-buttons {
     width: fit-content;
     margin: 0 auto;

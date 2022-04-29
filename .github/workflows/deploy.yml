@@ -1,0 +1,55 @@
+# Deploy JS and coverage doc to master
+
+name: CD
+on:
+  push:
+    branches:
+      - master
+  # Allows workflow to be run manually
+  workflow_dispatch:
+
+jobs:
+  # builds app, coverage report, and jsdocs in build folder and deploys to the gh-pages branch
+  deploy-app:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: source
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install modules and ready build
+        run: |
+          npm install
+          mkdir build
+
+      - name: Build app
+        run: cp -av src/* build
+
+      - name: Build Jest coverage report
+        run: npm test
+
+      - name: Build Cypress coverage report
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          working-directory: source
+          browser: chrome
+          start: npm start
+
+      - run: cp -av coverage build
+
+      - name: Build docs
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: source/src
+          output_dir: source/build/docs
+          template: minami
+          front_page: README.md
+          recurse: true
+
+      - name: Deploy build on gh-pages
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: source/build

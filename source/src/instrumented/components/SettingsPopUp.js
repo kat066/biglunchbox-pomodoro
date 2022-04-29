@@ -1,10 +1,10 @@
-function cov_2pzpljnt1() {
-  var path = "/Users/efeichen/Documents/Academics/CSE 110/cse110-w21-group13/source/src/components/SettingsPopUp.js";
-  var hash = "b35902c0023cc82f10d4b517cd070baf980de022";
+function cov_f3gyl445a() {
+  var path = "C:\\UCSD\\Spring_2022\\CSE112\\biglunchbox-pomodoro\\source\\src\\components\\SettingsPopUp.js";
+  var hash = "3de3881d7cd0841b0034c6fbb398d7327fc0d729";
   var global = new Function("return this")();
   var gcv = "__coverage__";
   var coverageData = {
-    path: "/Users/efeichen/Documents/Academics/CSE 110/cse110-w21-group13/source/src/components/SettingsPopUp.js",
+    path: "C:\\UCSD\\Spring_2022\\CSE112\\biglunchbox-pomodoro\\source\\src\\components\\SettingsPopUp.js",
     statementMap: {
       "0": {
         start: {
@@ -2104,7 +2104,7 @@ function cov_2pzpljnt1() {
       "4": [0, 0]
     },
     _coverageSchema: "1a1c01bbd47fc00a2c39e90264f33305004495a9",
-    hash: "b35902c0023cc82f10d4b517cd070baf980de022"
+    hash: "3de3881d7cd0841b0034c6fbb398d7327fc0d729"
   };
   var coverage = global[gcv] || (global[gcv] = {});
 
@@ -2115,14 +2115,14 @@ function cov_2pzpljnt1() {
   var actualCoverage = coverage[path];
   {
     // @ts-ignore
-    cov_2pzpljnt1 = function () {
+    cov_f3gyl445a = function () {
       return actualCoverage;
     };
   }
   return actualCoverage;
 }
 
-cov_2pzpljnt1();
+cov_f3gyl445a();
 
 /**
  * The class is extend the HTMlElement function. The closePopup function would be call for
@@ -2134,320 +2134,324 @@ cov_2pzpljnt1();
  */
 class SettingsPopUp extends HTMLElement {
   closePopUp() {
-    cov_2pzpljnt1().f[0]++;
-    const wrapper = (cov_2pzpljnt1().s[0]++, this.shadowRoot.getElementById('settings-confirm-popup'));
-    cov_2pzpljnt1().s[1]++;
+    cov_f3gyl445a().f[0]++;
+    const wrapper = (cov_f3gyl445a().s[0]++, this.shadowRoot.getElementById('settings-confirm-popup'));
+    cov_f3gyl445a().s[1]++;
     wrapper.style.display = 'none';
   }
 
   confirmSettings() {
-    cov_2pzpljnt1().f[1]++;
-    let pomoLength = (cov_2pzpljnt1().s[2]++, parseInt(this.shadowRoot.getElementById('pomo-length-input').value, 10));
-    cov_2pzpljnt1().s[3]++;
+    cov_f3gyl445a().f[1]++;
+    let pomoLength = (cov_f3gyl445a().s[2]++, parseInt(this.shadowRoot.getElementById('pomo-length-input').value, 10));
+    cov_f3gyl445a().s[3]++;
 
     if (Number.isNaN(pomoLength)) {
-      cov_2pzpljnt1().b[0][0]++;
-      cov_2pzpljnt1().s[4]++;
+      cov_f3gyl445a().b[0][0]++;
+      cov_f3gyl445a().s[4]++;
       pomoLength = 25;
-      cov_2pzpljnt1().s[5]++;
+      cov_f3gyl445a().s[5]++;
       this.shadowRoot.getElementById('pomo-length-input').value = 25;
     } else {
-      cov_2pzpljnt1().b[0][1]++;
+      cov_f3gyl445a().b[0][1]++;
     }
 
-    cov_2pzpljnt1().s[6]++;
+    cov_f3gyl445a().s[6]++;
     localStorage.setItem('pomo-length', String(pomoLength));
-    let shortBreak = (cov_2pzpljnt1().s[7]++, parseInt(this.shadowRoot.getElementById('short-break-input').value, 10));
-    cov_2pzpljnt1().s[8]++;
+    let shortBreak = (cov_f3gyl445a().s[7]++, parseInt(this.shadowRoot.getElementById('short-break-input').value, 10));
+    cov_f3gyl445a().s[8]++;
 
     if (Number.isNaN(shortBreak)) {
-      cov_2pzpljnt1().b[1][0]++;
-      cov_2pzpljnt1().s[9]++;
+      cov_f3gyl445a().b[1][0]++;
+      cov_f3gyl445a().s[9]++;
       shortBreak = 5;
-      cov_2pzpljnt1().s[10]++;
+      cov_f3gyl445a().s[10]++;
       this.shadowRoot.getElementById('short-break-input').value = 5;
     } else {
-      cov_2pzpljnt1().b[1][1]++;
+      cov_f3gyl445a().b[1][1]++;
     }
 
-    cov_2pzpljnt1().s[11]++;
+    cov_f3gyl445a().s[11]++;
     localStorage.setItem('short-break-length', String(shortBreak));
-    let longBreak = (cov_2pzpljnt1().s[12]++, parseInt(this.shadowRoot.getElementById('long-break-input').value, 10));
-    cov_2pzpljnt1().s[13]++;
+    let longBreak = (cov_f3gyl445a().s[12]++, parseInt(this.shadowRoot.getElementById('long-break-input').value, 10));
+    cov_f3gyl445a().s[13]++;
 
     if (Number.isNaN(longBreak)) {
-      cov_2pzpljnt1().b[2][0]++;
-      cov_2pzpljnt1().s[14]++;
+      cov_f3gyl445a().b[2][0]++;
+      cov_f3gyl445a().s[14]++;
       longBreak = 15;
-      cov_2pzpljnt1().s[15]++;
+      cov_f3gyl445a().s[15]++;
       this.shadowRoot.getElementById('long-break-input').value = 15;
     } else {
-      cov_2pzpljnt1().b[2][1]++;
+      cov_f3gyl445a().b[2][1]++;
     }
 
-    cov_2pzpljnt1().s[16]++;
+    cov_f3gyl445a().s[16]++;
     localStorage.setItem('long-break-length', String(longBreak));
-    const btnSound = (cov_2pzpljnt1().s[17]++, new Audio('./icons/btnClick.mp3'));
-    cov_2pzpljnt1().s[18]++;
+    const btnSound = (cov_f3gyl445a().s[17]++, new Audio('./icons/btnClick.mp3'));
+    cov_f3gyl445a().s[18]++;
     btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-    cov_2pzpljnt1().s[19]++;
+    cov_f3gyl445a().s[19]++;
     btnSound.play();
-    cov_2pzpljnt1().s[20]++;
+    cov_f3gyl445a().s[20]++;
     localStorage.setItem('stop', 'true');
-    cov_2pzpljnt1().s[21]++;
+    cov_f3gyl445a().s[21]++;
     this.closePopUp();
   }
 
   toggleMode() {
-    cov_2pzpljnt1().f[2]++;
-    cov_2pzpljnt1().s[22]++;
+    cov_f3gyl445a().f[2]++;
+    cov_f3gyl445a().s[22]++;
 
     if (localStorage.getItem('theme') === 'light') {
-      cov_2pzpljnt1().b[3][0]++;
-      cov_2pzpljnt1().s[23]++;
+      cov_f3gyl445a().b[3][0]++;
+      cov_f3gyl445a().s[23]++;
       localStorage.setItem('theme', 'dark');
     } else {
-      cov_2pzpljnt1().b[3][1]++;
-      cov_2pzpljnt1().s[24]++;
+      cov_f3gyl445a().b[3][1]++;
+      cov_f3gyl445a().s[24]++;
       localStorage.setItem('theme', 'light');
     }
 
-    cov_2pzpljnt1().s[25]++;
+    cov_f3gyl445a().s[25]++;
     document.body.classList.toggle('dark-theme');
   }
 
   setVolume() {
-    cov_2pzpljnt1().f[3]++;
-    const volume = (cov_2pzpljnt1().s[26]++, this.shadowRoot.getElementById('range').value);
-    cov_2pzpljnt1().s[27]++;
+    cov_f3gyl445a().f[3]++;
+    const volume = (cov_f3gyl445a().s[26]++, this.shadowRoot.getElementById('range').value);
+    cov_f3gyl445a().s[27]++;
     localStorage.setItem('volume', `${volume}`);
   }
 
   constructor() {
-    cov_2pzpljnt1().f[4]++;
-    cov_2pzpljnt1().s[28]++;
+    cov_f3gyl445a().f[4]++;
+    cov_f3gyl445a().s[28]++;
     super();
-    const shadow = (cov_2pzpljnt1().s[29]++, this.attachShadow({
+    const shadow = (cov_f3gyl445a().s[29]++, this.attachShadow({
       mode: 'open'
     })); // use div as wrapper
 
-    const wrapper = (cov_2pzpljnt1().s[30]++, document.createElement('div'));
-    cov_2pzpljnt1().s[31]++;
+    const wrapper = (cov_f3gyl445a().s[30]++, document.createElement('div'));
+    cov_f3gyl445a().s[31]++;
     wrapper.setAttribute('id', 'settings-confirm-popup'); // close icon
 
-    const close = (cov_2pzpljnt1().s[32]++, wrapper.appendChild(document.createElement('img')));
-    cov_2pzpljnt1().s[33]++;
+    const close = (cov_f3gyl445a().s[32]++, wrapper.appendChild(document.createElement('img')));
+    cov_f3gyl445a().s[33]++;
     close.setAttribute('src', 'icons/close.svg');
-    cov_2pzpljnt1().s[34]++;
+    cov_f3gyl445a().s[34]++;
     close.setAttribute('id', 'close-icon'); // title
 
-    const title = (cov_2pzpljnt1().s[35]++, wrapper.appendChild(document.createElement('h3')));
-    cov_2pzpljnt1().s[36]++;
+    const title = (cov_f3gyl445a().s[35]++, wrapper.appendChild(document.createElement('h3')));
+    cov_f3gyl445a().s[36]++;
     title.innerHTML = 'Settings'; // session title
 
-    const sessionTitle = (cov_2pzpljnt1().s[37]++, wrapper.appendChild(document.createElement('h4')));
-    cov_2pzpljnt1().s[38]++;
+    const sessionTitle = (cov_f3gyl445a().s[37]++, wrapper.appendChild(document.createElement('h4')));
+    cov_f3gyl445a().s[38]++;
     sessionTitle.setAttribute('id', 'timer-settings');
-    cov_2pzpljnt1().s[39]++;
+    cov_f3gyl445a().s[39]++;
     sessionTitle.innerHTML = 'Session Length (minutes)'; // session div
 
-    const session = (cov_2pzpljnt1().s[40]++, wrapper.appendChild(document.createElement('div')));
-    cov_2pzpljnt1().s[41]++;
+    const session = (cov_f3gyl445a().s[40]++, wrapper.appendChild(document.createElement('div')));
+    cov_f3gyl445a().s[41]++;
     session.setAttribute('id', 'session'); // append input forms
 
-    const pomoWrapper = (cov_2pzpljnt1().s[42]++, session.appendChild(document.createElement('div')));
-    cov_2pzpljnt1().s[43]++;
+    const pomoWrapper = (cov_f3gyl445a().s[42]++, session.appendChild(document.createElement('div')));
+    cov_f3gyl445a().s[43]++;
     pomoWrapper.setAttribute('class', 'session-inputs');
-    const pomoLabel = (cov_2pzpljnt1().s[44]++, pomoWrapper.appendChild(document.createElement('label')));
-    cov_2pzpljnt1().s[45]++;
+    const pomoLabel = (cov_f3gyl445a().s[44]++, pomoWrapper.appendChild(document.createElement('label')));
+    cov_f3gyl445a().s[45]++;
     pomoLabel.setAttribute('for', 'pomo');
-    cov_2pzpljnt1().s[46]++;
+    cov_f3gyl445a().s[46]++;
     pomoLabel.innerHTML = 'Pomodoro';
-    const pomoInput = (cov_2pzpljnt1().s[47]++, pomoWrapper.appendChild(document.createElement('input')));
-    cov_2pzpljnt1().s[48]++;
+    const pomoInput = (cov_f3gyl445a().s[47]++, pomoWrapper.appendChild(document.createElement('input')));
+    cov_f3gyl445a().s[48]++;
     pomoInput.setAttribute('type', 'number');
-    cov_2pzpljnt1().s[49]++;
+    cov_f3gyl445a().s[49]++;
     pomoInput.setAttribute('id', 'pomo-length-input');
-    cov_2pzpljnt1().s[50]++;
+    cov_f3gyl445a().s[50]++;
     pomoInput.setAttribute('value', parseInt(localStorage.getItem('pomo-length'), 10));
-    cov_2pzpljnt1().s[51]++;
+    cov_f3gyl445a().s[51]++;
     pomoInput.setAttribute('min', 1); // values subj. to change
 
-    cov_2pzpljnt1().s[52]++;
+    cov_f3gyl445a().s[52]++;
     pomoInput.setAttribute('max', 60); // values subj. to change
 
-    cov_2pzpljnt1().s[53]++;
+    cov_f3gyl445a().s[53]++;
     pomoInput.setAttribute('oninput', "validity.valid||(value='');");
-    const shortBreakWrapper = (cov_2pzpljnt1().s[54]++, session.appendChild(document.createElement('div')));
-    cov_2pzpljnt1().s[55]++;
+    const shortBreakWrapper = (cov_f3gyl445a().s[54]++, session.appendChild(document.createElement('div')));
+    cov_f3gyl445a().s[55]++;
     shortBreakWrapper.setAttribute('class', 'session-inputs');
-    const shortBreakLabel = (cov_2pzpljnt1().s[56]++, shortBreakWrapper.appendChild(document.createElement('label')));
-    cov_2pzpljnt1().s[57]++;
+    const shortBreakLabel = (cov_f3gyl445a().s[56]++, shortBreakWrapper.appendChild(document.createElement('label')));
+    cov_f3gyl445a().s[57]++;
     shortBreakLabel.setAttribute('for', 'short-break');
-    cov_2pzpljnt1().s[58]++;
+    cov_f3gyl445a().s[58]++;
     shortBreakLabel.innerHTML = 'Short Break';
-    const shortBreakInput = (cov_2pzpljnt1().s[59]++, shortBreakWrapper.appendChild(document.createElement('input')));
-    cov_2pzpljnt1().s[60]++;
+    const shortBreakInput = (cov_f3gyl445a().s[59]++, shortBreakWrapper.appendChild(document.createElement('input')));
+    cov_f3gyl445a().s[60]++;
     shortBreakInput.setAttribute('type', 'number');
-    cov_2pzpljnt1().s[61]++;
+    cov_f3gyl445a().s[61]++;
     shortBreakInput.setAttribute('id', 'short-break-input');
-    cov_2pzpljnt1().s[62]++;
+    cov_f3gyl445a().s[62]++;
     shortBreakInput.setAttribute('value', parseInt(localStorage.getItem('short-break-length'), 10));
-    cov_2pzpljnt1().s[63]++;
+    cov_f3gyl445a().s[63]++;
     shortBreakInput.setAttribute('min', 1); // values subj. to change
 
-    cov_2pzpljnt1().s[64]++;
+    cov_f3gyl445a().s[64]++;
     shortBreakInput.setAttribute('max', 60); // values subj. to change
 
-    cov_2pzpljnt1().s[65]++;
+    cov_f3gyl445a().s[65]++;
     shortBreakInput.setAttribute('oninput', "validity.valid||(value='');");
-    const longBreakWrapper = (cov_2pzpljnt1().s[66]++, session.appendChild(document.createElement('div')));
-    cov_2pzpljnt1().s[67]++;
+    const longBreakWrapper = (cov_f3gyl445a().s[66]++, session.appendChild(document.createElement('div')));
+    cov_f3gyl445a().s[67]++;
     longBreakWrapper.setAttribute('class', 'session-inputs');
-    const longBreakLabel = (cov_2pzpljnt1().s[68]++, longBreakWrapper.appendChild(document.createElement('label')));
-    cov_2pzpljnt1().s[69]++;
+    const longBreakLabel = (cov_f3gyl445a().s[68]++, longBreakWrapper.appendChild(document.createElement('label')));
+    cov_f3gyl445a().s[69]++;
     longBreakLabel.setAttribute('for', 'long-break');
-    cov_2pzpljnt1().s[70]++;
+    cov_f3gyl445a().s[70]++;
     longBreakLabel.innerHTML = 'Long Break';
-    const longBreakInput = (cov_2pzpljnt1().s[71]++, longBreakWrapper.appendChild(document.createElement('input')));
-    cov_2pzpljnt1().s[72]++;
+    const longBreakInput = (cov_f3gyl445a().s[71]++, longBreakWrapper.appendChild(document.createElement('input')));
+    cov_f3gyl445a().s[72]++;
     longBreakInput.setAttribute('type', 'number');
-    cov_2pzpljnt1().s[73]++;
+    cov_f3gyl445a().s[73]++;
     longBreakInput.setAttribute('id', 'long-break-input');
-    cov_2pzpljnt1().s[74]++;
+    cov_f3gyl445a().s[74]++;
     longBreakInput.setAttribute('value', parseInt(localStorage.getItem('long-break-length'), 10));
-    cov_2pzpljnt1().s[75]++;
+    cov_f3gyl445a().s[75]++;
     longBreakInput.setAttribute('min', 1); // values subj. to change
 
-    cov_2pzpljnt1().s[76]++;
+    cov_f3gyl445a().s[76]++;
     longBreakInput.setAttribute('max', 60); // values subj. to change
 
-    cov_2pzpljnt1().s[77]++;
+    cov_f3gyl445a().s[77]++;
     longBreakInput.setAttribute('oninput', "validity.valid||(value='');"); // separate div for dark mode setting
 
-    const darkModeDiv = (cov_2pzpljnt1().s[78]++, wrapper.appendChild(document.createElement('div')));
-    cov_2pzpljnt1().s[79]++;
+    const darkModeDiv = (cov_f3gyl445a().s[78]++, wrapper.appendChild(document.createElement('div')));
+    cov_f3gyl445a().s[79]++;
     darkModeDiv.setAttribute('id', 'dark-mode');
-    const darkModeTitle = (cov_2pzpljnt1().s[80]++, darkModeDiv.appendChild(document.createElement('h4')));
-    cov_2pzpljnt1().s[81]++;
+    const darkModeTitle = (cov_f3gyl445a().s[80]++, darkModeDiv.appendChild(document.createElement('h4')));
+    cov_f3gyl445a().s[81]++;
     darkModeTitle.setAttribute('id', 'enable-dark-mode');
-    cov_2pzpljnt1().s[82]++;
+    cov_f3gyl445a().s[82]++;
     darkModeTitle.innerHTML = 'Enable Dark Mode?';
-    const modeSwitch = (cov_2pzpljnt1().s[83]++, darkModeDiv.appendChild(document.createElement('label')));
-    cov_2pzpljnt1().s[84]++;
+    const modeSwitch = (cov_f3gyl445a().s[83]++, darkModeDiv.appendChild(document.createElement('label')));
+    cov_f3gyl445a().s[84]++;
     modeSwitch.setAttribute('class', 'switch');
-    const checkboxInput = (cov_2pzpljnt1().s[85]++, modeSwitch.appendChild(document.createElement('input')));
-    cov_2pzpljnt1().s[86]++;
+    const checkboxInput = (cov_f3gyl445a().s[85]++, modeSwitch.appendChild(document.createElement('input')));
+    cov_f3gyl445a().s[86]++;
     checkboxInput.setAttribute('type', 'checkbox');
-    cov_2pzpljnt1().s[87]++;
+    cov_f3gyl445a().s[87]++;
 
     if (localStorage.getItem('theme') === 'dark') {
-      cov_2pzpljnt1().b[4][0]++;
-      cov_2pzpljnt1().s[88]++;
+      cov_f3gyl445a().b[4][0]++;
+      cov_f3gyl445a().s[88]++;
       checkboxInput.checked = 'checked';
     } else {
-      cov_2pzpljnt1().b[4][1]++;
+      cov_f3gyl445a().b[4][1]++;
     }
 
-    const slider = (cov_2pzpljnt1().s[89]++, modeSwitch.appendChild(document.createElement('span')));
-    cov_2pzpljnt1().s[90]++;
+    const slider = (cov_f3gyl445a().s[89]++, modeSwitch.appendChild(document.createElement('span')));
+    cov_f3gyl445a().s[90]++;
     slider.setAttribute('class', 'slider'); // add event listener to toggle dark mode
 
-    cov_2pzpljnt1().s[91]++;
+    cov_f3gyl445a().s[91]++;
     slider.addEventListener('click', this.toggleMode.bind(this)); // separate div for volume
 
-    const volumeDiv = (cov_2pzpljnt1().s[92]++, wrapper.appendChild(document.createElement('div')));
-    cov_2pzpljnt1().s[93]++;
+    const volumeDiv = (cov_f3gyl445a().s[92]++, wrapper.appendChild(document.createElement('div')));
+    cov_f3gyl445a().s[93]++;
     volumeDiv.setAttribute('id', 'volume-div');
-    const volumeTitle = (cov_2pzpljnt1().s[94]++, volumeDiv.appendChild(document.createElement('h4')));
-    cov_2pzpljnt1().s[95]++;
+    const volumeTitle = (cov_f3gyl445a().s[94]++, volumeDiv.appendChild(document.createElement('h4')));
+    cov_f3gyl445a().s[95]++;
     volumeTitle.setAttribute('id', 'sound-volume');
-    cov_2pzpljnt1().s[96]++;
+    cov_f3gyl445a().s[96]++;
     volumeTitle.innerHTML = 'Audio Volume';
-    const volP = (cov_2pzpljnt1().s[97]++, volumeDiv.appendChild(document.createElement('p')));
-    const volSpan = (cov_2pzpljnt1().s[98]++, volP.appendChild(document.createElement('span')));
-    cov_2pzpljnt1().s[99]++;
+    const volP = (cov_f3gyl445a().s[97]++, volumeDiv.appendChild(document.createElement('p')));
+    const volSpan = (cov_f3gyl445a().s[98]++, volP.appendChild(document.createElement('span')));
+    cov_f3gyl445a().s[99]++;
     volSpan.setAttribute('id', 'volume-number');
-    const sliderDiv = (cov_2pzpljnt1().s[100]++, volumeDiv.appendChild(document.createElement('div')));
-    cov_2pzpljnt1().s[101]++;
+    const sliderDiv = (cov_f3gyl445a().s[100]++, volumeDiv.appendChild(document.createElement('div')));
+    cov_f3gyl445a().s[101]++;
     sliderDiv.setAttribute('class', 'slider-div');
-    const rangeInput = (cov_2pzpljnt1().s[102]++, sliderDiv.appendChild(document.createElement('input')));
-    cov_2pzpljnt1().s[103]++;
+    const rangeInput = (cov_f3gyl445a().s[102]++, sliderDiv.appendChild(document.createElement('input')));
+    cov_f3gyl445a().s[103]++;
     rangeInput.setAttribute('type', 'range');
-    cov_2pzpljnt1().s[104]++;
+    cov_f3gyl445a().s[104]++;
     rangeInput.setAttribute('min', 0);
-    cov_2pzpljnt1().s[105]++;
+    cov_f3gyl445a().s[105]++;
     rangeInput.setAttribute('max', 100);
-    cov_2pzpljnt1().s[106]++;
+    cov_f3gyl445a().s[106]++;
     rangeInput.setAttribute('value', parseInt(localStorage.getItem('volume'), 10));
-    cov_2pzpljnt1().s[107]++;
+    cov_f3gyl445a().s[107]++;
     rangeInput.setAttribute('class', 'vol-slider');
-    cov_2pzpljnt1().s[108]++;
+    cov_f3gyl445a().s[108]++;
     rangeInput.setAttribute('id', 'range'); // append confirm btn in footer
 
-    const footer = (cov_2pzpljnt1().s[109]++, wrapper.appendChild(document.createElement('div')));
-    cov_2pzpljnt1().s[110]++;
+    const footer = (cov_f3gyl445a().s[109]++, wrapper.appendChild(document.createElement('div')));
+    cov_f3gyl445a().s[110]++;
     footer.setAttribute('class', 'button-footer');
-    const confirmBtn = (cov_2pzpljnt1().s[111]++, footer.appendChild(document.createElement('button')));
-    cov_2pzpljnt1().s[112]++;
+    const confirmBtn = (cov_f3gyl445a().s[111]++, footer.appendChild(document.createElement('button')));
+    cov_f3gyl445a().s[112]++;
     confirmBtn.setAttribute('class', 'settings-popup-btns');
-    cov_2pzpljnt1().s[113]++;
+    cov_f3gyl445a().s[113]++;
     confirmBtn.setAttribute('id', 'confirm-settings-btn');
-    cov_2pzpljnt1().s[114]++;
+    cov_f3gyl445a().s[114]++;
     confirmBtn.innerHTML = 'Confirm'; // event listeners for confirm btn and close icon
 
-    cov_2pzpljnt1().s[115]++;
+    cov_f3gyl445a().s[115]++;
     confirmBtn.addEventListener('click', this.confirmSettings.bind(this));
-    cov_2pzpljnt1().s[116]++;
+    cov_f3gyl445a().s[116]++;
     close.addEventListener('click', this.closePopUp.bind(this)); // event listener to set volume in local storage
 
-    cov_2pzpljnt1().s[117]++;
+    cov_f3gyl445a().s[117]++;
     rangeInput.addEventListener('change', this.setVolume.bind(this));
-    cov_2pzpljnt1().s[118]++;
+    cov_f3gyl445a().s[118]++;
     volSpan.innerHTML = rangeInput.value; // event listener to dynamically display volume
 
-    cov_2pzpljnt1().s[119]++;
+    cov_f3gyl445a().s[119]++;
     rangeInput.addEventListener('input', function onInput() {
-      cov_2pzpljnt1().f[5]++;
-      cov_2pzpljnt1().s[120]++;
+      cov_f3gyl445a().f[5]++;
+      cov_f3gyl445a().s[120]++;
       volSpan.innerHTML = this.value;
     }); // use ::part pseudo-element to style element outside of shadow tree -- for dark mode
 
-    cov_2pzpljnt1().s[121]++;
+    cov_f3gyl445a().s[121]++;
     wrapper.setAttribute('part', 'settings-confirm-popup');
-    cov_2pzpljnt1().s[122]++;
+    cov_f3gyl445a().s[122]++;
     close.setAttribute('part', 'close-icon');
-    cov_2pzpljnt1().s[123]++;
+    cov_f3gyl445a().s[123]++;
     title.setAttribute('part', 'settings-h3');
-    cov_2pzpljnt1().s[124]++;
+    cov_f3gyl445a().s[124]++;
     sessionTitle.setAttribute('part', 'timer-settings');
-    cov_2pzpljnt1().s[125]++;
+    cov_f3gyl445a().s[125]++;
     pomoLabel.setAttribute('part', 'session-labels');
-    cov_2pzpljnt1().s[126]++;
+    cov_f3gyl445a().s[126]++;
     pomoInput.setAttribute('part', 'length-inputs');
-    cov_2pzpljnt1().s[127]++;
+    cov_f3gyl445a().s[127]++;
     shortBreakLabel.setAttribute('part', 'session-labels');
-    cov_2pzpljnt1().s[128]++;
+    cov_f3gyl445a().s[128]++;
     shortBreakInput.setAttribute('part', 'length-inputs');
-    cov_2pzpljnt1().s[129]++;
+    cov_f3gyl445a().s[129]++;
     longBreakLabel.setAttribute('part', 'session-labels');
-    cov_2pzpljnt1().s[130]++;
+    cov_f3gyl445a().s[130]++;
     longBreakInput.setAttribute('part', 'length-inputs');
-    cov_2pzpljnt1().s[131]++;
+    cov_f3gyl445a().s[131]++;
     darkModeTitle.setAttribute('part', 'enable-dark-mode');
-    cov_2pzpljnt1().s[132]++;
+    cov_f3gyl445a().s[132]++;
     volumeTitle.setAttribute('part', 'sound-volume');
-    cov_2pzpljnt1().s[133]++;
+    cov_f3gyl445a().s[133]++;
     volSpan.setAttribute('part', 'volume-number');
-    cov_2pzpljnt1().s[134]++;
+    cov_f3gyl445a().s[134]++;
     rangeInput.setAttribute('part', 'range-slider');
-    cov_2pzpljnt1().s[135]++;
+    cov_f3gyl445a().s[135]++;
     footer.setAttribute('part', 'btn-footer');
-    cov_2pzpljnt1().s[136]++;
+    cov_f3gyl445a().s[136]++;
     confirmBtn.setAttribute('part', 'confirm-btn');
-    const style = (cov_2pzpljnt1().s[137]++, document.createElement('style'));
-    cov_2pzpljnt1().s[138]++;
+    const style = (cov_f3gyl445a().s[137]++, document.createElement('style'));
+    cov_f3gyl445a().s[138]++;
     style.textContent = `
+        /* Smoothen Animation */
+        button {
+          transition: transform .3s ease;
+        }
         h4 {
                 font-size: 1.15vw;
         }
@@ -2625,6 +2629,7 @@ class SettingsPopUp extends HTMLElement {
                 right:0;
                 cursor: pointer;
                 opacity: 0.33;
+                transition: transform .3s ease;
         }
         #close-icon:hover {
                 opacity: 1;
@@ -2684,43 +2689,43 @@ class SettingsPopUp extends HTMLElement {
         #confirm-settings-btn {
                 padding: 0.625vw 0.9375vw;
         }`;
-    cov_2pzpljnt1().s[139]++;
+    cov_f3gyl445a().s[139]++;
     shadow.appendChild(wrapper);
-    cov_2pzpljnt1().s[140]++;
+    cov_f3gyl445a().s[140]++;
     shadow.appendChild(style);
   }
 
 }
 
-cov_2pzpljnt1().s[141]++;
+cov_f3gyl445a().s[141]++;
 customElements.define('settings-popup', SettingsPopUp);
-cov_2pzpljnt1().s[142]++;
+cov_f3gyl445a().s[142]++;
 window.addEventListener('load', () => {
-  cov_2pzpljnt1().f[6]++;
-  const settingsButton = (cov_2pzpljnt1().s[143]++, document.getElementById('setting-button'));
-  const settingsPopUp = (cov_2pzpljnt1().s[144]++, document.createElement('settings-popup'));
-  cov_2pzpljnt1().s[145]++;
+  cov_f3gyl445a().f[6]++;
+  const settingsButton = (cov_f3gyl445a().s[143]++, document.getElementById('setting-button'));
+  const settingsPopUp = (cov_f3gyl445a().s[144]++, document.createElement('settings-popup'));
+  cov_f3gyl445a().s[145]++;
   settingsPopUp.setAttribute('class', 'popup');
-  cov_2pzpljnt1().s[146]++;
+  cov_f3gyl445a().s[146]++;
   document.body.appendChild(settingsPopUp);
-  cov_2pzpljnt1().s[147]++;
+  cov_f3gyl445a().s[147]++;
   settingsButton.addEventListener('click', () => {
-    cov_2pzpljnt1().f[7]++;
-    const btnSound = (cov_2pzpljnt1().s[148]++, new Audio('./icons/btnClick.mp3'));
-    cov_2pzpljnt1().s[149]++;
+    cov_f3gyl445a().f[7]++;
+    const btnSound = (cov_f3gyl445a().s[148]++, new Audio('./icons/btnClick.mp3'));
+    cov_f3gyl445a().s[149]++;
     btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-    cov_2pzpljnt1().s[150]++;
+    cov_f3gyl445a().s[150]++;
     btnSound.play(); // make sure all popups are closed before opening another one
 
-    const popups = (cov_2pzpljnt1().s[151]++, Array.from(document.getElementsByClassName('popup')));
-    cov_2pzpljnt1().s[152]++;
+    const popups = (cov_f3gyl445a().s[151]++, Array.from(document.getElementsByClassName('popup')));
+    cov_f3gyl445a().s[152]++;
 
-    for (let i = (cov_2pzpljnt1().s[153]++, 0); i < popups.length; i += 1) {
-      cov_2pzpljnt1().s[154]++;
+    for (let i = (cov_f3gyl445a().s[153]++, 0); i < popups.length; i += 1) {
+      cov_f3gyl445a().s[154]++;
       popups[i].closePopUp();
     }
 
-    cov_2pzpljnt1().s[155]++;
+    cov_f3gyl445a().s[155]++;
     settingsPopUp.shadowRoot.getElementById('settings-confirm-popup').setAttribute('style', 'display:block');
   });
 }); // module.exports = SettingsPopUp;
