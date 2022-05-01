@@ -12,75 +12,77 @@
     <div id="container">
         <header>
             <h1 id="header-name">Pomodoro Timer</h1>
-            <div id="header-buttons">
+            <nav id="header-buttons">
                 <ul>
-                    <li>
-                        <button class='top-buttons' id='focus-button'>
-                            <img src="icons/half-moon.svg" id="focus" class="top-button-img" alt="focus">
+                    <li title="Focus">
+                        <button class="top-buttons" id="focus-button">
+                            <img src="icons/half-moon.svg" id="focus" class="top-button-img" alt="Focus">
                         </button>
                     </li>
-                    <li>
+                    <li title="Reset">
                         <button class="top-buttons" id="reset-button">
-                            <img src="icons/reset.svg" id="reset" class="top-button-img" alt="reset">
+                            <img src="icons/reset.svg" id="reset" class="top-button-img" alt="Reset">
                         </button>
                     </li>
-                    <li><button class="top-buttons" id="setting-button">
-                            <img src="icons/settings.svg" id="gear" class="top-button-img" alt="gear">
+                    <li title="Settings"><button class="top-buttons" id="setting-button">
+                            <img src="icons/settings.svg" id="gear" class="top-button-img" alt="Settings">
                         </button>
                     </li>
-                    <li><button class="top-buttons" id="help-button">
-                            <img src="icons/help.svg" id="help" class="top-button-img" alt="help">
+                    <li title="Help"><button class="top-buttons" id="help-button">
+                            <img src="icons/help.svg" id="help" class="top-button-img" alt="Help">
                         </button>
                     </li>
                 </ul>
-            </div>
+            </nav>
         </header>
-        <div id="pomodoro-timer">
-            <div id="timer-btns" class="timer-buttons">
-                <button id="pomo-btn"> Pomo</button>
-                <button id="break-btn"> Break</button>
-            </div>
-            <div class="empty-space-border">
-            </div>
-            <div id="timer_display" class="timer-value">
-                <div id="timer_display_duration">25:00</div>
-            </div>
-            <div id="timer-control-btns" class="timer-control-buttons">
-                <button id="start-btn">Start</button>
-            </div>
-            <div id='focus-task'>
-                <h2 id='select-focus'></h2>
-            </div>
-        </div>
-        <div id="task-list">
-            <h2 id="up-next">Up Next</h2>
-            <ul id="task-list-elements">
-            </ul>
-            <button id="task-popup-btn"> <img src="icons/plus.svg" id="plus"></button>
-        </div>
+        <main>
+            <section id="pomodoro-timer">
+                <div id="timer-btns" class="timer-buttons">
+                    <button id="pomo-btn"> Pomo</button>
+                    <button id="break-btn"> Break</button>
+                </div>
+                <div class="empty-space-border">
+                </div>
+                <div id="timer_display" class="timer-value">
+                    <div id="timer_display_duration">25:00</div>
+                </div>
+                <div id="timer-control-btns" class="timer-control-buttons">
+                    <button id="start-btn">Start</button>
+                </div>
+                <div id="focus-task">
+                    <h2 id="select-focus"></h2>
+                </div>
+            </section>
+            <section id="task-list">
+                <h2 id="up-next">Up Next</h2>
+                <ul id="task-list-elements">
+                </ul>
+                <button id="task-popup-btn" title="Add Task"> <img src="icons/plus.svg" id="plus"></button>
+            </section>
+        </main>
         <!-- <footer>
             <span id='help-info'>Click on 'Help' or press 'h' for more info </span>
         </footer> -->
     </div>
     <script>
         // Render blocking JS:
-        if (localStorage.getItem("theme") === 'dark') {
-            document.body.classList.add("dark-theme");
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
         }
-        if (localStorage.getItem("state") === 'focus') {
+        if (localStorage.getItem('state') === 'focus') {
             document.getElementById('task-list').classList.add('state');
             document.getElementById('pomodoro-timer').classList.add('state');
             document.getElementById('focus-task').classList.add('state');
         }
     </script>
-    <script src="instrumented/scripts/script.js"></script>
-    <script src="instrumented/scripts/Timer.js"></script>
-    <script src="instrumented/scripts/FocusMode.js"></script>
-    <script src="instrumented/components/TaskItem.js"></script>
-    <script src="instrumented/components/TaskPopUp.js"></script>
-    <script src="instrumented/components/ResetPopUp.js"></script>
-    <script src="instrumented/components/SettingsPopUp.js"></script>
-    <script src="instrumented/components/HelpPopUp.js"></script>
+    <script src="/scripts/script.js"></script>
+    <script src="/scripts/Timer.js"></script>
+    <script src="/scripts/FocusMode.js"></script>
+    <script src="/components/TaskItem.js"></script>
+    <script src="/components/TaskPopUp.js"></script>
+    <script src="/components/ResetPopUp.js"></script>
+    <script src="/components/SettingsPopUp.js"></script>
+    <script src="/components/HelpPopUp.js"></script>
 </body>
 
 </html>

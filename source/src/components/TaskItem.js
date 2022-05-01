@@ -126,6 +126,7 @@ class TaskItem extends HTMLElement {
         this.addEventListener('click', this.toggle);
         const focus = document.createElement('img');
         focus.setAttribute('src', 'icons/focus.svg');
+        focus.setAttribute('title', 'Focus on this task');
         focus.setAttribute('class', 'focus-icon');
         li.appendChild(focus);
         // add event listener to image to focus a task
@@ -134,6 +135,7 @@ class TaskItem extends HTMLElement {
         const trash = document.createElement('img');
         trash.setAttribute('src', 'icons/delete.svg');
         trash.setAttribute('class', 'delete-icon');
+        trash.setAttribute('title', 'Delete this task');
         li.appendChild(trash);
         // add event listener to image to remove task
         trash.addEventListener('click', this.removeTask.bind(this));

@@ -31,6 +31,7 @@ window.addEventListener('DOMContentLoaded', () => {
         task.setAttribute('checked', tasks[i].checked);
         task.setAttribute('text', tasks[i].text);
         task.setAttribute('focused', tasks[i].focused);
+        task.setAttribute('title', 'Click to toggle task completion');
         if (tasks[i].focused === true) {
             title.innerHTML = 'Focusing on:';
             focusDiv.appendChild(task);

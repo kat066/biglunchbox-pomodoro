@@ -22,6 +22,7 @@ class TaskPopUp extends HTMLElement {
             };
             const taskItem = document.createElement('task-item');
             taskItem.setAttribute('id', task.id);
+            taskItem.setAttribute('title', 'Click to toggle task completion');
             taskItem.setAttribute('checked', task.checked);
             taskItem.setAttribute('text', task.text);
             taskItem.setAttribute('focused', task.focused);
