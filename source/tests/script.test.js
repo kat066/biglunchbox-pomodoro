@@ -17,6 +17,8 @@ beforeAll(async () => {
     // Initialized here to prevent multiple string building
     pageTemplate = `
         ${templates}
+        <button id="up-next"> Up Next </button>
+        <button id="completed"> Completed </button>
         <ul id="task-list-elements">
         </ul>
         <div id='focus-task'>

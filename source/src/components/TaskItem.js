@@ -16,7 +16,28 @@ class TaskItem extends HTMLElement {
         const task = tasks.find((t) => t.id === this.getAttribute('id') && t.text === this.getAttribute('text'));
         if (typeof task !== 'undefined') {
             task.checked = !task.checked;
+
+            // toggle display
+            if (this.style.display === 'none') {
+                this.style.display = 'flex';
+            } else {
+                this.style.display = 'none';
+            }
+
+            // hide focus button when task is complete
+            if (task.checked) {
+                this.shadowRoot.querySelector('.focus-icon').style.display = 'none';
+            } else {
+                this.shadowRoot.querySelector('.focus-icon').style.display = 'initial';
+            }
+
+            // save to local storage
             localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            // call focus function if task is set to complete during focus
+            if (this.getAttribute('focused') === 'true' && task.checked) {
+                this.focus(null);
+            }
         }
     }
 
@@ -38,7 +59,11 @@ class TaskItem extends HTMLElement {
 
     /** allows user to focus on a task item */
     focus(event) {
-        event.stopPropagation();
+        // for generic focus call
+        if (event) {
+            event.stopPropagation();
+        }
+
         // remove task item from parent
         this.parentNode.removeChild(this);
         const tasks = JSON.parse(localStorage.getItem('tasks'));
