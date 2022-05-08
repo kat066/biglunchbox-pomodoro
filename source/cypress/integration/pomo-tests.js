@@ -134,9 +134,9 @@ describe(('interact with exist task list while timer is runing'), () => {
     it(('toggle the tasks while timer is runing'), () => {
         cy.get('#start-btn').trigger('click');
         cy.get('#0').trigger('click');
-        cy.get('#0').should('have.css', 'text-decoration', 'line-through solid rgb(255, 255, 255)');
-        cy.get('#0').trigger('click');
-        cy.get('#0').should('have.css', 'text-decoration', 'none solid rgb(255, 255, 255)');
+        cy.get('#0').should('have.css', 'display', 'none');
+        // cy.get('#0').trigger('click');
+        // cy.get('#0').should('have.css', 'display', 'initial');
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
     });
 
@@ -456,9 +456,7 @@ describe(('task list in focus mode'), () => {
 
     it(('toggle task in focus mode'), () => {
         cy.get('#1').trigger('click');
-        cy.get('#1').should('have.css', 'text-decoration', 'line-through solid rgb(255, 255, 255)');
-        cy.get('#1').trigger('click');
-        cy.get('#1').should('have.css', 'text-decoration', 'none solid rgb(255, 255, 255)');
+        cy.get('#1').should('have.css', 'display', 'none');
     });
     it(('unfocus a task and queue in the next task'), () => {
         cy.get('#1').shadow().find('img[class="focus-icon"]').click({ force: true });
@@ -467,35 +465,30 @@ describe(('task list in focus mode'), () => {
 
     it(('all task are checked'), () => {
         cy.get('#1').trigger('click');
-        cy.get('#1').shadow().find('img[class="focus-icon"]').click({ force: true });
         cy.get('#0').trigger('click');
-        cy.get('#0').shadow().find('img[class="focus-icon"]').click({ force: true });
         cy.get('#select-focus').should('have.text', 'All tasks complete!');
     });
 
     it(('switch back to normal mode with correct task list'), () => {
         // cross out 2 and focus on 1
         cy.get('#1').trigger('click');
-        cy.get('#1').shadow().find('img[class="focus-icon"]').click({ force: true });
         // switch back
         cy.get('#focus-button').click();
         // 1 is the focus and 2 is in the task list and crossed out
         cy.get('#0').parent().should('have.id', 'focus-task');
         cy.get('#1').parent().should('have.id', 'task-list-elements');
-        cy.get('#1').should('have.css', 'text-decoration', 'line-through solid rgb(255, 255, 255)');
+        cy.get('#1').should('have.css', 'display', 'none');
     });
 
     it(('switch back to normal mode when all task are done'), () => {
         cy.get('#1').trigger('click');
-        cy.get('#1').shadow().find('img[class="focus-icon"]').click({ force: true });
         cy.get('#0').trigger('click');
-        cy.get('#0').shadow().find('img[class="focus-icon"]').click({ force: true });
         cy.get('#focus-button').click();
         // check the task list
         cy.get('#0').parent().should('have.id', 'task-list-elements');
         cy.get('#1').parent().should('have.id', 'task-list-elements');
-        cy.get('#0').should('have.css', 'text-decoration', 'line-through solid rgb(255, 255, 255)');
-        cy.get('#1').should('have.css', 'text-decoration', 'line-through solid rgb(255, 255, 255)');
+        cy.get('#0').should('have.css', 'display', 'none');
+        cy.get('#1').should('have.css', 'display', 'none');
         // TODO: check focus task
         // cy.get('#select-focus').should('have.text', '');
     });

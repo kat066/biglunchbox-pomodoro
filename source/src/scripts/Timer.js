@@ -23,7 +23,7 @@ timerDisplayDuration.innerHTML = `${pomoTime}:00`;
  * This function is used by switchMode() to switch the highlighted button
  * on the UI from pomo to break when switching to break mode.
  */
- function togglePomoButtonOff(pomoButton, breakButton) {
+function togglePomoButtonOff(pomoButton, breakButton) {
     if (pomoButton.getAttribute('class') !== 'toggle') {
         pomoButton.classList.toggle('toggle');
         breakButton.classList.toggle('toggle');
@@ -49,7 +49,7 @@ function togglePomoButtonOn(pomoButton, breakButton) {
 function switchMode() {
     const pomoButton = document.getElementById('pomo-btn');
     const breakButton = document.getElementById('break-btn');
-    
+
     if (timerStatus === 'pomo' && breakCounter >= 3) {
         timerDisplayDuration.innerHTML = `${longBreakTime}:00`;
         togglePomoButtonOff(pomoButton, breakButton);
