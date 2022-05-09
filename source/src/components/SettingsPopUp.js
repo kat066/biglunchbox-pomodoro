@@ -147,12 +147,7 @@ class SettingsPopUp extends HTMLElement {
         rangeInput.setAttribute('value', parseInt(localStorage.getItem('volume'), 10));
         rangeInput.setAttribute('class', 'vol-slider');
         rangeInput.setAttribute('id', 'range');
-        // Create footer and append warning message to it
-        // const warningFooter = wrapper.appendChild(document.createElement('div'));
-        // warningFooter.setAttribute('class', 'warning-footer');
-        // const warningMsg = warningFooter.appendChild(document.createElement('p'));
-        // warningMsg.setAttribute('class', 'settings-warning-message');
-        // warningMsg.innerHTML = "WARNING: Any changes to settings\nwill cause a reset in the timer, if running!!!"
+
         // Create footer and append confirm btn to it
         const footer = wrapper.appendChild(document.createElement('div'));
         footer.setAttribute('class', 'button-footer');
@@ -160,7 +155,7 @@ class SettingsPopUp extends HTMLElement {
         const warningMsg = footer.appendChild(document.createElement('p'));
         warningMsg.setAttribute('id', 'settings-warning-msg');
         warningMsg.setAttribute('text-align', 'left');
-        warningMsg.innerHTML = "WARNING: Any changes to settings will cause a reset in the timer, if running!"
+        warningMsg.innerHTML = "WARNING: Any changes to settings will reset the timer if running!"
 
         const confirmBtn = footer.appendChild(document.createElement('button'));
         confirmBtn.setAttribute('class', 'settings-popup-btns');
