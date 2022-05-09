@@ -148,15 +148,13 @@ class SettingsPopUp extends HTMLElement {
         rangeInput.setAttribute('class', 'vol-slider');
         rangeInput.setAttribute('id', 'range');
 
-        // Create footer and append confirm btn to it
+        // Create footer and append confirm btn and warning message to it
         const footer = wrapper.appendChild(document.createElement('div'));
         footer.setAttribute('class', 'button-footer');
-
         const warningMsg = footer.appendChild(document.createElement('p'));
         warningMsg.setAttribute('id', 'settings-warning-msg');
-        warningMsg.setAttribute('text-align', 'left');
+        warningMsg.setAttribute('style', 'text-align:left');
         warningMsg.innerHTML = "WARNING: Any changes to settings will reset the timer if running!"
-
         const confirmBtn = footer.appendChild(document.createElement('button'));
         confirmBtn.setAttribute('class', 'settings-popup-btns');
         confirmBtn.setAttribute('id', 'confirm-settings-btn');
@@ -242,7 +240,7 @@ class SettingsPopUp extends HTMLElement {
                 justify-content: space-between;
                 display: flex;
                 width: 85%;
-                margin: 1.5625vw auto 0.78125vw auto;
+                margin: 1.78125vw auto 0.78125vw auto;
                 padding-bottom: 1.5625vw;
         }
         .slider-div {
@@ -344,7 +342,7 @@ class SettingsPopUp extends HTMLElement {
         .button-footer {
                 background-color: rgb(234 234 234);
                 padding: 1.09375vw 1.5625vw;
-                text-align: center;
+                text-align: right;
                 position: absolute;
                 bottom: 0;
                 right: 0;
@@ -380,7 +378,7 @@ class SettingsPopUp extends HTMLElement {
                 display: none;
                 position: fixed;
                 width: 29.296875vw;
-                height: 30.46875vw;
+                height: 32.46875vw;
                 border-radius: 0.3125vw;
                 top:20%;
                 left: 34%;
