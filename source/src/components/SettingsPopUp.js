@@ -245,6 +245,9 @@ class SettingsPopUp extends HTMLElement {
         alarmSoundTitle.setAttribute('part', 'enable-disable-alarmsound');
         const style = document.createElement('style');
         style.textContent = `
+        button {
+                transition: transform .3s ease;
+              }
         h4 {
                 font-size: 1.15vw;
         }
@@ -421,6 +424,7 @@ class SettingsPopUp extends HTMLElement {
                 right:0;
                 cursor: pointer;
                 opacity: 0.33;
+                transition: transform .3s ease;
         }
         #close-icon:hover {
                 opacity: 1;

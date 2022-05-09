@@ -70,6 +70,9 @@ class ResetPopUp extends HTMLElement {
         // CSS styling
         const style = document.createElement('style');
         style.textContent = `
+        button {
+            transition: transform .3s ease;
+          }
         .button-footer {
             background-color: rgb(234 234 234);
             // padding: 14px 20px;
@@ -96,6 +99,7 @@ class ResetPopUp extends HTMLElement {
             right:0;
             cursor: pointer;
             opacity: 0.33;
+            transition: transform .3s ease;
         }
         #close-icon:hover {
             opacity: 1;

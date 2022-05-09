@@ -157,6 +157,7 @@ class HelpPopUp extends HTMLElement {
             right:0;
             cursor: pointer;
             opacity: 0.33;
+            transition: transform .3s ease;
         }
         #close-icon:hover {
             opacity: 1;

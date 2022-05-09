@@ -206,6 +206,7 @@ class TaskItem extends HTMLElement {
             height: 1.5625vw;
             margin: 0;
             visibility: hidden;
+            transition: transform .3s ease;
         }
         .delete-icon:hover {
             transform: scale(1.3);
@@ -226,6 +227,7 @@ class TaskItem extends HTMLElement {
             height: 1.5625vw;
             margin: 0;
             visibility: hidden;
+            transition: transform .3s ease;
         }
         .focus-icon:hover {
             transform: scale(1.3);
