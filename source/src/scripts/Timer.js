@@ -70,7 +70,7 @@ async function timerFunction() {
     if (timerText === '0:01') {
         alarmSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
         // console.log(alarmSound.volume);
-        if (localStorage.getItem('alarm_s') === 'on') {
+        if (localStorage.getItem('alarmState') === 'on') {
             alarmSound.play(); // only plays sound when enabled
         }
     }
@@ -128,7 +128,7 @@ async function stopChecker() {
  */
 async function startAndStopButton() {
     btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-    if (localStorage.getItem('click_s') === 'on') {
+    if (localStorage.getItem('clickState') === 'on') {
         btnSound.play(); // only plays sound when enabled
     }
     if (startButton.innerHTML === 'Start') {
@@ -151,7 +151,7 @@ window.addEventListener('keyup', (event) => {
         switch (event.code) {
             case 'KeyF':
                 btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-                if (localStorage.getItem('click_s') === 'on') {
+                if (localStorage.getItem('clickState') === 'on') {
                     btnSound.play(); // only plays sound when enabled
                 }
                 document.getElementById('focus-button').click();

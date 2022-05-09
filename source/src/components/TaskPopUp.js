@@ -34,7 +34,7 @@ class TaskPopUp extends HTMLElement {
             localStorage.setItem('id', `${id}`);
             const btnSound = new Audio('./icons/btnClick.mp3');
             btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-            if (localStorage.getItem('click_s') === 'on') {
+            if (localStorage.getItem('clickState') === 'on') {
                 btnSound.play(); // only plays sound when enabled
             }
             // hide popup
@@ -225,7 +225,7 @@ window.addEventListener('load', () => {
     popupBtn.addEventListener('click', () => {
         const btnSound = new Audio('./icons/btnClick.mp3');
         btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-        if (localStorage.getItem('click_s') === 'on') {
+        if (localStorage.getItem('clickState') === 'on') {
             btnSound.play(); // only plays sound when enabled
         }
         // make sure any popup is closed before opening current popup

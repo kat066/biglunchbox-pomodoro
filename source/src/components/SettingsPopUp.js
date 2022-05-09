@@ -36,7 +36,7 @@ class SettingsPopUp extends HTMLElement {
 
         const btnSound = new Audio('./icons/btnClick.mp3');
         btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-        if (localStorage.getItem('click_s') === 'on') {
+        if (localStorage.getItem('clickState') === 'on') {
             btnSound.play(); // only plays sound when enabled
         }
         localStorage.setItem('stop', 'true');
@@ -52,21 +52,21 @@ class SettingsPopUp extends HTMLElement {
         document.body.classList.toggle('dark-theme');
     }
 
-    // toggles click_s's state
+    // toggles clickState's state
     toggleClickSound() {
-        if (localStorage.getItem('click_s') === 'off') {
-            localStorage.setItem('click_s', 'on');
+        if (localStorage.getItem('clickState') === 'off') {
+            localStorage.setItem('clickState', 'on');
         } else {
-            localStorage.setItem('click_s', 'off');
+            localStorage.setItem('clickState', 'off');
         }
     }
 
-    // toggles alarm_s's state
+    // toggles alarmState's state
     toggleAlarmSound() {
-        if (localStorage.getItem('alarm_s') === 'off') {
-            localStorage.setItem('alarm_s', 'on');
+        if (localStorage.getItem('alarmState') === 'off') {
+            localStorage.setItem('alarmState', 'on');
         } else {
-            localStorage.setItem('alarm_s', 'off');
+            localStorage.setItem('alarmState', 'off');
         }
     }
 
@@ -172,7 +172,7 @@ class SettingsPopUp extends HTMLElement {
         soundOptions.setAttribute('id', 'sound-options');
         // child div for click sound
         const clickSoundDiv = soundOptions.appendChild(document.createElement('div'));
-        clickSoundDiv.setAttribute('id', "click_s-div");
+        clickSoundDiv.setAttribute('id', "clickState-div");
         const clickSoundTitle = clickSoundDiv.appendChild(document.createElement('h4'));
         clickSoundTitle.setAttribute('id', 'enable-disable-clicksound');
         clickSoundTitle.setAttribute('class', 'text');
@@ -182,7 +182,7 @@ class SettingsPopUp extends HTMLElement {
         const clickSoundInput = clickSoundSwitch.appendChild(document.createElement('input'));
         clickSoundInput.setAttribute('type', 'checkbox');
         clickSoundInput.checked = 'checked';
-        if (localStorage.getItem('click_s') === 'on') {
+        if (localStorage.getItem('clickState') === 'on') {
             clickSoundInput.checked = 'checked';
         }
         const clickSoundSlider = clickSoundSwitch.appendChild(document.createElement('span'));
@@ -190,7 +190,7 @@ class SettingsPopUp extends HTMLElement {
         clickSoundSlider.addEventListener('click', this.toggleClickSound.bind(this));
         // child div for alarm sound
         const alarmSoundDiv = soundOptions.appendChild(document.createElement('div'));
-        alarmSoundDiv.setAttribute('id', "alarm_s-div");
+        alarmSoundDiv.setAttribute('id', "alarmState-div");
         const alarmSoundTitle = alarmSoundDiv.appendChild(document.createElement('h4'));
         alarmSoundTitle.setAttribute('id', 'enable-disable-alarmsound');
         alarmSoundTitle.setAttribute('class', 'text');
@@ -200,7 +200,7 @@ class SettingsPopUp extends HTMLElement {
         const alarmSoundInput = alarmSoundSwitch.appendChild(document.createElement('input'));
         alarmSoundInput.setAttribute('type', 'checkbox');
         alarmSoundInput.checked = 'checked';
-        if (localStorage.getItem('alarm_s') === 'on') {
+        if (localStorage.getItem('alarmState') === 'on') {
             alarmSoundInput.checked = 'checked';
         }
         const alarmSoundSlider = alarmSoundSwitch.appendChild(document.createElement('span'));
@@ -485,10 +485,10 @@ class SettingsPopUp extends HTMLElement {
                 margin: 3vw auto 2vw auto;
         }
 
-        #click_s-div {
+        #clickState-div {
                 width: 55%;
         }
-        #alarm_s-div {
+        #alarmState-div {
                 flex-grow: 1;
         }
         .text {
@@ -539,7 +539,7 @@ window.addEventListener('load', () => {
     settingsButton.addEventListener('click', () => {
         const btnSound = new Audio('./icons/btnClick.mp3');
         btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-        if (localStorage.getItem('click_s') === 'on') {
+        if (localStorage.getItem('clickState') === 'on') {
             btnSound.play();
         }
         // make sure all popups are closed before opening another one

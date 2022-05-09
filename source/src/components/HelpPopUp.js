@@ -216,7 +216,7 @@ window.addEventListener('load', () => {
     helpBtn.addEventListener('click', () => {
         const btnSound = new Audio('./icons/btnClick.mp3');
         btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-        if (localStorage.getItem('click_s') === 'on') {
+        if (localStorage.getItem('clickState') === 'on') {
             btnSound.play(); // only plays sound when enabled
         }
         // this makes sure any popup is closed before opening current popup

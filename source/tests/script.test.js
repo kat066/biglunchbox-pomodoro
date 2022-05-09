@@ -52,8 +52,8 @@ test('Reads task list and creates one task correctly', () => {
 });
 
 test('Reads task list and creates multiple tasks correctly', () => {
-    localStorage.setItem('tasks', '[{"id":"0","checked":false,"text":"test_task","focused":false},'
-    + '{"id":"1","checked":false,"text":"test_task1","focused":false}]');
+    localStorage.setItem('tasks', '[{"id":"0","checked":false,"text":"test_task","focused":false},' +
+        '{"id":"1","checked":false,"text":"test_task1","focused":false}]');
 
     window.document.dispatchEvent(new Event('DOMContentLoaded', {
         bubbles: true,
@@ -76,8 +76,8 @@ test('Reads task list and creates multiple tasks correctly', () => {
 });
 
 test('Reads task list and creates multiple tasks correctly, with one focused task', () => {
-    localStorage.setItem('tasks', '[{"id":"0","checked":false,"text":"test_task","focused":false},'
-    + '{"id":"1","checked":false,"text":"test_task1","focused":true}]');
+    localStorage.setItem('tasks', '[{"id":"0","checked":false,"text":"test_task","focused":false},' +
+        '{"id":"1","checked":false,"text":"test_task1","focused":true}]');
 
     window.document.dispatchEvent(new Event('DOMContentLoaded', {
         bubbles: true,
