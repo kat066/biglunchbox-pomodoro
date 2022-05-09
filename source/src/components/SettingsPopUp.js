@@ -146,6 +146,7 @@ class SettingsPopUp extends HTMLElement {
             checkboxInput.checked = 'checked';
         }
         const slider = modeSwitch.appendChild(document.createElement('span'));
+        slider.setAttribute('id', 'mode-switch-slider');
         slider.setAttribute('class', 'slider');
         // add event listener to toggle dark mode
         slider.addEventListener('click', this.toggleMode.bind(this));
