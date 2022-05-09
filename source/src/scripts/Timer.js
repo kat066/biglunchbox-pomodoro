@@ -89,10 +89,11 @@ async function timerFunction() {
         seconds = `0${String(seconds)}`;
     }
     // TODO: Adapt to each modes; now this is hard-coded to pomo mode; break/other modes do not work!!
-    let timePerc = 100 - Math.floor(((minutes*60 + seconds) / (parseInt(pomoTime)*60))*100);
-    console.log(timePerc);
+    // let timePerc = 100 - Math.floor(((minutes*60 + seconds) / (parseInt(pomoTime)*60))*100);
+    // console.log(timePerc);
     timerDisplayDuration.innerHTML = `${minutes}:${seconds}`;
-    startButton.innerHTML = `<div style=height:24px;width:${timePerc}%;background-color:DodgerBlue;></div>`;
+    // TODO: Change this into css (through element.style.backgroundColor)
+    // startButton.innerHTML = `<div style=height:24px;width:${timePerc}%;background-color:DodgerBlue;></div>`;
     // timerDisplayDuration.innerHTML = `<div style=height:24px;width:${timePerc}%;background-color:DodgerBlue;></div>`;
 
 }
@@ -101,7 +102,7 @@ async function timerFunction() {
  * would be show in the web.
  */
 async function start() {
-    // startButton.innerHTML = 'Stop';
+    startButton.innerHTML = 'Stop';
     timer = setInterval(timerFunction, SECOND);
 }
 
