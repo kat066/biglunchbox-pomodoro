@@ -70,7 +70,9 @@ async function timerFunction() {
     if (timerText === '0:01') {
         alarmSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
         // console.log(alarmSound.volume);
-        alarmSound.play();
+        if (localStorage.getItem('alarmState') === 'on') {
+            alarmSound.play(); // only plays sound when enabled
+        }
     }
 
     let minutes = Number(timerText.substring(0, timerText.length - 3));
@@ -92,7 +94,7 @@ async function timerFunction() {
 
 /** The function would be call when the click start button and the stop button
  * would be show in the web.
-*/
+ */
 async function start() {
     startButton.innerHTML = 'Stop';
     timer = setInterval(timerFunction, SECOND);
@@ -100,7 +102,7 @@ async function start() {
 
 /** The function would be call when the click stop button the start button
  * would be show in the web. The time would be reset.
-*/
+ */
 async function stop() {
     pomoTime = localStorage.getItem('pomo-length');
     breakTime = localStorage.getItem('short-break-length');
@@ -126,7 +128,9 @@ async function stopChecker() {
  */
 async function startAndStopButton() {
     btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-    btnSound.play();
+    if (localStorage.getItem('clickState') === 'on') {
+        btnSound.play(); // only plays sound when enabled
+    }
     if (startButton.innerHTML === 'Start') {
         start();
     } else {
@@ -145,46 +149,49 @@ window.addEventListener('keyup', (event) => {
     const helpDis = document.querySelector('help-popup').shadowRoot.getElementById('help-popup').style.display;
     if (!addDis || addDis === 'none') {
         switch (event.code) {
-        case 'KeyF':
-            btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-            btnSound.play();
-            document.getElementById('focus-button').click();
-            break;
-        case 'KeyS':
-            startButton.click();
-            break;
-        case 'KeyR':
-            document.getElementById('reset-button').click();
-            break;
-        case 'KeyH':
-            document.getElementById('help-button').click();
-            break;
-        case 'Semicolon':
-            document.getElementById('setting-button').click();
-            break;
-        case 'Escape':
-            if (setDis === 'block') {
-                document.querySelector('body > settings-popup').shadowRoot.querySelector('#close-icon').click();
-            } else if (resDis === 'block') {
-                document.querySelector('body > reset-popup').shadowRoot.querySelector('#close-icon').click();
-            } else if (helpDis === 'block') {
-                document.querySelector('body > help-popup').shadowRoot.querySelector('#close-icon').click();
-            }
-            break;
-        case 'KeyA': {
-            const state = localStorage.getItem('state');
-            if (state === 'default') document.getElementById('task-popup-btn').click();
-            break;
-        }
-        case 'Enter':
-            if (setDis === 'block') {
-                document.querySelector('body > settings-popup').shadowRoot.querySelector('#confirm-settings-btn').click();
-            } else if (resDis === 'block') {
-                document.querySelector('body > reset-popup').shadowRoot.querySelector('#confirm-reset-btn').click();
-            }
-            break;
-        default:
-            break;
+            case 'KeyF':
+                btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
+                if (localStorage.getItem('clickState') === 'on') {
+                    btnSound.play(); // only plays sound when enabled
+                }
+                document.getElementById('focus-button').click();
+                break;
+            case 'KeyS':
+                startButton.click();
+                break;
+            case 'KeyR':
+                document.getElementById('reset-button').click();
+                break;
+            case 'KeyH':
+                document.getElementById('help-button').click();
+                break;
+            case 'Semicolon':
+                document.getElementById('setting-button').click();
+                break;
+            case 'Escape':
+                if (setDis === 'block') {
+                    document.querySelector('body > settings-popup').shadowRoot.querySelector('#close-icon').click();
+                } else if (resDis === 'block') {
+                    document.querySelector('body > reset-popup').shadowRoot.querySelector('#close-icon').click();
+                } else if (helpDis === 'block') {
+                    document.querySelector('body > help-popup').shadowRoot.querySelector('#close-icon').click();
+                }
+                break;
+            case 'KeyA':
+                {
+                    const state = localStorage.getItem('state');
+                    if (state === 'default') document.getElementById('task-popup-btn').click();
+                    break;
+                }
+            case 'Enter':
+                if (setDis === 'block') {
+                    document.querySelector('body > settings-popup').shadowRoot.querySelector('#confirm-settings-btn').click();
+                } else if (resDis === 'block') {
+                    document.querySelector('body > reset-popup').shadowRoot.querySelector('#confirm-reset-btn').click();
+                }
+                break;
+            default:
+                break;
         }
     } else if (addDis === 'block') {
         if (event.code === 'Enter') {

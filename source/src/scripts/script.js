@@ -6,8 +6,20 @@ window.addEventListener('DOMContentLoaded', () => {
     let theme; // UI theme
     let volume; // default volume -> initialized to 50
     let state; // state -> initialized to 'default'
+    let clickState; // record for if click sound is enabled
+    let alarmState; // record for if alarm sound is enabled
 
-    if (localStorage.getItem('tasks') === null || localStorage.getItem('id') === null || localStorage.getItem('theme') === null || localStorage.getItem('volume') === null || localStorage.getItem('state') === null) {
+    if (localStorage.getItem('clickState') === null) {
+        clickState = 'on'; // default to be on
+        localStorage.setItem('clickState', clickState);
+    }
+    if (localStorage.getItem('alarmState') === null) {
+        alarmState = 'on'; // default to be on
+        localStorage.setItem('alarmState', alarmState);
+    }
+
+    if (localStorage.getItem('tasks') === null || localStorage.getItem('id') === null || localStorage.getItem('theme') === null || localStorage.getItem('volume') === null ||
+        localStorage.getItem('state') === null || localStorage.getItem('clickState') === null || localStorage.getItem('alarmState') === null) {
         tasks = [];
         id = 0;
         theme = 'light';
@@ -31,6 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
         task.setAttribute('checked', tasks[i].checked);
         task.setAttribute('text', tasks[i].text);
         task.setAttribute('focused', tasks[i].focused);
+        task.setAttribute('title', 'Click to toggle task completion');
         if (tasks[i].focused === true) {
             title.innerHTML = 'Focusing on:';
             focusDiv.appendChild(task);

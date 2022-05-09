@@ -2,17 +2,21 @@
   "name": "horrible-timer",
   "version": "1.0.0",
   "description": "A horrible Pomodoro timer",
-  "main": "index.js",
+  "files": [
+    "source/cypress"
+  ],
   "directories": {
-    "test": "tests"
+    "test": "source/tests"
   },
   "scripts": {
-    "start": "http-server src -p=5500",
-    "watch": "watch 'npm run instrument' src/components src/scripts",
+    "start": "http-server source/src -p=5500",
+    "watch": "watch 'npm run instrument' source/src/components source/src/scripts",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "eslint .",
-    "instrument": "npx rimraf src/instrumented && npx nyc instrument --compact=false src src/instrumented"
+    "lint": "eslint --fix --fix-type layout source/",
+    "instrument": "npx rimraf source/src/instrumented && npx nyc instrument --compact=false source/src source/src/instrumented",
+    "cy:verify": "cypress verify",
+    "cy:info": "cypress cache list"
   },
   "repository": {
     "type": "git",
@@ -32,7 +36,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "babel-jest": "^26.6.3",
     "babel-plugin-istanbul": "^6.0.0",
-    "cypress": "^6.5.0",
+    "cypress": "^6.9.1",
     "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-cypress": "^2.11.2",
@@ -50,7 +54,7 @@
   "jest": {
     "verbose": true,
     "collectCoverage": true,
-    "coverageDirectory": "coverage/jest",
+    "coverageDirectory": "source/coverage/jest",
     "testEnvironment": "jest-environment-jsdom-sixteen",
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
@@ -79,13 +83,12 @@
     ]
   },
   "nyc": {
-    "report-dir": "coverage/cypress",
+    "report-dir": "source/coverage/cypress",
     "reporter": [
       "text",
       "json",
       "lcov"
-    ],
-    "exclude": "src/instrumented"
+    ]
   },
   "husky": {
     "hooks": {

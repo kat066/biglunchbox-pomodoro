@@ -22,6 +22,7 @@ class TaskPopUp extends HTMLElement {
             };
             const taskItem = document.createElement('task-item');
             taskItem.setAttribute('id', task.id);
+            taskItem.setAttribute('title', 'Click to toggle task completion');
             taskItem.setAttribute('checked', task.checked);
             taskItem.setAttribute('text', task.text);
             taskItem.setAttribute('focused', task.focused);
@@ -33,7 +34,9 @@ class TaskPopUp extends HTMLElement {
             localStorage.setItem('id', `${id}`);
             const btnSound = new Audio('./icons/btnClick.mp3');
             btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-            btnSound.play();
+            if (localStorage.getItem('clickState') === 'on') {
+                btnSound.play(); // only plays sound when enabled
+            }
             // hide popup
             this.closePopUp();
         }
@@ -222,7 +225,9 @@ window.addEventListener('load', () => {
     popupBtn.addEventListener('click', () => {
         const btnSound = new Audio('./icons/btnClick.mp3');
         btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-        btnSound.play();
+        if (localStorage.getItem('clickState') === 'on') {
+            btnSound.play(); // only plays sound when enabled
+        }
         // make sure any popup is closed before opening current popup
         const popups = Array.from(document.getElementsByClassName('popup'));
         for (let i = 0; i < popups.length; i += 1) {

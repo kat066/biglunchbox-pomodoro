@@ -6,44 +6,80 @@ on:
   pull_request:
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
+  install:
+    runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      # installs the npm modules
-      - name: Install modules
-        run: npm --prefix source/ install
+      - name: Setup node with module cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      
+      - name: Cache Cypress installation
+        uses: actions/cache@v3
+        id: cache-cypress
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
+
+      - name: Dependency installation
+        run: npm ci
+
+  lint:
+    runs-on: ubuntu-18.04
+    needs: install
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup node with module cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      
+      # Install from cached .npm
+      - name: Install cached modules
+        run: npm ci
 
       # lint
       - name: Run linter
-        run: npm --prefix source/ run lint
+        run: npm run lint
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
+    needs: install
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      #installs the npm modules
-      - name: Install modules
-        run: npm --prefix source/ install
-
-      - name: Annotate tests on PR
-        uses: mattallty/jest-github-action@v1.0.3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup node with module cache
+        uses: actions/setup-node@v3
         with:
-          test-command: "npm --prefix source/ test"
+          node-version: 16
+          cache: 'npm'
+      
+      - name: Cache Cypress installation
+        uses: actions/cache@v3
+        id: cache-cypress
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
+
+      - name: Install cached modules
+        run: npm ci
 
       # run the test suite
       - name: Run unit tests
-        run: npm --prefix source/ test
+        run: npm test
         
       - name: Run integration tests
         uses: cypress-io/github-action@v2
         with:
           install: false
-          working-directory: source
           browser: chrome
           start: npm start
-

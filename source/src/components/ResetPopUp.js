@@ -21,7 +21,9 @@ class ResetPopUp extends HTMLElement {
         localStorage.setItem('id', `${0}`);
         const btnSound = new Audio('./icons/btnClick.mp3');
         btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-        btnSound.play();
+        if (localStorage.getItem('clickState') === 'on') {
+            btnSound.play(); // only plays sound when enabled
+        }
         this.closePopUp();
     }
 
@@ -189,7 +191,9 @@ window.addEventListener('load', () => {
     resetBtn.addEventListener('click', () => {
         const btnSound = new Audio('./icons/btnClick.mp3');
         btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-        btnSound.play();
+        if (localStorage.getItem('clickState') === 'on') {
+            btnSound.play(); // only plays sound when enabled
+        }
         // this makes sure any popup is closed before opening current popup
         const popups = Array.from(document.getElementsByClassName('popup'));
         for (let i = 0; i < popups.length; i += 1) {

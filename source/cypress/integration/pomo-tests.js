@@ -332,7 +332,7 @@ describe('setting popup and timer', () => {
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
         cy.get('#setting-button').trigger('click');
         cy.get('settings-popup').shadow()
-            .find('span[class="slider"]')
+            .find('span[id="mode-switch-slider"]')
             .click();
         cy.get('#timer_display_duration').should('have.text', '24:57');
         cy.url().should(() => {
@@ -388,7 +388,7 @@ describe(('in dark mode'), () => {
         cy.visit('http://127.0.0.1:5500');
         cy.get('#setting-button').trigger('click');
         cy.get('settings-popup').shadow()
-            .find('span[class="slider"]')
+            .find('span[id="mode-switch-slider"]')
             .trigger('click');
         cy.get('settings-popup').shadow()
             .find('#close-icon')
@@ -400,7 +400,7 @@ describe(('in dark mode'), () => {
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
         cy.get('#setting-button').trigger('click');
         cy.get('settings-popup').shadow()
-            .find('span[class="slider"]')
+            .find('span[id="mode-switch-slider"]')
             .trigger('click');
         cy.get('#timer_display_duration').should('have.text', '24:57');
         cy.url().should(() => {

@@ -1,17 +1,19 @@
 # Horrible Timer
 
-**We are Runtime Terror!**
+**We are Big Lunchbox!**
 
-[![CodeFactor](https://www.codefactor.io/repository/github/jackie1342/cse110-w21-group13/badge?s=60ed377b2b1538342690c2bba4151269aedbbc86)](https://www.codefactor.io/repository/github/jackie1342/cse110-w21-group13)
-[![CI](https://github.com/Jackie1342/cse110-w21-group13/actions/workflows/integrate.yml/badge.svg)](https://github.com/Jackie1342/cse110-w21-group13/actions/workflows/integrate.yml)
-[![CD](https://github.com/Jackie1342/cse110-w21-group13/actions/workflows/deploy.yml/badge.svg)](https://github.com/Jackie1342/cse110-w21-group13/actions/workflows/deploy.yml)
+We adopted this project and forked this repo from [Runtime Terror](https://github.com/Jackie1342/cse110-w21-group13).
 
-You can find our app [here!](https://jackie1342.github.io/cse110-w21-group13/)
-* [Unit test coverage report](https://jackie1342.github.io/cse110-w21-group13/coverage/jest/lcov-report)
-* [E2E test coverage report](https://jackie1342.github.io/cse110-w21-group13/coverage/cypress/lcov-report)
-* [JSDocs](https://jackie1342.github.io/cse110-w21-group13/docs)
+[![CodeFactor](https://www.codefactor.io/repository/github/kat066/biglunchbox-pomodoro/badge?s=60ed377b2b1538342690c2bba4151269aedbbc86)](https://www.codefactor.io/repository/github/kat066/biglunchbox-pomodoro)
+[![CI](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/integrate.yml/badge.svg)](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/integrate.yml)
+[![CD](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/deploy.yml/badge.svg)](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/deploy.yml)
 
-**New to the team? Read the [onboarding documentation](https://github.com/Jackie1342/cse110-w21-group13/wiki/Onboarding) in our Wiki!**
+You can find our app [here!](https://kat066.github.io/biglunchbox-pomodoro/)
+* [Unit test coverage report](https://kat066.github.io/biglunchbox-pomodoro/coverage/jest/lcov-report)
+* [E2E test coverage report](https://kat066.github.io/biglunchbox-pomodoro/coverage/cypress/lcov-report)
+* [JSDocs](https://kat066.github.io/biglunchbox-pomodoro/docs)
+
+**New to the team? Read the [onboarding documentation](https://github.com/kat066/biglunchbox-pomodoro/wiki/Onboarding) in our Wiki!**
 
 # Keyboard Events
 
@@ -32,4 +34,3 @@ You can find our app [here!](https://jackie1342.github.io/cse110-w21-group13/)
 'Enter' --confirm your setting
 
 'Escape' --cancel the change and close the pop-up
-

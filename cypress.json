@@ -1,0 +1,7 @@
+{
+  "integrationFolder": "./source/cypress/integration",
+  "pluginsFile": "./source/cypress/plugins/index.js",
+  "supportFile": "./source/cypress/support/index.js",
+  "screenshotOnRunFailure": false,
+  "video": false
+}
