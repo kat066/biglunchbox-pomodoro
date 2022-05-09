@@ -2,11 +2,25 @@ html {
     height: 100%;
 }
 
+/* theme color variables 
+can be edited in scripts as such:
+let root = document.querySelector(':root');
+root.style.setProperty('--bg-color', 'yellow');
+*/
+:root {
+    --bg-color: #ffd5ca;
+    --header-txt-color: #f36060;
+    --top-button-bg-color: #f36060;
+    --top-button-color: white;
+    --divider-color: #7b0c0c4f;
+    --inactive-button-color: #f3606060;
+}
+
 body {
     padding: 0;
     margin: 0;
     font-family: 'Quicksand', sans-serif;
-    background-color: #ffd5ca;
+    background-color: var(--bg-color);
     box-sizing: border-box;
     min-height: 100%;
     height: 100%;
@@ -27,7 +41,7 @@ header {
 h1#header-name {
     display: inline-block;
     position: relative;
-    color: #f36060;
+    color: var(--header-txt-color);
     left: 10%;
     font-size: 2.275vw;
     font-weight: 500;
@@ -55,8 +69,8 @@ h1#header-name {
     border-style: none;
     border-radius: 10%;
     text-align: center;
-    background-color: #f36060;
-    color: #fff;
+    background-color: var(--top-button-bg-color);
+    color: var(--top-button-color);
     outline: none;
     margin-left: 0.5vw;
     height: 2.875vw;
@@ -88,7 +102,7 @@ img#focus {
 header:after {
     content: ' ';
     display: block;
-    border-bottom: 1px solid #7b0c0c4f;
+    border-bottom: 1px solid var(--divider-color);
     border-radius: 4px;
     width: 80%;
     margin-left: auto;
@@ -104,7 +118,7 @@ header:after {
 }
 
 #up-next {
-    color: #f36060;
+    color: var(--header-txt-color);
     text-align: center;
     font-weight: 500;
     font-size: 1.875vw;
@@ -132,9 +146,9 @@ header:after {
     border-style: none;
     border-radius: 50%;
     text-align: center;
-    color: rgba(255, 255, 255);
+    color: var(--top-button-color);
     font-family: 'Quicksand', sans-serif;
-    background-color: #f36060;
+    background-color: var(--top-button-bg-color);
     outline: none;
     margin: 0 auto;
     display: block;
@@ -173,7 +187,7 @@ img#dash {
 
 .timer-buttons button {
     border: none;
-    color: white;
+    color: var(--top-button-color);
     padding: 0.78125vw 1.875vw;
     font-size: 1.5625vw;
     font-family: 'Quicksand', sans-serif;
@@ -185,29 +199,29 @@ img#dash {
 }
 
 #pomo-btn {
-    background-color: #f36060;
+    background-color: var(--top-button-bg-color);
 }
 
 #pomo-btn.toggle {
-    background-color: #f3606060;
+    background-color: var(--inactive-button-color);
 }
 
 #break-btn {
-    background-color: #f3606060;
+    background-color: var(--inactive-button-color);
 }
 
 #break-btn.toggle {
-    background-color: #f36060;
+    background-color: var(--top-button-bg-color);
 }
 
 
 /* This is here to create spacing between Pomo/Break and Timer Display */
 
 div.empty-space-border {
-    background: #ffd5ca;
-    color: #fff;
+    background: var(--bg-color);
+    color: var(--top-button-color);
     border-style: solid;
-    border-color: #ffd5ca;
+    border-color: var(--bg-color);
     border-width: thick;
     border-radius: 50px;
     text-align: center;
@@ -219,10 +233,10 @@ div.empty-space-border {
 
 div.timer-value {
     font-size: 6.5vw;
-    background: #f36060;
-    color: #fff;
+    background: var(--top-button-bg-color);
+    color: var(--top-button-color);
     border-style: solid;
-    border-color: #ffd5ca;
+    border-color: var(--bg-color);
     border-width: thick;
     border-radius: 3.90625vw;
     text-align: center;
@@ -240,9 +254,9 @@ div.timer-value {
 
 .timer-control-buttons button {
     margin-top: 1.640625vw;
-    background-color: #f36060;
+    background-color: var(--top-button-bg-color);
     border: none;
-    color: white;
+    color: var(--top-button-color);
     padding: 0.78125vw 1.875vw;
     cursor: pointer;
     font-size: 1.953125vw;
@@ -508,7 +522,7 @@ body.dark-theme settings-popup::part(enable-disable-alarmsound) {
 
 #select-focus {
     font-weight: 500;
-    color: #f36060;
+    color: var(--header-txt-color);
     font-size: 1.875vw;
 }
 
