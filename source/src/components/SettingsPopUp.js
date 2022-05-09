@@ -147,9 +147,21 @@ class SettingsPopUp extends HTMLElement {
         rangeInput.setAttribute('value', parseInt(localStorage.getItem('volume'), 10));
         rangeInput.setAttribute('class', 'vol-slider');
         rangeInput.setAttribute('id', 'range');
-        // append confirm btn in footer
+        // Create footer and append warning message to it
+        // const warningFooter = wrapper.appendChild(document.createElement('div'));
+        // warningFooter.setAttribute('class', 'warning-footer');
+        // const warningMsg = warningFooter.appendChild(document.createElement('p'));
+        // warningMsg.setAttribute('class', 'settings-warning-message');
+        // warningMsg.innerHTML = "WARNING: Any changes to settings\nwill cause a reset in the timer, if running!!!"
+        // Create footer and append confirm btn to it
         const footer = wrapper.appendChild(document.createElement('div'));
         footer.setAttribute('class', 'button-footer');
+
+        const warningMsg = footer.appendChild(document.createElement('p'));
+        warningMsg.setAttribute('id', 'settings-warning-msg');
+        warningMsg.setAttribute('text-align', 'left');
+        warningMsg.innerHTML = "WARNING: Any changes to settings will cause a reset in the timer, if running!"
+
         const confirmBtn = footer.appendChild(document.createElement('button'));
         confirmBtn.setAttribute('class', 'settings-popup-btns');
         confirmBtn.setAttribute('id', 'confirm-settings-btn');
@@ -337,7 +349,7 @@ class SettingsPopUp extends HTMLElement {
         .button-footer {
                 background-color: rgb(234 234 234);
                 padding: 1.09375vw 1.5625vw;
-                text-align: right;
+                text-align: center;
                 position: absolute;
                 bottom: 0;
                 right: 0;
@@ -345,8 +357,12 @@ class SettingsPopUp extends HTMLElement {
                 border-bottom-left-radius: 0.3125vw;
                 border-bottom-right-radius: 0.3125vw;
         }
+        .settings-warning-msg {
+                width: 50%;
+                font-weight: 1000;
+        }
         #timer-settings {
-                color: rgb(85, 85, 85);
+                color: rgb(255, 0, 0);
                 width: 85%;
                 font-weight: 500;
                 margin: 1.5625vw auto 0.78125vw auto;
