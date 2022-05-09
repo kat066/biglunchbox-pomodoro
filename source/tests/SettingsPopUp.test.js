@@ -181,11 +181,11 @@ test('All attributes set correctly', () => {
     expect(shadow.querySelector('span').getAttribute('class')).toBe('slider');
 
     // volume session set correctly, default volume 50
-    expect(shadow.querySelectorAll('input')[4].getAttribute('type')).toBe('range');
-    expect(shadow.querySelectorAll('input')[4].getAttribute('id')).toBe('range');
-    expect(shadow.querySelectorAll('input')[4].getAttribute('value')).toBe('50');
-    expect(shadow.querySelectorAll('input')[4].getAttribute('min')).toBe('0');
-    expect(shadow.querySelectorAll('input')[4].getAttribute('max')).toBe('100');
+    expect(shadow.querySelectorAll('input')[5].getAttribute('type')).toBe('range');
+    expect(shadow.querySelectorAll('input')[5].getAttribute('id')).toBe('range');
+    expect(shadow.querySelectorAll('input')[5].getAttribute('value')).toBe('50');
+    expect(shadow.querySelectorAll('input')[5].getAttribute('min')).toBe('0');
+    expect(shadow.querySelectorAll('input')[5].getAttribute('max')).toBe('100');
 
     // confirm button attributes set correctly
     expect(shadow.querySelectorAll('button')[0].getAttribute('class')).toBe('settings-popup-btns');

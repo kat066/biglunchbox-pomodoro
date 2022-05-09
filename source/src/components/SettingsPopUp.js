@@ -70,6 +70,16 @@ class SettingsPopUp extends HTMLElement {
         }
     }
 
+    toggleTabLabel() {
+        const tabLabel = document.getElementById('tab-label');
+        if (localStorage.getItem('tab-label') === 'on') {
+            localStorage.setItem('tab-label', 'off');
+            tabLabel.innerHTML = 'Pomodoro Timer';
+        } else {
+            localStorage.setItem('tab-label', 'on');
+        }
+    }
+
     setVolume() {
         const volume = this.shadowRoot.getElementById('range').value;
         localStorage.setItem('volume', `${volume}`);
@@ -108,6 +118,9 @@ class SettingsPopUp extends HTMLElement {
             _bindedChangeTheme: {
                 value: this.toggleMode.bind(this),
             },
+            _bindedToggleTabLabel: {
+                value: this.toggleTabLabel.bind(this),
+            },
             _bindedUpdateVolumeText: {
                 value: this.updateVolumeText.bind(this),
             },
@@ -143,6 +156,13 @@ class SettingsPopUp extends HTMLElement {
         }
         const themeStylisticSlider = this.shadowRoot.getElementById('mode-switch-slider');
         themeStylisticSlider.addEventListener('click', this._bindedChangeTheme);
+
+        const tabLabelCheckbox = this.shadowRoot.querySelector('#tab-label-switch > label.switch > input[type=checkbox]');
+        if (localStorage.getItem('tab-label') === 'on') {
+            tabLabelCheckbox.toggleAttribute('checked');
+        }
+        const tabLabelStylisticSlider = this.shadowRoot.getElementById('tab-label-switch-slider');
+        tabLabelStylisticSlider.addEventListener('click', this._bindedToggleTabLabel);
 
         const rangeInput = this.shadowRoot.getElementById('range');
         rangeInput.setAttribute('value', parseInt(localStorage.getItem('volume'), 10));

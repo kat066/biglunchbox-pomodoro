@@ -1,10 +1,12 @@
 const startButton = document.getElementById('start-btn');
 const timerDisplayDuration = document.getElementById('timer_display_duration');
+const tabLabel = document.getElementById('tab-label');
 const btnSound = new Audio('./icons/btnClick.mp3');
 const alarmSound = new Audio('./icons/alarm.mp3');
 const SECOND = 1000;
 let timer;
 let timerStatus = 'pomo';
+let tabLabelStatus = 'Time to Focus!';
 let breakCounter = 0;
 
 // assign default session lengths to local storage
@@ -23,7 +25,7 @@ timerDisplayDuration.innerHTML = `${pomoTime}:00`;
  * This function is used by switchMode() to switch the highlighted button
  * on the UI from pomo to break when switching to break mode.
  */
- function togglePomoButtonOff(pomoButton, breakButton) {
+function togglePomoButtonOff(pomoButton, breakButton) {
     if (pomoButton.getAttribute('class') !== 'toggle') {
         pomoButton.classList.toggle('toggle');
         breakButton.classList.toggle('toggle');
@@ -41,6 +43,15 @@ function togglePomoButtonOn(pomoButton, breakButton) {
     }
 }
 
+/** This function is called to update the tab label with the remaining
+ * time, if the Tab Label setting is enabled.
+*/
+function updateTabLabel(tabLabelTime) {
+    if (localStorage.getItem('tab-label') === 'on') {
+        tabLabel.innerHTML = `${tabLabelTime} - ${tabLabelStatus}`;
+    }
+}
+
 /**
  * The sitchMode function would sitch the time mode if the pomo time is over.
  * the function would switch short break time mode. After three times of short
@@ -49,20 +60,26 @@ function togglePomoButtonOn(pomoButton, breakButton) {
 function switchMode() {
     const pomoButton = document.getElementById('pomo-btn');
     const breakButton = document.getElementById('break-btn');
-    
+
     if (timerStatus === 'pomo' && breakCounter >= 3) {
         timerDisplayDuration.innerHTML = `${longBreakTime}:00`;
         togglePomoButtonOff(pomoButton, breakButton);
+        tabLabelStatus = 'Rest a while!';
+        updateTabLabel(`${longBreakTime}:00`);
         timerStatus = 'break';
         breakCounter = 0;
     } else if (timerStatus === 'pomo') {
         timerDisplayDuration.innerHTML = `${breakTime}:00`;
         togglePomoButtonOff(pomoButton, breakButton);
+        tabLabelStatus = 'Take a break!';
+        updateTabLabel(`${breakTime}:00`);
         timerStatus = 'break';
         breakCounter += 1;
     } else {
         timerDisplayDuration.innerHTML = `${pomoTime}:00`;
         togglePomoButtonOn(pomoButton, breakButton);
+        tabLabelStatus = 'Time to Focus!';
+        updateTabLabel(`${pomoTime}:00`);
         timerStatus = 'pomo';
     }
 }
@@ -103,6 +120,7 @@ async function timerFunction() {
     }
 
     timerDisplayDuration.innerHTML = `${minutes}:${seconds}`;
+    updateTabLabel(`${minutes}:${seconds}`);
 }
 
 /** The function would be call when the click start button and the stop button
@@ -110,6 +128,7 @@ async function timerFunction() {
  */
 async function start() {
     startButton.innerHTML = 'Stop';
+    updateTabLabel(`${pomoTime}:00`);
     timer = setInterval(timerFunction, SECOND);
 }
 

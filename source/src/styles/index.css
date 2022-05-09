@@ -431,6 +431,10 @@ body.dark-theme settings-popup::part(enable-dark-mode) {
     color: #f5f6f7;
 }
 
+body.dark-theme settings-popup::part(enable-tab-label) {
+    color: #f5f6f7;
+}
+
 body.dark-theme settings-popup::part(btn-footer) {
     background-color: #2d3848;
 }

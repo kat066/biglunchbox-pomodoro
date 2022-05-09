@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Pomodoro Timer</title>
+    <title id="tab-label">Pomodoro Timer</title>
     <link rel="stylesheet" href="styles/index.css">
     <link rel="shortcut icon" type="image/x-icon" href="/icons/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
@@ -242,6 +242,21 @@
             border-bottom: solid 1px #d2d2d2;
             padding-bottom: 1.5625vw;
         }
+        #enable-tab-label {
+            color: rgb(85, 85, 85);
+            font-weight: 500;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        #tab-label-switch {
+            justify-content: space-between;
+            display: flex;
+            width: 85%;
+            margin: 1.5625vw auto 0.78125vw auto;
+            border-bottom: solid 1px #d2d2d2;
+            padding-bottom: 1.5625vw;
+        }
         .switch {
             position: relative;
             display: inline-flex;
@@ -466,6 +481,13 @@
             <label class="switch">
                 <input type="checkbox">
                 <span id="mode-switch-slider" class="slider"></span>
+            </label>
+        </div>
+        <div id="tab-label-switch">
+            <h4 id="enable-tab-label" part="enable-tab-label">Enable Tab Label?</h4>
+            <label class="switch">
+                <input type="checkbox">
+                <span id="tab-label-switch-slider" class="slider"></span>
             </label>
         </div>
         <div id="volume-div">
