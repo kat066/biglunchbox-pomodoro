@@ -1,6 +1,6 @@
-# Horrible Timer
+# Pomodoro Timer
 
-**We are Runtime Terror!**
+**We are Big Lunchbox!**
 
 [![CodeFactor](https://www.codefactor.io/repository/github/kat066/biglunchbox-pomodoro/badge?s=60ed377b2b1538342690c2bba4151269aedbbc86)](https://www.codefactor.io/repository/github/kat066/biglunchbox-pomodoro)
 [![CI](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/integrate.yml/badge.svg)](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/integrate.yml)
