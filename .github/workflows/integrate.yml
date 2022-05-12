@@ -47,7 +47,7 @@ jobs:
 
       # lint
       - name: Run linter
-        run: npm run lint
+        run: npm run lint:verify
 
   test:
     runs-on: ubuntu-18.04

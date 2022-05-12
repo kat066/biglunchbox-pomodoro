@@ -1,13 +1,16 @@
 import '../src/components/TaskPopUp';
+import { TASK_POPUP_TEMPLATE } from './Constants';
+import { addTemplates, dispatchDOMLoadedEvent } from './utils';
 
-window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
-// jest.mock('../src/components/TaskItem');
+let pageTemplate;
 
-beforeEach(() => {
-    localStorage.setItem('volume', 50);
-    localStorage.setItem('tasks', '[]');
-    localStorage.setItem('id', '0');
-    document.body.innerHTML = `
+beforeAll(async () => {
+    const templates = await addTemplates([
+        TASK_POPUP_TEMPLATE,
+    ], __dirname);
+
+    pageTemplate = `
+        ${templates}
         <ul id="task-list-elements">
         </ul>
         <div id="popup-button">
@@ -17,20 +20,27 @@ beforeEach(() => {
     window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
 });
 
+// jest.mock('../src/components/TaskItem');
+
+beforeEach(() => {
+    localStorage.setItem('volume', 50);
+    localStorage.setItem('tasks', '[]');
+    localStorage.setItem('id', '0');
+    document.body.innerHTML = pageTemplate;
+});
+
 afterEach(() => {
-    jest.resetModules();
     localStorage.clear();
 });
 
 test('Adding a task called test_task with the addButton correctly updates localStorage', () => {
-    const testTaskPopUp = document.createElement('task-popup');
-    const shadow = testTaskPopUp.shadowRoot;
+    const taskPopUp = document.createElement('task-popup');
+    const shadow = taskPopUp.shadowRoot;
 
     const input = shadow.querySelector('input');
     input.value = 'test_task';
 
-    const button = shadow.querySelector('button');
-    button.click();
+    taskPopUp.addTask();
 
     // new task test_task is added to list of tasks
     expect(localStorage.getItem('tasks')).toBe('[{"id":"0","checked":false,"text":"test_task","focused":false}]');
@@ -41,14 +51,13 @@ test('Adding a task called test_task with the addButton correctly updates localS
 });
 
 test('Adding empty task does not change localStorage', () => {
-    const testTaskPopUp = document.createElement('task-popup');
-    const shadow = testTaskPopUp.shadowRoot;
+    const taskPopUp = document.createElement('task-popup');
+    const shadow = taskPopUp.shadowRoot;
 
     const input = shadow.querySelector('input');
     input.value = '';
 
-    const button = shadow.querySelector('button');
-    button.click();
+    taskPopUp.addTask();
 
     // localStorage remains the same
     expect(localStorage.getItem('tasks')).toBe('[]');
@@ -57,14 +66,11 @@ test('Adding empty task does not change localStorage', () => {
 });
 
 test('cancelButton works correctly', () => {
-    const testTaskPopUp = document.createElement('task-popup');
-    const shadow = testTaskPopUp.shadowRoot;
+    const taskPopUp = document.createElement('task-popup');
+    taskPopUp.closePopUp();
 
-    const close = shadow.querySelector('img');
-    close.click();
-
-    expect(shadow.querySelector('div').style.display).toBe('none');
-    expect(shadow.querySelector('input').value).toBe('');
+    expect(getComputedStyle(taskPopUp.shadowRoot.getElementById('add-task-popup')).display).toBe('none');
+    expect(taskPopUp.shadowRoot.getElementById('task-input').value).toBe('');
 });
 
 test('All attributes set correctly', () => {
@@ -96,18 +102,18 @@ test('All attributes set correctly', () => {
 test('Pop up button works correctly', () => {
     // const testTaskPopUp = new TaskPopUp();
     // const shadow = testTaskPopUp.shadowRoot;
-
-    dispatchEvent(new Event('load'));
-
-    const popupBtn = document.getElementById('task-popup-btn');
     const popUp = document.createElement('task-popup');
     document.body.appendChild(popUp);
+
+    const popupBtn = document.getElementById('task-popup-btn');
+    document.body.appendChild(popupBtn);
+
+    dispatchDOMLoadedEvent(window);
 
     popupBtn.click();
 
     const shadow = popUp.shadowRoot;
 
     const display = getComputedStyle(shadow.getElementById('add-task-popup'));
-
     expect(display.display).toBe('block');
 });

@@ -23,5 +23,7 @@ function toggleState() {
     }
 }
 
-const focusBtn = document.getElementById('focus-button');
-focusBtn.addEventListener('click', toggleState);
+window.addEventListener('DOMContentLoaded', () => {
+    const focusBtn = document.getElementById('focus-button');
+    focusBtn.addEventListener('click', toggleState);
+});
