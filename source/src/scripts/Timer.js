@@ -54,13 +54,18 @@ function switchMode() {
     }
 }
 
+
 /**
  * The function would call the switchMode function if the time mode counter
  * down to 0 and the alarm sound would be call. The counter down would be call
  * in this function.
  */
 async function timerFunction() {
+
+    // timerbox and text used for progress bar
+    let timerBox = document.getElementById("timer_display");
     let timerText = timerDisplayDuration.innerHTML;
+
 
     if (timerText === '0:00') {
         switchMode();
@@ -88,10 +93,25 @@ async function timerFunction() {
     if (seconds < 10) {
         seconds = `0${String(seconds)}`;
     }
-    // TODO: Adapt to each modes; now this is hard-coded to pomo mode; break/other modes do not work!!
+
+
+    // Adapt to each modes; now this is hard-coded to pomo mode; break/other modes do not work!!
+    const pomoButton = document.getElementById('pomo-btn');
+    // check state
+    let timePerc = 100 - Math.floor(((minutes*60 + seconds) / (parseInt(pomoTime)*60))*100);
+    if (pomoButton.getAttribute('class') !== 'toggle') {
+        timePerc = 100 - Math.floor(((minutes*60 + seconds) / (parseInt(pomoTime)*60))*100);
+    }
+    else {
+        timePerc = 100 - Math.floor(((minutes*60 + seconds) / (parseInt(breakTime)*60))*100);
+    }
+
     // let timePerc = 100 - Math.floor(((minutes*60 + seconds) / (parseInt(pomoTime)*60))*100);
     // console.log(timePerc);
     timerDisplayDuration.innerHTML = `${minutes}:${seconds}`;
+    timerDisplayDuration.style.backgroundColor = "green";
+    timerDisplayDuration.style.width = `${timePerc}%`;
+    timerBox.style.borderColor = "white";
     // TODO: Change this into css (through element.style.backgroundColor)
     // startButton.innerHTML = `<div style=height:24px;width:${timePerc}%;background-color:DodgerBlue;></div>`;
     // timerDisplayDuration.innerHTML = `<div style=height:24px;width:${timePerc}%;background-color:DodgerBlue;></div>`;
@@ -110,6 +130,13 @@ async function start() {
  * would be show in the web. The time would be reset.
  */
 async function stop() {
+    // timerbox and text used for progress bar
+    let timerBox = document.getElementById("timer_display");
+
+    timerBox.style.borderColor = startButton.style.color;
+    timerDisplayDuration.style.backgroundColor = startButton.style.color;
+    timerDisplayDuration.style.width = "100%";
+
     pomoTime = localStorage.getItem('pomo-length');
     breakTime = localStorage.getItem('short-break-length');
     longBreakTime = localStorage.getItem('long-break-length');
