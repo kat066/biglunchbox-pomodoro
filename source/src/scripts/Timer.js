@@ -20,6 +20,28 @@ let longBreakTime = localStorage.getItem('long-break-length');
 timerDisplayDuration.innerHTML = `${pomoTime}:00`;
 
 /**
+ * This function is used by switchMode() to switch the highlighted button
+ * on the UI from pomo to break when switching to break mode.
+ */
+ function togglePomoButtonOff(pomoButton, breakButton) {
+    if (pomoButton.getAttribute('class') !== 'toggle') {
+        pomoButton.classList.toggle('toggle');
+        breakButton.classList.toggle('toggle');
+    }
+}
+
+/**
+ * This function is used by switchMode() to switch the highlighted button
+ * on the UI from break to pomo when switching to pomo mode.
+ */
+function togglePomoButtonOn(pomoButton, breakButton) {
+    if (pomoButton.getAttribute('class') === 'toggle') {
+        pomoButton.classList.toggle('toggle');
+        breakButton.classList.toggle('toggle');
+    }
+}
+
+/**
  * The sitchMode function would sitch the time mode if the pomo time is over.
  * the function would switch short break time mode. After three times of short
  * break time, the function would switch to long break time.
@@ -27,29 +49,20 @@ timerDisplayDuration.innerHTML = `${pomoTime}:00`;
 function switchMode() {
     const pomoButton = document.getElementById('pomo-btn');
     const breakButton = document.getElementById('break-btn');
-
+    
     if (timerStatus === 'pomo' && breakCounter >= 3) {
         timerDisplayDuration.innerHTML = `${longBreakTime}:00`;
-        if (pomoButton.getAttribute('class') !== 'toggle') {
-            pomoButton.classList.toggle('toggle');
-            breakButton.classList.toggle('toggle');
-        }
+        togglePomoButtonOff(pomoButton, breakButton);
         timerStatus = 'break';
         breakCounter = 0;
     } else if (timerStatus === 'pomo') {
         timerDisplayDuration.innerHTML = `${breakTime}:00`;
-        if (pomoButton.getAttribute('class') !== 'toggle') {
-            pomoButton.classList.toggle('toggle');
-            breakButton.classList.toggle('toggle');
-        }
+        togglePomoButtonOff(pomoButton, breakButton);
         timerStatus = 'break';
         breakCounter += 1;
     } else {
         timerDisplayDuration.innerHTML = `${pomoTime}:00`;
-        if (pomoButton.getAttribute('class') === 'toggle') {
-            pomoButton.classList.toggle('toggle');
-            breakButton.classList.toggle('toggle');
-        }
+        togglePomoButtonOn(pomoButton, breakButton);
         timerStatus = 'pomo';
     }
 }
