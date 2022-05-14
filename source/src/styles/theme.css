@@ -1,3 +1,14 @@
 :root {
-    --color1: #eee;
+    --bg-color: rgb(255, 214, 204);
+    --header-txt-color: rgb(243, 96, 96);
+    --top-button-bg-color: rgb(243, 96, 96);
+    --top-button-color: rgb(255, 255, 255);
+    --divider-color: rgba(123, 12, 12, 0.31);
+    --inactive-button-color: rgba(243, 96, 96, 0.376);
+    --pop-up-bg-color: rgb(245, 245, 245);
+    --pop-up-color: rgb(85, 85, 85); 
+    --slider-bg-color: rgb(204, 204, 204);
+    --slider-bg-color-checked: rgb(163 243 67 / 88%);
+    --vol-slider-thumb-color: rgb(230, 229, 229);
+    --settings-input-bg-color: rgb(234, 234, 234);
 }

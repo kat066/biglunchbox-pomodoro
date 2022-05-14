@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Pomodoro Timer</title>
     <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/theme.css">
     <link rel="shortcut icon" type="image/x-icon" href="/icons/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
@@ -21,7 +22,7 @@
         }
         #accessibility {
             font-weight: 500;
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
         }
         #features-content li {
             margin-bottom: 0.390625vw;
@@ -33,7 +34,7 @@
         }
         #features {
             font-weight: 500;
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
         }
         #how-to-content li {
             margin-bottom: 0.390625vw;
@@ -45,25 +46,21 @@
         }
         #how-to {
             font-weight: 500;
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
         }
         h4 {
             font-size: 1.15vw;
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
             font-weight: 500;
         }
         #help-container {
             width: 85%;
             margin: 0 auto;
-            /* height: 80%; */
             height: 28.125vw;
             overflow: auto;
         }
         #close-icon {
-            /* width: 15px; */
             width: 1.171875vw;
-            /* margin-top: 10px; */
-            /* margin-right: 10px; */
             margin-top: 0.78125vw;
             margin-right: 0.78125vw;
             position:absolute;
@@ -79,18 +76,13 @@
         #help-popup {
             display: none;
             position: fixed;
-            /* width: 30%; */
-            /* width: 52%; */
             width: 51.953125vw;
-            /* height: 30%; */
             height: 35.15625vw;
-            /* border-radius: 4px; */
             border-radius: 0.3125vw;
             top:18%;
-            /* left: 34%; */
             left: 24%;
             z-index: 999;
-            background-color: whitesmoke;
+            background-color: var(--pop-up-bg-color);
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
             -webkit-animation-name: animatetop; 
             -webkit-animation-duration: 0.3s;
@@ -107,13 +99,10 @@
         }
         #help-popup > h3{
             font-size: 1.6vw;
-            color: #f36060;
-            border-bottom: solid 1px #d2d2d2;
-            /* padding-bottom: 5px; */
+            color: var(--header-txt-color);
             padding-bottom: 0.390625vw;
             width: 85%;
             font-weight: 500;
-            /* margin: 20px auto 10px auto; */
             margin: 1.5625vw auto 0.78125vw auto;
         }
     </style>
@@ -171,11 +160,11 @@
         #volume-number {
             font-size: 1.09375vw;
             font-family: Arial;
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
             margin-left: 1.5625vw;
         }
         .vol-slider {
-            background-color: #ccc;
+            background-color: var(--slider-bg-color);
             -webkit-appearance: none;
             appearance: none;
             border-radius: 3.90625vw;
@@ -197,7 +186,7 @@
             width: 1.5625vw;
             height: 1.5625vw;
             border-radius: 50%;
-            background: #e6e5e5;
+            background: var(--vol-slider-thumb-color);
             box-shadow: 0 0 3px 1px rgba(0,0,0,0.2);
         }
         .vol-slider::-moz-range-thumb {
@@ -205,7 +194,7 @@
             width: 1.5625vw;
             height: 1.5625vw;
             border-radius: 50%;
-            background: #e6e5e5;
+            background: var(--vol-slider-thumb-color);
             box-shadow: 0 0 3px 1px rgba(0,0,0,0.2);
         }
         #volume-div {
@@ -221,14 +210,14 @@
             align-items: center;
         }
         #sound-volume {
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
             margin: 0;
             font-weight: 500;
             display: flex;
             align-items: center;
         }
         #enable-dark-mode {
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
             font-weight: 500;
             margin: 0;
             display: flex;
@@ -239,7 +228,6 @@
             display: flex;
             width: 85%;
             margin: 1.5625vw auto 0.78125vw auto;
-            border-bottom: solid 1px #d2d2d2;
             padding-bottom: 1.5625vw;
         }
         .switch {
@@ -260,7 +248,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
+            background-color: var(--slider-bg-color);
             -webkit-transition: .4s;
             transition: .4s;
             border-radius: 2.65625vw;
@@ -272,13 +260,13 @@
             width: 2.03125vw;
             left: 0.3125vw;
             bottom: 0.3125vw;
-            background-color: white;
+            background-color: var(--top-button-color);
             -webkit-transition: 0.2s;
             transition: 0.2s;
             border-radius: 50%;
         }
         input[type='checkbox']:checked + .slider {
-            background-color: rgb(163 243 67 / 88%);
+            background-color: var(--slider-bg-color-checked);
         }
         input[type='checkbox']:checked + .slider:before {
             -webkit-transform: translateX(2.03125vw);
@@ -290,28 +278,27 @@
             display: flex;
             width: 85%;
             margin: 0.78125vw auto 0.78125vw auto;
-            border-bottom: solid 1px #d2d2d2;
             padding-bottom: 1.5625vw;
         }
         label {
             display: block;
             font-size: 0.9375vw;
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
             font-weight: 500;
         }
         input[type='number'] {
             font-size: 1.09375vw;
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
             border: none;
             border-radius: 0.3125vw;
-            background-color: rgb(234 234 234);
+            background-color: var(--settings-input-bg-color);
             padding: 0.78125vw;
             box-sizing: border-box;
             width: 100%;
             outline: none;
         }
         .button-footer {
-            background-color: rgb(234 234 234);
+            background-color: var(--settings-input-bg-color);
             padding: 1.09375vw 1.5625vw;
             text-align: right;
             position: absolute;
@@ -322,7 +309,7 @@
             border-bottom-right-radius: 0.3125vw;
         }
         #timer-settings {
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
             width: 85%;
             font-weight: 500;
             margin: 1.5625vw auto 0.78125vw auto;
@@ -350,7 +337,7 @@
             top:20%;
             left: 34%;
             z-index: 999;
-            background-color: whitesmoke;
+            background-color: var(--pop-up-bg-color);
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
             -webkit-animation-name: animatetop; 
             -webkit-animation-duration: 0.3s;
@@ -367,8 +354,7 @@
         }
         #settings-confirm-popup > h3 {
             font-size: 1.6vw;
-            color: #f36060;
-            border-bottom: solid 1px #d2d2d2;
+            color: var(--header-txt-color);
             padding-bottom: 0.390625vw;
             width: 85%;
             font-weight: 500;
@@ -379,8 +365,8 @@
             border-style: none; 
             border-radius: 0.3125vw;
             text-align: center;
-            background-color:#f36060;
-            color:#fff;
+            background-color:var(--top-button-bg-color);
+            color: var(--top-button-color);
             font-family: 'Quicksand', sans-serif;
             height: 17%;
             width: 27%;
@@ -408,7 +394,7 @@
             flex-grow: 1;
         }
         .text {
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
             margin: 0;
             font-size: 1.1vw;
             font-weight: 500;
@@ -499,24 +485,18 @@
 <template id="reset-popup-template">
     <style>
         .button-footer {
-            background-color: rgb(234 234 234);
-            /* padding: 14px 20px; */
+            background-color: var(--session-input-bg-color);
             padding: 1.09375vw 1.5625vw;
             text-align: right;
             position: absolute;
             bottom: 0;
             right: 0;
             left: 0;
-            /* border-bottom-left-radius: 4px; */
-            /* border-bottom-right-radius: 4px; */
             border-bottom-left-radius: 0.3125vw;
             border-bottom-right-radius: 0.3125vw;
         }
         #close-icon {
-            /* width: 15px; */
             width: 1.171875vw;
-            /* margin-top: 10px; */
-            /* margin-right: 10px; */
             margin-top: 0.78125vw;
             margin-right: 0.78125vw;
             position:absolute;
@@ -530,26 +510,22 @@
             transform: scale(1.1);
         }
         #reset-content {
-            color: rgb(85, 85, 85);
+            color: var(--pop-up-color);
             width: 85%;
             font-weight: 500;
             font-size: 1.0375vw;
-            /* margin: 20px auto 0 auto; */
             margin: 1.5625vw auto 0 auto;
         }
         #reset-confirm-popup {
             display: none;
             position: fixed;
-            /* width: 30%; */
             width: 29.296875vw;
-            /* height: 30%; */
             height: 15.625vw;
-            /* border-radius: 4px; */
             border-radius: 0.3125vw;
             top:25%;
             left: 34%;
             z-index: 999;
-            background-color: whitesmoke;
+            background-color: var(--pop-up-bg-color);
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
             -webkit-animation-name: animatetop; 
             -webkit-animation-duration: 0.3s;
@@ -566,23 +542,19 @@
         }
         #reset-confirm-popup > h3{
             font-size: 1.6vw;
-            color: #f36060;
-            border-bottom: solid 1px #d2d2d2;
-            /* padding-bottom: 5px; */
+            color: var(--header-txt-color);
             padding-bottom: 0.390625vw;
             width: 85%;
             font-weight: 500;
-            /* margin: 20px auto 10px auto; */
             margin: 1.5625vw auto 0.78125vw auto;
         }
         .reset-popup-btns {
             cursor: pointer;
             border-style: none;
-            /* border-radius: 4px; */
             border-radius: 0.3125vw;
             text-align: center;
-            background-color:#f36060;
-            color:#fff;
+            background-color:var(--top-button-bg-color);
+            color:var(--top-button-color);
             font-family: 'Quicksand', sans-serif;
             height: 17%;
             width: 27%;
@@ -596,7 +568,6 @@
             transform: scale(1.1);
         }
         #confirm-reset-btn {
-            /* padding: 8px 12px; */
             padding: 0.625vw 0.9375vw;
         }
         /* #cancel-reset-btn {
@@ -619,27 +590,20 @@
     <style>
         :host {
             cursor: pointer;
-            /* height: 50px; */
             height: 3.90625vw;
             position: relative;
-            /* margin-bottom: 10px; */
-            /* border-radius: 5px; */
             border-radius: 0.390625vw;
-            /* margin-right: 20%; */
             box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
             display: flex;
             align-items: center;
-            /* padding-left: 37px; */
             padding-left: 2.890625vw;
-            background-color: #f36060;
-            color: white;
-            /* font-size: medium; */
+            background-color: var(--top-button-bg-color);
+            color: var(--top-button-color);
             font-size: 1.35vw;
             font-weight: 500;
             border-style:none;
             user-select: none;
             margin: 0 auto;
-            /* margin-bottom: 10px; */
             margin-bottom: 0.78125vw;
         }
         :host(:hover) {
@@ -647,7 +611,7 @@
             transition: 0.3s;
         }
         :host([checked = 'true']) {
-            background: #f3606060;
+            background: var(--inactive-button-color);
             text-decoration: line-through;
             -webkit-text-decoration: line-through;
         }
@@ -656,11 +620,8 @@
         }
         .check-icon {
             position: absolute;
-            /* left: 10px; */
             left: 0.78125vw;
             vertical-align: middle;
-            /* width: 20px; */
-            /* height: 20px; */
             width: 1.5625vw;
             height: 1.5625vw;
             margin: 0;
@@ -671,12 +632,9 @@
         }
         .delete-icon {
             position: absolute;
-            color: #fff;
-            /* right: 10px; */
+            color: var(--top-button-color);
             right: 0.78125vw;
             vertical-align: middle;
-            /* width: 20px; */
-            /* height: 20px; */
             width: 1.5625vw;
             height: 1.5625vw;
             margin: 0;
@@ -691,12 +649,9 @@
         }
         .focus-icon {
             position: absolute;
-            color: #fff;
-            /* right: 40px; */
+            color: var(--top-button-color);
             right: 3.125vw;
             vertical-align: middle;
-            /* width: 20px; */
-            /* height: 20px; */
             width: 1.5625vw;
             height: 1.5625vw;
             margin: 0;
@@ -717,24 +672,18 @@
 <template id="task-popup-template">
     <style>
         .button-footer {
-            background-color: rgb(234 234 234);
-            /* padding: 14px 20px; */
+            background-color: var(--session-input-bg-color);
             padding: 1.09375vw 1.5625vw;
             text-align: right;
             position: absolute;
             bottom: 0;
             right: 0;
             left: 0;
-            /* border-bottom-left-radius: 4px; */
-            /* border-bottom-right-radius: 4px; */
             border-bottom-left-radius: 0.3125vw;
             border-bottom-right-radius: 0.3125vw;
         }
         #close-icon {
-            /* width: 15px; */
             width: 1.171875vw;
-            /* margin-top: 10px; */
-            /* margin-right: 10px; */
             margin-top: 0.78125vw;
             margin-right: 0.78125vw;
             position:absolute;
@@ -750,16 +699,13 @@
         #add-task-popup {
             display: none;
             position: fixed;
-            /* width: 30%; */
             width: 29.296875vw;
-            /* height: 30%; */
             height: 15.625vw;
-            /* border-radius: 4px; */
             border-radius: 0.3125vw;
             top:25%;
             left: 34%;
             z-index: 999;
-            background-color: whitesmoke;
+            background-color: var(--pop-up-bg-color);
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
             -webkit-animation-name: animatetop; 
             -webkit-animation-duration: 0.3s;
@@ -780,45 +726,36 @@
             font-weight: 600;
             width: 85%;
             height: 22%;
-            background-color: whitesmoke;
-            color: rgb(85, 85, 85); 
+            background-color: var(--pop-up-bg-color);
+            color: var(--pop-up-color); 
             border-style: hidden;
-            /* border-radius: 5px; */
             border-radius: 0.390625vw;
             outline: none;
             display: block;
-            /* margin: 20px auto 0 auto; */
             margin: 1.5625vw auto 0 auto;
             font-weight: 500;
         }
         input[type='text']::placeholder {
-            /* color: rgba(85, 85, 85, 0.2); */
-            /* color: #A7A7A7; */
-            color: #c7c7c75e;
+            color: var(--slider-bg-color);
         }
         #add-task-popup > h3{
             font-size: 1.6vw;
             font-weight: 500;
-            color: #f36060;
-            border-bottom: solid 1px #d2d2d2;
-            /* padding-bottom: 5px; */
+            color: var(--header-txt-color);
             padding-bottom: 0.390625vw;
             width: 85%;
-            /* margin: 20px auto 10px auto; */
             margin: 1.5625vw auto 0.78125vw auto;
         }
         .popup-btns {
             cursor: pointer;
             border-style: none;
-            /* border-radius: 4px; */
             border-radius: 0.3125vw;
             text-align: center;
-            background-color:#f36060;
-            color:#fff;
+            background-color:var(--top-button-bg-color);
+            color: var(--top-button-color);
             font-family: 'Quicksand', sans-serif;
             height: 17%;
             width: 20%;
-            /* font-size: 1em; */
             font-size: 1.25vw;
             font-weight: 500;
             outline: none;
@@ -828,7 +765,6 @@
             transform: scale(1.1);
         }
         #add-task-btn {
-            /* padding: 8px 12px; */
             padding: 0.625vw 0.9375vw;
         }
         #cancel-task-btn {

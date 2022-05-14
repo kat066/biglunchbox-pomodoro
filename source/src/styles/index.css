@@ -7,14 +7,14 @@ can be edited in scripts as such:
 let root = document.querySelector(':root');
 root.style.setProperty('--bg-color', 'yellow');
 */
-:root {
+/* :root {
     --bg-color: #ffd5ca;
     --header-txt-color: #f36060;
     --top-button-bg-color: #f36060;
     --top-button-color: white;
     --divider-color: #7b0c0c4f;
     --inactive-button-color: #f3606060;
-}
+} */
 
 body {
     padding: 0;
