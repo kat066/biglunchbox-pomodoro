@@ -18,8 +18,8 @@ window.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('alarmState', alarmState);
     }
 
-    if (localStorage.getItem('tasks') === null || localStorage.getItem('id') === null || localStorage.getItem('theme') === null || localStorage.getItem('volume') === null ||
-        localStorage.getItem('state') === null || localStorage.getItem('clickState') === null || localStorage.getItem('alarmState') === null) {
+    if (localStorage.getItem('tasks') === null || localStorage.getItem('id') === null || localStorage.getItem('theme') === null || localStorage.getItem('volume') === null
+        || localStorage.getItem('state') === null || localStorage.getItem('clickState') === null || localStorage.getItem('alarmState') === null) {
         tasks = [];
         id = 0;
         theme = 'light';

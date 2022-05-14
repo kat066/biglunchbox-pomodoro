@@ -1,14 +1,18 @@
 import '../src/components/SettingsPopUp';
 
-window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
-beforeEach(() => {
-    localStorage.clear();
-    localStorage.setItem('volume', 50);
-    localStorage.setItem('pomo-length', '25');
-    localStorage.setItem('short-break-length', '5');
-    localStorage.setItem('long-break-length', '15');
-    jest.resetModules();
-    document.body.innerHTML = `
+import { addTemplates, dispatchDOMLoadedEvent } from './utils';
+import { SETTINGS_POPUP_TEMPLATE } from './Constants';
+
+let templates;
+let pageTemplate;
+
+beforeAll(async () => {
+    window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
+    templates = await addTemplates([
+        SETTINGS_POPUP_TEMPLATE,
+    ], __dirname);
+    pageTemplate = `
+        ${templates}
         <button class="top-buttons" id="setting-button">
             <img src="../icons/settings.svg" id="gear" class="top-button-img" alt="gear">
             <p class="top-button-text">Setting</p>
@@ -16,24 +20,40 @@ beforeEach(() => {
         <div id="timer_display_duration">25:00</div>
         <button id = "start-btn">Start</button>
     `;
-    window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
+});
+
+beforeEach(() => {
+    localStorage.setItem('volume', 50);
+    localStorage.setItem('pomo-length', '25');
+    localStorage.setItem('short-break-length', '5');
+    localStorage.setItem('long-break-length', '15');
+    localStorage.setItem('theme', 'light');
+    document.body.innerHTML = pageTemplate;
+});
+
+afterEach(() => {
+    localStorage.clear();
 });
 
 test('Confirm Button functions as intended', () => {
+    document.body.innerHTML = templates;
     const testSettingsPopUp = document.createElement('settings-popup');
     const shadow = testSettingsPopUp.shadowRoot;
 
-    const pomoLength = shadow.querySelectorAll('input')[0];
-    const shortBreakLength = shadow.querySelectorAll('input')[1];
-    const longBreakLength = shadow.querySelectorAll('input')[2];
+    const pomoLength = shadow.getElementById('pomo-length-input');
+    const shortBreakLength = shadow.getElementById('short-break-input');
+    const longBreakLength = shadow.getElementById('long-break-input');
 
     pomoLength.value = '30';
     shortBreakLength.value = '10';
     longBreakLength.value = '20';
 
-    const confirmBtn = shadow.querySelectorAll('button')[0];
-
-    confirmBtn.click();
+    // !! TODO: Correct way to properly confirm that the settings are working for
+    // Jest since it doesn't need settings-popup attachment to body. We should
+    // only add eventlisteners when it is attached to the body since that is
+    // when they can actually be interacted with. We use cypress for testing
+    // UI and integration of components
+    testSettingsPopUp.confirmSettings();
 
     expect(localStorage.getItem('pomo-length')).toBe('30');
     expect(localStorage.getItem('short-break-length')).toBe('10');
@@ -45,6 +65,7 @@ test('Confirm Button functions as intended', () => {
 
 test('Illegal numbers treated properly', () => {
     const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
     const shadow = testSettingsPopUp.shadowRoot;
 
     localStorage.setItem('pomo-length', '100');
@@ -65,6 +86,7 @@ test('Illegal numbers treated properly', () => {
 
 test('NaN input treated correctly', () => {
     const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
     const shadow = testSettingsPopUp.shadowRoot;
 
     const pomoLength = shadow.querySelectorAll('input')[0];
@@ -89,6 +111,7 @@ test('NaN input treated correctly', () => {
 
 test('Cancel Button functions as intended', () => {
     const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
     const shadow = testSettingsPopUp.shadowRoot;
 
     const pomoLength = shadow.querySelectorAll('input')[0];
@@ -112,6 +135,7 @@ test('Cancel Button functions as intended', () => {
 
 test('All attributes set correctly', () => {
     const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
     const shadow = testSettingsPopUp.shadowRoot;
 
     // wrapper attributes set correctly
@@ -153,7 +177,6 @@ test('All attributes set correctly', () => {
     expect(shadow.querySelectorAll('h4')[1].innerHTML).toBe('Enable Dark Mode?');
     // dark mode switch, default in light mode
     expect(shadow.querySelectorAll('input')[3].getAttribute('type')).toBe('checkbox');
-    localStorage.setItem('theme', 'light');
     expect(shadow.querySelectorAll('input')[3].checked).toBe(false);
     expect(shadow.querySelector('span').getAttribute('class')).toBe('slider');
 
@@ -175,11 +198,11 @@ test('All attributes set correctly', () => {
 });
 
 test('Pop up button works correctly', () => {
-    dispatchEvent(new Event('load'));
-
     const settingsButton = document.getElementById('setting-button');
     const settingsPopUp = document.createElement('settings-popup');
     document.body.appendChild(settingsPopUp);
+
+    dispatchDOMLoadedEvent(window);
 
     settingsButton.click();
 
@@ -193,6 +216,7 @@ test('Pop up button works correctly', () => {
 test(('the page is in dark mode'), () => {
     localStorage.setItem('theme', 'dark');
     const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
     const shadow = testSettingsPopUp.shadowRoot;
     expect(shadow.querySelector('input[type="checkbox"]').checked).toBe(true);
 });
@@ -200,6 +224,7 @@ test(('the page is in dark mode'), () => {
 test(('toggle from light to dark mode'), () => {
     localStorage.setItem('theme', 'light');
     const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
     const shadow = testSettingsPopUp.shadowRoot;
     const mode = shadow.querySelector('span[class="slider"]');
     mode.click();
@@ -210,6 +235,7 @@ test(('toggle from light to dark mode'), () => {
 test(('toggle from dark to light mode'), () => {
     localStorage.setItem('theme', 'dark');
     const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
     const shadow = testSettingsPopUp.shadowRoot;
     const mode = shadow.querySelector('span[class="slider"]');
     mode.click();
@@ -218,6 +244,7 @@ test(('toggle from dark to light mode'), () => {
 
 test(('set volume'), () => {
     const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
     const shadow = testSettingsPopUp.shadowRoot;
     const slider = shadow.querySelector('input[type="range"]');
     slider.value = 60;
@@ -228,6 +255,7 @@ test(('set volume'), () => {
 
 test(('volume label consist with slider value'), () => {
     const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
     const shadow = testSettingsPopUp.shadowRoot;
     const slider = shadow.querySelector('input[type="range"]');
     slider.value = 60;
