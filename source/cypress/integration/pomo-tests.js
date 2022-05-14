@@ -81,7 +81,7 @@ describe(('task list and timer'), () => {
             .find('#add-task-btn').trigger('click');
         // task is added successfully
         cy.get('#0').shadow()
-            .find('li')
+            .find('#task-text')
             .should('have.text', 'test item 1');
         cy.url().should(() => {
             expect(localStorage.getItem('id')).contains('1');

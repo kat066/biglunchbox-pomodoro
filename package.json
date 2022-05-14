@@ -11,12 +11,14 @@
   "scripts": {
     "start": "http-server source/src -p=5500",
     "watch": "watch 'npm run instrument' source/src/components source/src/scripts",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "lint": "eslint --fix --fix-type layout source/",
-    "instrument": "npx rimraf source/src/instrumented && npx nyc instrument --compact=false source/src source/src/instrumented",
-    "cy:verify": "cypress verify",
-    "cy:info": "cypress cache list"
+    "test": "NODE_ENV=jest jest",
+    "test:watch": "npm run test -- --watch",
+    "lint:fix": "eslint --fix --fix-type layout source/",
+    "lint:verify": "eslint source/",
+    "instrument": "nyc instrument --delete --complete-copy source/src source/cypress_build",
+    "cy:build": "npm run instrument",
+    "cy:start": "npm run cy:build && http-server source/cypress_build -p=5500",
+    "cy:test": "cypress run"
   },
   "repository": {
     "type": "git",
@@ -70,7 +72,6 @@
   "dependencies": {
     "http-server": "^0.12.3",
     "jest-environment-jsdom-sixteen": "^1.0.3",
-    "regenerator-runtime": "^0.13.7",
     "rimraf": "^3.0.2",
     "watch": "^1.0.2"
   },
@@ -80,14 +81,36 @@
     ],
     "plugins": [
       "@babel/plugin-proposal-class-properties"
-    ]
+    ],
+    "env": {
+      "jest": {
+        "plugins": [
+          "@babel/plugin-transform-runtime"
+        ]
+      },
+      "cypress": {
+        "plugins": [
+          "@babel/runtime",
+          "istanbul"
+        ]
+      },
+      "prod": {
+        "plugins": [
+          "@babel/runtime"
+        ]
+      }
+    }
   },
   "nyc": {
+    "compact": false,
     "report-dir": "source/coverage/cypress",
     "reporter": [
       "text",
       "json",
       "lcov"
+    ],
+    "exclude": [
+      "source/src/html_fragments/**.*"
     ]
   },
   "husky": {

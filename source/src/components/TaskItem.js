@@ -27,7 +27,7 @@ class TaskItem extends HTMLElement {
         tasks.splice(tasks.findIndex((task) => task.id === this.getAttribute('id') && task.text === this.getAttribute('text')), 1);
         localStorage.setItem('tasks', JSON.stringify(tasks));
         // remove this element from DOM
-        this.parentNode.removeChild(this);
+        this.remove();
         // update focus task title if focus task no longer exists
         const focusDiv = document.getElementById('focus-task');
         if (focusDiv.querySelector('task-item') === null) {
@@ -110,130 +110,50 @@ class TaskItem extends HTMLElement {
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
+        const template = document.getElementById('task-item-template');
+        const templateContent = template.content;
+        shadow.appendChild(templateContent.cloneNode(true));
+
+        Object.defineProperties(this, {
+            _bindedFocus: {
+                value: this.focus.bind(this),
+            },
+            _bindedRemoveTask: {
+                value: this.removeTask.bind(this),
+            },
+        });
+    }
+
+    connectedCallback() {
+        if (!this.isConnected) {
+            return;
+        }
         // set attributes
         // this.setAttribute('id', task.id);
         // this.setAttribute('checked', task.checked);
         // this.setAttribute('text', task.text);
-        // create list node
-        const li = document.createElement('li');
-        li.setAttribute('id', 'li');
-        const check = document.createElement('img');
-        check.setAttribute('src', 'icons/check.svg');
-        check.setAttribute('class', 'check-icon');
-        check.setAttribute('part', 'test');
-        li.appendChild(check);
+
         // add event listener such that clicking on element crosses out task
         this.addEventListener('click', this.toggle);
-        const focus = document.createElement('img');
-        focus.setAttribute('src', 'icons/focus.svg');
-        focus.setAttribute('title', 'Focus on this task');
-        focus.setAttribute('class', 'focus-icon');
-        li.appendChild(focus);
-        // add event listener to image to focus a task
-        focus.addEventListener('click', this.focus.bind(this));
-        // create delete icon
-        const trash = document.createElement('img');
-        trash.setAttribute('src', 'icons/delete.svg');
-        trash.setAttribute('class', 'delete-icon');
-        trash.setAttribute('title', 'Delete this task');
-        li.appendChild(trash);
+
+        // We add these event listeners here since they require these icons in
+        // the DOM to actually function. Otherwise, how else would they be used
+        // We also keep the binded functions to disconnect them later
+        const focus = this.shadowRoot.querySelector('.focus-icon');
+        focus.addEventListener('click', this._bindedFocus);
+
+        const trash = this.shadowRoot.querySelector('.delete-icon');
         // add event listener to image to remove task
-        trash.addEventListener('click', this.removeTask.bind(this));
-        // CSS styling
-        const style = document.createElement('style');
-        style.textContent = `
-        :host {
-            cursor: pointer;
-            //height: 50px;
-            height: 3.90625vw;
-            position: relative;
-            // margin-bottom: 10px;
-            // border-radius: 5px;
-            border-radius: 0.390625vw;
-            // margin-right: 20%;
-            box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
-            display: flex;
-            align-items: center;
-            // padding-left: 37px;
-            padding-left: 2.890625vw;
-            background-color: #f36060;
-            color: white;
-            // font-size: medium;
-            font-size: 1.35vw;
-            font-weight: 500;
-            border-style:none;
-            user-select: none;
-            margin: 0 auto;
-            // margin-bottom: 10px;
-            margin-bottom: 0.78125vw;
-        }
-        :host(:hover) {
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-            transition: 0.3s;
-        }
-        :host([checked = 'true']) {
-            background: #f3606060;
-            text-decoration: line-through;
-            -webkit-text-decoration: line-through;
-        }
-        :host([checked = 'true']) .check-icon {
-            visibility: visible;
-        }
-        .check-icon {
-            position: absolute;
-            // left: 10px;
-            left: 0.78125vw;
-            vertical-align: middle;
-            // width: 20px;
-            // height: 20px;
-            width: 1.5625vw;
-            height: 1.5625vw;
-            margin: 0;
-            visibility: hidden;
-        }
-        :host(:hover) .delete-icon {
-            visibility: visible;
-        }
-        .delete-icon {
-            position: absolute;
-            color: #fff;
-            // right: 10px;
-            right: 0.78125vw;
-            vertical-align: middle;
-            // width: 20px;
-            // height: 20px;
-            width: 1.5625vw;
-            height: 1.5625vw;
-            margin: 0;
-            visibility: hidden;
-        }
-        .delete-icon:hover {
-            transform: scale(1.3);
-            filter:brightness(105%)
-        }
-        :host(:hover) .focus-icon {
-            visibility: visible;
-        }
-        .focus-icon {
-            position: absolute;
-            color: #fff;
-            // right: 40px;
-            right: 3.125vw;
-            vertical-align: middle;
-            // width: 20px;
-            // height: 20px;
-            width: 1.5625vw;
-            height: 1.5625vw;
-            margin: 0;
-            visibility: hidden;
-        }
-        .focus-icon:hover {
-            transform: scale(1.3);
-            filter:brightness(105%)
-        }
-        `;
-        shadow.appendChild(li);
-        shadow.appendChild(style);
+        trash.addEventListener('click', this._bindedRemoveTask);
+    }
+
+    disconnectedCallback() {
+        this.removeEventListener('click', this.toggle);
+
+        const focus = this.shadowRoot.querySelector('.focus-icon');
+        const trash = this.shadowRoot.querySelector('.delete-icon');
+        focus.removeEventListener('click', this._bindedFocus);
+        trash.removeEventListener('click', this._bindedRemoveTask);
     }
 
     static get observedAttributes() {
@@ -241,9 +161,7 @@ class TaskItem extends HTMLElement {
     }
 
     attributeChangedCallback(attrName, oldVal, newVal) {
-        const shadow = this.shadowRoot;
-        const text = document.createTextNode(newVal);
-        shadow.getElementById('li').append(text);
+        this.shadowRoot.getElementById('task-text').textContent = newVal;
     }
 }
 
