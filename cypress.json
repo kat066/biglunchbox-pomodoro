@@ -2,6 +2,7 @@
   "integrationFolder": "./source/cypress/integration",
   "pluginsFile": "./source/cypress/plugins/index.js",
   "supportFile": "./source/cypress/support/index.js",
+  "fixturesFolder": "./source/cypress/fixtures",
   "screenshotOnRunFailure": false,
   "video": false
 }

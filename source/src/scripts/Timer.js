@@ -162,49 +162,49 @@ window.addEventListener('keyup', (event) => {
     const helpDis = document.querySelector('help-popup').shadowRoot.getElementById('help-popup').style.display;
     if (!addDis || addDis === 'none') {
         switch (event.code) {
-            case 'KeyF':
-                btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-                if (localStorage.getItem('clickState') === 'on') {
-                    btnSound.play(); // only plays sound when enabled
-                }
-                document.getElementById('focus-button').click();
-                break;
-            case 'KeyS':
-                startButton.click();
-                break;
-            case 'KeyR':
-                document.getElementById('reset-button').click();
-                break;
-            case 'KeyH':
-                document.getElementById('help-button').click();
-                break;
-            case 'Semicolon':
-                document.getElementById('setting-button').click();
-                break;
-            case 'Escape':
-                if (setDis === 'block') {
-                    document.querySelector('body > settings-popup').shadowRoot.querySelector('#close-icon').click();
-                } else if (resDis === 'block') {
-                    document.querySelector('body > reset-popup').shadowRoot.querySelector('#close-icon').click();
-                } else if (helpDis === 'block') {
-                    document.querySelector('body > help-popup').shadowRoot.querySelector('#close-icon').click();
-                }
-                break;
-            case 'KeyA':
-                {
-                    const state = localStorage.getItem('state');
-                    if (state === 'default') document.getElementById('task-popup-btn').click();
-                    break;
-                }
-            case 'Enter':
-                if (setDis === 'block') {
-                    document.querySelector('body > settings-popup').shadowRoot.querySelector('#confirm-settings-btn').click();
-                } else if (resDis === 'block') {
-                    document.querySelector('body > reset-popup').shadowRoot.querySelector('#confirm-reset-btn').click();
-                }
-                break;
-            default:
-                break;
+        case 'KeyF':
+            btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
+            if (localStorage.getItem('clickState') === 'on') {
+                btnSound.play(); // only plays sound when enabled
+            }
+            document.getElementById('focus-button').click();
+            break;
+        case 'KeyS':
+            startButton.click();
+            break;
+        case 'KeyR':
+            document.getElementById('reset-button').click();
+            break;
+        case 'KeyH':
+            document.getElementById('help-button').click();
+            break;
+        case 'Semicolon':
+            document.getElementById('setting-button').click();
+            break;
+        case 'Escape':
+            if (setDis === 'block') {
+                document.querySelector('body > settings-popup').shadowRoot.querySelector('#close-icon').click();
+            } else if (resDis === 'block') {
+                document.querySelector('body > reset-popup').shadowRoot.querySelector('#close-icon').click();
+            } else if (helpDis === 'block') {
+                document.querySelector('body > help-popup').shadowRoot.querySelector('#close-icon').click();
+            }
+            break;
+        case 'KeyA':
+        {
+            const state = localStorage.getItem('state');
+            if (state === 'default') document.getElementById('task-popup-btn').click();
+            break;
+        }
+        case 'Enter':
+            if (setDis === 'block') {
+                document.querySelector('body > settings-popup').shadowRoot.querySelector('#confirm-settings-btn').click();
+            } else if (resDis === 'block') {
+                document.querySelector('body > reset-popup').shadowRoot.querySelector('#confirm-reset-btn').click();
+            }
+            break;
+        default:
+            break;
         }
     } else if (addDis === 'block') {
         if (event.code === 'Enter') {
