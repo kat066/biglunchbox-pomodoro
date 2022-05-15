@@ -20,6 +20,28 @@ let longBreakTime = localStorage.getItem('long-break-length');
 timerDisplayDuration.innerHTML = `${pomoTime}:00`;
 
 /**
+ * This function is used by switchMode() to switch the highlighted button
+ * on the UI from pomo to break when switching to break mode.
+ */
+ function togglePomoButtonOff(pomoButton, breakButton) {
+    if (pomoButton.getAttribute('class') !== 'toggle') {
+        pomoButton.classList.toggle('toggle');
+        breakButton.classList.toggle('toggle');
+    }
+}
+
+/**
+ * This function is used by switchMode() to switch the highlighted button
+ * on the UI from break to pomo when switching to pomo mode.
+ */
+function togglePomoButtonOn(pomoButton, breakButton) {
+    if (pomoButton.getAttribute('class') === 'toggle') {
+        pomoButton.classList.toggle('toggle');
+        breakButton.classList.toggle('toggle');
+    }
+}
+
+/**
  * The sitchMode function would sitch the time mode if the pomo time is over.
  * the function would switch short break time mode. After three times of short
  * break time, the function would switch to long break time.
@@ -27,29 +49,20 @@ timerDisplayDuration.innerHTML = `${pomoTime}:00`;
 function switchMode() {
     const pomoButton = document.getElementById('pomo-btn');
     const breakButton = document.getElementById('break-btn');
-
+    
     if (timerStatus === 'pomo' && breakCounter >= 3) {
         timerDisplayDuration.innerHTML = `${longBreakTime}:00`;
-        if (pomoButton.getAttribute('class') !== 'toggle') {
-            pomoButton.classList.toggle('toggle');
-            breakButton.classList.toggle('toggle');
-        }
+        togglePomoButtonOff(pomoButton, breakButton);
         timerStatus = 'break';
         breakCounter = 0;
     } else if (timerStatus === 'pomo') {
         timerDisplayDuration.innerHTML = `${breakTime}:00`;
-        if (pomoButton.getAttribute('class') !== 'toggle') {
-            pomoButton.classList.toggle('toggle');
-            breakButton.classList.toggle('toggle');
-        }
+        togglePomoButtonOff(pomoButton, breakButton);
         timerStatus = 'break';
         breakCounter += 1;
     } else {
         timerDisplayDuration.innerHTML = `${pomoTime}:00`;
-        if (pomoButton.getAttribute('class') === 'toggle') {
-            pomoButton.classList.toggle('toggle');
-            breakButton.classList.toggle('toggle');
-        }
+        togglePomoButtonOn(pomoButton, breakButton);
         timerStatus = 'pomo';
     }
 }
@@ -70,7 +83,9 @@ async function timerFunction() {
     if (timerText === '0:01') {
         alarmSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
         // console.log(alarmSound.volume);
-        alarmSound.play();
+        if (localStorage.getItem('alarmState') === 'on') {
+            alarmSound.play(); // only plays sound when enabled
+        }
     }
 
     let minutes = Number(timerText.substring(0, timerText.length - 3));
@@ -92,7 +107,7 @@ async function timerFunction() {
 
 /** The function would be call when the click start button and the stop button
  * would be show in the web.
-*/
+ */
 async function start() {
     startButton.innerHTML = 'Stop';
     timer = setInterval(timerFunction, SECOND);
@@ -100,7 +115,7 @@ async function start() {
 
 /** The function would be call when the click stop button the start button
  * would be show in the web. The time would be reset.
-*/
+ */
 async function stop() {
     pomoTime = localStorage.getItem('pomo-length');
     breakTime = localStorage.getItem('short-break-length');
@@ -126,7 +141,9 @@ async function stopChecker() {
  */
 async function startAndStopButton() {
     btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-    btnSound.play();
+    if (localStorage.getItem('clickState') === 'on') {
+        btnSound.play(); // only plays sound when enabled
+    }
     if (startButton.innerHTML === 'Start') {
         start();
     } else {
@@ -147,7 +164,9 @@ window.addEventListener('keyup', (event) => {
         switch (event.code) {
         case 'KeyF':
             btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-            btnSound.play();
+            if (localStorage.getItem('clickState') === 'on') {
+                btnSound.play(); // only plays sound when enabled
+            }
             document.getElementById('focus-button').click();
             break;
         case 'KeyS':
@@ -171,7 +190,8 @@ window.addEventListener('keyup', (event) => {
                 document.querySelector('body > help-popup').shadowRoot.querySelector('#close-icon').click();
             }
             break;
-        case 'KeyA': {
+        case 'KeyA':
+        {
             const state = localStorage.getItem('state');
             if (state === 'default') document.getElementById('task-popup-btn').click();
             break;

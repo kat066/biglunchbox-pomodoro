@@ -11,20 +11,31 @@ on:
 jobs:
   # builds app, coverage report, and jsdocs in build folder and deploys to the gh-pages branch
   deploy-app:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: source
+    runs-on: ubuntu-18.04
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - name: Setup node with module cache
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
 
       - name: Install modules and ready build
         run: |
-          npm install
+          npm ci
           mkdir build
-
-      - name: Build app
-        run: cp -av src/* build
+          cp -av source/src/* build
+      
+      - name: Build docs
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: build/
+          output_dir: build/docs
+          template: minami
+          front_page: README.md
+          recurse: true
 
       - name: Build Jest coverage report
         run: npm test
@@ -33,23 +44,14 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           install: false
-          working-directory: source
           browser: chrome
           start: npm start
 
-      - run: cp -av coverage build
-
-      - name: Build docs
-        uses: andstor/jsdoc-action@v1
-        with:
-          source_dir: source/src
-          output_dir: source/build/docs
-          template: minami
-          front_page: README.md
-          recurse: true
+      - name: Move coverage reports to build directory
+        run: cp -av source/coverage build/coverage
 
       - name: Deploy build on gh-pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
         with:
           branch: gh-pages
-          folder: source/build
+          folder: build
