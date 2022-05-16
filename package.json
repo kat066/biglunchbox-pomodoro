@@ -13,6 +13,7 @@
     "watch": "watch 'npm run instrument' source/src/components source/src/scripts",
     "test": "NODE_ENV=jest jest",
     "test:watch": "npm run test -- --watch",
+    "lint": "eslint",
     "lint:fix": "eslint --fix --fix-type layout source/",
     "lint:verify": "eslint source/",
     "instrument": "nyc instrument --delete --complete-copy source/src source/cypress_build",
