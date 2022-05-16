@@ -23,7 +23,7 @@ timerDisplayDuration.innerHTML = `${pomoTime}:00`;
  * This function is used by switchMode() to switch the highlighted button
  * on the UI from pomo to break when switching to break mode.
  */
- function togglePomoButtonOff(pomoButton, breakButton) {
+function togglePomoButtonOff(pomoButton, breakButton) {
     if (pomoButton.getAttribute('class') !== 'toggle') {
         pomoButton.classList.toggle('toggle');
         breakButton.classList.toggle('toggle');
@@ -49,7 +49,7 @@ function togglePomoButtonOn(pomoButton, breakButton) {
 function switchMode() {
     const pomoButton = document.getElementById('pomo-btn');
     const breakButton = document.getElementById('break-btn');
-    
+
     if (timerStatus === 'pomo' && breakCounter >= 3) {
         timerDisplayDuration.innerHTML = `${longBreakTime}:00`;
         togglePomoButtonOff(pomoButton, breakButton);
@@ -72,6 +72,10 @@ function switchMode() {
  * down to 0 and the alarm sound would be call. The counter down would be call
  * in this function.
  */
+// button to get theme color
+const settingBtn = document.getElementById('setting-button');
+// theme color for timer graphics
+let themeColor = window.getComputedStyle(settingBtn).getPropertyValue('background-color');
 async function timerFunction() {
     let timerText = timerDisplayDuration.innerHTML;
 
@@ -102,36 +106,36 @@ async function timerFunction() {
         seconds = `0${String(seconds)}`;
     }
 
-
     timerDisplayDuration.innerHTML = `${minutes}:${seconds}`;
-    // Adapt to each modes; now this is hard-coded to pomo mode; break/other modes do not work!!
+    // Adapt to each modes; now this is hard-coded to pomo mode
+    // break/other modes do not work!!
     const pomoButton = document.getElementById('pomo-btn');
-    const timerBackground = document.getElementById("timer_display");
-    let timeMin = parseInt(timerDisplayDuration.innerHTML.split(":")[0]);
+    const timerBackground = document.getElementById('timer_display');
+    const timeMin = parseInt(timerDisplayDuration.innerHTML.split(':')[0], 10);
     // let timeSec = parseInt(timerDisplayDuration.innerHTML.substring(4));
-    let timeSec = parseInt(timerDisplayDuration.innerHTML.split(":")[1]);
-    // let timePerc = 100 - Math.floor(((timeMin*60 + timeSec) / (parseInt(pomoTime)*60))*100);
-    let timePerc = 100 - ((timeMin*60 + timeSec) / (parseFloat(pomoTime)*60))*100;
+    const timeSec = parseInt(timerDisplayDuration.innerHTML.split(':')[1], 10);
+    // let timePerc = 100 - Math.floor(((timeMin*60 +
+    //              timeSec) / (parseInt(pomoTime)*60))*100);
+    let timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
     if (pomoButton.getAttribute('class') !== 'toggle') {
-        timePerc = 100 - ((timeMin*60 + timeSec) / (parseFloat(pomoTime)*60))*100;
+        timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
+    } else {
+        timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(breakTime) * 60)) * 100;
     }
-    else {
-        timePerc = 100 - ((timeMin*60 + timeSec) / (parseFloat(breakTime)*60))*100;
-    }
-    // document.body.style.background = `linear-gradient(0deg, rgba(69,238,56,1) ${timePerc}%, rgb(51, 231, 255) 100%)`
-    // document.body.style.background = `linear-gradient(0deg, ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)`
-    timerBackground.style.background = `linear-gradient(0deg, ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)`;
+    /* document.body.style.background = `linear-gradient(0deg,
+            rgba(69,238,56,1) ${timePerc}%, rgb(51, 231, 255) 100%)`
+     document.body.style.background = `linear-gradient(0deg,
+            ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)` */
+    timerBackground.style.background = `linear-gradient(0deg, 
+            ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)`;
 }
 
 /** The function would be call when the click start button and the stop button
  * would be show in the web.
  */
-// theme color for timer graphics
-var themeColor;
 async function start() {
-    const settingBtn = document.getElementById("setting-button");
     // get background color for sync between different modes
-    themeColor = window.getComputedStyle(settingBtn).getPropertyValue("background-color");
+    themeColor = window.getComputedStyle(settingBtn).getPropertyValue('background-color');
     startButton.innerHTML = 'Stop';
     timer = setInterval(timerFunction, SECOND);
 }
@@ -140,7 +144,7 @@ async function start() {
  * would be show in the web. The time would be reset.
  */
 async function stop() {
-    const timerBackground = document.getElementById("timer_display");
+    const timerBackground = document.getElementById('timer_display');
     pomoTime = localStorage.getItem('pomo-length');
     breakTime = localStorage.getItem('short-break-length');
     longBreakTime = localStorage.getItem('long-break-length');
@@ -150,7 +154,6 @@ async function stop() {
     breakCounter = 0;
     startButton.innerHTML = 'Start';
     timerBackground.style.background = `linear-gradient(0deg, ${themeColor} 0%, rgba(51, 231, 255, 0) 0%)`;
-
 }
 
 /** The function to check if the status stop */
