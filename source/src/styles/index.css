@@ -1,3 +1,49 @@
+@media only screen and (max-width: 600px){
+    :root {
+        --setting-h4:15px;
+        --setting-h3:20px;
+        --volume-number-width:30px;
+        --volume-number-marigin:5px;
+        --volume-slider-height:5px;
+        --volume-slider-width:50px;
+        --vol-slider-thumb-height:7px;
+        --vol-slider-thumb-width:7px;
+        --setting-text:12px;
+        --setting-h3-padding:2px;
+        --setting-number-input:12px;
+        --number-input-width:50px;
+        --switch-width:24px;
+        --switch-height:12px;
+        --slider-width:10px;
+        --slider-height:10px;
+        --button-footer-padding:3px;
+        --setting-margin:8px;
+        --pop-up-button-font-size:7px;
+    }
+}
+@media only screen and (min-width: 600px){
+    :root {
+        --setting-h4:24px;
+        --setting-h3:30px;
+        --volume-number-width:48px;
+        --volume-number-marigin:15px;
+        --volume-slider-height:12px;
+        --volume-slider-width:120px;
+        --vol-slider-thumb-height:16px;
+        --vol-slider-thumb-width:16px;
+        --setting-text:20px;
+        --setting-h3-padding:5px;
+        --setting-number-input:15px;
+        --number-input-width:100%;
+        --switch-width:48px;
+        --switch-height:25px;
+        --slider-width:23px;
+        --slider-height:23px;
+        --button-footer-padding:12px;
+        --setting-margin:15px;
+        --pop-up-button-font-size:15px;
+    }     
+}
 html {
     height: 100%;
 }
@@ -10,12 +56,11 @@ body {
     box-sizing: border-box;
     min-height: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
 }
 
 #container {
     min-height: 100%;
-    overflow: hidden;
 }
 
 header {
@@ -145,8 +190,8 @@ menu button:hover{
     width: 35%;
     margin-left: 10%;
     height: 80vh;
-}
 
+}
 #task-list ul {
     list-style-type: none;
     max-height: 80%;
