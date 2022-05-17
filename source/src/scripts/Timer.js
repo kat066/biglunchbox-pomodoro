@@ -72,10 +72,8 @@ function switchMode() {
  * down to 0 and the alarm sound would be call. The counter down would be call
  * in this function.
  */
-// button to get theme color
-const settingBtn = document.getElementById('setting-button');
 // theme color for timer graphics
-let themeColor = window.getComputedStyle(settingBtn).getPropertyValue('background-color');
+let themeColor = (document.body.classList.length == 0) ? "#f36060" : "#4a5568";
 async function timerFunction() {
     let timerText = timerDisplayDuration.innerHTML;
 
@@ -135,7 +133,7 @@ async function timerFunction() {
  */
 async function start() {
     // get background color for sync between different modes
-    themeColor = window.getComputedStyle(settingBtn).getPropertyValue('background-color');
+    themeColor = (document.body.classList.length == 0) ? "#f36060" : "#4a5568";
     startButton.innerHTML = 'Stop';
     timer = setInterval(timerFunction, SECOND);
 }
