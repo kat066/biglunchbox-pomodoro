@@ -1,12 +1,13 @@
 const startButton = document.getElementById('start-btn');
 const timerDisplayDuration = document.getElementById('timer_display_duration');
-// const pomoButton = document.getElementById('pomo-btn');
 const timerBackground = document.getElementById('timer_display');
+const tabLabel = document.getElementById('tab-label');
 const btnSound = new Audio('./icons/btnClick.mp3');
 const alarmSound = new Audio('./icons/alarm.mp3');
 const SECOND = 1000;
 let timer;
 let timerStatus = 'pomo';
+let tabLabelStatus = 'Time to Focus!';
 let breakCounter = 0;
 
 // assign default session lengths to local storage
@@ -43,6 +44,15 @@ function togglePomoButtonOn(pomoButton, breakButton) {
     }
 }
 
+/** This function is called to update the tab label with the remaining
+ * time, if the Tab Label setting is enabled.
+*/
+function updateTabLabel(tabLabelTime) {
+    if (localStorage.getItem('tab-label') === 'on') {
+        tabLabel.innerHTML = `${tabLabelTime} - ${tabLabelStatus}`;
+    }
+}
+
 /**
  * The sitchMode function would sitch the time mode if the pomo time is over.
  * the function would switch short break time mode. After three times of short
@@ -55,16 +65,22 @@ function switchMode() {
     if (timerStatus === 'pomo' && breakCounter >= 3) {
         timerDisplayDuration.innerHTML = `${longBreakTime}:00`;
         togglePomoButtonOff(pomoButton, breakButton);
+        tabLabelStatus = 'Rest a while!';
+        updateTabLabel(`${longBreakTime}:00`);
         timerStatus = 'break';
         breakCounter = 0;
     } else if (timerStatus === 'pomo') {
         timerDisplayDuration.innerHTML = `${breakTime}:00`;
         togglePomoButtonOff(pomoButton, breakButton);
+        tabLabelStatus = 'Take a break!';
+        updateTabLabel(`${breakTime}:00`);
         timerStatus = 'break';
         breakCounter += 1;
     } else {
         timerDisplayDuration.innerHTML = `${pomoTime}:00`;
         togglePomoButtonOn(pomoButton, breakButton);
+        tabLabelStatus = 'Time to Focus!';
+        updateTabLabel(`${pomoTime}:00`);
         timerStatus = 'pomo';
     }
 }
@@ -112,6 +128,7 @@ async function timerFunction() {
     const timeMin = parseInt(timerDisplayDuration.innerHTML.split(':')[0], 10);
     // let timeSec = parseInt(timerDisplayDuration.innerHTML.substring(4));
     const timeSec = parseInt(timerDisplayDuration.innerHTML.split(':')[1], 10);
+    updateTabLabel(`${timeMin}:${timeSec}`);
     // let timePerc = 100 - Math.floor(((timeMin*60 +
     //              timeSec) / (parseInt(pomoTime)*60))*100);
     // adapt to jest tests
@@ -144,6 +161,7 @@ async function start() {
     // get background color for sync between different modes
     themeColor = (document.body.classList.length === 0) ? '#f36060' : '#4a5568';
     startButton.innerHTML = 'Stop';
+    updateTabLabel(`${pomoTime}:00`);
     timer = setInterval(timerFunction, SECOND);
 }
 

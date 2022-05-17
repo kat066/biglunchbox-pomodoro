@@ -46,6 +46,7 @@ function initializeLocalStorage() {
     localStorage.setItem('tasks', '[]');
     localStorage.setItem('id', '0');
     localStorage.setItem('theme', 'light');
+    localStorage.setItem('tab-label', 'on');
     localStorage.setItem('volume', '50');
     localStorage.setItem('state', 'default');
 }
