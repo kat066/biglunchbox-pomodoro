@@ -1,6 +1,6 @@
 const startButton = document.getElementById('start-btn');
 const timerDisplayDuration = document.getElementById('timer_display_duration');
-const pomoButton = document.getElementById('pomo-btn');
+// const pomoButton = document.getElementById('pomo-btn');
 const timerBackground = document.getElementById('timer_display');
 const btnSound = new Audio('./icons/btnClick.mp3');
 const alarmSound = new Audio('./icons/alarm.mp3');
@@ -116,6 +116,7 @@ async function timerFunction() {
     //              timeSec) / (parseInt(pomoTime)*60))*100);
     // adapt to jest tests
     let pomoMode = true;
+    const pomoButton = document.getElementById('pomo-btn');
     if (pomoButton !== null) {
         pomoMode = (pomoButton.getAttribute('class') !== 'toggle');
     }
@@ -134,7 +135,6 @@ async function timerFunction() {
         timerBackground.style.background = `linear-gradient(0deg, 
             ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)`;
     }
-
 }
 
 /** The function would be call when the click start button and the stop button
@@ -151,7 +151,6 @@ async function start() {
  * would be show in the web. The time would be reset.
  */
 async function stop() {
-    const timerBackground = document.getElementById('timer_display');
     pomoTime = localStorage.getItem('pomo-length');
     breakTime = localStorage.getItem('short-break-length');
     longBreakTime = localStorage.getItem('long-break-length');
