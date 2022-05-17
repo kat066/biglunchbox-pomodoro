@@ -123,15 +123,10 @@ async function timerFunction() {
     }
 
     timerDisplayDuration.innerHTML = `${minutes}:${seconds}`;
-    // Adapt to each modes; now this is hard-coded to pomo mode
-    // break/other modes do not work!!
+    // Adapt to each modes
     const timeMin = parseInt(timerDisplayDuration.innerHTML.split(':')[0], 10);
-    // let timeSec = parseInt(timerDisplayDuration.innerHTML.substring(4));
     const timeSec = parseInt(timerDisplayDuration.innerHTML.split(':')[1], 10);
     updateTabLabel(`${timeMin}:${timeSec}`);
-    // let timePerc = 100 - Math.floor(((timeMin*60 +
-    //              timeSec) / (parseInt(pomoTime)*60))*100);
-    // adapt to jest tests
     let pomoMode = true;
     const pomoButton = document.getElementById('pomo-btn');
     pomoMode = (pomoButton.getAttribute('class') !== 'toggle');
@@ -141,11 +136,7 @@ async function timerFunction() {
     } else {
         timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(breakTime) * 60)) * 100;
     }
-    /* document.body.style.background = `linear-gradient(0deg,
-            rgba(69,238,56,1) ${timePerc}%, rgb(51, 231, 255) 100%)`
-     document.body.style.background = `linear-gradient(0deg,
-            ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)` */
-    // adapt for jest test
+    // set timer graphics
     timerBackground.style.background = `linear-gradient(0deg, 
         ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)`;
 }
