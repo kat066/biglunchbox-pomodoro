@@ -177,7 +177,10 @@ async function stop() {
     setTimeout(switchMode, SECOND / 10);
     breakCounter = 0;
     startButton.innerHTML = 'Start';
-    timerBackground.style.background = `linear-gradient(0deg, ${themeColor} 0%, rgba(51, 231, 255, 0) 0%)`;
+    if (timerBackground !== null) {
+        timerBackground.style.background = `linear-gradient(0deg, 
+                            ${themeColor} 0%, rgba(51, 231, 255, 0) 0%)`;
+    }
 }
 
 /** The function to check if the status stop */
