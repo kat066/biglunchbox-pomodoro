@@ -134,9 +134,7 @@ async function timerFunction() {
     // adapt to jest tests
     let pomoMode = true;
     const pomoButton = document.getElementById('pomo-btn');
-    if (pomoButton !== null) {
-        pomoMode = (pomoButton.getAttribute('class') !== 'toggle');
-    }
+    pomoMode = (pomoButton.getAttribute('class') !== 'toggle');
     let timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
     if (pomoMode) {
         timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
@@ -148,10 +146,8 @@ async function timerFunction() {
      document.body.style.background = `linear-gradient(0deg,
             ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)` */
     // adapt for jest test
-    if (timerBackground !== null) {
-        timerBackground.style.background = `linear-gradient(0deg, 
-            ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)`;
-    }
+    timerBackground.style.background = `linear-gradient(0deg, 
+        ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)`;
 }
 
 /** The function would be call when the click start button and the stop button
@@ -177,10 +173,8 @@ async function stop() {
     setTimeout(switchMode, SECOND / 10);
     breakCounter = 0;
     startButton.innerHTML = 'Start';
-    if (timerBackground !== null) {
-        timerBackground.style.background = `linear-gradient(0deg, 
-                            ${themeColor} 0%, rgba(51, 231, 255, 0) 0%)`;
-    }
+    timerBackground.style.background = `linear-gradient(0deg, 
+                        ${themeColor} 0%, rgba(51, 231, 255, 0) 0%)`;
 }
 
 /** The function to check if the status stop */
