@@ -1,5 +1,7 @@
 const startButton = document.getElementById('start-btn');
 const timerDisplayDuration = document.getElementById('timer_display_duration');
+const pomoButton = document.getElementById('pomo-btn');
+const timerBackground = document.getElementById('timer_display');
 const btnSound = new Audio('./icons/btnClick.mp3');
 const alarmSound = new Audio('./icons/alarm.mp3');
 const SECOND = 1000;
@@ -107,15 +109,18 @@ async function timerFunction() {
     timerDisplayDuration.innerHTML = `${minutes}:${seconds}`;
     // Adapt to each modes; now this is hard-coded to pomo mode
     // break/other modes do not work!!
-    const pomoButton = document.getElementById('pomo-btn');
-    const timerBackground = document.getElementById('timer_display');
     const timeMin = parseInt(timerDisplayDuration.innerHTML.split(':')[0], 10);
     // let timeSec = parseInt(timerDisplayDuration.innerHTML.substring(4));
     const timeSec = parseInt(timerDisplayDuration.innerHTML.split(':')[1], 10);
     // let timePerc = 100 - Math.floor(((timeMin*60 +
     //              timeSec) / (parseInt(pomoTime)*60))*100);
+    // adapt to jest tests
+    let pomoMode = true;
+    if (pomoButton !== null) {
+        pomoMode = (pomoButton.getAttribute('class') !== 'toggle');
+    }
     let timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
-    if (pomoButton.getAttribute('class') !== 'toggle') {
+    if (pomoMode) {
         timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
     } else {
         timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(breakTime) * 60)) * 100;
@@ -124,8 +129,12 @@ async function timerFunction() {
             rgba(69,238,56,1) ${timePerc}%, rgb(51, 231, 255) 100%)`
      document.body.style.background = `linear-gradient(0deg,
             ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)` */
-    timerBackground.style.background = `linear-gradient(0deg, 
+    // adapt for jest test
+    if (timerBackground !== null) {
+        timerBackground.style.background = `linear-gradient(0deg, 
             ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)`;
+    }
+
 }
 
 /** The function would be call when the click start button and the stop button

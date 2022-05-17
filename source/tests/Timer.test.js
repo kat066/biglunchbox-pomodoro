@@ -1188,7 +1188,9 @@ describe(('keyboard input'), () => {
             <h2 id='select-focus'></h2>
         </div>
         <button id = "start-btn">Start</button>
-        <div id="timer_display_duration">25:00</div>
+        <div id="timer_display" class="timer-value">
+            <div id="timer_display_duration">25:00</div>
+        </div>
     </div>
     <div id="task-list">
         <h2 id="up-next">Up Next</h2>
