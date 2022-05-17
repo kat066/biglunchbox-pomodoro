@@ -4,11 +4,12 @@ import '../src/components/TaskPopUp';
 import '../src/components/TaskItem';
 import '../src/components/HelpPopUp';
 
-import { addTemplates, dispatchDOMLoadedEvent } from './utils';
-import {
-    TASK_POPUP_TEMPLATE, SETTINGS_POPUP_TEMPLATE, RESET_POPUP_TEMPLATE,
-    HELP_POPUP_TEMPLATE, TASK_ITEM_TEMPLATE,
-} from './Constants';
+import { dispatchDOMLoadedEvent } from './utils';
+// import { addTemplates, dispatchDOMLoadedEvent } from './utils';
+// import {
+//     TASK_POPUP_TEMPLATE, SETTINGS_POPUP_TEMPLATE, RESET_POPUP_TEMPLATE,
+//     HELP_POPUP_TEMPLATE, TASK_ITEM_TEMPLATE,
+// } from './Constants';
 
 window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
 
@@ -1194,7 +1195,7 @@ describe(('keyboard input'), () => {
         <ul id="task-list-elements">
         </ul>
     </div>
-    `
+    `;
     });
 
     afterEach(() => {

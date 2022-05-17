@@ -73,7 +73,7 @@ function switchMode() {
  * in this function.
  */
 // theme color for timer graphics
-let themeColor = (document.body.classList.length == 0) ? "#f36060" : "#4a5568";
+let themeColor = (document.body.classList.length === 0) ? '#f36060' : '#4a5568';
 async function timerFunction() {
     let timerText = timerDisplayDuration.innerHTML;
 
@@ -133,7 +133,7 @@ async function timerFunction() {
  */
 async function start() {
     // get background color for sync between different modes
-    themeColor = (document.body.classList.length == 0) ? "#f36060" : "#4a5568";
+    themeColor = (document.body.classList.length === 0) ? '#f36060' : '#4a5568';
     startButton.innerHTML = 'Stop';
     timer = setInterval(timerFunction, SECOND);
 }
