@@ -2,6 +2,7 @@ node_modules
 coverage
 docs
 build
+admin
 .nyc_output
 
 cypress_build
