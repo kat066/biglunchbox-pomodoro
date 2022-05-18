@@ -158,7 +158,7 @@ class SettingsPopUp extends HTMLElement {
         themeStylisticSlider.addEventListener('click', this._bindedChangeTheme);
 
         const tabLabelCheckbox = this.shadowRoot.querySelector('#tab-label-switch > label.switch > input[type=checkbox]');
-        if (localStorage.getItem('tab-label') === 'on') {
+        if (localStorage.getItem('tab-label') === 'on' || localStorage.getItem('tab-label') === null) {
             tabLabelCheckbox.toggleAttribute('checked');
         }
         const tabLabelStylisticSlider = this.shadowRoot.getElementById('tab-label-switch-slider');
