@@ -277,7 +277,7 @@ div.timer-value {
 
 
 /* Dark Mode Styles */
-
+/*
 body.dark-theme {
     background-color: #232b32;
 }
@@ -349,7 +349,7 @@ body.dark-theme #help-info {
 
 
 /* Task Items */
-
+/*
 body.dark-theme task-item {
     color: #f5f6f7;
     background-color: #4a5568;
@@ -362,7 +362,7 @@ body.dark-theme [checked='true'] {
 
 
 /* Task Popup */
-
+/*
 body.dark-theme task-popup::part(close-icon) {
     opacity: 1;
     filter: contrast(0.2);
@@ -391,7 +391,7 @@ body.dark-theme task-popup::part(add-btn) {
 
 
 /* Reset Popup */
-
+/*
 body.dark-theme reset-popup::part(close-icon) {
     opacity: 1;
     filter: contrast(0.2)
@@ -409,7 +409,7 @@ body.dark-theme reset-popup::part(reset-content) {
     color: #f5f6f7;
 }
 
-body.dark-theme reset-popup::part(btn-footer) {
+body.-theme reset-popup::part(btn-footer) {
     background-color: #2d3848;
 }
 
@@ -419,7 +419,7 @@ body.dark-theme reset-popup::part(confirm-btn) {
 
 
 /* Settings Popup */
-
+/*
 body.dark-theme settings-popup::part(close-icon) {
     opacity: 1;
     filter: contrast(0.2);
@@ -445,7 +445,7 @@ body.dark-theme settings-popup::part(enable-dark-mode) {
     color: #f5f6f7;
 }
 
-body.dark-theme settings-popup::part(btn-footer) {
+body.dark-theme fettings-popup::part(btn-footer) {
     background-color: #2d3848;
 }
 
@@ -472,7 +472,7 @@ body.dark-theme settings-popup::part(range-slider) {
 
 
 /* Help Popup */
-
+/*
 body.dark-theme help-popup::part(close-icon) {
     opacity: 1;
     filter: contrast(0.2);
@@ -509,7 +509,7 @@ body.dark-theme settings-popup::part(enable-disable-clicksound) {
 body.dark-theme settings-popup::part(enable-disable-alarmsound) {
     color: #f5f6f7;
 }
-
+*/
 
 /* Focus Task */
 

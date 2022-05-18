@@ -22,7 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
         || localStorage.getItem('state') === null || localStorage.getItem('clickState') === null || localStorage.getItem('alarmState') === null) {
         tasks = [];
         id = 0;
-        theme = 'light';
+        theme = 'default';
         volume = 50;
         state = 'default';
         localStorage.setItem('tasks', JSON.stringify(tasks));

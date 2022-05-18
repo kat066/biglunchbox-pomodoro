@@ -43,13 +43,31 @@ class SettingsPopUp extends HTMLElement {
         this.closePopUp();
     }
 
-    toggleMode() {
-        if (localStorage.getItem('theme') === 'light') {
+    setColors(bg, htxt, topbtnbg, topbtn, divider, inactbtn, popupbg, popup, inputbg, footerbg) {
+        let root = document.querySelector(':root');
+        root.style.setProperty('--bg-color', bg);
+        root.style.setProperty('--header-txt-color', htxt);
+        root.style.setProperty('--top-button-bg-color', topbtnbg);
+        root.style.setProperty('--top-button-color', topbtn);
+        root.style.setProperty('--divider-color', divider);
+        root.style.setProperty('--inactive-button-color', inactbtn);
+        root.style.setProperty('--pop-up-bg-color', popupbg);
+        root.style.setProperty('--pop-up-color', popup);
+
+        root.style.setProperty('--settings-input-bg-color', inputbg);
+
+        root.style.setProperty('--footer-bg-color', footerbg);
+    }
+
+    changeTheme() {
+        const themeInput = this.shadowRoot.getElementById('color-themes');
+        if (themeInput.value === 'dark') {
             localStorage.setItem('theme', 'dark');
+            this.setColors('#232b32', '#f5f6f7', '#4a5568', '#f5f6f7', '#9c9c9c', '#2d3848bf', '#3a4556', '#f5f6f7', '#4a5568', '#2d3848');
         } else {
-            localStorage.setItem('theme', 'light');
+            localStorage.setItem('theme', 'default');
+            this.setColors('rgb(255, 214, 204)', 'rgb(243, 96, 96)', 'rgb(243, 96, 96)', 'rgb(255, 255, 255)', 'rgba(123, 12, 12, 0.31)', 'rgba(243, 96, 96, 0.376)', 'rgb(245, 245, 245)', 'rgb(85, 85, 85)', 'rgb(234, 234, 234)', 'rgb(234, 234, 234)');
         }
-        document.body.classList.toggle('dark-theme');
     }
 
     // toggles clickState's state
@@ -106,7 +124,7 @@ class SettingsPopUp extends HTMLElement {
                 value: this.confirmSettings.bind(this),
             },
             _bindedChangeTheme: {
-                value: this.toggleMode.bind(this),
+                value: this.changeTheme.bind(this),
             },
             _bindedUpdateVolumeText: {
                 value: this.updateVolumeText.bind(this),
@@ -137,12 +155,17 @@ class SettingsPopUp extends HTMLElement {
         longBreakInput.setAttribute('value', parseInt(localStorage.getItem('long-break-length'), 10));
         longBreakInput.setAttribute('oninput', 'validity.valid||(value="")');
 
-        const themeCheckbox = this.shadowRoot.querySelector('#dark-mode > label.switch > input[type=checkbox]');
-        if (localStorage.getItem('theme') === 'dark') {
-            themeCheckbox.toggleAttribute('checked');
-        }
-        const themeStylisticSlider = this.shadowRoot.getElementById('mode-switch-slider');
-        themeStylisticSlider.addEventListener('click', this._bindedChangeTheme);
+        const themeInput = this.shadowRoot.getElementById('color-themes');
+        themeInput.setAttribute('value', localStorage.getItem('theme'));
+        this._bindedChangeTheme();
+        themeInput.addEventListener('change', this._bindedChangeTheme);
+
+        // const themeCheckbox = this.shadowRoot.querySelector('#dark-mode > label.switch > input[type=checkbox]');
+        // if (localStorage.getItem('theme') === 'dark') {
+        //     themeCheckbox.toggleAttribute('checked');
+        // }
+        // const themeStylisticSlider = this.shadowRoot.getElementById('mode-switch-slider');
+        // themeStylisticSlider.addEventListener('click', this._bindedChangeTheme);
 
         const rangeInput = this.shadowRoot.getElementById('range');
         rangeInput.setAttribute('value', parseInt(localStorage.getItem('volume'), 10));
@@ -172,8 +195,10 @@ class SettingsPopUp extends HTMLElement {
         const closeBtn = this.shadowRoot.getElementById('close-icon');
         closeBtn.addEventListener('click', this._bindedClose);
 
-        const themeStylisticSlider = this.shadowRoot.getElementById('mode-switch-slider');
-        themeStylisticSlider.addEventListener('click', this._bindedChangeTheme);
+        const themeInput = this.shadowRoot.getElementById('color-themes');
+        themeInput.addEventListener('change', this._bindedChangeTheme);
+        // const themeStylisticSlider = this.shadowRoot.getElementById('mode-switch-slider');
+        // themeStylisticSlider.addEventListener('click', this._bindedChangeTheme);
 
         const rangeInput = this.shadowRoot.getElementById('range');
         rangeInput.addEventListener('input', this._bindedUpdateVolumeText);

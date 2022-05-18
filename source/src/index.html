@@ -216,21 +216,21 @@
             display: flex;
             align-items: center;
         }
-        #enable-dark-mode {
+        #theme-selector {
             color: var(--pop-up-color);
             font-weight: 500;
             margin: 0;
             display: flex;
             align-items: center;
         }
-        #dark-mode {
+        #theme-div {
             justify-content: space-between;
             display: flex;
             width: 85%;
             margin: 1.5625vw auto 0.78125vw auto;
             padding-bottom: 1.5625vw;
         }
-        .switch {
+        /* .switch {
             position: relative;
             display: inline-flex;
             width: 4.6875vw;
@@ -240,7 +240,7 @@
             opacity: 0;
             width: 0;
             height: 0;
-        }
+        } */
         .slider {
             position: absolute;
             cursor: pointer;
@@ -298,7 +298,7 @@
             outline: none;
         }
         .button-footer {
-            background-color: var(--settings-input-bg-color);
+            background-color: var(--footer-bg-color);
             padding: 1.09375vw 1.5625vw;
             text-align: right;
             position: absolute;
@@ -447,12 +447,14 @@
                 <input type="number" id="long-break-input" min="1" max="60" part="length-inputs">
             </div>
         </div>
-        <div id="dark-mode">
-            <h4 id="enable-dark-mode" part="enable-dark-mode">Enable Dark Mode?</h4>
-            <label class="switch">
-                <input type="checkbox">
-                <span id="mode-switch-slider" class="slider"></span>
-            </label>
+        <div id="theme-div">
+
+            <h4 id="theme-selector" part="theme-selector">Color theme: </h4>
+            <select name="color-themes" id="color-themes">
+                <option value="default">Default</option>
+                <option value="dark">Dark</option>
+            </select>
+
         </div>
         <div id="volume-div">
             <h4 id="sound-volume" part="sound-volume">Global Audio Volume</h4>
@@ -672,7 +674,7 @@
 <template id="task-popup-template">
     <style>
         .button-footer {
-            background-color: var(--session-input-bg-color);
+            background-color: var(--footer-bg-color);
             padding: 1.09375vw 1.5625vw;
             text-align: right;
             position: absolute;
