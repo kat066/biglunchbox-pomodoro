@@ -1,7 +1,6 @@
 const startButton = document.getElementById('start-btn');
 const timerDisplayDuration = document.getElementById('timer_display_duration');
 const timerBackground = document.getElementById('timer_display');
-const tabLabel = document.getElementById('tab-label');
 const btnSound = new Audio('./icons/btnClick.mp3');
 const alarmSound = new Audio('./icons/alarm.mp3');
 const SECOND = 1000;
@@ -45,10 +44,14 @@ function togglePomoButtonOn(pomoButton, breakButton) {
 }
 
 /** This function is called to update the tab label with the remaining
- * time, if the Tab Label setting is enabled.
+ * time, if the Tab Label setting is enabled. It can also be used to
+ * set the tab label back to normal text by passing null as the argument.
  */
 function updateTabLabel(tabLabelTime) {
-    if (localStorage.getItem('tab-label') === 'on') {
+    const tabLabel = document.getElementById('tab-label');
+    if (tabLabelTime === null) {
+        tabLabel.innerHTML = 'Pomodoro Timer';
+    } else if (localStorage.getItem('tab-label') === 'on') {
         tabLabel.innerHTML = `${tabLabelTime} - ${tabLabelStatus}`;
     }
 }
@@ -161,7 +164,10 @@ async function stop() {
     longBreakTime = localStorage.getItem('long-break-length');
     clearInterval(timer);
     timerStatus = 'break';
-    setTimeout(switchMode, SECOND / 10);
+    setTimeout(() => {
+        switchMode();
+        updateTabLabel(null);
+    }, SECOND / 10);
     breakCounter = 0;
     startButton.innerHTML = 'Start';
     timerBackground.style.background = `linear-gradient(0deg, 
