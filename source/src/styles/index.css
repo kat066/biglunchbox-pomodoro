@@ -102,13 +102,42 @@ header:after {
     margin-right: 10%;
     display: block;
 }
+menu{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
 
-#up-next {
-    color: #f36060;
+menu button{
+    transition: all 0.3s ease;
+}
+
+menu button:hover{
+    filter:brightness(125%);
+}
+
+#up-next[data-selected = "true"], #completed[data-selected = "true"] {
+    background-color: #f36060;
+    color: white;
     text-align: center;
     font-weight: 500;
     font-size: 1.875vw;
+    padding: 0.78125vw 1.875vw;
+    border:none;
     margin: 0;
+    cursor: pointer;
+    margin-right: -1px;
+}
+#up-next[data-selected = "false"], #completed[data-selected = "false"]{
+    background-color: #f3606060;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.875vw;
+    padding: 0.78125vw 1.875vw;
+    border:none;
+    margin: 0;
+    cursor: pointer;
 }
 
 #pomodoro-timer {
@@ -320,9 +349,13 @@ body.dark-theme .timer-control-buttons button {
 body.dark-theme #select-focus {
     color: #f5f6f7;
 }
-
-body.dark-theme #up-next {
+body.dark-theme #up-next[data-selected = "true"], body.dark-theme #completed[data-selected = "true"] {
     color: #f5f6f7;
+    background-color: #4a5568;
+}
+body.dark-theme #up-next[data-selected = "false"],body.dark-theme #completed[data-selected = "false"] {
+    color: #f5f6f7;
+    background-color: #2d3848bf;
 }
 
 body.dark-theme #task-popup-btn {
@@ -343,7 +376,6 @@ body.dark-theme task-item {
 
 body.dark-theme [checked='true'] {
     background-color: #2d3848bf;
-    text-decoration: line-through;
 }
 
 

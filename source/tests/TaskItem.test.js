@@ -215,8 +215,6 @@ describe(('focus task'), () => {
         localStorage.setItem('state', 'focus');
         const task0 = document.getElementById('0');
         task0.focus(new Event('click', { bubbles: true, cancelable: true }));
-        // Toggle task
-        task0.toggle();
         // unfocus task0
         task0.focus(new Event('click', { bubbles: true, cancelable: true }));
 
@@ -240,7 +238,7 @@ describe(('focus task'), () => {
         task0.toggle();
 
         // unfocus task0
-        task0.focus(new Event('click', { bubbles: true, cancelable: true }));
+        // task0.focus(new Event('click', { bubbles: true, cancelable: true }));
 
         // There should be no more tasks during focus mode
         const focus = document.getElementById('focus-task');
