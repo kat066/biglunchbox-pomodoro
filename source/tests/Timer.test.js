@@ -1,9 +1,3 @@
-import '../src/components/ResetPopUp';
-import '../src/components/SettingsPopUp';
-import '../src/components/TaskPopUp';
-import '../src/components/TaskItem';
-import '../src/components/HelpPopUp';
-
 import { addTemplates, dispatchDOMLoadedEvent } from './utils';
 import {
     TASK_POPUP_TEMPLATE,
@@ -13,7 +7,11 @@ import {
     TASK_ITEM_TEMPLATE,
 } from './Constants';
 
-window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
+import '../src/components/TaskItem';
+
+beforeAll(() => {
+    window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
+});
 
 beforeEach(() => {
     jest.useFakeTimers();
@@ -28,8 +26,8 @@ afterEach(() => {
 test('start timer function', () => {
     document.body.innerHTML = `
         <button id = "start-btn">Start</button>
-        <div id="timer_display" class="timer-value">
-            <div id="timer_display_duration">25:00</div>
+        <div id="timer-display" class="timer-value">
+            <div id="timer-display-duration">25:00</div>
         </div>
         <button id = "pomo-btn"> Pomo</button>
     `;
@@ -37,7 +35,7 @@ test('start timer function', () => {
     require('../src/scripts/Timer');
 
     const startButton = document.getElementById('start-btn');
-    const display = document.getElementById('timer_display_duration');
+    const display = document.getElementById('timer-display-duration');
 
     startButton.click();
 
@@ -56,15 +54,15 @@ test('Stop and reset function', () => {
         <button id="pomo-btn"> Pomo</button>
         <button id="break-btn"> Break</button>
         <button id = "pomo-btn"> Pomo</button>
-        <div id="timer_display" class="timer-value">
-            <div id="timer_display_duration">13:00</div>
+        <div id="timer-display" class="timer-value">
+            <div id="timer-display-duration">13:00</div>
         </div>
     `;
 
     require('../src/scripts/Timer');
 
     const startButton = document.getElementById('start-btn');
-    const display = document.getElementById('timer_display_duration');
+    const display = document.getElementById('timer-display-duration');
 
     startButton.click();
     jest.advanceTimersByTime(100);
@@ -77,15 +75,15 @@ test('advance in time', () => {
     document.body.innerHTML = `
         <button id = "start-btn">Start</button>
         <button id = "pomo-btn"> Pomo</button>
-        <div id="timer_display" class="timer-value">
-            <div id="timer_display_duration">25:00</div>
+        <div id="timer-display" class="timer-value">
+            <div id="timer-display-duration">25:00</div>
         </div>
     `;
 
     require('../src/scripts/Timer');
 
     const startButton = document.getElementById('start-btn');
-    const display = document.getElementById('timer_display_duration');
+    const display = document.getElementById('timer-display-duration');
 
     startButton.click();
 
@@ -111,8 +109,8 @@ test('advance in time', () => {
 test('stop() called when localStorage stop value is true', () => {
     document.body.innerHTML = `
         <button id = "start-btn">Start</button>
-        <div id="timer_display" class="timer-value">
-            <div id="timer_display_duration">25:00</div>
+        <div id="timer-display" class="timer-value">
+            <div id="timer-display-duration">25:00</div>
         </div>
         <button id="pomo-btn"> Pomo</button>
         <button id="break-btn"> Break</button>
@@ -140,8 +138,8 @@ describe(('switch mode'), () => {
     test('pomo section ends', async () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display" class="timer-value">
-                <div id="timer_display_duration">3:00</div>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">3:00</div>
             </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
@@ -150,7 +148,7 @@ describe(('switch mode'), () => {
         require('../src/scripts/Timer');
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -170,8 +168,8 @@ describe(('switch mode'), () => {
     test('break section ends', async () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display" class="timer-value">
-                <div id="timer_display_duration">0:01</div>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">0:01</div>
             </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
@@ -180,7 +178,7 @@ describe(('switch mode'), () => {
         require('../src/scripts/Timer');
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -202,8 +200,8 @@ describe(('switch mode'), () => {
     test('switch to long break when class is not toggle', () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display" class="timer-value">
-                <div id="timer_display_duration">0:01</div>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">0:01</div>
             </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
@@ -212,7 +210,7 @@ describe(('switch mode'), () => {
         require('../src/scripts/Timer');
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -246,8 +244,8 @@ describe(('switch mode'), () => {
     test('switch to long break when class is toggle', () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display" class="timer-value">
-                <div id="timer_display_duration">0:01</div>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">0:01</div>
             </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
@@ -256,7 +254,7 @@ describe(('switch mode'), () => {
         require('../src/scripts/Timer');
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -295,6 +293,8 @@ describe(('keyboard input'), () => {
             HELP_POPUP_TEMPLATE, TASK_ITEM_TEMPLATE,
         ], __dirname);
 
+        document.head.innerHTML = '<title id="tab-label"></title>';
+
         genericPageTemplate = `
             ${templates}
             <ul id="task-list-elements">
@@ -325,8 +325,8 @@ describe(('keyboard input'), () => {
                     <h2 id='select-focus'></h2>
                 </div>
                 <button id = "start-btn">Start</button>
-                <div id="timer_display" class="timer-value">
-                    <div id="timer_display_duration">25:00</div>
+                <div id="timer-display" class="timer-value">
+                    <div id="timer-display-duration">25:00</div>
                 </div>
             </div>
             <div id="task-list">
@@ -334,12 +334,24 @@ describe(('keyboard input'), () => {
                 <ul id="task-list-elements">
                 </ul>
             </div>
+            <button id="completed" data-selected="false">Up Next</button>
         `;
+
+        Object.defineProperty(document, 'readyState', {
+            get() { return 'loading'; },
+        });
+
+        require('../src/components/ResetPopUp');
+        require('../src/components/SettingsPopUp');
+        require('../src/components/TaskPopUp');
+        require('../src/components/HelpPopUp');
     });
 
     beforeEach(() => {
         jest.useFakeTimers();
         document.body.innerHTML = genericPageTemplate;
+        localStorage.setItem('volume', '50');
+        localStorage.setItem('prevVolume', '50');
     });
 
     afterEach(() => {
@@ -388,7 +400,7 @@ describe(('keyboard input'), () => {
         expect(localStorage.getItem('state')).toBe('default');
     });
 
-    test(('key press S starts the timer'), () => {
+    test(('key press space starts the timer'), () => {
         require('../src/scripts/Timer');
 
         const taskPopUp = document.createElement('task-popup');
@@ -404,6 +416,8 @@ describe(('keyboard input'), () => {
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
 
+        dispatchDOMLoadedEvent(window);
+
         const eventObj = document.createEventObject ? document.createEventObject() : document.createEvent('Events');
         if (eventObj.initEvent) {
             eventObj.initEvent('keyup', true, true);
@@ -412,7 +426,7 @@ describe(('keyboard input'), () => {
         document.body.dispatchEvent(eventObj);
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
 
         jest.advanceTimersByTime(5000);
 
@@ -420,15 +434,18 @@ describe(('keyboard input'), () => {
         expect(display.innerHTML).toBe('24:55');
     });
 
-    test(('key press S stops the timer'), () => {
+    test(('key press space stops the timer'), () => {
         document.body.innerHTML = `
             ${templates}
             <button id = "start-btn">Stop</button>
-            <div id="timer_display" class="timer-value">
-                <div id="timer_display_duration">25:00</div>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">25:00</div>
             </div>
             <ul id="task-list-elements">
             </ul>
+            <button class="top-buttons" id="focus-button">
+                <img src="icons/half-moon.svg" id="focus" class="top-button-img" alt="focus">
+            </button>
             <div id="popup-button">
                 <button id="task-popup-btn"> <img src="../icons/plus.svg" id="plus"></button>
             </div>
@@ -440,6 +457,10 @@ describe(('keyboard input'), () => {
                 <img src="../icons/reset.svg" id="reset" class="top-button-img" alt=git "reset">
                 <p class="top-button-text">Reset</p>
             </button>
+            <button class="top-buttons" id="help-button">
+                <img src="icons/help.svg" id="help" class="top-button-img" alt="help">
+            </button>
+
             <button id="pomo-btn"> Pomo</button>
             <button id="break-btn"> Break</button>
         `;
@@ -459,6 +480,8 @@ describe(('keyboard input'), () => {
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
 
+        dispatchDOMLoadedEvent(window);
+
         const eventObj = document.createEventObject ? document.createEventObject() : document.createEvent('Events');
         if (eventObj.initEvent) {
             eventObj.initEvent('keyup', true, true);
@@ -467,7 +490,7 @@ describe(('keyboard input'), () => {
         document.body.dispatchEvent(eventObj);
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
 
         jest.advanceTimersByTime(5000);
 
@@ -488,7 +511,10 @@ describe(('keyboard input'), () => {
         resetPopUp.shadowRoot.getElementById('reset-confirm-popup').setAttribute('style', 'display:none');
         document.body.appendChild(resetPopUp);
         const helpPopUp = document.createElement('help-popup');
+        helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
+
+        dispatchDOMLoadedEvent(window);
 
         const eventObj = document.createEventObject ? document.createEventObject() : document.createEvent('Events');
         if (eventObj.initEvent) {
@@ -511,10 +537,13 @@ describe(('keyboard input'), () => {
         settingsPopUp.shadowRoot.getElementById('settings-confirm-popup').setAttribute('style', 'display:none');
         document.body.appendChild(settingsPopUp);
         const resetPopUp = document.createElement('reset-popup');
+        resetPopUp.shadowRoot.getElementById('reset-confirm-popup').setAttribute('style', 'display:none');
         document.body.appendChild(resetPopUp);
         const helpPopUp = document.createElement('help-popup');
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
+
+        dispatchDOMLoadedEvent(window);
 
         const eventObj = document.createEventObject ? document.createEventObject() : document.createEvent('Events');
         if (eventObj.initEvent) {
@@ -534,6 +563,7 @@ describe(('keyboard input'), () => {
         taskPopUp.shadowRoot.getElementById('add-task-popup').setAttribute('style', 'display:none');
         document.body.appendChild(taskPopUp);
         const settingsPopUp = document.createElement('settings-popup');
+        settingsPopUp.shadowRoot.getElementById('settings-confirm-popup').setAttribute('style', 'display:none');
         document.body.appendChild(settingsPopUp);
         const resetPopUp = document.createElement('reset-popup');
         resetPopUp.shadowRoot.getElementById('reset-confirm-popup').setAttribute('style', 'display:none');
@@ -541,6 +571,8 @@ describe(('keyboard input'), () => {
         const helpPopUp = document.createElement('help-popup');
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
+
+        dispatchDOMLoadedEvent(window);
 
         const eventObj = document.createEventObject ? document.createEventObject() : document.createEvent('Events');
         if (eventObj.initEvent) {
@@ -558,6 +590,7 @@ describe(('keyboard input'), () => {
         require('../src/scripts/Timer');
 
         const taskPopUp = document.createElement('task-popup');
+        taskPopUp.shadowRoot.getElementById('add-task-popup').setAttribute('style', 'display:none');
         document.body.appendChild(taskPopUp);
         const settingsPopUp = document.createElement('settings-popup');
         settingsPopUp.shadowRoot.getElementById('settings-confirm-popup').setAttribute('style', 'display:none');
@@ -568,6 +601,8 @@ describe(('keyboard input'), () => {
         const helpPopUp = document.createElement('help-popup');
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
+
+        dispatchDOMLoadedEvent(window);
 
         localStorage.setItem('state', 'default');
 
@@ -597,6 +632,9 @@ describe(('keyboard input'), () => {
         document.body.appendChild(resetPopUp);
         const helpPopUp = document.createElement('help-popup');
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
+
+        dispatchDOMLoadedEvent(window);
+
         document.body.appendChild(helpPopUp);
 
         localStorage.setItem('state', 'focus');
@@ -617,6 +655,7 @@ describe(('keyboard input'), () => {
         require('../src/scripts/Timer');
 
         const taskPopUp = document.createElement('task-popup');
+        taskPopUp.shadowRoot.getElementById('add-task-popup').setAttribute('style', 'display:none');
         document.body.appendChild(taskPopUp);
         const settingsPopUp = document.createElement('settings-popup');
         settingsPopUp.shadowRoot.getElementById('settings-confirm-popup').setAttribute('style', 'display:none');
@@ -627,6 +666,8 @@ describe(('keyboard input'), () => {
         const helpPopUp = document.createElement('help-popup');
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:block');
         document.body.appendChild(helpPopUp);
+
+        dispatchDOMLoadedEvent(window);
 
         const eventObj = document.createEventObject ? document.createEventObject() : document.createEvent('Events');
         if (eventObj.initEvent) {
@@ -663,6 +704,7 @@ describe(('keyboard input'), () => {
         require('../src/scripts/Timer');
 
         const taskPopUp = document.createElement('task-popup');
+        taskPopUp.shadowRoot.getElementById('add-task-popup').setAttribute('style', 'display:none');
         document.body.appendChild(taskPopUp);
         const settingsPopUp = document.createElement('settings-popup');
         settingsPopUp.shadowRoot.getElementById('settings-confirm-popup').setAttribute('style', 'display:none');
@@ -673,6 +715,8 @@ describe(('keyboard input'), () => {
         const helpPopUp = document.createElement('help-popup');
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
+
+        dispatchDOMLoadedEvent(window);
 
         const eventObj = document.createEventObject ? document.createEventObject() : document.createEvent('Events');
         if (eventObj.initEvent) {
@@ -713,6 +757,7 @@ describe(('keyboard input'), () => {
         require('../src/scripts/Timer');
 
         const taskPopUp = document.createElement('task-popup');
+        taskPopUp.shadowRoot.getElementById('add-task-popup').setAttribute('style', 'display:none');
         document.body.appendChild(taskPopUp);
         const settingsPopUp = document.createElement('settings-popup');
         settingsPopUp.shadowRoot.getElementById('settings-confirm-popup').setAttribute('style', 'display:none');
@@ -723,6 +768,8 @@ describe(('keyboard input'), () => {
         const helpPopUp = document.createElement('help-popup');
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
+
+        dispatchDOMLoadedEvent(window);
 
         const eventObj = document.createEventObject ? document.createEventObject() : document.createEvent('Events');
         if (eventObj.initEvent) {
@@ -748,6 +795,7 @@ describe(('keyboard input'), () => {
         require('../src/scripts/Timer');
 
         const taskPopUp = document.createElement('task-popup');
+        taskPopUp.shadowRoot.getElementById('add-task-popup').setAttribute('style', 'display:none');
         document.body.appendChild(taskPopUp);
         const settingsPopUp = document.createElement('settings-popup');
         settingsPopUp.shadowRoot.getElementById('settings-confirm-popup').setAttribute('style', 'display:block');
@@ -758,6 +806,8 @@ describe(('keyboard input'), () => {
         const helpPopUp = document.createElement('help-popup');
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
+
+        dispatchDOMLoadedEvent(window);
 
         const shadow = settingsPopUp.shadowRoot;
         const pomoLength = shadow.querySelectorAll('input')[0];
@@ -804,6 +854,8 @@ describe(('keyboard input'), () => {
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
 
+        dispatchDOMLoadedEvent(window);
+
         const shadow = settingsPopUp.shadowRoot;
         const pomoLength = shadow.querySelectorAll('input')[0];
         const shortBreakLength = shadow.querySelectorAll('input')[1];
@@ -848,6 +900,8 @@ describe(('keyboard input'), () => {
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
 
+        dispatchDOMLoadedEvent(window);
+
         const shadow = taskPopUp.shadowRoot;
 
         const input = shadow.getElementById('task-input');
@@ -885,6 +939,8 @@ describe(('keyboard input'), () => {
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
 
+        dispatchDOMLoadedEvent(window);
+
         localStorage.setItem('tasks', '[]');
         localStorage.setItem('id', '0');
         localStorage.setItem('volume', 50);
@@ -920,6 +976,8 @@ describe(('keyboard input'), () => {
         const helpPopUp = document.createElement('help-popup');
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
+
+        dispatchDOMLoadedEvent(window);
 
         localStorage.setItem('tasks', '[]');
         localStorage.setItem('id', '0');
@@ -958,6 +1016,8 @@ describe(('keyboard input'), () => {
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
 
+        dispatchDOMLoadedEvent(window);
+
         localStorage.setItem('tasks', '[]');
         localStorage.setItem('id', '0');
         localStorage.setItem('volume', 50);
@@ -994,6 +1054,8 @@ describe(('keyboard input'), () => {
         const helpPopUp = document.createElement('help-popup');
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
+
+        dispatchDOMLoadedEvent(window);
 
         localStorage.setItem('tasks', '[]');
         localStorage.setItem('id', '0');

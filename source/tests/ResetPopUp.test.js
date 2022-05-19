@@ -1,9 +1,6 @@
-import '../src/components/ResetPopUp';
-import '../src/components/TaskItem';
 import { addTemplates } from './utils';
 import { RESET_POPUP_TEMPLATE, TASK_ITEM_TEMPLATE } from './Constants';
-
-window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
+import '../src/components/TaskItem';
 
 let pageTemplate;
 
@@ -25,6 +22,8 @@ beforeAll(async () => {
             <h2 id="select-focus"></h2>
         </div>
     `;
+
+    window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
 });
 
 beforeEach(() => {
@@ -48,7 +47,7 @@ beforeEach(() => {
         list.appendChild(taskItemNode);
     });
     localStorage.setItem('volume', 50);
-    window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
+    require('../src/components/ResetPopUp');
 });
 
 afterEach(() => [

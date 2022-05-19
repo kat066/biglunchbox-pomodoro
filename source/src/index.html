@@ -3,15 +3,38 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="tab-label">Pomodoro Timer</title>
+    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" as="style">
     <link rel="stylesheet" href="styles/index.css">
-    <link rel="shortcut icon" type="image/x-icon" href="/icons/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
-</head>
+    <link rel="shortcut icon" type="image/x-icon" href="icons/favicon.ico">
 
+    <link ref="preload" href="icons/btnClick.mp3" as="audio">
+    <link ref="preload" href="icons/alarm.mp3" as="audio">
+    <link ref="preload" href="scripts/Timer.worker.js" as="script">
+
+    <script src="scripts/script.js"></script>
+    <script src="scripts/Timer.js" type="module"></script>
+    <script src="scripts/FocusMode.js" type="module"></script>
+</head>
 <body>
-    <template id="help-popup-template">
+    <script>
+        // Render blocking JS:
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('state') === 'focus') {
+                document.getElementById('task-list').classList.add('state');
+                document.getElementById('pomodoro-timer').classList.add('state');
+                document.getElementById('focus-task').classList.add('state');
+            }
+        });
+    </script>
+<template id="help-popup-template">
     <style>
         #accessibility-content li{
             margin-bottom: 0.390625vw;
@@ -161,7 +184,8 @@
         </div>
     </div>
 </template>
-    <template id="settings-popup-template">
+<script src="components/HelpPopUp.js" type="module" async></script>
+<template id="settings-popup-template">
     <style>
         button {
             transition: transform .3s ease;
@@ -465,7 +489,8 @@
         </div>
     </div>
 </template>
-    <template id="reset-popup-template">
+<script src="components/SettingsPopUp.js" type="module" async></script>
+<template id="reset-popup-template">
     <style>
         button{
             transition: transform .3s ease;
@@ -588,7 +613,8 @@
         </div>
     </div>
 </template>
-    <template id="task-item-template">
+<script src="components/ResetPopUp.js" type="module" async></script>
+<template id="task-item-template">
     <style>
         :host {
             cursor: pointer;
@@ -609,7 +635,7 @@
             /* font-size: medium; */
             font-size: 1.35vw;
             font-weight: 500;
-            border-style:none;
+            border-style: none;
             user-select: none;
             margin: 0 auto;
             /* margin-bottom: 10px; */
@@ -618,6 +644,12 @@
         :host(:hover) {
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
             transition: 0.3s;
+        }
+        :host(:hover) .delete-icon, :host(:hover) .focus-icon {
+            visibility: visible;
+        }
+        :host(:hover[checked = "true"]) .focus-icon {
+            visibility: hidden;
         }
         :host([checked = 'true']) {
             background: #f3606060;
@@ -639,9 +671,6 @@
             margin: 0;
             visibility: hidden;
         }
-        :host(:hover) .delete-icon {
-            visibility: visible;
-        }
         .delete-icon {
             position: absolute;
             color: #fff;
@@ -659,9 +688,6 @@
         .delete-icon:hover {
             transform: scale(1.3);
             filter:brightness(105%)
-        }
-        :host(:hover) .focus-icon {
-            visibility: visible;
         }
         .focus-icon {
             position: absolute;
@@ -689,7 +715,8 @@
         <span id="task-text"></span>
     </li>
 </template>
-    <template id="task-popup-template">
+<script src="components/TaskItem.js" type="module" async></script>
+<template id="task-popup-template">
     <style>
         .button-footer {
             background-color: rgb(234 234 234);
@@ -824,6 +851,7 @@
         </div>
     </div>
 </template>
+<script src="components/TaskPopUp.js" type="module" async></script>
     <div id="container">
         <header>
             <h1 id="header-name">Pomodoro Timer</h1>
@@ -858,8 +886,8 @@
                 </div>
                 <div class="empty-space-border">
                 </div>
-                <div id="timer_display" class="timer-value">
-                    <div id="timer_display_duration">25:00</div>
+                <div id="timer-display" class="timer-value">
+                    <div id="timer-display-duration">25:00</div>
                 </div>
                 <div id="timer-control-btns" class="timer-control-buttons">
                     <button id="start-btn">Start</button>
@@ -882,25 +910,6 @@
             <span id='help-info'>Click on 'Help' or press 'h' for more info </span>
         </footer> -->
     </div>
-    <script>
-        // Render blocking JS:
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-theme');
-        }
-        if (localStorage.getItem('state') === 'focus') {
-            document.getElementById('task-list').classList.add('state');
-            document.getElementById('pomodoro-timer').classList.add('state');
-            document.getElementById('focus-task').classList.add('state');
-        }
-    </script>
-    <script src="scripts/script.js"></script>
-    <script src="scripts/Timer.js"></script>
-    <script src="scripts/FocusMode.js"></script>
-    <script src="components/TaskItem.js"></script>
-    <script src="components/TaskPopUp.js"></script>
-    <script src="components/ResetPopUp.js"></script>
-    <script src="components/SettingsPopUp.js"></script>
-    <script src="components/HelpPopUp.js"></script>
 
     <settings-popup class="popup"></settings-popup>
     <help-popup class="popup"></help-popup>

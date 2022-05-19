@@ -13,17 +13,14 @@ class SettingsPopUp extends HTMLElement {
     }
 
     closePopUp() {
-        const timerBackground = document.getElementById('timer_display');
         const themeCheckbox = this.shadowRoot.querySelector('#dark-mode > label.switch > input[type=checkbox]');
 
         if ((localStorage.getItem('theme') === 'light') && document.body.classList.contains('dark-theme')) {
             themeCheckbox.checked = false;
             document.body.classList.toggle('dark-theme');
-            timerBackground.style.background = '#f36060';
         } else if ((localStorage.getItem('theme') === 'dark') && (!document.body.classList.contains('dark-theme'))) {
             themeCheckbox.checked = true;
             document.body.classList.toggle('dark-theme');
-            timerBackground.style.background = '#4a5568';
         }
 
         const curTabState = localStorage.getItem('tab-label');
@@ -66,7 +63,7 @@ class SettingsPopUp extends HTMLElement {
         const volumeToSet = localStorage.getItem('prevVolume');
         const rangeInput = this.shadowRoot.getElementById('range');
         rangeInput.value = parseInt(volumeToSet, 10);
-        localStorage.setItem('volume', volumeToSet);
+        localStorage.setItem('volume', volumeToSet.toString());
         const volumeText = this.shadowRoot.getElementById('volume-number');
         volumeText.textContent = volumeToSet;
 
@@ -119,14 +116,6 @@ class SettingsPopUp extends HTMLElement {
     }
 
     toggleMode() {
-        const timerBackground = document.getElementById('timer_display');
-        if (localStorage.getItem('theme') === 'light') {
-            timerBackground.style.background = '#4a5568';
-            // localStorage.setItem('theme', 'dark');
-        } else {
-            timerBackground.style.background = '#f36060';
-            // localStorage.setItem('theme', 'light');
-        }
         document.body.classList.toggle('dark-theme');
     }
 
@@ -230,14 +219,14 @@ class SettingsPopUp extends HTMLElement {
 
         const themeCheckbox = this.shadowRoot.querySelector('#dark-mode > label.switch > input[type=checkbox]');
         if (localStorage.getItem('theme') === 'dark') {
-            themeCheckbox.toggleAttribute('checked');
+            themeCheckbox.setAttribute('checked', '');
         }
         const themeStylisticSlider = this.shadowRoot.getElementById('mode-switch-slider');
         themeStylisticSlider.addEventListener('click', this._bindedChangeTheme);
 
         const tabLabelCheckbox = this.shadowRoot.querySelector('#tab-label-switch > label.switch > input[type=checkbox]');
-        if (localStorage.getItem('tab-label') === 'on' || localStorage.getItem('tab-label') === null) {
-            tabLabelCheckbox.toggleAttribute('checked');
+        if (localStorage.getItem('tab-label') === 'on') {
+            tabLabelCheckbox.setAttribute('checked', '');
         }
         const tabLabelStylisticSlider = this.shadowRoot.getElementById('tab-label-switch-slider');
         tabLabelStylisticSlider.addEventListener('click', this._bindedToggleTabLabel);
@@ -248,9 +237,17 @@ class SettingsPopUp extends HTMLElement {
         rangeInput.addEventListener('input', this._bindedUpdateVolumeText);
         rangeInput.addEventListener('change', this._bindedSetVolume);
 
+        const soundCheckbox = this.shadowRoot.querySelector('#sound-switch > input[type=checkbox]');
+        if (localStorage.getItem('clickState') === 'on') {
+            soundCheckbox.setAttribute('checked', '');
+        }
         const soundStylisticSlider = this.shadowRoot.querySelector('#sound-switch > span.slider');
         soundStylisticSlider.addEventListener('click', this._bindedToggleClickSound);
 
+        const alarmCheckbox = this.shadowRoot.querySelector('#alarm-switch > input[type=checkbox]');
+        if (localStorage.getItem('clickState') === 'on') {
+            alarmCheckbox.setAttribute('checked', '');
+        }
         const alarmStylisticSlider = this.shadowRoot.querySelector('#alarm-switch > span.slider');
         alarmStylisticSlider.addEventListener('click', this._bindedToggleAlarmSound);
 
@@ -282,7 +279,7 @@ class SettingsPopUp extends HTMLElement {
 
 customElements.define('settings-popup', SettingsPopUp);
 
-window.addEventListener('DOMContentLoaded', () => {
+function init() {
     const settingsButton = document.getElementById('setting-button');
     const settingsPopUp = document.querySelector('settings-popup');
     settingsButton.addEventListener('click', () => {
@@ -298,6 +295,12 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         settingsPopUp.shadowRoot.getElementById('settings-confirm-popup').setAttribute('style', 'display:block');
     });
-});
+}
+
+if (document.readyState !== 'loading') {
+    init();
+} else {
+    window.addEventListener('DOMContentLoaded', init);
+}
 
 // module.exports = SettingsPopUp;

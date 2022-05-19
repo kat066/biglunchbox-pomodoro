@@ -40,6 +40,16 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
+
+      # Mainly done to speed up linting process and prevent cypress reinstallation
+      - name: Cache Cypress installation
+        uses: actions/cache@v3
+        id: cache-cypress
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
       
       # Install from cached .npm
       - name: Install cached modules
@@ -82,4 +92,4 @@ jobs:
         with:
           install: false
           browser: chrome
-          start: npm start
+          start: npm run cy:start

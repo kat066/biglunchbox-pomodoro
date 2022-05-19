@@ -24,6 +24,15 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
+      
+      - name: Cache Cypress installation
+        uses: actions/cache@v3
+        id: cache-cypress
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
 
       - name: Install modules and ready build
         run: |
@@ -48,7 +57,7 @@ jobs:
         with:
           install: false
           browser: chrome
-          start: npm start
+          start: npm run cy:start
 
       - name: Move coverage reports to build directory
         run: cp -av source/coverage build/coverage

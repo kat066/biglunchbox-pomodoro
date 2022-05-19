@@ -117,12 +117,13 @@ class TaskItem extends HTMLElement {
             if (focusTask === null) {
                 focusDiv.appendChild(this);
             } else {
-                focusDiv.removeChild(focusTask);
+                // focusTask can only be the child of one task. implicit removeChild
                 ul.appendChild(focusTask);
                 focusTask.setAttribute('focused', false);
-                const unfocus = tasks.find((t) => t.id === focusTask.getAttribute('id') && t.text === focusTask.getAttribute('text'));
+                const unfocus = tasks.find((t) => t.id === focusTask.getAttribute('id'));
                 unfocus.focused = false;
                 localStorage.setItem('tasks', JSON.stringify(tasks));
+
                 // add 'this' task item to under clock display
                 focusDiv.appendChild(this);
             }

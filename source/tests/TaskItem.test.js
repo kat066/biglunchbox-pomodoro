@@ -1,7 +1,7 @@
-import '../src/components/TaskItem';
-
 import { TASK_ITEM_TEMPLATE } from './Constants';
 import { addTemplates } from './utils';
+
+import '../src/components/TaskItem';
 
 let defaultTasks;
 let templates;

@@ -1,7 +1,6 @@
 // import { toggleState } from '../src/scripts/FocusMode';
-import '../src/scripts/FocusMode';
-
 import { dispatchDOMLoadedEvent } from './utils';
+import '../src/scripts/FocusMode';
 
 let pageTemplate;
 

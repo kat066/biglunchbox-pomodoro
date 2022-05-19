@@ -18,7 +18,7 @@
         /* font-size: medium; */
         font-size: 1.35vw;
         font-weight: 500;
-        border-style:none;
+        border-style: none;
         user-select: none;
         margin: 0 auto;
         /* margin-bottom: 10px; */
@@ -27,6 +27,12 @@
     :host(:hover) {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
         transition: 0.3s;
+    }
+    :host(:hover) .delete-icon, :host(:hover) .focus-icon {
+        visibility: visible;
+    }
+    :host(:hover[checked = "true"]) .focus-icon {
+        visibility: hidden;
     }
     :host([checked = 'true']) {
         background: #f3606060;
@@ -48,9 +54,6 @@
         margin: 0;
         visibility: hidden;
     }
-    :host(:hover) .delete-icon {
-        visibility: visible;
-    }
     .delete-icon {
         position: absolute;
         color: #fff;
@@ -63,13 +66,11 @@
         height: 1.5625vw;
         margin: 0;
         visibility: hidden;
+        transition: transform .3s ease;
     }
     .delete-icon:hover {
         transform: scale(1.3);
         filter:brightness(105%)
-    }
-    :host(:hover) .focus-icon {
-        visibility: visible;
     }
     .focus-icon {
         position: absolute;
@@ -83,6 +84,7 @@
         height: 1.5625vw;
         margin: 0;
         visibility: hidden;
+        transition: transform .3s ease;
     }
     .focus-icon:hover {
         transform: scale(1.3);
