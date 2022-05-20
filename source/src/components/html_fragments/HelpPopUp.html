@@ -1,45 +1,55 @@
 <style>
-    #accessibility-content li{
+    #accessibility-content li {
         margin-bottom: 0.390625vw;
     }
+    
     #accessibility-content {
         padding: 0;
         margin-left: 1.875vw;
         font-size: 1vw;
     }
+    
     #accessibility {
         font-weight: 500;
         color: rgb(85, 85, 85);
     }
+    
     #features-content li {
         margin-bottom: 0.390625vw;
     }
+    
     #features-content {
         padding: 0;
         margin-left: 1.875vw;
         font-size: 1vw;
     }
+    
     #features {
         font-weight: 500;
         color: rgb(85, 85, 85);
     }
+    
     #how-to-content li {
         margin-bottom: 0.390625vw;
     }
+    
     #how-to-content {
         padding: 0;
         margin-left: 1.875vw;
         font-size: 1vw;
     }
+    
     #how-to {
         font-weight: 500;
         color: rgb(85, 85, 85);
     }
+    
     h4 {
         font-size: 1.15vw;
         color: rgb(85, 85, 85);
         font-weight: 500;
     }
+    
     #help-container {
         width: 85%;
         margin: 0 auto;
@@ -47,6 +57,7 @@
         height: 28.125vw;
         overflow: auto;
     }
+    
     #close-icon {
         /* width: 15px; */
         width: 1.171875vw;
@@ -54,16 +65,18 @@
         /* margin-right: 10px; */
         margin-top: 0.78125vw;
         margin-right: 0.78125vw;
-        position:absolute;
-        top:0;
-        right:0;
+        position: absolute;
+        top: 0;
+        right: 0;
         cursor: pointer;
         opacity: 0.33;
     }
+    
     #close-icon:hover {
         opacity: 1;
         transform: scale(1.1);
     }
+    
     #help-popup {
         display: none;
         position: fixed;
@@ -74,26 +87,41 @@
         height: 35.15625vw;
         /* border-radius: 4px; */
         border-radius: 0.3125vw;
-        top:18%;
+        top: 18%;
         /* left: 34%; */
         left: 24%;
         z-index: 999;
         background-color: whitesmoke;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-        -webkit-animation-name: animatetop; 
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-animation-name: animatetop;
         -webkit-animation-duration: 0.3s;
         animation-name: animatetop;
         animation-duration: 0.3s
     }
+    
     @-webkit-keyframes animatetop {
-        from {top:-200px; opacity:0} 
-        to {top:70; opacity:1}
+        from {
+            top: -200px;
+            opacity: 0
+        }
+        to {
+            top: 70;
+            opacity: 1
+        }
     }
+    
     @keyframes animatetop {
-        from {top:-200px; opacity:0}
-        to {top:70; opacity:1}
+        from {
+            top: -200px;
+            opacity: 0
+        }
+        to {
+            top: 70;
+            opacity: 1
+        }
     }
-    #help-popup > h3{
+    
+    #help-popup>h3 {
         font-size: 1.6vw;
         color: #f36060;
         border-bottom: solid 1px #d2d2d2;
@@ -117,7 +145,7 @@
                 <li>Select a task to focus on using the magnifying glass icon</li>
                 <li>Start the timer and be productive!</li>
                 <li>Take a break when the alarm rings</li>
-                <li>Repeats teps 3-5 to satisfaction</li>
+                <li>Repeat steps 3-5 to satisfaction</li>
             </ol>
         </div>
         <div id="features" part="features">
@@ -137,8 +165,8 @@
                 <li>';' - Settings pop up</li>
                 <li>'r' - Reset pop up</li>
                 <li>'f' - Focus mode</li>
-                <li>'s' - Start/stop</li>
                 <li>'a' - Add task</li>
+                <li>'Space' - Start/stop</li>
                 <li>'Enter' - Confirm/Add</li>
                 <li>'Esc' - Cancel/Close</li>
             </ul>

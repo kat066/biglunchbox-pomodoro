@@ -532,10 +532,10 @@ describe(('keyboard shortcut and focus mode'), () => {
             .find('#add-task-popup').should('have.css', 'display', 'none');
     });
     it(('start and stop the timer'), () => {
-        cy.get('body').type('s');
+        cy.get('body').type(' ');
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
         cy.get('#start-btn').should('have.text', 'Stop');
-        cy.get('body').type('s');
+        cy.get('body').type(' ');
         cy.get('#timer_display_duration').should('have.text', '25:00');
         cy.get('#start-btn').should('have.text', 'Start');
     });

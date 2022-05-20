@@ -19,15 +19,19 @@ You can find our app [here!](https://kat066.github.io/biglunchbox-pomodoro/)
 
 ## Main Page:
 
-'s' --Start/Stop the timer
+'Space' --Start/Stop the timer
 
-'h' --open the help pop-up
+'h'     --open the help pop-up
 
-'r' --open the reset pop-up
+'r'     --open the reset pop-up
 
-';' --open the setting pop-up
+';'     --open the setting pop-up
 
-'a' --open the add task pop-up
+'a'     --open the add task pop-up
+
+'Enter' --Confirm/Add
+
+'Esc'   --Cancel/Close
 
 ## In Pop-Ups
 
