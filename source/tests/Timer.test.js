@@ -6,8 +6,11 @@ import '../src/components/HelpPopUp';
 
 import { addTemplates, dispatchDOMLoadedEvent } from './utils';
 import {
-    TASK_POPUP_TEMPLATE, SETTINGS_POPUP_TEMPLATE, RESET_POPUP_TEMPLATE,
-    HELP_POPUP_TEMPLATE, TASK_ITEM_TEMPLATE,
+    TASK_POPUP_TEMPLATE,
+    SETTINGS_POPUP_TEMPLATE,
+    RESET_POPUP_TEMPLATE,
+    HELP_POPUP_TEMPLATE,
+    TASK_ITEM_TEMPLATE,
 } from './Constants';
 
 window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
@@ -400,7 +403,7 @@ describe(('keyboard input'), () => {
         if (eventObj.initEvent) {
             eventObj.initEvent('keyup', true, true);
         }
-        eventObj.code = 'KeyS';
+        eventObj.code = 'Space';
         document.body.dispatchEvent(eventObj);
 
         const startButton = document.getElementById('start-btn');
@@ -455,7 +458,7 @@ describe(('keyboard input'), () => {
         if (eventObj.initEvent) {
             eventObj.initEvent('keyup', true, true);
         }
-        eventObj.code = 'KeyS';
+        eventObj.code = 'Space';
         document.body.dispatchEvent(eventObj);
 
         const startButton = document.getElementById('start-btn');

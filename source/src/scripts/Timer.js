@@ -46,7 +46,7 @@ function togglePomoButtonOn(pomoButton, breakButton) {
 
 /** This function is called to update the tab label with the remaining
  * time, if the Tab Label setting is enabled.
-*/
+ */
 function updateTabLabel(tabLabelTime) {
     if (localStorage.getItem('tab-label') === 'on') {
         tabLabel.innerHTML = `${tabLabelTime} - ${tabLabelStatus}`;
@@ -194,6 +194,13 @@ async function startAndStopButton() {
 
 setInterval(stopChecker, 500);
 
+// disableing space keydown
+window.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') {
+        event.preventDefault();
+    }
+});
+
 startButton.addEventListener('click', startAndStopButton);
 // keyboard event stuff
 window.addEventListener('keyup', (event) => {
@@ -210,7 +217,7 @@ window.addEventListener('keyup', (event) => {
             }
             document.getElementById('focus-button').click();
             break;
-        case 'KeyS':
+        case 'Space':
             startButton.click();
             break;
         case 'KeyR':

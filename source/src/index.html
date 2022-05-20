@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -8,8 +9,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="/icons/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
+
 <body>
-<template id="help-popup-template">
+    <template id="help-popup-template">
     <style>
         #accessibility-content li{
             margin-bottom: 0.390625vw;
@@ -130,7 +132,7 @@
                     <li>Select a task to focus on using the magnifying glass icon</li>
                     <li>Start the timer and be productive!</li>
                     <li>Take a break when the alarm rings</li>
-                    <li>Repeats teps 3-5 to satisfaction</li>
+                    <li>Repeat steps 3-5 to satisfaction</li>
                 </ol>
             </div>
             <div id="features" part="features">
@@ -146,20 +148,20 @@
             <div id="accessibility" part="accessibility">
                 <h4 part="h4">Keyboard Shortcuts</h4>
                 <ul id="accessibility-content">
-                    <li>'h' - Help page pop up</li>
-                    <li>';' - Settings pop up</li>
-                    <li>'r' - Reset pop up</li>
-                    <li>'f' - Focus mode</li>
-                    <li>'s' - Start/stop</li>
-                    <li>'a' - Add task</li>
+                    <li>'h'     - Help page pop up</li>
+                    <li>';'     - Settings pop up</li>
+                    <li>'r'     - Reset pop up</li>
+                    <li>'f'     - Focus mode</li>
+                    <li>'a'     - Add task</li>
+                    <li>'Space' - Start/stop</li>
                     <li>'Enter' - Confirm/Add</li>
-                    <li>'Esc' - Cancel/Close</li>
+                    <li>'Esc'   - Cancel/Close</li>
                 </ul>
             </div>
         </div>
     </div>
 </template>
-<template id="settings-popup-template">
+    <template id="settings-popup-template">
     <style>
         button {
             transition: transform .3s ease;
@@ -320,6 +322,7 @@
             opacity: 1;
             transform: scale(1.1);
         }
+        
         #settings-confirm-popup {
             flex-wrap: wrap;
             position:absolute;
@@ -327,6 +330,7 @@
             height:max-content;
             padding-left: 2.5%;
             padding-right: 2.5%;
+            padding-bottom: 0.30625vw;
             border-radius: 0.3125vw;
             top: 50vh;
             left: 50%;
@@ -457,11 +461,11 @@
             
         </div>
         <div class="button-footer" part="btn-footer">
-            <button class="settings-popup-btns" id="confirm-settings-btn" part="confirm-btn">Confirm</button>
+            <button id="confirm-settings-btn" class="settings-popup-btns" part="confirm-btn">Confirm</button>
         </div>
     </div>
 </template>
-<template id="reset-popup-template">
+    <template id="reset-popup-template">
     <style>
         button{
             transition: transform .3s ease;
@@ -584,7 +588,7 @@
         </div>
     </div>
 </template>
-<template id="task-item-template">
+    <template id="task-item-template">
     <style>
         :host {
             cursor: pointer;
@@ -685,7 +689,7 @@
         <span id="task-text"></span>
     </li>
 </template>
-<template id="task-popup-template">
+    <template id="task-popup-template">
     <style>
         .button-footer {
             background-color: rgb(234 234 234);
@@ -846,7 +850,7 @@
                 </ul>
             </nav>
         </header>
-        <main >
+        <main>
             <section id="pomodoro-timer">
                 <div id="timer-btns" class="timer-buttons">
                     <button id="pomo-btn"> Pomo</button>
