@@ -1,15 +1,14 @@
 One line description of your change
 
 ==Changelog==
-- List short summary of changes
-- Fixes issue number XXX
+-Added warning message to setting popup
 
 ==Testing==
-- List manual tests performed or automated tests created here
+-Jest and Cypress tests pass
 
 ==Version Compatibility==
-- List any potential conflict other older versions
+-Full Compatibility, since nothing crazy was changed in the code to warrant any compatibility issues
 
 ==Detail Description==
-- Expand on items listed under changelog
-
+-Updated setting popup menu to reflect the fact that any changes to settings will cause a reset in timer
+-Updated new code to match refactoring changes in settings

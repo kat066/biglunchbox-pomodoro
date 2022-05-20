@@ -1,3 +1,49 @@
+@media only screen and (max-width: 600px){
+    :root {
+        --setting-h4:15px;
+        --setting-h3:20px;
+        --volume-number-width:30px;
+        --volume-number-marigin:5px;
+        --volume-slider-height:5px;
+        --volume-slider-width:50px;
+        --vol-slider-thumb-height:7px;
+        --vol-slider-thumb-width:7px;
+        --setting-text:12px;
+        --setting-h3-padding:2px;
+        --setting-number-input:12px;
+        --number-input-width:50px;
+        --switch-width:24px;
+        --switch-height:12px;
+        --slider-width:10px;
+        --slider-height:10px;
+        --button-footer-padding:3px;
+        --setting-margin:8px;
+        --pop-up-button-font-size:7px;
+    }
+}
+@media only screen and (min-width: 600px){
+    :root {
+        --setting-h4:24px;
+        --setting-h3:30px;
+        --volume-number-width:48px;
+        --volume-number-marigin:15px;
+        --volume-slider-height:12px;
+        --volume-slider-width:120px;
+        --vol-slider-thumb-height:16px;
+        --vol-slider-thumb-width:16px;
+        --setting-text:20px;
+        --setting-h3-padding:5px;
+        --setting-number-input:15px;
+        --number-input-width:100%;
+        --switch-width:48px;
+        --switch-height:25px;
+        --slider-width:23px;
+        --slider-height:23px;
+        --button-footer-padding:12px;
+        --setting-margin:15px;
+        --pop-up-button-font-size:15px;
+    }     
+}
 html {
     height: 100%;
 }
@@ -10,12 +56,11 @@ body {
     box-sizing: border-box;
     min-height: 100%;
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
 }
 
 #container {
     min-height: 100%;
-    overflow: hidden;
 }
 
 header {
@@ -102,13 +147,42 @@ header:after {
     margin-right: 10%;
     display: block;
 }
+menu{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
 
-#up-next {
-    color: #f36060;
+menu button{
+    transition: all 0.3s ease;
+}
+
+menu button:hover{
+    filter:brightness(125%);
+}
+
+#up-next[data-selected = "true"], #completed[data-selected = "true"] {
+    background-color: #f36060;
+    color: white;
     text-align: center;
     font-weight: 500;
     font-size: 1.875vw;
+    padding: 0.78125vw 1.875vw;
+    border:none;
     margin: 0;
+    cursor: pointer;
+    margin-right: -1px;
+}
+#up-next[data-selected = "false"], #completed[data-selected = "false"]{
+    background-color: #f3606060;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.875vw;
+    padding: 0.78125vw 1.875vw;
+    border:none;
+    margin: 0;
+    cursor: pointer;
 }
 
 #pomodoro-timer {
@@ -116,8 +190,8 @@ header:after {
     width: 35%;
     margin-left: 10%;
     height: 80vh;
-}
 
+}
 #task-list ul {
     list-style-type: none;
     max-height: 80%;
@@ -320,9 +394,13 @@ body.dark-theme .timer-control-buttons button {
 body.dark-theme #select-focus {
     color: #f5f6f7;
 }
-
-body.dark-theme #up-next {
+body.dark-theme #up-next[data-selected = "true"], body.dark-theme #completed[data-selected = "true"] {
     color: #f5f6f7;
+    background-color: #4a5568;
+}
+body.dark-theme #up-next[data-selected = "false"],body.dark-theme #completed[data-selected = "false"] {
+    color: #f5f6f7;
+    background-color: #2d3848bf;
 }
 
 body.dark-theme #task-popup-btn {
@@ -343,7 +421,6 @@ body.dark-theme task-item {
 
 body.dark-theme [checked='true'] {
     background-color: #2d3848bf;
-    text-decoration: line-through;
 }
 
 
@@ -428,6 +505,10 @@ body.dark-theme settings-popup::part(session-labels) {
 }
 
 body.dark-theme settings-popup::part(enable-dark-mode) {
+    color: #f5f6f7;
+}
+
+body.dark-theme settings-popup::part(enable-tab-label) {
     color: #f5f6f7;
 }
 
