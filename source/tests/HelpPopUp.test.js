@@ -1,23 +1,34 @@
 import '../src/components/HelpPopUp';
 
+import { addTemplates, dispatchDOMLoadedEvent } from './utils';
+import { HELP_POPUP_TEMPLATE } from './Constants';
+
+let pageTemplate;
+
+beforeAll(async () => {
+    const templates = await addTemplates([
+        HELP_POPUP_TEMPLATE,
+    ], __dirname);
+
+    pageTemplate = `
+    ${templates}
+    <button class="top-buttons" id="help-button">
+        <img src="icons/help.svg" id="help" class="top-button-img" alt="help">
+    </button>
+    <help-popup></help-popup>
+    `;
+});
+
 window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
 beforeEach(() => {
     localStorage.setItem('volume', 50);
     localStorage.setItem('tasks', '[]');
     localStorage.setItem('id', '0');
-    document.body.innerHTML = `
-    <button class="top-buttons" id="help-button">
-        <img src="icons/help.svg" id="help" class="top-button-img" alt="help">
-    </button>
-    `;
+    document.body.innerHTML = pageTemplate;
+    dispatchDOMLoadedEvent(window);
 });
 
-test(('create help popup on load'), () => {
-    dispatchEvent(new Event('load'));
-    expect(document.querySelector('help-popup')).not.toBeNull();
-});
 test(('popup help window when help button is clicked'), () => {
-    dispatchEvent(new Event('load'));
     const helpBtn = document.getElementById('help-button');
     helpBtn.click();
     const helpPopUp = document.querySelector('help-popup');
@@ -25,9 +36,9 @@ test(('popup help window when help button is clicked'), () => {
 });
 
 test(('close icon works properly'), () => {
-    const helpPopUp = document.createElement('help-popup');
     const helpBtn = document.getElementById('help-button');
     helpBtn.click();
+    const helpPopUp = document.querySelector('help-popup');
     const close = helpPopUp.shadowRoot.getElementById('close-icon');
     close.click();
     expect(helpPopUp.shadowRoot.getElementById('help-popup').style.display).toBe('none');

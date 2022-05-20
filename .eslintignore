@@ -1,0 +1,5 @@
+**/instrumented/
+**/cypress/support/
+**/cypress/plugins/
+**/coverage
+**/*_build/

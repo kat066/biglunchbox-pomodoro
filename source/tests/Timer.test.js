@@ -4,7 +4,11 @@ import '../src/components/TaskPopUp';
 import '../src/components/TaskItem';
 import '../src/components/HelpPopUp';
 
-require('regenerator-runtime/runtime');
+import { addTemplates, dispatchDOMLoadedEvent } from './utils';
+import {
+    TASK_POPUP_TEMPLATE, SETTINGS_POPUP_TEMPLATE, RESET_POPUP_TEMPLATE,
+    HELP_POPUP_TEMPLATE, TASK_ITEM_TEMPLATE,
+} from './Constants';
 
 window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
 
@@ -21,7 +25,10 @@ afterEach(() => {
 test('start timer function', () => {
     document.body.innerHTML = `
         <button id = "start-btn">Start</button>
-        <div id="timer_display_duration">25:00</div>
+        <div id="timer_display" class="timer-value">
+            <div id="timer_display_duration">25:00</div>
+        </div>
+        <button id = "pomo-btn"> Pomo</button>
     `;
 
     require('../src/scripts/Timer');
@@ -42,7 +49,10 @@ test('Stop and reset function', () => {
         <button id = "start-btn">Stop</button>
         <button id="pomo-btn"> Pomo</button>
         <button id="break-btn"> Break</button>
-        <div id="timer_display_duration">13:00</div>
+        <button id = "pomo-btn"> Pomo</button>
+        <div id="timer_display" class="timer-value">
+            <div id="timer_display_duration">13:00</div>
+        </div>
     `;
 
     require('../src/scripts/Timer');
@@ -60,7 +70,10 @@ test('Stop and reset function', () => {
 test('advance in time', () => {
     document.body.innerHTML = `
         <button id = "start-btn">Start</button>
-        <div id="timer_display_duration">25:00</div>
+        <button id = "pomo-btn"> Pomo</button>
+        <div id="timer_display" class="timer-value">
+            <div id="timer_display_duration">25:00</div>
+        </div>
     `;
 
     require('../src/scripts/Timer');
@@ -92,7 +105,9 @@ test('advance in time', () => {
 test('stop() called when localStorage stop value is true', () => {
     document.body.innerHTML = `
         <button id = "start-btn">Start</button>
-        <div id="timer_display_duration">25:00</div>
+        <div id="timer_display" class="timer-value">
+            <div id="timer_display_duration">25:00</div>
+        </div>
         <button id="pomo-btn"> Pomo</button>
         <button id="break-btn"> Break</button>
     `;
@@ -119,7 +134,9 @@ describe(('switch mode'), () => {
     test('pomo section ends', async () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display_duration">3:00</div>
+            <div id="timer_display" class="timer-value">
+                <div id="timer_display_duration">3:00</div>
+            </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
         `;
@@ -147,7 +164,9 @@ describe(('switch mode'), () => {
     test('break section ends', async () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display_duration">0:01</div>
+            <div id="timer_display" class="timer-value">
+                <div id="timer_display_duration">0:01</div>
+            </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
         `;
@@ -177,7 +196,9 @@ describe(('switch mode'), () => {
     test('switch to long break when class is not toggle', () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display_duration">0:01</div>
+            <div id="timer_display" class="timer-value">
+                <div id="timer_display_duration">0:01</div>
+            </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
         `;
@@ -219,7 +240,9 @@ describe(('switch mode'), () => {
     test('switch to long break when class is toggle', () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display_duration">0:01</div>
+            <div id="timer_display" class="timer-value">
+                <div id="timer_display_duration">0:01</div>
+            </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
         `;
@@ -258,9 +281,16 @@ describe(('switch mode'), () => {
 });
 
 describe(('keyboard input'), () => {
-    beforeEach(() => {
-        jest.useFakeTimers();
-        document.body.innerHTML = `
+    let templates;
+    let genericPageTemplate;
+    beforeAll(async () => {
+        templates = await addTemplates([
+            TASK_POPUP_TEMPLATE, SETTINGS_POPUP_TEMPLATE, RESET_POPUP_TEMPLATE,
+            HELP_POPUP_TEMPLATE, TASK_ITEM_TEMPLATE,
+        ], __dirname);
+
+        genericPageTemplate = `
+            ${templates}
             <ul id="task-list-elements">
             </ul>
             <button class='top-buttons' id='focus-button'>
@@ -287,7 +317,9 @@ describe(('keyboard input'), () => {
                     <h2 id='select-focus'></h2>
                 </div>
                 <button id = "start-btn">Start</button>
-                <div id="timer_display_duration">25:00</div>
+                <div id="timer_display" class="timer-value">
+                    <div id="timer_display_duration">25:00</div>
+                </div>
             </div>
             <div id="task-list">
                 <h2 id="up-next">Up Next</h2>
@@ -295,6 +327,11 @@ describe(('keyboard input'), () => {
                 </ul>
             </div>
         `;
+    });
+
+    beforeEach(() => {
+        jest.useFakeTimers();
+        document.body.innerHTML = genericPageTemplate;
     });
 
     afterEach(() => {
@@ -321,16 +358,24 @@ describe(('keyboard input'), () => {
         helpPopUp.shadowRoot.getElementById('help-popup').setAttribute('style', 'display:none');
         document.body.appendChild(helpPopUp);
 
-        const eventObj = document.createEventObject ? document.createEventObject() : document.createEvent('Events');
-        if (eventObj.initEvent) {
-            eventObj.initEvent('keyup', true, true);
-        }
-        eventObj.code = 'KeyF';
-        document.body.dispatchEvent(eventObj);
+        dispatchDOMLoadedEvent(window);
+
+        // !! TODO: Correct way to dispatch keyboard events in jest
+        // Replace other event simulations (eg. clicks) with this to prevent
+        // requirement of DOMContentLoaded
+        document.dispatchEvent(new KeyboardEvent('keyup', {
+            code: 'KeyF',
+            bubbles: true,
+            cancelable: true,
+        }));
 
         expect(localStorage.getItem('state')).toBe('focus');
 
-        document.body.dispatchEvent(eventObj);
+        document.dispatchEvent(new KeyboardEvent('keyup', {
+            code: 'KeyF',
+            bubbles: true,
+            cancelable: true,
+        }));
 
         expect(localStorage.getItem('state')).toBe('default');
     });
@@ -369,8 +414,11 @@ describe(('keyboard input'), () => {
 
     test(('key press S stops the timer'), () => {
         document.body.innerHTML = `
+            ${templates}
             <button id = "start-btn">Stop</button>
-            <div id="timer_display_duration">23:00</div>
+            <div id="timer_display" class="timer-value">
+                <div id="timer_display_duration">25:00</div>
+            </div>
             <ul id="task-list-elements">
             </ul>
             <div id="popup-button">

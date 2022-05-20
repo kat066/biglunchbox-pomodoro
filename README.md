@@ -2,6 +2,9 @@
 
 **We are Big Lunchbox!**
 
+=======
+Adopted and forked from the Pomodoro Timer by [Runtime Terror](https://github.com/Jackie1342/cse110-w21-group13).
+
 [![CodeFactor](https://www.codefactor.io/repository/github/kat066/biglunchbox-pomodoro/badge?s=60ed377b2b1538342690c2bba4151269aedbbc86)](https://www.codefactor.io/repository/github/kat066/biglunchbox-pomodoro)
 [![CI](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/integrate.yml/badge.svg)](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/integrate.yml)
 [![CD](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/deploy.yml/badge.svg)](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/deploy.yml)
@@ -32,4 +35,3 @@ You can find our app [here!](https://kat066.github.io/biglunchbox-pomodoro/)
 'Enter' --confirm your setting
 
 'Escape' --cancel the change and close the pop-up
-

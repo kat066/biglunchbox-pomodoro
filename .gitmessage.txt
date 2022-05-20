@@ -1,0 +1,15 @@
+One line description of your change
+
+==Changelog==
+- List short summary of changes
+- Fixes issue number XXX
+
+==Testing==
+- List manual tests performed or automated tests created here
+
+==Version Compatibility==
+- List any potential conflict other older versions
+
+==Detail Description==
+- Expand on items listed under changelog
+
