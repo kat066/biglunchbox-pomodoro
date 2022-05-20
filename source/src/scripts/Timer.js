@@ -1,5 +1,6 @@
 const startButton = document.getElementById('start-btn');
 const timerDisplayDuration = document.getElementById('timer_display_duration');
+const timerBackground = document.getElementById('timer_display');
 const tabLabel = document.getElementById('tab-label');
 const btnSound = new Audio('./icons/btnClick.mp3');
 const alarmSound = new Audio('./icons/alarm.mp3');
@@ -89,6 +90,8 @@ function switchMode() {
  * down to 0 and the alarm sound would be call. The counter down would be call
  * in this function.
  */
+// theme color for timer graphics
+let themeColor = (document.body.classList.length === 0) ? '#f36060' : '#4a5568';
 async function timerFunction() {
     let timerText = timerDisplayDuration.innerHTML;
 
@@ -120,13 +123,30 @@ async function timerFunction() {
     }
 
     timerDisplayDuration.innerHTML = `${minutes}:${seconds}`;
-    updateTabLabel(`${minutes}:${seconds}`);
+    // Adapt to each modes
+    const timeMin = parseInt(timerDisplayDuration.innerHTML.split(':')[0], 10);
+    const timeSec = parseInt(timerDisplayDuration.innerHTML.split(':')[1], 10);
+    updateTabLabel(`${timeMin}:${timeSec}`);
+    let pomoMode = true;
+    const pomoButton = document.getElementById('pomo-btn');
+    pomoMode = (pomoButton.getAttribute('class') !== 'toggle');
+    let timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
+    if (pomoMode) {
+        timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
+    } else {
+        timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(breakTime) * 60)) * 100;
+    }
+    // set timer graphics
+    timerBackground.style.background = `linear-gradient(0deg, 
+        ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)`;
 }
 
 /** The function would be call when the click start button and the stop button
  * would be show in the web.
  */
 async function start() {
+    // get background color for sync between different modes
+    themeColor = (document.body.classList.length === 0) ? '#f36060' : '#4a5568';
     startButton.innerHTML = 'Stop';
     updateTabLabel(`${pomoTime}:00`);
     timer = setInterval(timerFunction, SECOND);
@@ -144,6 +164,8 @@ async function stop() {
     setTimeout(switchMode, SECOND / 10);
     breakCounter = 0;
     startButton.innerHTML = 'Start';
+    timerBackground.style.background = `linear-gradient(0deg, 
+                        ${themeColor} 0%, rgba(51, 231, 255, 0) 0%)`;
 }
 
 /** The function to check if the status stop */
