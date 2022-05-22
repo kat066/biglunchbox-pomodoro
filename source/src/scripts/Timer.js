@@ -126,10 +126,10 @@ async function timerFunction() {
     }
 
     timerDisplayDuration.innerHTML = `${minutes}:${seconds}`;
+    updateTabLabel(`${minutes}:${seconds}`);
     // Adapt to each modes
     const timeMin = parseInt(timerDisplayDuration.innerHTML.split(':')[0], 10);
     const timeSec = parseInt(timerDisplayDuration.innerHTML.split(':')[1], 10);
-    updateTabLabel(`${timeMin}:${timeSec}`);
     let pomoMode = true;
     const pomoButton = document.getElementById('pomo-btn');
     pomoMode = (pomoButton.getAttribute('class') !== 'toggle');
