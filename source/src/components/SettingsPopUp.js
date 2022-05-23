@@ -44,9 +44,12 @@ class SettingsPopUp extends HTMLElement {
     }
 
     toggleMode() {
+        const timerBackground = document.getElementById('timer_display');
         if (localStorage.getItem('theme') === 'light') {
+            timerBackground.style.background = '#4a5568';
             localStorage.setItem('theme', 'dark');
         } else {
+            timerBackground.style.background = '#f36060';
             localStorage.setItem('theme', 'light');
         }
         document.body.classList.toggle('dark-theme');

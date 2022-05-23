@@ -17,7 +17,9 @@ beforeAll(async () => {
             <img src="../icons/settings.svg" id="gear" class="top-button-img" alt="gear">
             <p class="top-button-text">Setting</p>
         </button>
-        <div id="timer_display_duration">25:00</div>
+        <div id="timer_display" class="timer-value">
+            <div id="timer_display_duration">25:00</div>
+        </div>
         <button id = "start-btn">Start</button>
     `;
 });
