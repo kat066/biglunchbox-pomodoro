@@ -1,3 +1,4 @@
+// import toggleState from '/scripts/FocusMode.js';
 const startButton = document.getElementById('start-btn');
 const timerDisplayDuration = document.getElementById('timer_display_duration');
 const timerBackground = document.getElementById('timer_display');
@@ -85,6 +86,33 @@ function switchMode() {
     }
 }
 
+/** Toggle focus mode: remove task list component and only show the Pomodoro timer */
+/** The function is keep track of focus tasks and check if all the
+ * tasks are complete.
+  */
+function toggleState() {
+    // elements -- popup button, task list div, pomodoro timer div, focus task
+    // const popUpBtn = document.getElementById('popup-button');
+    const taskListDiv = document.getElementById('task-list');
+    const pomoDiv = document.getElementById('pomodoro-timer');
+    const focusTask = document.getElementById('focus-task');
+    const button = document.getElementById('header-buttons');
+    // popUpBtn.classList.toggle('state');
+    taskListDiv.classList.toggle('state');
+    pomoDiv.classList.toggle('state');
+    focusTask.classList.toggle('state');
+    button.classList.toggle('state');
+    if (localStorage.getItem('state') === 'default') {
+        localStorage.setItem('state', 'focus');
+    } else {
+        localStorage.setItem('state', 'default');
+        const title = document.getElementById('select-focus');
+        if (title.innerHTML === 'All tasks complete!') {
+            title.innerHTML = '';
+        }
+    }
+}
+
 /**
  * The function would call the switchMode function if the time mode counter
  * down to 0 and the alarm sound would be call. The counter down would be call
@@ -130,13 +158,14 @@ async function timerFunction() {
     let pomoMode = true;
     const pomoButton = document.getElementById('pomo-btn');
     pomoMode = (pomoButton.getAttribute('class') !== 'toggle');
-    let timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
+    let timePerc = ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
     if (pomoMode) {
-        timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
+        timePerc = ((timeMin * 60 + timeSec) / (parseFloat(pomoTime) * 60)) * 100;
     } else {
         timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(breakTime) * 60)) * 100;
     }
     // set timer graphics
+    themeColor = (document.body.classList.length === 0) ? '#f36060' : '#4a5568';
     timerBackground.style.background = `linear-gradient(0deg, 
         ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)`;
 }
@@ -145,10 +174,16 @@ async function timerFunction() {
  * would be show in the web.
  */
 async function start() {
+    // automatically get into focus mode when timer is running
+    if (localStorage.getItem('state') === 'default') {
+        toggleState();
+    }
     // get background color for sync between different modes
     themeColor = (document.body.classList.length === 0) ? '#f36060' : '#4a5568';
     startButton.innerHTML = 'Stop';
     updateTabLabel(`${pomoTime}:00`);
+    timerBackground.style.background = `linear-gradient(0deg, 
+        ${themeColor} 100%, rgba(51, 231, 255, 0) 0%)`;
     timer = setInterval(timerFunction, SECOND);
 }
 
@@ -159,6 +194,10 @@ async function stop() {
     pomoTime = localStorage.getItem('pomo-length');
     breakTime = localStorage.getItem('short-break-length');
     longBreakTime = localStorage.getItem('long-break-length');
+
+    if (localStorage.getItem('state') === 'focus') {
+        toggleState();
+    }
     clearInterval(timer);
     timerStatus = 'break';
     setTimeout(switchMode, SECOND / 10);

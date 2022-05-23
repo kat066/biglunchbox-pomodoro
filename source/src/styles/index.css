@@ -612,6 +612,10 @@ body.dark-theme settings-popup::part(enable-disable-alarmsound) {
 
 /*Focus mode toggles*/
 
+#header-buttons.state{
+    opacity: 10%;
+}
+
 #popup-button.state {
     display: none;
 }
