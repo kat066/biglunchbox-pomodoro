@@ -48,6 +48,9 @@ test('start timer function', () => {
 });
 
 test('Stop and reset function', () => {
+    document.head.innerHTML = `
+        <title id="tab-label">Pomodoro Timer</title>
+    `;
     document.body.innerHTML = `
         <button id = "start-btn">Stop</button>
         <button id="pomo-btn"> Pomo</button>

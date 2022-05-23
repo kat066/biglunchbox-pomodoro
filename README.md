@@ -1,8 +1,9 @@
-# Horrible Timer
+# Pomodoro Timer
 
 **We are Big Lunchbox!**
 
-We adopted this project and forked this repo from [Runtime Terror](https://github.com/Jackie1342/cse110-w21-group13).
+=======
+Adopted and forked from the Pomodoro Timer by [Runtime Terror](https://github.com/Jackie1342/cse110-w21-group13).
 
 [![CodeFactor](https://www.codefactor.io/repository/github/kat066/biglunchbox-pomodoro/badge?s=60ed377b2b1538342690c2bba4151269aedbbc86)](https://www.codefactor.io/repository/github/kat066/biglunchbox-pomodoro)
 [![CI](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/integrate.yml/badge.svg)](https://github.com/kat066/biglunchbox-pomodoro/actions/workflows/integrate.yml)
@@ -11,7 +12,7 @@ We adopted this project and forked this repo from [Runtime Terror](https://githu
 You can find our app [here!](https://kat066.github.io/biglunchbox-pomodoro/)
 * [Unit test coverage report](https://kat066.github.io/biglunchbox-pomodoro/coverage/jest/lcov-report)
 * [E2E test coverage report](https://kat066.github.io/biglunchbox-pomodoro/coverage/cypress/lcov-report)
-* [JSDocs](https://kat066.github.io/biglunchbox-pomodoro/docs)
+* [JSDocs](https://kat066.github.io/biglunchbox-pomodoro/docs/)
 
 **New to the team? Read the [onboarding documentation](https://github.com/kat066/biglunchbox-pomodoro/wiki/Onboarding) in our Wiki!**
 
