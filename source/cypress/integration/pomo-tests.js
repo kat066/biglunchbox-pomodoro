@@ -9,6 +9,7 @@ describe(('task list and timer'), () => {
     it('add task when timer has started', () => {
         // start timer
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('#task-popup-btn').trigger('click');
         cy.get('task-popup').shadow()
             .find('#add-task-popup')
@@ -37,6 +38,7 @@ describe(('task list and timer'), () => {
     it('add task when timer has started (keyboard)', () => {
         // start timer
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('body').type('a');
         cy.get('task-popup').shadow()
             .find('#add-task-popup').should('have.css', 'display', 'block');
@@ -77,11 +79,12 @@ describe(('task list and timer'), () => {
         cy.get('#start-btn').trigger('click');
         cy.get('#timer_display_duration').should('have.text', '25:00');
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('task-popup').shadow()
             .find('#add-task-btn').trigger('click');
         // task is added successfully
         cy.get('#0').shadow()
-            .find('li')
+            .find('#task-text')
             .should('have.text', 'test item 1');
         cy.url().should(() => {
             expect(localStorage.getItem('id')).contains('1');
@@ -93,6 +96,7 @@ describe(('task list and timer'), () => {
     it('cancel add task when timer has started', () => {
         // start timer
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('#task-popup-btn').trigger('click');
         cy.get('task-popup').shadow()
             .find('#close-icon').trigger('click');
@@ -104,6 +108,7 @@ describe(('task list and timer'), () => {
     it(('start the timer while adding the task then cancel'), () => {
         cy.get('#task-popup-btn').trigger('click');
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         // timer runs without affect
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
         cy.get('task-popup').shadow()
@@ -133,15 +138,17 @@ describe(('interact with exist task list while timer is runing'), () => {
     });
     it(('toggle the tasks while timer is runing'), () => {
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('#0').trigger('click');
-        cy.get('#0').should('have.css', 'text-decoration', 'line-through solid rgb(255, 255, 255)');
-        cy.get('#0').trigger('click');
-        cy.get('#0').should('have.css', 'text-decoration', 'none solid rgb(255, 255, 255)');
+        cy.get('#0').should('have.css', 'display', 'none');
+        // cy.get('#0').trigger('click');
+        // cy.get('#0').should('have.css', 'display', 'initial');
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
     });
 
     it(('delete the tasks while timer is runing'), () => {
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('#0').shadow()
             .find('img[src="icons/delete.svg"]').click({ force: true });
         cy.get('#0').should('have.length', 0);
@@ -332,7 +339,7 @@ describe('setting popup and timer', () => {
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
         cy.get('#setting-button').trigger('click');
         cy.get('settings-popup').shadow()
-            .find('span[class="slider"]')
+            .find('span[id="mode-switch-slider"]')
             .click();
         cy.get('#timer_display_duration').should('have.text', '24:57');
         cy.url().should(() => {
@@ -388,7 +395,7 @@ describe(('in dark mode'), () => {
         cy.visit('http://127.0.0.1:5500');
         cy.get('#setting-button').trigger('click');
         cy.get('settings-popup').shadow()
-            .find('span[class="slider"]')
+            .find('span[id="mode-switch-slider"]')
             .trigger('click');
         cy.get('settings-popup').shadow()
             .find('#close-icon')
@@ -400,7 +407,7 @@ describe(('in dark mode'), () => {
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
         cy.get('#setting-button').trigger('click');
         cy.get('settings-popup').shadow()
-            .find('span[class="slider"]')
+            .find('span[id="mode-switch-slider"]')
             .trigger('click');
         cy.get('#timer_display_duration').should('have.text', '24:57');
         cy.url().should(() => {
@@ -415,6 +422,7 @@ describe(('toggle focus mode while timer is runing'), () => {
     });
     it(('toggle to focus mode'), () => {
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
         cy.get('#focus-button').click();
         // state changed successfully
@@ -456,9 +464,7 @@ describe(('task list in focus mode'), () => {
 
     it(('toggle task in focus mode'), () => {
         cy.get('#1').trigger('click');
-        cy.get('#1').should('have.css', 'text-decoration', 'line-through solid rgb(255, 255, 255)');
-        cy.get('#1').trigger('click');
-        cy.get('#1').should('have.css', 'text-decoration', 'none solid rgb(255, 255, 255)');
+        cy.get('#1').should('have.css', 'display', 'none');
     });
     it(('unfocus a task and queue in the next task'), () => {
         cy.get('#1').shadow().find('img[class="focus-icon"]').click({ force: true });
@@ -467,35 +473,30 @@ describe(('task list in focus mode'), () => {
 
     it(('all task are checked'), () => {
         cy.get('#1').trigger('click');
-        cy.get('#1').shadow().find('img[class="focus-icon"]').click({ force: true });
         cy.get('#0').trigger('click');
-        cy.get('#0').shadow().find('img[class="focus-icon"]').click({ force: true });
         cy.get('#select-focus').should('have.text', 'All tasks complete!');
     });
 
     it(('switch back to normal mode with correct task list'), () => {
         // cross out 2 and focus on 1
         cy.get('#1').trigger('click');
-        cy.get('#1').shadow().find('img[class="focus-icon"]').click({ force: true });
         // switch back
         cy.get('#focus-button').click();
         // 1 is the focus and 2 is in the task list and crossed out
         cy.get('#0').parent().should('have.id', 'focus-task');
         cy.get('#1').parent().should('have.id', 'task-list-elements');
-        cy.get('#1').should('have.css', 'text-decoration', 'line-through solid rgb(255, 255, 255)');
+        cy.get('#1').should('have.css', 'display', 'none');
     });
 
     it(('switch back to normal mode when all task are done'), () => {
         cy.get('#1').trigger('click');
-        cy.get('#1').shadow().find('img[class="focus-icon"]').click({ force: true });
         cy.get('#0').trigger('click');
-        cy.get('#0').shadow().find('img[class="focus-icon"]').click({ force: true });
         cy.get('#focus-button').click();
         // check the task list
         cy.get('#0').parent().should('have.id', 'task-list-elements');
         cy.get('#1').parent().should('have.id', 'task-list-elements');
-        cy.get('#0').should('have.css', 'text-decoration', 'line-through solid rgb(255, 255, 255)');
-        cy.get('#1').should('have.css', 'text-decoration', 'line-through solid rgb(255, 255, 255)');
+        cy.get('#0').should('have.css', 'display', 'none');
+        cy.get('#1').should('have.css', 'display', 'none');
         // TODO: check focus task
         // cy.get('#select-focus').should('have.text', '');
     });
@@ -539,10 +540,10 @@ describe(('keyboard shortcut and focus mode'), () => {
             .find('#add-task-popup').should('have.css', 'display', 'none');
     });
     it(('start and stop the timer'), () => {
-        cy.get('body').type('s');
+        cy.get('body').type(' ');
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
         cy.get('#start-btn').should('have.text', 'Stop');
-        cy.get('body').type('s');
+        cy.get('body').type(' ');
         cy.get('#timer_display_duration').should('have.text', '25:00');
         cy.get('#start-btn').should('have.text', 'Start');
     });

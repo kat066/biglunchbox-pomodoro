@@ -1,0 +1,175 @@
+<style>
+    #accessibility-content li {
+        margin-bottom: 0.390625vw;
+    }
+    
+    #accessibility-content {
+        padding: 0;
+        margin-left: 1.875vw;
+        font-size: 1vw;
+    }
+    
+    #accessibility {
+        font-weight: 500;
+        color: rgb(85, 85, 85);
+    }
+    
+    #features-content li {
+        margin-bottom: 0.390625vw;
+    }
+    
+    #features-content {
+        padding: 0;
+        margin-left: 1.875vw;
+        font-size: 1vw;
+    }
+    
+    #features {
+        font-weight: 500;
+        color: rgb(85, 85, 85);
+    }
+    
+    #how-to-content li {
+        margin-bottom: 0.390625vw;
+    }
+    
+    #how-to-content {
+        padding: 0;
+        margin-left: 1.875vw;
+        font-size: 1vw;
+    }
+    
+    #how-to {
+        font-weight: 500;
+        color: rgb(85, 85, 85);
+    }
+    
+    h4 {
+        font-size: 1.15vw;
+        color: rgb(85, 85, 85);
+        font-weight: 500;
+    }
+    
+    #help-container {
+        width: 85%;
+        margin: 0 auto;
+        /* height: 80%; */
+        height: 28.125vw;
+        overflow: auto;
+    }
+    
+    #close-icon {
+        /* width: 15px; */
+        width: 1.171875vw;
+        /* margin-top: 10px; */
+        /* margin-right: 10px; */
+        margin-top: 0.78125vw;
+        margin-right: 0.78125vw;
+        position: absolute;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+        opacity: 0.33;
+    }
+    
+    #close-icon:hover {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    
+    #help-popup {
+        display: none;
+        position: fixed;
+        /* width: 30%; */
+        /* width: 52%; */
+        width: 51.953125vw;
+        /* height: 30%; */
+        height: 35.15625vw;
+        /* border-radius: 4px; */
+        border-radius: 0.3125vw;
+        top: 18%;
+        /* left: 34%; */
+        left: 24%;
+        z-index: 999;
+        background-color: whitesmoke;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.3s;
+        animation-name: animatetop;
+        animation-duration: 0.3s
+    }
+    
+    @-webkit-keyframes animatetop {
+        from {
+            top: -200px;
+            opacity: 0
+        }
+        to {
+            top: 70;
+            opacity: 1
+        }
+    }
+    
+    @keyframes animatetop {
+        from {
+            top: -200px;
+            opacity: 0
+        }
+        to {
+            top: 70;
+            opacity: 1
+        }
+    }
+    
+    #help-popup>h3 {
+        font-size: 1.6vw;
+        color: #f36060;
+        border-bottom: solid 1px #d2d2d2;
+        /* padding-bottom: 5px; */
+        padding-bottom: 0.390625vw;
+        width: 85%;
+        font-weight: 500;
+        /* margin: 20px auto 10px auto; */
+        margin: 1.5625vw auto 0.78125vw auto;
+    }
+</style>
+<div id="help-popup" part="popup-wrapper">
+    <img src="icons/close.svg" id="close-icon" part="close-icon">
+    <h3 part="help-h3">Help</h3>
+    <div id="help-container">
+        <div id="how-to" part="instructions">
+            <h4 part="h4">How to use the Pomodoro Timer</h4>
+            <ol id="how-to-content">
+                <li>Add tasks using the '+' button</li>
+                <li>Set pomodoro and break lengths in the setitngs (or use the default values)</li>
+                <li>Select a task to focus on using the magnifying glass icon</li>
+                <li>Start the timer and be productive!</li>
+                <li>Take a break when the alarm rings</li>
+                <li>Repeat steps 3-5 to satisfaction</li>
+            </ol>
+        </div>
+        <div id="features" part="features">
+            <h4 part="h4">Features</h4>
+            <ul id="features-content">
+                <li>Dark mode theme for late night work sessions</li>
+                <li>Audio notifications at end of pomodoro sessions</li>
+                <li>Customizable pomodoro and break intervals</li>
+                <li>Ability to focus, mark as completed, and delete tasks</li>
+                <li>Focus mode to eliminate page distractions and allow for greater focus on current task</li>
+            </ul>
+        </div>
+        <div id="accessibility" part="accessibility">
+            <h4 part="h4">Keyboard Shortcuts</h4>
+            <ul id="accessibility-content">
+                <li>'h' - Help page pop up</li>
+                <li>';' - Settings pop up</li>
+                <li>'r' - Reset pop up</li>
+                <li>'f' - Focus mode</li>
+                <li>'a' - Add task</li>
+                <li>'Space' - Start/stop</li>
+                <li>'Enter' - Confirm/Add</li>
+                <li>'Esc' - Cancel/Close</li>
+            </ul>
+        </div>
+    </div>
+</div>

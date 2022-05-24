@@ -1,0 +1,296 @@
+<style>
+    h4 {
+        font-size: var(--setting-h4);
+        color: rgb(85, 85, 85);
+        font-weight: 500;
+        margin: 0;
+        display: flex;
+        align-items: center;
+    }
+    p {
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
+    #volume-number {
+        font-size: var(--setting-h4);
+        width: var(--volume-number-width);
+        font-family: Arial;
+        color: rgb(85, 85, 85);
+        margin-left: var(--volume-number-marigin);
+    }
+    .vol-slider {
+        background-color: #ccc;
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: 3.90625vw;
+        height:var(--volume-slider-height);
+        width: var(--volume-slider-width);
+        outline: none;
+        cursor: pointer;
+        opacity: 0.7;
+        -webkit-transition: .1s;
+        transition: opacity .1s;
+    }
+    .vol-slider:hover {
+        opacity: 1;
+    }
+    .vol-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        cursor: pointer;
+        width: var(--vol-slider-thumb-width);
+        height: var(--vol-slider-thumb-height);
+        border-radius: 50%;
+        background: #e6e5e5;
+        box-shadow: 0 0 3px 1px rgba(0,0,0,0.2);
+    }
+    .vol-slider::-moz-range-thumb {
+        cursor: pointer;
+        width: var(--vol-slider-thumb-width);
+        height: var(--vol-slider-thumb-height);
+        border-radius: 50%;
+        background: #e6e5e5;
+        box-shadow: 0 0 3px 1px rgba(0,0,0,0.2);
+    }
+    .slider-div {
+        position: relative;
+        display: inline-flex;
+        vertical-align: middle;
+        align-items: center;
+    }
+    .single-setting {
+        justify-content: space-between;
+        display: flex;
+        margin: 10px auto 0px auto;
+        border-bottom: solid 1px #d2d2d2;
+        padding-bottom: 15px;
+    }
+    .switch {
+        position: relative;
+        display: inline-flex;
+        width: var(--switch-width);
+        height: var(--switch-height);
+    }
+    .switch input[type='checkbox'] { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 2.65625vw;
+    }
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: var(--slider-height);
+        width: var(--slider-width);
+        left: 1px;
+        bottom: 1px;
+        background-color: white;
+        -webkit-transition: 0.2s;
+        transition: 0.2s;
+        border-radius: 50%;
+    }
+    input[type='checkbox']:checked + .slider {
+        background-color: rgb(163 243 67 / 88%);
+    }
+    input[type='checkbox']:checked + .slider:before {
+        -webkit-transform: translateX(var(--slider-width));
+        -ms-transform: translateX(var(--slider-width));
+        transform: translateX(var(--slider-width));
+    }
+    label {
+        display: block;
+        font-size: var(--setting-number-input);
+        color: rgb(85, 85, 85);
+        font-weight: 500;
+    }
+    input[type='number'] {
+        font-size: var(--setting-number-input);
+        color: rgb(85, 85, 85);
+        border: none;
+        border-radius: 0.3125vw;
+        background-color: rgb(234 234 234);
+        padding: 10%;
+        box-sizing: border-box;
+        width: var(--number-input-width);
+        outline: none;
+    }
+    .button-footer {
+        background-color: rgb(234 234 234);
+        margin: 0;
+        padding: var(--button-footer-padding);
+        text-align: right;
+        position: absolute;
+        right: 0;
+        left: 0;
+        border-bottom-left-radius: 0.3125vw;
+        border-bottom-right-radius: 0.3125vw;
+    }
+    #timer-settings {
+        margin: var(--setting-margin) auto var(--setting-margin) auto;
+    }
+    #close-icon {
+        width: 1.171875vw;
+        margin-top: 0.78125vw;
+        margin-right: 0.78125vw;
+        position:absolute;
+        top:0;
+        right:0;
+        cursor: pointer;
+        opacity: 0.33;
+    }
+    #close-icon:hover {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    #settings-confirm-popup {
+        flex-wrap: wrap;
+        position:absolute;
+        width:max-content;
+        height:max-content;
+        padding-left: 2.5%;
+        padding-right: 2.5%;
+        border-radius: 0.3125vw;
+        top: 50vh;
+        left: 50%;
+        transform: translate(-50%,-25vh);
+        z-index: 999;
+        background-color: whitesmoke;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop; 
+        -webkit-animation-duration: 0.3s;
+        animation-name: animatetop;
+        animation-duration: 0.3s;
+        display:none;
+    }
+    @-webkit-keyframes animatetop {
+        from {top:-200px; opacity:0} 
+        to {top:70; opacity:1}
+    }
+    @keyframes animatetop {
+        from {top:-200px; opacity:0}
+        to {top:70; opacity:1}
+    }
+    #settings-confirm-popup > h3 {
+        font-size: var(--setting-h3);
+        color: #f36060;
+        border-bottom: solid 1px #d2d2d2;
+        padding-bottom: var(--setting-h3-padding);
+        font-weight: 500;
+        margin: var(--setting-margin) auto var(--setting-margin) auto;
+    }
+    .settings-popup-btns {
+        cursor: pointer;
+        border-style: none; 
+        border-radius: 0.3125vw;
+        text-align: center;
+        background-color:#f36060;
+        color:#fff;
+        font-family: 'Quicksand', sans-serif;
+        height: 17%;
+        width: 27%;
+        font-size: var(--pop-up-button-font-size);
+        font-weight: 500;
+        outline: none;
+        padding: var(--setting-margin) var(--setting-margin);
+    }
+    .settings-popup-btns:hover {
+        filter: brightness(105%);
+        transform: scale(1.1);
+    }
+    .text {
+        color: rgb(85, 85, 85);
+        margin: 0;
+        font-size: var(--setting-text);
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        
+    }
+    .state-div{
+        display: inline-flex;
+        align-items: center;
+    }
+    #sound-options{
+        justify-content: space-around;
+    }
+    #sound-switch {
+        margin-left: var(--setting-margin);
+    }
+    #alarm-switch {
+        margin-left: var(--setting-margin);
+    }
+</style>
+<!-- Part attributes are set to change the style in a global stylesheet -->
+<div id="settings-confirm-popup" part="settings-confirm-popup">
+    <img src="icons/close.svg" id="close-icon" part="close-icon">
+    <h3 part="settings-h3">Settings</h3>
+    <h4 id="timer-settings" part="timer-settings">Session Length (minutes)</h4>
+    <div id="session" class="single-setting">
+        <div class="session-inputs">
+            <label for="pomo" part="session-labels">Pomodoro</label>
+            <input type="number" id="pomo-length-input" min="1" max="60" part="length-inputs">
+        </div>
+        <div class="session-inputs">
+            <label for="short-break" part="session-labels">Short Break</label>
+            <input type="number" id="short-break-input" min="1" max="60" part="length-inputs">
+        </div>
+        <div class="session-inputs">
+            <label for="long-break" part="session-labels">Short Break</label>
+            <input type="number" id="long-break-input" min="1" max="60" part="length-inputs">
+        </div>
+    </div>
+    <div id="dark-mode" class="single-setting">
+        <h4 id="enable-dark-mode" part="enable-dark-mode">Enable Dark Mode?</h4>
+        <label class="switch">
+            <input type="checkbox">
+            <span id="mode-switch-slider" class="slider"></span>
+        </label>
+    </div>
+    <div id="tab-label-switch" class="single-setting">
+        <h4 id="enable-tab-label" part="enable-tab-label">Enable Tab Label?</h4>
+        <label class="switch">
+            <input type="checkbox">
+            <span id="tab-label-switch-slider" class="slider"></span>
+        </label>
+    </div>
+    <div id="volume-div" class="single-setting">
+        <h4 id="sound-volume" part="sound-volume">Global Audio Volume</h4>
+        <p><span id="volume-number" part="volume-number"></span></p>
+        <div class="slider-div">
+            <input type="range" min="0" max="100" class="vol-slider" id="range" part="range-slider">
+        </div>
+    </div>
+    <div class="single-setting" id="sound-options">
+        <div class="state-div">
+            <h4 id="enable-disable-clicksound" class="text" part="enable-disable-clicksound">&nbsp&nbspClick<br/>Sound</h4>
+            <label id="sound-switch" class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        
+        <div class="state-div">
+            <h4 id="enable-disable-alarmsound" class="text" part="enable-disable-alarmsound">Alarm<br/>Sound</h4>
+            <label id="alarm-switch" class="switch">
+                <input type="checkbox" checked>
+                <span class="slider"></span>
+            </label>
+        </div>
+        
+    </div>
+    <div class="button-footer" part="btn-footer">
+        <button class="settings-popup-btns" id="confirm-settings-btn" part="confirm-btn">Confirm</button>
+    </div>
+</div>

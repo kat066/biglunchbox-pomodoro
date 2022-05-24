@@ -4,5 +4,7 @@ docs
 build
 .nyc_output
 
+cypress_build
+
 .DS_Store
 debug.log
