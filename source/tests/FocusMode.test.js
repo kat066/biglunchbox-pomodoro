@@ -7,9 +7,11 @@ let pageTemplate;
 
 beforeAll(() => {
     pageTemplate = `
-        <button class='top-buttons' id='focus-button'>
-            <img src="icons/half-moon.svg" id="focus" class="top-button-img" alt="focus">
-        </button>
+        <nav id="header-buttons">
+            <button class='top-buttons' id='focus-button'>
+                <img src="icons/half-moon.svg" id="focus" class="top-button-img" alt="focus">
+            </button>        
+        </nav>
         <div id="pomodoro-timer">
             <div id='focus-task'>
                 <h2 id='select-focus'></h2>
