@@ -9,6 +9,7 @@ describe(('task list and timer'), () => {
     it('add task when timer has started', () => {
         // start timer
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('#task-popup-btn').trigger('click');
         cy.get('task-popup').shadow()
             .find('#add-task-popup')
@@ -37,6 +38,7 @@ describe(('task list and timer'), () => {
     it('add task when timer has started (keyboard)', () => {
         // start timer
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('body').type('a');
         cy.get('task-popup').shadow()
             .find('#add-task-popup').should('have.css', 'display', 'block');
@@ -77,6 +79,7 @@ describe(('task list and timer'), () => {
         cy.get('#start-btn').trigger('click');
         cy.get('#timer_display_duration').should('have.text', '25:00');
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('task-popup').shadow()
             .find('#add-task-btn').trigger('click');
         // task is added successfully
@@ -93,6 +96,7 @@ describe(('task list and timer'), () => {
     it('cancel add task when timer has started', () => {
         // start timer
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('#task-popup-btn').trigger('click');
         cy.get('task-popup').shadow()
             .find('#close-icon').trigger('click');
@@ -104,6 +108,7 @@ describe(('task list and timer'), () => {
     it(('start the timer while adding the task then cancel'), () => {
         cy.get('#task-popup-btn').trigger('click');
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         // timer runs without affect
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
         cy.get('task-popup').shadow()
@@ -133,6 +138,7 @@ describe(('interact with exist task list while timer is runing'), () => {
     });
     it(('toggle the tasks while timer is runing'), () => {
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('#0').trigger('click');
         cy.get('#0').should('have.css', 'display', 'none');
         // cy.get('#0').trigger('click');
@@ -142,6 +148,7 @@ describe(('interact with exist task list while timer is runing'), () => {
 
     it(('delete the tasks while timer is runing'), () => {
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('#0').shadow()
             .find('img[src="icons/delete.svg"]').click({ force: true });
         cy.get('#0').should('have.length', 0);
@@ -415,6 +422,7 @@ describe(('toggle focus mode while timer is runing'), () => {
     });
     it(('toggle to focus mode'), () => {
         cy.get('#start-btn').trigger('click');
+        cy.get('#focus-button').trigger('click');
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
         cy.get('#focus-button').click();
         // state changed successfully

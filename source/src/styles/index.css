@@ -298,7 +298,8 @@ div.empty-space-border {
 
 div.timer-value {
     font-size: 6.5vw;
-    background: #ffd5ca;
+    /* background: #ffd5ca; */
+    background: #f36060;
     color: #fff;
     border-style: solid;
     border-color: #f36060;
@@ -394,7 +395,7 @@ body.dark-theme div.timer-value {
     /* border-color: #232b32; */
     border-color: #4a5568;
     overflow: hidden;
-    background: #232b32;
+    background: #4a5568;
 }
 
 body.dark-theme .timer-control-buttons button {
@@ -611,6 +612,16 @@ body.dark-theme settings-popup::part(enable-disable-alarmsound) {
 
 
 /*Focus mode toggles*/
+
+#header-buttons.state button.top-buttons {
+    opacity: 10%;
+}
+
+#header-buttons.state  button.top-buttons:hover {
+    filter: brightness(105%);
+    transform: scale(1.1);
+    opacity: 1;
+}
 
 #popup-button.state {
     display: none;

@@ -8,10 +8,12 @@ function toggleState() {
     const taskListDiv = document.getElementById('task-list');
     const pomoDiv = document.getElementById('pomodoro-timer');
     const focusTask = document.getElementById('focus-task');
+    const button = document.getElementById('header-buttons');
     // popUpBtn.classList.toggle('state');
     taskListDiv.classList.toggle('state');
     pomoDiv.classList.toggle('state');
     focusTask.classList.toggle('state');
+    button.classList.toggle('state');
     if (localStorage.getItem('state') === 'default') {
         localStorage.setItem('state', 'focus');
     } else {
@@ -22,6 +24,8 @@ function toggleState() {
         }
     }
 }
+
+// export { toggleState as default };
 
 window.addEventListener('DOMContentLoaded', () => {
     const focusBtn = document.getElementById('focus-button');

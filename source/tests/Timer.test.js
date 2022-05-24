@@ -299,23 +299,25 @@ describe(('keyboard input'), () => {
             ${templates}
             <ul id="task-list-elements">
             </ul>
-            <button class='top-buttons' id='focus-button'>
-                <img src="icons/half-moon.svg" id="focus" class="top-button-img" alt="focus">
-            </button>
+            <nav id="header-buttons">
+                <button class='top-buttons' id='focus-button'>
+                    <img src="icons/half-moon.svg" id="focus" class="top-button-img" alt="focus">
+                </button>  
+                <button class="top-buttons" id="setting-button">
+                <img src="../icons/settings.svg" id="gear" class="top-button-img" alt="gear">
+                <p class="top-button-text">Setting</p>
+                </button>
+                <button class="top-buttons" id="reset-button">
+                    <img src="../icons/reset.svg" id="reset" class="top-button-img" alt=git "reset">
+                    <p class="top-button-text">Reset</p>
+                </button>
+                <button class="top-buttons" id="help-button">
+                    <img src="icons/help.svg" id="help" class="top-button-img" alt="help">
+                </button>          
+            </nav>
             <div id="popup-button">
                 <button id="task-popup-btn"> <img src="../icons/plus.svg" id="plus"></button>
             </div>
-            <button class="top-buttons" id="setting-button">
-                <img src="../icons/settings.svg" id="gear" class="top-button-img" alt="gear">
-                <p class="top-button-text">Setting</p>
-            </button>
-            <button class="top-buttons" id="reset-button">
-                <img src="../icons/reset.svg" id="reset" class="top-button-img" alt=git "reset">
-                <p class="top-button-text">Reset</p>
-            </button>
-            <button class="top-buttons" id="help-button">
-                <img src="icons/help.svg" id="help" class="top-button-img" alt="help">
-            </button>
             <div id="pomodoro-timer">
                 <button id="pomo-btn"> Pomo</button>
                 <button id="break-btn"> Break</button>
