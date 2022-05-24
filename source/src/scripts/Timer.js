@@ -122,7 +122,7 @@ function toggleState() {
  * in this function.
  */
 // theme color for timer graphics
-let themeColor = (document.body.classList.length === 0) ? '#f36060' : '#4a5568';
+let themeColor = (localStorage.getItem('theme') === 'light') ? '#f36060' : '#4a5568';
 async function timerFunction() {
     let timerText = timerDisplayDuration.innerHTML;
 
@@ -168,7 +168,7 @@ async function timerFunction() {
         timePerc = 100 - ((timeMin * 60 + timeSec) / (parseFloat(breakTime) * 60)) * 100;
     }
     // set timer graphics
-    themeColor = (document.body.classList.length === 0) ? '#f36060' : '#4a5568';
+    themeColor = (localStorage.getItem('theme') === 'light') ? '#f36060' : '#4a5568';
     timerBackground.style.background = `linear-gradient(0deg, 
         ${themeColor} ${timePerc}%, rgba(51, 231, 255, 0) 0%)`;
 }
@@ -182,7 +182,7 @@ async function start() {
         toggleState();
     }
     // get background color for sync between different modes
-    themeColor = (document.body.classList.length === 0) ? '#f36060' : '#4a5568';
+    themeColor = (localStorage.getItem('theme') === 'light') ? '#f36060' : '#4a5568';
     startButton.innerHTML = 'Stop';
     updateTabLabel(`${pomoTime}:00`);
     timerBackground.style.background = `linear-gradient(0deg, 
