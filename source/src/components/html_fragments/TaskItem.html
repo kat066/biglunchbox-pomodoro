@@ -1,0 +1,97 @@
+<style>
+    :host {
+        cursor: pointer;
+        /* height: 50px; */
+        height: 3.90625vw;
+        position: relative;
+        /* margin-bottom: 10px; */
+        /* border-radius: 5px; */
+        border-radius: 0.390625vw;
+        /* margin-right: 20%; */
+        box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+        display: flex;
+        align-items: center;
+        /* padding-left: 37px; */
+        padding-left: 2.890625vw;
+        background-color: #f36060;
+        color: white;
+        /* font-size: medium; */
+        font-size: 1.35vw;
+        font-weight: 500;
+        border-style:none;
+        user-select: none;
+        margin: 0 auto;
+        /* margin-bottom: 10px; */
+        margin-bottom: 0.78125vw;
+    }
+    :host(:hover) {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+    :host([checked = 'true']) {
+        background: #f3606060;
+        text-decoration: line-through;
+        -webkit-text-decoration: line-through;
+    }
+    :host([checked = 'true']) .check-icon {
+        visibility: visible;
+    }
+    .check-icon {
+        position: absolute;
+        /* left: 10px; */
+        left: 0.78125vw;
+        vertical-align: middle;
+        /* width: 20px; */
+        /* height: 20px; */
+        width: 1.5625vw;
+        height: 1.5625vw;
+        margin: 0;
+        visibility: hidden;
+    }
+    :host(:hover) .delete-icon {
+        visibility: visible;
+    }
+    .delete-icon {
+        position: absolute;
+        color: #fff;
+        /* right: 10px; */
+        right: 0.78125vw;
+        vertical-align: middle;
+        /* width: 20px; */
+        /* height: 20px; */
+        width: 1.5625vw;
+        height: 1.5625vw;
+        margin: 0;
+        visibility: hidden;
+    }
+    .delete-icon:hover {
+        transform: scale(1.3);
+        filter:brightness(105%)
+    }
+    :host(:hover) .focus-icon {
+        visibility: visible;
+    }
+    .focus-icon {
+        position: absolute;
+        color: #fff;
+        /* right: 40px; */
+        right: 3.125vw;
+        vertical-align: middle;
+        /* width: 20px; */
+        /* height: 20px; */
+        width: 1.5625vw;
+        height: 1.5625vw;
+        margin: 0;
+        visibility: hidden;
+    }
+    .focus-icon:hover {
+        transform: scale(1.3);
+        filter:brightness(105%)
+    }
+</style>
+<li id="li">
+    <img src="icons/check.svg" alt="" part="test" class="check-icon">
+    <img src="icons/focus.svg" alt="" title="Focus on this task" class="focus-icon">
+    <img src="icons/delete.svg" alt="" title="Delete this task" class="delete-icon">
+    <span id="task-text"></span>
+</li>
