@@ -1,17 +1,9 @@
-// import { toggleState } from '../src/scripts/FocusMode';
-import '../src/scripts/FocusMode';
-
-import { dispatchDOMLoadedEvent } from './utils';
-
-let pageTemplate;
-
-beforeAll(() => {
-    pageTemplate = `
-        <nav id="header-buttons">
-            <button class='top-buttons' id='focus-button'>
-                <img src="icons/half-moon.svg" id="focus" class="top-button-img" alt="focus">
-            </button>        
-        </nav>
+beforeEach(() => {
+    jest.resetModules();
+    document.body.innerHTML = `
+        <button class='top-buttons' id='focus-button'>
+            <img src="icons/half-moon.svg" id="focus" class="top-button-img" alt="focus">
+        </button>
         <div id="pomodoro-timer">
             <div id='focus-task'>
                 <h2 id='select-focus'></h2>
@@ -28,25 +20,19 @@ beforeAll(() => {
     `;
 });
 
-beforeEach(() => {
-    document.body.innerHTML = pageTemplate;
-    dispatchDOMLoadedEvent(window);
-});
-
 afterEach(() => [
     localStorage.clear(),
 ]);
 
 test('Switch state from default to focus', () => {
+    require('../src/scripts/FocusMode');
+
     localStorage.setItem('state', 'default');
     // const popUpBtn = document.getElementById('popup-button');
     const taskListDiv = document.getElementById('task-list');
     const pomoDiv = document.getElementById('pomodoro-timer');
     const focusTask = document.getElementById('focus-task');
 
-    /**
-     * TODO Make FocusMode export toggleState and use ToggleState instead of clicks
-     */
     const focusBtn = document.getElementById('focus-button');
     focusBtn.click();
 
@@ -59,18 +45,19 @@ test('Switch state from default to focus', () => {
 });
 
 test('Switch state from focus to default, title updates properly', () => {
-    // Initialize state to focus and then toggle
+    require('../src/scripts/FocusMode');
+
     localStorage.setItem('state', 'focus');
+    // const popUpBtn = document.getElementById('popup-button');
+    const taskListDiv = document.getElementById('task-list');
+    const pomoDiv = document.getElementById('pomodoro-timer');
+    const focusTask = document.getElementById('focus-task');
+
     const title = document.getElementById('select-focus');
     title.innerHTML = 'All tasks complete!';
 
     const focusBtn = document.getElementById('focus-button');
     focusBtn.click();
-
-    // const popUpBtn = document.getElementById('popup-button');
-    const taskListDiv = document.getElementById('task-list');
-    const pomoDiv = document.getElementById('pomodoro-timer');
-    const focusTask = document.getElementById('focus-task');
 
     // expect(popUpBtn.getAttribute('class')).toBe('state');
     expect(taskListDiv.getAttribute('class')).toBe('state');
@@ -82,18 +69,19 @@ test('Switch state from focus to default, title updates properly', () => {
 });
 
 test('Switch state from focus to default, title unchanges properly', () => {
-    // Initialize state to focus state and then toggle
+    require('../src/scripts/FocusMode');
+
     localStorage.setItem('state', 'focus');
+    // const popUpBtn = document.getElementById('popup-button');
+    const taskListDiv = document.getElementById('task-list');
+    const pomoDiv = document.getElementById('pomodoro-timer');
+    const focusTask = document.getElementById('focus-task');
+
     const title = document.getElementById('select-focus');
     title.innerHTML = '';
 
     const focusBtn = document.getElementById('focus-button');
     focusBtn.click();
-
-    // const popUpBtn = document.getElementById('popup-button');
-    const taskListDiv = document.getElementById('task-list');
-    const pomoDiv = document.getElementById('pomodoro-timer');
-    const focusTask = document.getElementById('focus-task');
 
     // expect(popUpBtn.getAttribute('class')).toBe('state');
     expect(taskListDiv.getAttribute('class')).toBe('state');

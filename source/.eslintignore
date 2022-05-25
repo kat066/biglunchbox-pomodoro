@@ -1,0 +1,3 @@
+instrumented
+**/cypress/support/
+**/cypress/plugins/

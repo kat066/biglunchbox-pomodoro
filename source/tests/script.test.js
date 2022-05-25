@@ -1,61 +1,32 @@
-import '../src/scripts/script';
-import '../src/components/TaskItem';
-
-import { addTemplates, dispatchDOMLoadedEvent } from './utils';
-import { TASK_ITEM_TEMPLATE } from './Constants';
-
 window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
-
-let pageTemplate;
-
-beforeAll(async () => {
-    const templates = await addTemplates([
-        TASK_ITEM_TEMPLATE,
-    ], __dirname);
-
-    // Page template to be used for every test
-    // Initialized here to prevent multiple string building
-    pageTemplate = `
-        ${templates}
-        <button id="up-next"> Up Next </button>
-        <button id="completed"> Completed </button>
+beforeEach(() => {
+    require('../src/scripts/script');
+    require('../src/components/TaskItem');
+    localStorage.setItem('tasks', '[]');
+    localStorage.setItem('id', '0');
+    localStorage.setItem('theme', 'light');
+    localStorage.setItem('volume', 50);
+    localStorage.setItem('state', 'default');
+    document.body.innerHTML = `
         <ul id="task-list-elements">
-        </ul>
+        </ul>   
         <div id='focus-task'>
             <h2 id='select-focus'></h2>
-        </div>
+        </div>   
     `;
-});
-
-beforeEach(() => {
-    document.body.innerHTML = pageTemplate;
 });
 
 afterEach(() => {
     localStorage.clear();
 });
 
-/**
- * !! Due to how script.js is written, this is necessary to do before running
- * tests that manipulate the localStorage. This is because the tests relied on
- * beforeEach initializing localStorage manually and used the event listener
- * to populate the document with the tasks.
- *
- * We should aim to no longer need this function and to unlink the localStorage
- * manipulation with the DOMContentLoaded event listener in script.js
- */
-function initializeLocalStorage() {
-    localStorage.setItem('tasks', '[]');
-    localStorage.setItem('id', '0');
-    localStorage.setItem('theme', 'light');
-    localStorage.setItem('tab-label', 'on');
-    localStorage.setItem('volume', '50');
-    localStorage.setItem('state', 'default');
-}
-
 test('Initializes localStorage correctly', () => {
-    dispatchDOMLoadedEvent(window);
+    localStorage.clear();
 
+    window.document.dispatchEvent(new Event('DOMContentLoaded', {
+        bubbles: true,
+        cancelable: true,
+    }));
     expect(localStorage.getItem('tasks')).toBe('[]');
     expect(localStorage.getItem('id')).toBe('0');
     expect(localStorage.getItem('theme')).toBe('light');
@@ -64,9 +35,12 @@ test('Initializes localStorage correctly', () => {
 });
 
 test('Reads task list and creates one task correctly', () => {
-    initializeLocalStorage();
     localStorage.setItem('tasks', '[{"id":"0","checked":false,"text":"test_task","focused":false}]');
-    dispatchDOMLoadedEvent(window);
+
+    window.document.dispatchEvent(new Event('DOMContentLoaded', {
+        bubbles: true,
+        cancelable: true,
+    }));
 
     expect(document.getElementById('task-list-elements').children).toHaveLength(1);
 
@@ -78,10 +52,13 @@ test('Reads task list and creates one task correctly', () => {
 });
 
 test('Reads task list and creates multiple tasks correctly', () => {
-    initializeLocalStorage();
     localStorage.setItem('tasks', '[{"id":"0","checked":false,"text":"test_task","focused":false},'
-        + '{"id":"1","checked":false,"text":"test_task1","focused":false}]');
-    dispatchDOMLoadedEvent(window);
+    + '{"id":"1","checked":false,"text":"test_task1","focused":false}]');
+
+    window.document.dispatchEvent(new Event('DOMContentLoaded', {
+        bubbles: true,
+        cancelable: true,
+    }));
 
     expect(document.getElementById('task-list-elements').children).toHaveLength(2);
 
@@ -99,10 +76,13 @@ test('Reads task list and creates multiple tasks correctly', () => {
 });
 
 test('Reads task list and creates multiple tasks correctly, with one focused task', () => {
-    initializeLocalStorage();
     localStorage.setItem('tasks', '[{"id":"0","checked":false,"text":"test_task","focused":false},'
-        + '{"id":"1","checked":false,"text":"test_task1","focused":true}]');
-    dispatchDOMLoadedEvent(window);
+    + '{"id":"1","checked":false,"text":"test_task1","focused":true}]');
+
+    window.document.dispatchEvent(new Event('DOMContentLoaded', {
+        bubbles: true,
+        cancelable: true,
+    }));
 
     expect(document.getElementById('task-list-elements').children).toHaveLength(1);
 

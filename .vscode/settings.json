@@ -1,9 +1,3 @@
 {
-    "files.eol": "\n",
-    "[javascript]": {
-        "editor.tabSize": 4
-    },
-    "[html]": {
-        "editor.tabSize": 4
-    }
+    "files.eol": "\n"
 }
