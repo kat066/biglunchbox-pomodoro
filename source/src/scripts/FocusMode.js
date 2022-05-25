@@ -1,7 +1,7 @@
 /** Toggle focus mode: remove task list component and only show the Pomodoro timer */
 /** The function is keep track of focus tasks and check if all the
  * tasks are complete.
-  */
+ */
 function toggleState() {
     // elements -- popup button, task list div, pomodoro timer div, focus task
     // const popUpBtn = document.getElementById('popup-button');
@@ -22,6 +22,13 @@ function toggleState() {
         if (title.innerHTML === 'All tasks complete!') {
             title.innerHTML = '';
         }
+    }
+
+    // play button-click sound accordingly
+    const btnSound = new Audio('../icons/btnClick.mp3');
+    btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
+    if (localStorage.getItem('clickState') === 'on') {
+        btnSound.play(); // only plays sound when enabled
     }
 }
 
