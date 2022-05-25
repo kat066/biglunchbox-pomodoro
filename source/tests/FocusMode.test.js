@@ -31,6 +31,8 @@ beforeAll(() => {
 beforeEach(() => {
     document.body.innerHTML = pageTemplate;
     dispatchDOMLoadedEvent(window);
+    localStorage.setItem('volume', 100);
+    localStorage.setItem('prevVolume', 100);
 });
 
 afterEach(() => [

@@ -342,6 +342,11 @@ describe('setting popup and timer', () => {
             .find('span[id="mode-switch-slider"]')
             .click();
         cy.get('#timer_display_duration').should('have.text', '24:57');
+        cy.get('settings-popup').shadow()
+            .find('#confirm-settings-btn')
+            .click();
+        // should reset now
+        cy.get('#timer_display_duration').should('have.text', '25:00');
         cy.url().should(() => {
             expect(localStorage.getItem('theme')).contains('dark');
         });

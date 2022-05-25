@@ -11,10 +11,14 @@ function getTasks() {
     if (localStorage.getItem('clickState') === null) {
         clickState = 'on'; // default to be on
         localStorage.setItem('clickState', clickState);
+        // initializing previous state
+        localStorage.setItem('prevClickState', clickState);
     }
     if (localStorage.getItem('alarmState') === null) {
         alarmState = 'on'; // default to be on
         localStorage.setItem('alarmState', alarmState);
+        // initializing previous state
+        localStorage.setItem('prevAlarmState', alarmState);
     }
 
     if (localStorage.getItem('tasks') === null || localStorage.getItem('id') === null || localStorage.getItem('theme') === null
@@ -30,7 +34,9 @@ function getTasks() {
         localStorage.setItem('id', `${id}`);
         localStorage.setItem('theme', theme);
         localStorage.setItem('tab-label', tabLabel);
+        localStorage.setItem('prevTabState', tabLabel);
         localStorage.setItem('volume', `${volume}`);
+        localStorage.setItem('prevVolume', `${volume}`); // prev state tracking
         localStorage.setItem('state', state);
     } else {
         tasks = JSON.parse(localStorage.getItem('tasks'));

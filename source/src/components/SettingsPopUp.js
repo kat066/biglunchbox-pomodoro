@@ -7,7 +7,69 @@
  * @constructor The constructor would reset and show everything in pages
  */
 class SettingsPopUp extends HTMLElement {
+    closeWithoutReset() {
+        const wrapper = this.shadowRoot.getElementById('settings-confirm-popup');
+        wrapper.style.display = 'none';
+    }
+
     closePopUp() {
+        const timerBackground = document.getElementById('timer_display');
+        const themeCheckbox = this.shadowRoot.querySelector('#dark-mode > label.switch > input[type=checkbox]');
+
+        if ((localStorage.getItem('theme') === 'light') && document.body.classList.contains('dark-theme')) {
+            themeCheckbox.checked = false;
+            document.body.classList.toggle('dark-theme');
+            timerBackground.style.background = '#f36060';
+        } else if ((localStorage.getItem('theme') === 'dark') && (!document.body.classList.contains('dark-theme'))) {
+            themeCheckbox.checked = true;
+            document.body.classList.toggle('dark-theme');
+            timerBackground.style.background = '#4a5568';
+        }
+
+        const curTabState = localStorage.getItem('tab-label');
+        const prevTabState = localStorage.getItem('prevTabState');
+        if (!(curTabState === prevTabState)) {
+            localStorage.setItem('tab-label', prevTabState);
+            const tabLabelCheckbox = this.shadowRoot.querySelector('#tab-label-switch > label.switch > input[type=checkbox]');
+            if (prevTabState === 'on') {
+                tabLabelCheckbox.checked = true;
+            } else {
+                tabLabelCheckbox.checked = false;
+                document.getElementById('tab-label').innerHTML = 'Pomodoro Timer';
+            }
+        }
+
+        const curClickState = localStorage.getItem('clickState');
+        const prevClickState = localStorage.getItem('prevClickState');
+        if (!(curClickState === prevClickState)) {
+            localStorage.setItem('clickState', prevClickState);
+            const clickCheckbox = this.shadowRoot.querySelector('#sound-switch > input[type=checkbox]');
+            if (prevClickState === 'on') {
+                clickCheckbox.checked = true;
+            } else {
+                clickCheckbox.checked = false;
+            }
+        }
+
+        const curAlarmState = localStorage.getItem('alarmState');
+        const prevAlarmState = localStorage.getItem('prevAlarmState');
+        if (!(curAlarmState === prevAlarmState)) {
+            localStorage.setItem('alarmState', prevAlarmState);
+            const alarmCheckbox = this.shadowRoot.querySelector('#alarm-switch > input[type=checkbox]');
+            if (prevAlarmState === 'on') {
+                alarmCheckbox.checked = true;
+            } else {
+                alarmCheckbox.checked = false;
+            }
+        }
+
+        const volumeToSet = localStorage.getItem('prevVolume');
+        const rangeInput = this.shadowRoot.getElementById('range');
+        rangeInput.value = parseInt(volumeToSet, 10);
+        localStorage.setItem('volume', volumeToSet);
+        const volumeText = this.shadowRoot.getElementById('volume-number');
+        volumeText.textContent = volumeToSet;
+
         const wrapper = this.shadowRoot.getElementById('settings-confirm-popup');
         wrapper.style.display = 'none';
     }
@@ -40,17 +102,30 @@ class SettingsPopUp extends HTMLElement {
             btnSound.play(); // only plays sound when enabled
         }
         localStorage.setItem('stop', 'true');
-        this.closePopUp();
+
+        if (document.body.classList.contains('dark-theme')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+
+        // setting for previous states
+        localStorage.setItem('prevVolume', localStorage.getItem('volume'));
+        localStorage.setItem('prevClickState', localStorage.getItem('clickState'));
+        localStorage.setItem('prevAlarmState', localStorage.getItem('alarmState'));
+        localStorage.setItem('prevTabState', localStorage.getItem('tab-label'));
+        this.closeWithoutReset();
+        // this.closePopUp();
     }
 
     toggleMode() {
         const timerBackground = document.getElementById('timer_display');
         if (localStorage.getItem('theme') === 'light') {
             timerBackground.style.background = '#4a5568';
-            localStorage.setItem('theme', 'dark');
+            // localStorage.setItem('theme', 'dark');
         } else {
             timerBackground.style.background = '#f36060';
-            localStorage.setItem('theme', 'light');
+            // localStorage.setItem('theme', 'light');
         }
         document.body.classList.toggle('dark-theme');
     }
@@ -173,18 +248,10 @@ class SettingsPopUp extends HTMLElement {
         rangeInput.addEventListener('input', this._bindedUpdateVolumeText);
         rangeInput.addEventListener('change', this._bindedSetVolume);
 
-        const soundCheckbox = this.shadowRoot.querySelector('#sound-switch > input[type=checkbox]');
-        if (localStorage.getItem('clickState') === 'on') {
-            soundCheckbox.toggleAttribute('checked');
-        }
         const soundStylisticSlider = this.shadowRoot.querySelector('#sound-switch > span.slider');
         soundStylisticSlider.addEventListener('click', this._bindedToggleClickSound);
 
-        const alarmCheckbox = this.shadowRoot.querySelector('#alarm-switch > input[type=checkbox]');
-        if (localStorage.getItem('clickState') === 'on') {
-            alarmCheckbox.toggleAttribute('checked');
-        }
-        const alarmStylisticSlider = this.shadowRoot.querySelector('#sound-switch > span.slider');
+        const alarmStylisticSlider = this.shadowRoot.querySelector('#alarm-switch > span.slider');
         alarmStylisticSlider.addEventListener('click', this._bindedToggleAlarmSound);
 
         const confirmBtn = this.shadowRoot.getElementById('confirm-settings-btn');
@@ -193,23 +260,23 @@ class SettingsPopUp extends HTMLElement {
 
     disconnectedCallback() {
         const closeBtn = this.shadowRoot.getElementById('close-icon');
-        closeBtn.addEventListener('click', this._bindedClose);
+        closeBtn.removeEventListener('click', this._bindedClose);
 
         const themeStylisticSlider = this.shadowRoot.getElementById('mode-switch-slider');
-        themeStylisticSlider.addEventListener('click', this._bindedChangeTheme);
+        themeStylisticSlider.removeEventListener('click', this._bindedChangeTheme);
 
         const rangeInput = this.shadowRoot.getElementById('range');
-        rangeInput.addEventListener('input', this._bindedUpdateVolumeText);
-        rangeInput.addEventListener('change', this._bindedSetVolume);
+        rangeInput.removeEventListener('input', this._bindedUpdateVolumeText);
+        rangeInput.removeEventListener('change', this._bindedSetVolume);
 
         const soundStylisticSlider = this.shadowRoot.querySelector('#sound-switch > span.slider');
-        soundStylisticSlider.addEventListener('click', this._bindedToggleClickSound);
+        soundStylisticSlider.removeEventListener('click', this._bindedToggleClickSound);
 
         const alarmStylisticSlider = this.shadowRoot.querySelector('#sound-switch > span.slider');
-        alarmStylisticSlider.addEventListener('click', this._bindedToggleAlarmSound);
+        alarmStylisticSlider.removeEventListener('click', this._bindedToggleAlarmSound);
 
         const confirmBtn = this.shadowRoot.getElementById('confirm-settings-btn');
-        confirmBtn.addEventListener('click', this._bindedConfirmSettings);
+        confirmBtn.removeEventListener('click', this._bindedConfirmSettings);
     }
 }
 

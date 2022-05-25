@@ -26,10 +26,13 @@ beforeAll(async () => {
 
 beforeEach(() => {
     localStorage.setItem('volume', 50);
+    localStorage.setItem('prevVolume', 50);
     localStorage.setItem('pomo-length', '25');
     localStorage.setItem('short-break-length', '5');
     localStorage.setItem('long-break-length', '15');
     localStorage.setItem('theme', 'light');
+    localStorage.setItem('tab-label', 'on');
+    localStorage.setItem('prevTabState', 'on');
     document.body.innerHTML = pageTemplate;
 });
 
@@ -230,6 +233,8 @@ test(('toggle from light to dark mode'), () => {
     const shadow = testSettingsPopUp.shadowRoot;
     const mode = shadow.querySelector('span[class="slider"]');
     mode.click();
+    const confirm = shadow.querySelectorAll('button')[0];
+    confirm.click();
     expect(localStorage.getItem('theme')).toBe('dark');
     expect(document.body.classList).toContain('dark-theme');
 });
@@ -241,6 +246,8 @@ test(('toggle from dark to light mode'), () => {
     const shadow = testSettingsPopUp.shadowRoot;
     const mode = shadow.querySelector('span[class="slider"]');
     mode.click();
+    const confirm = shadow.querySelectorAll('button')[0];
+    confirm.click();
     expect(localStorage.getItem('theme')).toBe('light');
 });
 
