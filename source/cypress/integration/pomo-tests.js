@@ -138,11 +138,11 @@ describe(('interact with exist task list while timer is runing'), () => {
     });
     it(('toggle the tasks while timer is runing'), () => {
         cy.get('#start-btn').trigger('click');
+        cy.get('#task-list').should('have.css', 'display', 'none');
         cy.get('#focus-button').trigger('click');
+        cy.get('#0').should('have.css', 'display', 'flex');
         cy.get('#0').trigger('click');
         cy.get('#0').should('have.css', 'display', 'none');
-        // cy.get('#0').trigger('click');
-        // cy.get('#0').should('have.css', 'display', 'initial');
         cy.get('#timer_display_duration').should('not.have.text', '25:00');
     });
 
@@ -463,7 +463,7 @@ describe(('task list in focus mode'), () => {
         cy.get('task-popup').shadow()
             .find('#add-task-btn').trigger('click');
         cy.get('#1').shadow().find('img[class="focus-icon"]').click({ force: true });
-        cy.get('#focus-button').click();
+        cy.get('#start-btn').trigger('click');
         cy.visit('http://127.0.0.1:5500');
     });
 
