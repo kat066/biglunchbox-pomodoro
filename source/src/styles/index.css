@@ -19,6 +19,17 @@
         --button-footer-padding:3px;
         --setting-margin:8px;
         --pop-up-button-font-size:7px;
+        --header-font-size:35px;
+        --top-button-size:30px;
+        --top-button-help-size:25px;
+        --top-button-focus-size:45px;
+        --top-button-width:50px;
+        --top-button-height:45px;
+        --main-font-size:30px;
+        --timer-button-padding-height:6px;
+        --timer-button-padding-width:12px;
+        --timer-marigin:20px;
+        --plus-circle-size:45px;
     }
 }
 @media only screen and (min-width: 600px){
@@ -42,10 +53,30 @@
         --button-footer-padding:12px;
         --setting-margin:15px;
         --pop-up-button-font-size:15px;
+        --header-font-size:50px;
+        --top-button-size:35px;
+        --top-button-help-size:30px;
+        --top-button-focus-size:50px;
+        --top-button-width:60px;
+        --top-button-height:50px;
+        --main-font-size:35px;
+        --timer-button-padding-height:15px;
+        --timer-button-padding-width:30px;
+        --timer-marigin:40px;
+        --plus-circle-size:45px;
+        
     }     
 }
 html {
     height: 100%;
+}
+
+ul{
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
 }
 
 body {
@@ -60,36 +91,35 @@ body {
 }
 
 #container {
-    min-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 header {
-    margin-top: 1.275vh;
-    margin-bottom: 1.275vh;
-    height: 15vh;
+    display: flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 h1#header-name {
-    display: inline-block;
-    position: relative;
+    display:inline-block;
     color: #f36060;
-    left: 10%;
-    font-size: 2.275vw;
+    font-size: var(--header-font-size);
     font-weight: 500;
-    margin-bottom: 1.275vh;
+    justify-content: center;
 }
 
 #header-buttons {
-    display: inline-block;
-    position: absolute;
-    right: 10%;
-    margin-top: 0.4vw;
+    padding: 0;
+    margin: 0;
 }
 
-#header-buttons ul {
-    list-style-type: none;
-    margin-bottom: 0;
-}
 
 #header-buttons ul li {
     display: inline-block;
@@ -103,9 +133,8 @@ h1#header-name {
     background-color: #f36060;
     color: #fff;
     outline: none;
-    margin-left: 0.5vw;
-    height: 2.875vw;
-    width: 3.125vw;
+    height: var(--top-button-height);
+    width: var(--top-button-width);
 }
 
 .top-buttons:hover {
@@ -116,40 +145,47 @@ h1#header-name {
 .top-button-img {
     display: inline-block;
     vertical-align: middle;
-    width: 1.6vw;
-    height: 1.6vw;
+    width: var(--top-button-size);
+    height:  var(--top-button-size);
 }
 
 img#help {
-    width: 1.275vw;
-    height: 1.275vw;
+    width: var(--top-button-help-size);
+    height: var(--top-button-help-size);
 }
 
 img#focus {
-    width: 2.375vw;
-    height: 2.375vw;
+    width: var(--top-button-focus-size);
+    height: var(--top-button-focus-size);
 }
-
 header:after {
     content: ' ';
     display: block;
     border-bottom: 1px solid #7b0c0c4f;
     border-radius: 4px;
-    width: 80%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 1%;
 }
 
 #task-list {
-    float: right;
-    width: 35%;
-    height: 80vh;
-    margin-right: 10%;
-    display: block;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: max-content;
+    max-width: 80%;
+    margin: 0 auto auto auto;
 }
 menu{
-    display:flex;
-    justify-content: center;
+    margin-block-start: var(--timer-marigin);
+    margin-block-end: var(--timer-marigin);
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+    display:table;
+    width: fit-content;
     align-items: center;
 }
 
@@ -159,6 +195,13 @@ menu button{
     -moz-transition: background-color 0.3s ease, filter 0.3s ease;
     -ms-transition: background-color 0.3s ease, filter 0.3s ease;
     -o-transition: background-color 0.3s ease, filter 0.3s ease;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    font-size: var(--main-font-size);
+    padding: var(--timer-button-padding-height) var(--timer-button-padding-width);
+    border:none;
+    cursor: pointer;
 }
 
 menu button:hover{
@@ -168,46 +211,46 @@ menu button:hover{
 
 #up-next[data-selected = "true"], #completed[data-selected = "true"] {
     background-color: #f36060;
-    color: white;
-    text-align: center;
-    font-weight: 500;
-    font-size: 1.875vw;
-    padding: 0.78125vw 1.875vw;
-    border:none;
-    margin: 0;
-    cursor: pointer;
     margin-right: -1px;
 }
 #up-next[data-selected = "false"], #completed[data-selected = "false"]{
     background-color: #f3606060;
-    color: white;
-    text-align: center;
-    font-weight: 500;
-    font-size: 1.875vw;
-    padding: 0.78125vw 1.875vw;
-    border:none;
-    margin: 0;
-    cursor: pointer;
-}
 
-#pomodoro-timer {
-    float: left;
-    width: 35%;
+}
+main {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items:center;
     margin-left: 10%;
-    height: 80vh;
+    margin-right: 10%;
+    height: 100%;
+}
+#pomodoro-timer {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: max-content;
+    width: max-content;
+    margin: 0 auto auto auto;
 }
 
 #task-list ul {
-    list-style-type: none;
+    /* list-style-type: none; */
     max-height: 80%;
-    overflow: auto;
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
 }
+
 
 #task-popup-btn {
     cursor: pointer;
-    height: 3.5vw;
-    width: 3.5vw;
+    height: var(--plus-circle-size);
+    width: var(--plus-circle-size);
     border-style: none;
     border-radius: 50%;
     text-align: center;
@@ -215,7 +258,7 @@ menu button:hover{
     font-family: 'Quicksand', sans-serif;
     background-color: #f36060;
     outline: none;
-    margin: 0 auto;
+    margin: auto;
     display: block;
 }
 
@@ -225,7 +268,7 @@ menu button:hover{
 }
 
 #plus {
-    width: 1.45vw;
+    width: var(--main-font-size);
     vertical-align: middle;
 }
 
@@ -248,22 +291,20 @@ button {
 }
 .timer-buttons {
     width: fit-content;
-    margin: 0 auto;
-    margin-top: 0.25vh;
     display: table;
+    margin-top:var(--timer-marigin);
 }
 
 .timer-buttons button {
     border: none;
     color: white;
-    padding: 0.78125vw 1.875vw;
-    font-size: 1.5625vw;
+    padding: var(--timer-button-padding-height) var(--timer-button-padding-width);
+    font-size: var(--main-font-size);
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     outline: none;
-    display: inline;
-    margin-right: -4.5px;
-    margin-left: -0px;
+    
+
 }
 
 #pomo-btn {
@@ -293,7 +334,7 @@ div.empty-space-border {
     border-width: thick;
     border-radius: 50px;
     text-align: center;
-    padding: 0.46875vw;
+    padding: 15px;
     opacity: 0;
 }
 
@@ -301,16 +342,16 @@ div.empty-space-border {
 /* CSS for Clock Test and Border Surrounding it */
 
 div.timer-value {
-    font-size: 6.5vw;
+    font-size: var(--header-font-size);
+    margin-top: var(--timer-marigin);
     color: #fff;
     border-style: solid;
     border-color: #f36060;
     border-width: thick;
-    border-radius: 3.90625vw;
+    border-radius: 30px;
     text-align: center;
-    padding: 3.90625vw;
-    max-width: 25.390625vw;
-    margin: 0 auto;
+    padding: 50px; 
+    width: 80%; 
 }
 
 #timer-display {
@@ -344,26 +385,29 @@ div.timer-value {
 #timer-display[data-started].break {
     background-size: 100% calc(100% + 5vh);
 }
+#timer-display-duration {
+    margin: auto;
+}
 
 /* CSS for Start/Reset Buttons */
 
 .timer-control-buttons {
     text-align: center;
+    width: 80%;
 }
 
 .timer-control-buttons button {
-    margin-top: 1.640625vw;
+    margin-top: var(--timer-marigin);
     background-color: #f36060;
     border: none;
     color: white;
-    padding: 0.78125vw 1.875vw;
-    cursor: pointer;
-    font-size: 1.953125vw;
+    padding:var(--timer-button-padding-height) var(--timer-button-padding-width);
+    font-size: var(--main-font-size);
     font-weight: 500;
     border-radius: 0.625vw;
     outline: none;
     font-family: 'Quicksand', sans-serif;
-    width: 15.625vw;
+    width: 100%;
 }
 
 
@@ -629,20 +673,20 @@ body.dark-theme #timer-display {
 
 #focus-task {
     text-align: center;
-    /* width: 75%; */
-    margin: 40px auto;
+    width: 100%;
     list-style-type: none;
 }
 
 #select-focus {
     font-weight: 500;
     color: #f36060;
-    font-size: 1.875vw;
+    font-size: var(--main-font-size);
 }
 
 #focus-task task-item {
-    margin: 0 auto;
-    border-left: solid 0.46875vw #eaeaea;
+    width: 80%;
+    border-left: solid 5px #eaeaea;
+    display: flex;
 }
 
 
@@ -667,13 +711,8 @@ body.dark-theme #timer-display {
 }
 
 #pomodoro-timer.state {
-    float: none;
     width: auto;
-    margin-left: auto;
-}
-
-#focus-task.state {
-    width: 40%;
+    /* margin: auto; */
 }
 
 

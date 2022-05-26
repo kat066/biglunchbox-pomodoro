@@ -140,6 +140,9 @@ class TaskItem extends HTMLElement {
         shadow.appendChild(templateContent.cloneNode(true));
 
         Object.defineProperties(this, {
+            _bindedToggle: {
+                value: this.toggle.bind(this),
+            },
             _bindedFocus: {
                 value: this.focus.bind(this),
             },
@@ -160,7 +163,7 @@ class TaskItem extends HTMLElement {
         // this.setAttribute('text', task.text);
 
         // add event listener such that clicking on element crosses out task
-        this.addEventListener('click', this.toggle);
+        this.shadowRoot.addEventListener('click', this._bindedToggle);
 
         // We add these event listeners here since they require these icons in
         // the DOM to actually function. Otherwise, how else would they be used
