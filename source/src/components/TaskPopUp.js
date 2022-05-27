@@ -26,6 +26,12 @@ class TaskPopUp extends HTMLElement {
             taskItem.setAttribute('checked', task.checked);
             taskItem.setAttribute('text', task.text);
             taskItem.setAttribute('focused', task.focused);
+            // If we are in the completed task view
+            if (document.getElementById('completed').getAttribute('data-selected') === 'true') {
+                taskItem.style.display = 'none';
+            } else {
+                taskItem.style.display = 'flex';
+            }
             document.getElementById('task-list-elements').appendChild(taskItem);
             // update localStorage
             tasks.push(task);
@@ -90,7 +96,7 @@ class TaskPopUp extends HTMLElement {
 
 customElements.define('task-popup', TaskPopUp);
 
-window.addEventListener('DOMContentLoaded', () => {
+function init() {
     const popupBtn = document.getElementById('task-popup-btn');
     const popUp = document.querySelector('task-popup');
     popupBtn.addEventListener('click', () => {
@@ -107,6 +113,12 @@ window.addEventListener('DOMContentLoaded', () => {
         popUp.shadowRoot.getElementById('add-task-popup').style.display = 'block';
         popUp.shadowRoot.getElementById('task-input').focus();
     });
-});
+}
+
+if (document.readyState !== 'loading') {
+    init();
+} else {
+    window.addEventListener('DOMContentLoaded', init);
+}
 
 // module.exports = TaskPopUp;

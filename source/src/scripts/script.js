@@ -1,48 +1,31 @@
+(function initializeLocalStorage() {
+    const defaults = {
+        tasks: '[]',
+        id: 0,
+        theme: 'light',
+        volume: 50,
+        state: 'default',
+        'tab-label': 'on',
+        clickState: 'on',
+        alarmState: 'on',
+        prevClickState: 'on',
+        prevAlarmState: 'on',
+        prevTabState: 'on',
+        prevVolume: 50,
+        'pomo-length': 25,
+        'short-break-length': 5,
+        'long-break-length': 15,
+    };
+
+    Object.entries(defaults).forEach(([key, value]) => {
+        if (localStorage.getItem(key) === null) {
+            localStorage.setItem(key, value.toString());
+        }
+    });
+}());
+
 function getTasks() {
-    let tasks; // holds list nodes in local storage
-    let id; // id counter for task items
-    let theme; // UI theme
-    let tabLabel;
-    let volume; // default volume -> initialized to 50
-    let state; // state -> initialized to 'default'
-    let clickState; // record for if click sound is enabled
-    let alarmState; // record for if alarm sound is enabled
-
-    if (localStorage.getItem('clickState') === null) {
-        clickState = 'on'; // default to be on
-        localStorage.setItem('clickState', clickState);
-        // initializing previous state
-        localStorage.setItem('prevClickState', clickState);
-    }
-    if (localStorage.getItem('alarmState') === null) {
-        alarmState = 'on'; // default to be on
-        localStorage.setItem('alarmState', alarmState);
-        // initializing previous state
-        localStorage.setItem('prevAlarmState', alarmState);
-    }
-
-    if (localStorage.getItem('tasks') === null || localStorage.getItem('id') === null || localStorage.getItem('theme') === null
-        || localStorage.getItem('tab-label') === null || localStorage.getItem('volume') === null || localStorage.getItem('state') === null
-        || localStorage.getItem('clickState') === null || localStorage.getItem('alarmState') === null) {
-        tasks = [];
-        id = 0;
-        theme = 'light';
-        tabLabel = 'on';
-        volume = 50;
-        state = 'default';
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        localStorage.setItem('id', `${id}`);
-        localStorage.setItem('theme', theme);
-        localStorage.setItem('tab-label', tabLabel);
-        localStorage.setItem('prevTabState', tabLabel);
-        localStorage.setItem('volume', `${volume}`);
-        localStorage.setItem('prevVolume', `${volume}`); // prev state tracking
-        localStorage.setItem('state', state);
-    } else {
-        tasks = JSON.parse(localStorage.getItem('tasks'));
-    }
-
-    return tasks;
+    return JSON.parse(localStorage.getItem('tasks'));
 }
 
 function showInComplete() {
@@ -77,48 +60,46 @@ function showCompleted() {
     }
 }
 
+function buildTaskList() {
+    const tasks = getTasks();
+
+    const taskNodes = tasks.map((task) => {
+        const taskNode = document.createElement('task-item');
+        Object.entries(task).forEach(([key, value]) => {
+            taskNode.setAttribute(key, value);
+        });
+        taskNode.setAttribute('title', 'Click to toggle task completion');
+        return taskNode;
+    });
+
+    return taskNodes;
+}
+
 // require('../components/TaskItem');
 // const TaskItem = require('../components/TaskItem');
 window.addEventListener('DOMContentLoaded', () => {
     const upNextBtn = document.getElementById('up-next');
     const completedBtn = document.getElementById('completed');
 
-    // holds list nodes in local storage
-    // id counter for task items
-    // UI theme
-    // default volume -> initialized to 50
-    // state -> initialized to 'default'
-    const tasks = getTasks();
+    const focusDiv = document.getElementById('focus-task');
+    const focusDivTitle = document.getElementById('select-focus');
+    const tasklist = document.getElementById('task-list-elements');
 
-    const ul = document.getElementById('task-list-elements');
-    // create task items if exists in local storage
-    for (let i = 0; i < tasks.length; i += 1) {
-        const task = document.createElement('task-item');
-        const focusDiv = document.getElementById('focus-task');
-        const title = document.getElementById('select-focus');
-        task.setAttribute('id', tasks[i].id);
-        task.setAttribute('checked', tasks[i].checked);
-        task.setAttribute('text', tasks[i].text);
-        task.setAttribute('focused', tasks[i].focused);
-        task.setAttribute('title', 'Click to toggle task completion');
-
-        // hide completed tasks while showing incomplete
-        if (tasks[i].checked) {
-            task.style.display = 'none';
-            task.shadowRoot.querySelector('.focus-icon').style.display = 'none';
+    const taskNodes = buildTaskList();
+    taskNodes.forEach((taskNode) => {
+        if (taskNode.getAttribute('focused') === 'true') {
+            focusDivTitle.textContent = 'Focusing on:';
+            focusDiv.appendChild(taskNode);
         } else {
-            task.style.display = 'flex';
-            task.shadowRoot.querySelector('.focus-icon').style.display = 'initial';
+            tasklist.appendChild(taskNode);
         }
+    });
 
-        if (tasks[i].focused === true) {
-            title.innerHTML = 'Focusing on:';
-            focusDiv.appendChild(task);
-        } else {
-            ul.appendChild(task);
-        }
-    }
+    // hide completed tasks while showing incomplete
+    showInComplete();
 
     upNextBtn.addEventListener('click', showInComplete);
     completedBtn.addEventListener('click', showCompleted);
+
+    // document.getElementById('click-snd').volume = localStorage.getItem('volume') / 100;
 });

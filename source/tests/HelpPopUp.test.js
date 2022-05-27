@@ -1,5 +1,3 @@
-import '../src/components/HelpPopUp';
-
 import { addTemplates, dispatchDOMLoadedEvent } from './utils';
 import { HELP_POPUP_TEMPLATE } from './Constants';
 
@@ -17,15 +15,25 @@ beforeAll(async () => {
     </button>
     <help-popup></help-popup>
     `;
+    window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
+
+    Object.defineProperty(document, 'readyState', {
+        get() { return 'loading'; },
+    });
+    require('../src/components/HelpPopUp');
 });
 
-window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
 beforeEach(() => {
     localStorage.setItem('volume', 50);
     localStorage.setItem('tasks', '[]');
     localStorage.setItem('id', '0');
     document.body.innerHTML = pageTemplate;
     dispatchDOMLoadedEvent(window);
+});
+
+// Used to prevent multiple custom element registers
+afterEach(() => {
+    jest.resetModules();
 });
 
 test(('popup help window when help button is clicked'), () => {

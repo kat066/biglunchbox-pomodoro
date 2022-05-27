@@ -9,7 +9,7 @@
     "test": "source/tests"
   },
   "scripts": {
-    "start": "http-server source/src -p=5500",
+    "start": "http-server source/src -p=5500 -g -c-1",
     "watch": "watch 'npm run instrument' source/src/components source/src/scripts",
     "test": "NODE_ENV=jest jest",
     "test:watch": "npm run test -- --watch",
@@ -18,7 +18,11 @@
     "instrument": "nyc instrument --delete --complete-copy source/src source/cypress_build",
     "cy:build": "npm run instrument",
     "cy:start": "npm run cy:build && http-server source/cypress_build -p=5500",
-    "cy:test": "cypress run"
+    "cy:test": "cypress run",
+    "test:init": "rimraf source/test_build/ && cp -a source/src source/test_build/",
+    "test:gzip": "find source/test_build \\( -name '*.css' -o -name '*.html' -o -name '*.js' -o -name '*.svg' \\) -exec gzip -9 --keep {} \\;",
+    "test:build": "npm run test:init && npm run test:gzip",
+    "test:start": "http-server source/test_build -p=5500 -g -c-1"
   },
   "repository": {
     "type": "git",
@@ -37,10 +41,10 @@
     "@cypress/code-coverage": "^3.9.0",
     "@testing-library/jest-dom": "^5.11.9",
     "babel-jest": "^26.6.3",
-    "babel-plugin-istanbul": "^6.0.0",
     "cypress": "^6.9.1",
     "eslint": "^7.19.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-compat": "^4.0.2",
     "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.1.3",
@@ -86,17 +90,6 @@
       "jest": {
         "plugins": [
           "@babel/plugin-transform-runtime"
-        ]
-      },
-      "cypress": {
-        "plugins": [
-          "@babel/runtime",
-          "istanbul"
-        ]
-      },
-      "prod": {
-        "plugins": [
-          "@babel/runtime"
         ]
       }
     }

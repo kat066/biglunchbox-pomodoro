@@ -56,7 +56,6 @@ body {
     box-sizing: border-box;
     min-height: 100%;
     height: 100%;
-    /* background: linear-gradient(0deg, rgba(69,238,56,1) 10%, rgb(51, 231, 255) 100%); */
     overflow: auto;
 }
 
@@ -155,11 +154,16 @@ menu{
 }
 
 menu button{
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease, filter 0.3s ease;
+    -webkit-transition: background-color 0.3s ease, filter 0.3s ease;
+    -moz-transition: background-color 0.3s ease, filter 0.3s ease;
+    -ms-transition: background-color 0.3s ease, filter 0.3s ease;
+    -o-transition: background-color 0.3s ease, filter 0.3s ease;
 }
 
 menu button:hover{
-    filter:brightness(125%);
+    filter: brightness(125%);
+    -webkit-filter: brightness(125%);
 }
 
 #up-next[data-selected = "true"], #completed[data-selected = "true"] {
@@ -191,8 +195,8 @@ menu button:hover{
     width: 35%;
     margin-left: 10%;
     height: 80vh;
-
 }
+
 #task-list ul {
     list-style-type: none;
     max-height: 80%;
@@ -298,8 +302,6 @@ div.empty-space-border {
 
 div.timer-value {
     font-size: 6.5vw;
-    /* background: #ffd5ca; */
-    background: #f36060;
     color: #fff;
     border-style: solid;
     border-color: #f36060;
@@ -311,6 +313,37 @@ div.timer-value {
     margin: 0 auto;
 }
 
+#timer-display {
+    background-origin: padding-box;
+    -moz-background-origin: padding-box;
+    -webkit-background-origin: padding-box;
+    background-image: linear-gradient(#f36060, #f36060);
+    background-position-x: center;
+    /* Weird hack to prevent flashing at bottom for Chrome. Second term must be some non-percentage.*/
+    background-position-y: calc(100% + 5vh);
+    background-repeat: no-repeat;
+    background-size: 100% calc(100% + 5vh);
+    background-attachment: scroll;
+    transition: none;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+}
+
+#timer-display[data-started] {
+    transition-property: background-size;
+    transition-delay: 1s;
+    transition-timing-function: linear;
+}
+
+#timer-display[data-started].work {
+    background-size: 100% 5vh;
+}
+
+#timer-display[data-started].break {
+    background-size: 100% calc(100% + 5vh);
+}
 
 /* CSS for Start/Reset Buttons */
 
@@ -395,7 +428,6 @@ body.dark-theme div.timer-value {
     /* border-color: #232b32; */
     border-color: #4a5568;
     overflow: hidden;
-    background: #4a5568;
 }
 
 body.dark-theme .timer-control-buttons button {
@@ -589,6 +621,9 @@ body.dark-theme settings-popup::part(enable-disable-alarmsound) {
     color: #f5f6f7;
 }
 
+body.dark-theme #timer-display {
+    background-image: linear-gradient(#4a5568, #4a5568);
+}
 
 /* Focus Task */
 

@@ -5,6 +5,7 @@ build
 .nyc_output
 
 cypress_build
+test_build
 
 .DS_Store
 debug.log

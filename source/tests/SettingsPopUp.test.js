@@ -1,6 +1,4 @@
-import '../src/components/SettingsPopUp';
-
-import { addTemplates, dispatchDOMLoadedEvent } from './utils';
+import { addTemplates } from './utils';
 import { SETTINGS_POPUP_TEMPLATE } from './Constants';
 
 let templates;
@@ -17,8 +15,8 @@ beforeAll(async () => {
             <img src="../icons/settings.svg" id="gear" class="top-button-img" alt="gear">
             <p class="top-button-text">Setting</p>
         </button>
-        <div id="timer_display" class="timer-value">
-            <div id="timer_display_duration">25:00</div>
+        <div id="timer-display" class="timer-value">
+            <div id="timer-display-duration">25:00</div>
         </div>
         <button id = "start-btn">Start</button>
     `;
@@ -34,6 +32,7 @@ beforeEach(() => {
     localStorage.setItem('tab-label', 'on');
     localStorage.setItem('prevTabState', 'on');
     document.body.innerHTML = pageTemplate;
+    require('../src/components/SettingsPopUp');
 });
 
 afterEach(() => {
@@ -206,8 +205,6 @@ test('Pop up button works correctly', () => {
     const settingsButton = document.getElementById('setting-button');
     const settingsPopUp = document.createElement('settings-popup');
     document.body.appendChild(settingsPopUp);
-
-    dispatchDOMLoadedEvent(window);
 
     settingsButton.click();
 
