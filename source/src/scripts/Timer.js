@@ -1,7 +1,7 @@
 // import toggleState from '/scripts/FocusMode.js';
 const startButton = document.getElementById('start-btn');
-const timerDisplayDuration = document.getElementById('timer_display_duration');
-const timerBackground = document.getElementById('timer_display');
+const timerDisplayDuration = document.getElementById('timer-display-duration');
+const timerBackground = document.getElementById('timer-display');
 const btnSound = new Audio('./icons/btnClick.mp3');
 const alarmSound = new Audio('./icons/alarm.mp3');
 const SECOND = 1000;

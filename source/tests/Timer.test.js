@@ -28,8 +28,8 @@ afterEach(() => {
 test('start timer function', () => {
     document.body.innerHTML = `
         <button id = "start-btn">Start</button>
-        <div id="timer_display" class="timer-value">
-            <div id="timer_display_duration">25:00</div>
+        <div id="timer-display" class="timer-value">
+            <div id="timer-display-duration">25:00</div>
         </div>
         <button id = "pomo-btn"> Pomo</button>
     `;
@@ -37,7 +37,7 @@ test('start timer function', () => {
     require('../src/scripts/Timer');
 
     const startButton = document.getElementById('start-btn');
-    const display = document.getElementById('timer_display_duration');
+    const display = document.getElementById('timer-display-duration');
 
     startButton.click();
 
@@ -56,15 +56,15 @@ test('Stop and reset function', () => {
         <button id="pomo-btn"> Pomo</button>
         <button id="break-btn"> Break</button>
         <button id = "pomo-btn"> Pomo</button>
-        <div id="timer_display" class="timer-value">
-            <div id="timer_display_duration">13:00</div>
+        <div id="timer-display" class="timer-value">
+            <div id="timer-display-duration">13:00</div>
         </div>
     `;
 
     require('../src/scripts/Timer');
 
     const startButton = document.getElementById('start-btn');
-    const display = document.getElementById('timer_display_duration');
+    const display = document.getElementById('timer-display-duration');
 
     startButton.click();
     jest.advanceTimersByTime(100);
@@ -77,15 +77,15 @@ test('advance in time', () => {
     document.body.innerHTML = `
         <button id = "start-btn">Start</button>
         <button id = "pomo-btn"> Pomo</button>
-        <div id="timer_display" class="timer-value">
-            <div id="timer_display_duration">25:00</div>
+        <div id="timer-display" class="timer-value">
+            <div id="timer-display-duration">25:00</div>
         </div>
     `;
 
     require('../src/scripts/Timer');
 
     const startButton = document.getElementById('start-btn');
-    const display = document.getElementById('timer_display_duration');
+    const display = document.getElementById('timer-display-duration');
 
     startButton.click();
 
@@ -111,8 +111,8 @@ test('advance in time', () => {
 test('stop() called when localStorage stop value is true', () => {
     document.body.innerHTML = `
         <button id = "start-btn">Start</button>
-        <div id="timer_display" class="timer-value">
-            <div id="timer_display_duration">25:00</div>
+        <div id="timer-display" class="timer-value">
+            <div id="timer-display-duration">25:00</div>
         </div>
         <button id="pomo-btn"> Pomo</button>
         <button id="break-btn"> Break</button>
@@ -140,8 +140,8 @@ describe(('switch mode'), () => {
     test('pomo section ends', async () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display" class="timer-value">
-                <div id="timer_display_duration">3:00</div>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">3:00</div>
             </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
@@ -150,7 +150,7 @@ describe(('switch mode'), () => {
         require('../src/scripts/Timer');
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -170,8 +170,8 @@ describe(('switch mode'), () => {
     test('break section ends', async () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display" class="timer-value">
-                <div id="timer_display_duration">0:01</div>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">0:01</div>
             </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
@@ -180,7 +180,7 @@ describe(('switch mode'), () => {
         require('../src/scripts/Timer');
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -202,8 +202,8 @@ describe(('switch mode'), () => {
     test('switch to long break when class is not toggle', () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display" class="timer-value">
-                <div id="timer_display_duration">0:01</div>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">0:01</div>
             </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
@@ -212,7 +212,7 @@ describe(('switch mode'), () => {
         require('../src/scripts/Timer');
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -246,8 +246,8 @@ describe(('switch mode'), () => {
     test('switch to long break when class is toggle', () => {
         document.body.innerHTML = `
             <button id = "start-btn">Start</button>
-            <div id="timer_display" class="timer-value">
-                <div id="timer_display_duration">0:01</div>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">0:01</div>
             </div>
             <button id = "pomo-btn"> Pomo</button>
             <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
@@ -256,7 +256,7 @@ describe(('switch mode'), () => {
         require('../src/scripts/Timer');
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -325,8 +325,8 @@ describe(('keyboard input'), () => {
                     <h2 id='select-focus'></h2>
                 </div>
                 <button id = "start-btn">Start</button>
-                <div id="timer_display" class="timer-value">
-                    <div id="timer_display_duration">25:00</div>
+                <div id="timer-display" class="timer-value">
+                    <div id="timer-display-duration">25:00</div>
                 </div>
             </div>
             <div id="task-list">
@@ -412,7 +412,7 @@ describe(('keyboard input'), () => {
         document.body.dispatchEvent(eventObj);
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
 
         jest.advanceTimersByTime(5000);
 
@@ -424,8 +424,8 @@ describe(('keyboard input'), () => {
         document.body.innerHTML = `
             ${templates}
             <button id = "start-btn">Stop</button>
-            <div id="timer_display" class="timer-value">
-                <div id="timer_display_duration">25:00</div>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">25:00</div>
             </div>
             <ul id="task-list-elements">
             </ul>
@@ -467,7 +467,7 @@ describe(('keyboard input'), () => {
         document.body.dispatchEvent(eventObj);
 
         const startButton = document.getElementById('start-btn');
-        const display = document.getElementById('timer_display_duration');
+        const display = document.getElementById('timer-display-duration');
 
         jest.advanceTimersByTime(5000);
 

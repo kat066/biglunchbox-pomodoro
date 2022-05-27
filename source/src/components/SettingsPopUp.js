@@ -13,7 +13,7 @@ class SettingsPopUp extends HTMLElement {
     }
 
     closePopUp() {
-        const timerBackground = document.getElementById('timer_display');
+        const timerBackground = document.getElementById('timer-display');
         const themeCheckbox = this.shadowRoot.querySelector('#dark-mode > label.switch > input[type=checkbox]');
 
         if ((localStorage.getItem('theme') === 'light') && document.body.classList.contains('dark-theme')) {
@@ -119,7 +119,7 @@ class SettingsPopUp extends HTMLElement {
     }
 
     toggleMode() {
-        const timerBackground = document.getElementById('timer_display');
+        const timerBackground = document.getElementById('timer-display');
         if (localStorage.getItem('theme') === 'light') {
             timerBackground.style.background = '#4a5568';
             // localStorage.setItem('theme', 'dark');
