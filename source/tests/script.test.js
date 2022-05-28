@@ -4,8 +4,6 @@ import '../src/components/TaskItem';
 import { addTemplates, dispatchDOMLoadedEvent } from './utils';
 import { TASK_ITEM_TEMPLATE } from './Constants';
 
-window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
-
 let pageTemplate;
 
 beforeAll(async () => {
@@ -24,7 +22,9 @@ beforeAll(async () => {
         <div id='focus-task'>
             <h2 id='select-focus'></h2>
         </div>
+        <audio id="click-snd" src="#"></audio>
     `;
+    window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
 });
 
 beforeEach(() => {

@@ -1,6 +1,4 @@
-import '../src/components/SettingsPopUp';
-
-import { addTemplates, dispatchDOMLoadedEvent } from './utils';
+import { addTemplates } from './utils';
 import { SETTINGS_POPUP_TEMPLATE } from './Constants';
 
 let templates;
@@ -17,8 +15,8 @@ beforeAll(async () => {
             <img src="../icons/settings.svg" id="gear" class="top-button-img" alt="gear">
             <p class="top-button-text">Setting</p>
         </button>
-        <div id="timer_display" class="timer-value">
-            <div id="timer_display_duration">25:00</div>
+        <div id="timer-display" class="timer-value">
+            <div id="timer-display-duration">25:00</div>
         </div>
         <button id = "start-btn">Start</button>
     `;
@@ -26,11 +24,15 @@ beforeAll(async () => {
 
 beforeEach(() => {
     localStorage.setItem('volume', 50);
+    localStorage.setItem('prevVolume', 50);
     localStorage.setItem('pomo-length', '25');
     localStorage.setItem('short-break-length', '5');
     localStorage.setItem('long-break-length', '15');
     localStorage.setItem('theme', 'light');
+    localStorage.setItem('tab-label', 'on');
+    localStorage.setItem('prevTabState', 'on');
     document.body.innerHTML = pageTemplate;
+    require('../src/components/SettingsPopUp');
 });
 
 afterEach(() => {
@@ -204,8 +206,6 @@ test('Pop up button works correctly', () => {
     const settingsPopUp = document.createElement('settings-popup');
     document.body.appendChild(settingsPopUp);
 
-    dispatchDOMLoadedEvent(window);
-
     settingsButton.click();
 
     const shadow = settingsPopUp.shadowRoot;
@@ -230,6 +230,8 @@ test(('toggle from light to dark mode'), () => {
     const shadow = testSettingsPopUp.shadowRoot;
     const mode = shadow.querySelector('span[class="slider"]');
     mode.click();
+    const confirm = shadow.querySelectorAll('button')[0];
+    confirm.click();
     expect(localStorage.getItem('theme')).toBe('dark');
     expect(document.body.classList).toContain('dark-theme');
 });
@@ -241,6 +243,8 @@ test(('toggle from dark to light mode'), () => {
     const shadow = testSettingsPopUp.shadowRoot;
     const mode = shadow.querySelector('span[class="slider"]');
     mode.click();
+    const confirm = shadow.querySelectorAll('button')[0];
+    confirm.click();
     expect(localStorage.getItem('theme')).toBe('light');
 });
 

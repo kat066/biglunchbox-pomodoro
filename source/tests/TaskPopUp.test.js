@@ -1,6 +1,5 @@
-import '../src/components/TaskPopUp';
 import { TASK_POPUP_TEMPLATE } from './Constants';
-import { addTemplates, dispatchDOMLoadedEvent } from './utils';
+import { addTemplates } from './utils';
 
 let pageTemplate;
 
@@ -16,6 +15,7 @@ beforeAll(async () => {
         <div id="popup-button">
             <button id="task-popup-btn"> <img src="../icons/plus.svg" id="plus"></button>
         </div>
+        <button id="completed" data-selected="false">Up Next</button>
     `;
     window.HTMLMediaElement.prototype.play = () => { /* do nothing */ };
 });
@@ -27,6 +27,7 @@ beforeEach(() => {
     localStorage.setItem('tasks', '[]');
     localStorage.setItem('id', '0');
     document.body.innerHTML = pageTemplate;
+    require('../src/components/TaskPopUp');
 });
 
 afterEach(() => {
@@ -107,8 +108,6 @@ test('Pop up button works correctly', () => {
 
     const popupBtn = document.getElementById('task-popup-btn');
     document.body.appendChild(popupBtn);
-
-    dispatchDOMLoadedEvent(window);
 
     popupBtn.click();
 

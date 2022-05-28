@@ -1,7 +1,6 @@
 // import { toggleState } from '../src/scripts/FocusMode';
-import '../src/scripts/FocusMode';
-
 import { dispatchDOMLoadedEvent } from './utils';
+import '../src/scripts/FocusMode';
 
 let pageTemplate;
 
@@ -31,6 +30,8 @@ beforeAll(() => {
 beforeEach(() => {
     document.body.innerHTML = pageTemplate;
     dispatchDOMLoadedEvent(window);
+    localStorage.setItem('volume', 100);
+    localStorage.setItem('prevVolume', 100);
 });
 
 afterEach(() => [

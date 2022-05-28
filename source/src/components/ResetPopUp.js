@@ -76,7 +76,7 @@ class ResetPopUp extends HTMLElement {
 }
 customElements.define('reset-popup', ResetPopUp);
 
-window.addEventListener('DOMContentLoaded', () => {
+function init() {
     const resetPopUp = document.querySelector('reset-popup');
     const resetBtn = document.getElementById('reset-button');
     resetBtn.addEventListener('click', () => {
@@ -92,6 +92,12 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         resetPopUp.shadowRoot.getElementById('reset-confirm-popup').setAttribute('style', 'display:block');
     });
-});
+}
+
+if (document.readyState !== 'loading') {
+    init();
+} else {
+    window.addEventListener('DOMContentLoaded', init);
+}
 
 // module.exports = ResetPopUp;
