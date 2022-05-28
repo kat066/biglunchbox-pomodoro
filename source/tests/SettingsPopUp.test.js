@@ -248,6 +248,52 @@ test(('toggle from dark to light mode'), () => {
     expect(localStorage.getItem('theme')).toBe('light');
 });
 
+test(('the tab label is on'), () => {
+    localStorage.setItem('tab-label', 'on');
+    const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
+    const shadow = testSettingsPopUp.shadowRoot;
+    expect(shadow.querySelectorAll('input[type="checkbox"]')[1].checked).toBe(true);
+});
+
+test(('the tab label is off'), () => {
+    localStorage.setItem('tab-label', 'off');
+    const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
+    const shadow = testSettingsPopUp.shadowRoot;
+    expect(shadow.querySelectorAll('input[type="checkbox"]')[1].checked).toBe(false);
+});
+
+test(('toggle tab label from on to off'), () => {
+    localStorage.setItem('tab-label', 'on');
+    document.head.innerHTML = `
+        <title id="tab-label">Pomodoro Timer</title>
+    `;
+    const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
+    const shadow = testSettingsPopUp.shadowRoot;
+    const mode = shadow.querySelectorAll('span[class="slider"]')[1];
+    mode.click();
+    const confirm = shadow.querySelectorAll('button')[0];
+    confirm.click();
+    expect(localStorage.getItem('tab-label')).toBe('off');
+});
+
+test(('toggle tab label from off to on'), () => {
+    localStorage.setItem('tab-label', 'off');
+    document.head.innerHTML = `
+        <title id="tab-label">Pomodoro Timer</title>
+    `;
+    const testSettingsPopUp = document.createElement('settings-popup');
+    document.body.appendChild(testSettingsPopUp);
+    const shadow = testSettingsPopUp.shadowRoot;
+    const mode = shadow.querySelectorAll('span[class="slider"]')[1];
+    mode.click();
+    const confirm = shadow.querySelectorAll('button')[0];
+    confirm.click();
+    expect(localStorage.getItem('tab-label')).toBe('on');
+});
+
 test(('set volume'), () => {
     const testSettingsPopUp = document.createElement('settings-popup');
     document.body.appendChild(testSettingsPopUp);
