@@ -142,7 +142,6 @@ function toggleState() {
     }
 }
 
-
 /**
  * Updates the transition on tab refocus to prevent transition desync.
  *
