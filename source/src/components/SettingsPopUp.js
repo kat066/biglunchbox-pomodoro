@@ -103,7 +103,6 @@ class SettingsPopUp extends HTMLElement {
         if (document.body.classList.contains('dark-theme')) {
             localStorage.setItem('theme', 'dark');
         } else {
-            timerBackground.style.background = '#f36060';
             localStorage.setItem('theme', 'light');
         }
 
