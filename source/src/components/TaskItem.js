@@ -1,12 +1,11 @@
-/** creates a task list item */
+/** Task item model component. */
+
 /**
- * The class is extend the HTMlElement function. The toggle function would be call for
- * check if the button toggle. The removeTask function would be call for remove all the tasks
- * and the class mostly would manage the focus tasks in the app.
- * @constructor The constructor would reset and show everything in pages
+ * This class extends HTMLElement, creates a shadow document object model 
+ * (DOM), and adds the elements of the task item object to the DOM.
  */
 class TaskItem extends HTMLElement {
-    // toggles custom attribute 'checked' for this element
+    //Toggles custom attribute 'checked' for this element.
     toggle() {
         const tasks = JSON.parse(localStorage.getItem('tasks'));
         // update checked attribute
@@ -41,7 +40,7 @@ class TaskItem extends HTMLElement {
         }
     }
 
-    /** removes custom element from DOM and deletes task from localStorage */
+    //Removes custom element from DOM and deletes task from localStorage.
     removeTask() {
         const tasks = JSON.parse(localStorage.getItem('tasks'));
         // find and remove task from localStorage
@@ -57,7 +56,7 @@ class TaskItem extends HTMLElement {
         }
     }
 
-    /** allows user to focus on a task item */
+    //Allows user to focus on a task item.
     focus(event) {
         // for generic focus call
         if (event) {
@@ -117,13 +116,12 @@ class TaskItem extends HTMLElement {
             if (focusTask === null) {
                 focusDiv.appendChild(this);
             } else {
-                // focusTask can only be the child of one task. implicit removeChild
+                focusDiv.removeChild(focusTask);
                 ul.appendChild(focusTask);
                 focusTask.setAttribute('focused', false);
-                const unfocus = tasks.find((t) => t.id === focusTask.getAttribute('id'));
+                const unfocus = tasks.find((t) => t.id === focusTask.getAttribute('id') && t.text === focusTask.getAttribute('text'));
                 unfocus.focused = false;
                 localStorage.setItem('tasks', JSON.stringify(tasks));
-
                 // add 'this' task item to under clock display
                 focusDiv.appendChild(this);
             }
@@ -132,7 +130,7 @@ class TaskItem extends HTMLElement {
         }
     }
 
-    /** create task list item by building custom component */
+    //Create task list item by building custom component.
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
@@ -150,6 +148,7 @@ class TaskItem extends HTMLElement {
         });
     }
 
+    //If node is connected, add an on-click listener to the close button.
     connectedCallback() {
         if (!this.isConnected) {
             return;
@@ -173,6 +172,7 @@ class TaskItem extends HTMLElement {
         trash.addEventListener('click', this._bindedRemoveTask);
     }
 
+    //If node is connected, remove the close button's on-click listener.
     disconnectedCallback() {
         this.removeEventListener('click', this.toggle);
 
@@ -182,9 +182,17 @@ class TaskItem extends HTMLElement {
         trash.removeEventListener('click', this._bindedRemoveTask);
     }
 
+    //Returns observed attributes.
     static get observedAttributes() {
         return ['text'];
     }
+
+    /**
+     * Changes attribute from old value to new value.
+     * @param {*} attrName The name of the attribute.
+     * @param {*} oldVal The old value.
+     * @param {*} newVal The new value.
+     */
 
     attributeChangedCallback(attrName, oldVal, newVal) {
         this.shadowRoot.getElementById('task-text').textContent = newVal;
