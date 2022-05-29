@@ -28,13 +28,20 @@ function getTasks() {
     return JSON.parse(localStorage.getItem('tasks'));
 }
 
+/**
+ * Show incomplete tasks and hides completed tasks
+ */
 function showInComplete() {
+    // Reference task list, upnext, and completed buttons in the DOM
     const tasks = document.getElementById('task-list-elements').children;
     const upNextBtn = document.getElementById('up-next');
     const completedBtn = document.getElementById('completed');
 
+    // set button attributes for style
     upNextBtn.setAttribute('data-selected', 'true');
     completedBtn.setAttribute('data-selected', 'false');
+
+    // loop through elements and hide/show them depending on checked status
     for (let i = 0; i < tasks.length; i += 1) {
         if (tasks[i].getAttribute('checked') === 'false') {
             tasks[i].style.display = 'flex';
@@ -44,13 +51,20 @@ function showInComplete() {
     }
 }
 
+/**
+ * Show completed tasks and hides incomplete tasks
+ */
 function showCompleted() {
+    // Reference task list, upnext, and completed buttons in the DOM
     const tasks = document.getElementById('task-list-elements').children;
     const upNextBtn = document.getElementById('up-next');
     const completedBtn = document.getElementById('completed');
 
+    // set button attributes for style
     upNextBtn.setAttribute('data-selected', 'false');
     completedBtn.setAttribute('data-selected', 'true');
+
+    // loop through elements and hide/show them depending on checked status
     for (let i = 0; i < tasks.length; i += 1) {
         if (tasks[i].getAttribute('checked') === 'true') {
             tasks[i].style.display = 'flex';
@@ -95,11 +109,11 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // hide completed tasks while showing incomplete
+    // initially hide completed tasks while showing incomplete
     showInComplete();
 
+    // add event listener to buttons
     upNextBtn.addEventListener('click', showInComplete);
     completedBtn.addEventListener('click', showCompleted);
-
     // document.getElementById('click-snd').volume = localStorage.getItem('volume') / 100;
 });
