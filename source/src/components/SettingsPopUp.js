@@ -137,6 +137,12 @@ class SettingsPopUp extends HTMLElement {
         }
     }
 
+    /** This function is called when the tab label toggle is clicked,
+     * to toggle the tab label setting on and off in localStorage.
+     * If the tab label is toggled off, it also sets the tab label
+     * back to regular text (in case it is currently showing a time).
+     * @returns { void }
+     */
     toggleTabLabel() {
         const tabLabel = document.getElementById('tab-label');
         if (localStorage.getItem('tab-label') === 'on') {
