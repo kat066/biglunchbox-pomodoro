@@ -1,7 +1,7 @@
 /** Task model component. */
 
 /**
- * This class extends HTMLElement, creates a shadow document object model 
+ * This class extends HTMLElement, creates a shadow document object model
  * (DOM), and adds the elements of the task popup window to the DOM.
  */
 class TaskPopUp extends HTMLElement {
