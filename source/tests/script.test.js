@@ -74,7 +74,23 @@ test('Reads task list and creates one task correctly', () => {
     const taskItem = document.getElementById('task-list-elements').children[0];
     expect(taskItem.getAttribute('checked')).toBe('false');
     expect(taskItem.id).toBe('0');
+    expect(taskItem.style.display).toBe('flex');
     expect(taskItem.getAttribute('text')).toBe('test_task');
+    expect(taskItem.getAttribute('focused')).toBe('false');
+});
+
+test('Reads task list and creates one task that is completed correctly', () => {
+    initializeLocalStorage();
+    localStorage.setItem('tasks', '[{"id":"0","checked":true,"text":"test_task","focused":false}]');
+    dispatchDOMLoadedEvent(window);
+
+    expect(document.getElementById('task-list-elements').children).toHaveLength(1);
+
+    const taskItem = document.getElementById('task-list-elements').children[0];
+    expect(taskItem.getAttribute('checked')).toBe('true');
+    expect(taskItem.id).toBe('0');
+    expect(taskItem.getAttribute('text')).toBe('test_task');
+    expect(taskItem.style.display).toBe('none');
     expect(taskItem.getAttribute('focused')).toBe('false');
 });
 
@@ -119,6 +135,36 @@ test('Reads task list and creates multiple tasks correctly, with one focused tas
     expect(taskItem1.id).toBe('1');
     expect(taskItem1.getAttribute('text')).toBe('test_task1');
     expect(taskItem1.getAttribute('focused')).toBe('true');
+});
+
+test('Show completed task on button click', () => {
+    initializeLocalStorage();
+    localStorage.setItem('tasks', '[{"id":"0","checked":false,"text":"test_task","focused":false},'
+        + '{"id":"1","checked":true,"text":"test_task1","focused":false}]');
+    dispatchDOMLoadedEvent(window);
+
+    expect(document.getElementById('task-list-elements').children).toHaveLength(2);
+
+    const taskItem = document.getElementById('task-list-elements').children[0];
+    const taskItem1 = document.getElementById('task-list-elements').children[1];
+
+    /* before click */
+    expect(taskItem.getAttribute('checked')).toBe('false');
+    expect(taskItem.id).toBe('0');
+    expect(taskItem.getAttribute('text')).toBe('test_task');
+    expect(taskItem.getAttribute('focused')).toBe('false');
+    expect(taskItem.style.display).toBe('flex');
+
+    expect(taskItem1.getAttribute('checked')).toBe('true');
+    expect(taskItem1.id).toBe('1');
+    expect(taskItem1.getAttribute('text')).toBe('test_task1');
+    expect(taskItem1.getAttribute('focused')).toBe('false');
+    expect(taskItem1.style.display).toBe('none');
+
+    /* after click */
+    document.getElementById('completed').click();
+    expect(taskItem.style.display).toBe('none');
+    expect(taskItem1.style.display).toBe('flex');
 });
 
 // test(('save dark theme'), () => {
