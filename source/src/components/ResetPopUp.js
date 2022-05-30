@@ -1,11 +1,11 @@
-/** Reset modal component */
+/** Reset model component. */
+
 /**
- * The class is extend HTMLElement function. This function call the reset function which is
- * reset all the time. and call the closepopup function which is close all the pop up windows.
- * @constructor The constructor would reset and show everything in pages
+ * This class extends HTMLElement, creates a shadow document object model
+ * (DOM), and adds the elements of the reset popup window to the DOM.
  */
 class ResetPopUp extends HTMLElement {
-    /** Reset current Pomodoro session */
+    // Resets current Pomodoro session.
     reset() {
         // stop();
         localStorage.setItem('stop', 'true');
@@ -27,12 +27,13 @@ class ResetPopUp extends HTMLElement {
         this.closePopUp();
     }
 
-    /** Close the reset modal */
+    // Closes the reset popup.
     closePopUp() {
         const wrapper = this.shadowRoot.getElementById('reset-confirm-popup');
         wrapper.style.display = 'none';
     }
 
+    // Appends the elements of the reset popup to the shadow DOM.
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
@@ -54,6 +55,7 @@ class ResetPopUp extends HTMLElement {
         });
     }
 
+    // If node is connected, add an on-click listener to the close button.
     connectedCallback() {
         if (!this.isConnected) {
             return;
@@ -66,6 +68,7 @@ class ResetPopUp extends HTMLElement {
         confirmBtn.addEventListener('click', this._bindedReset);
     }
 
+    // If node is connected, remove the close button's on-click listener.
     disconnectedCallback() {
         const closeBtn = this.shadowRoot.getElementById('close-icon');
         closeBtn.removeEventListener('click', this._bindedClose);

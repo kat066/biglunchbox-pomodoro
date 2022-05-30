@@ -1,17 +1,17 @@
+/** Settings model component. */
+
 /**
- * The class is extend the HTMlElement function. The closePopup function would be call for
- * close all the popup windows. The confirmSettings function would be call for confirm setting
- * all the time. The toggleMode function would be call for change the dark or light mode.
- * The setVolume would be call for setting the volume.
- * include the style of the web.
- * @constructor The constructor would reset and show everything in pages
+ * This class extends HTMLElement, creates a shadow document object model
+ * (DOM), and adds the elements of the settings popup window to the DOM.
  */
 class SettingsPopUp extends HTMLElement {
+    // Closes the settings popup without reset.
     closeWithoutReset() {
         const wrapper = this.shadowRoot.getElementById('settings-confirm-popup');
         wrapper.style.display = 'none';
     }
 
+    // Closes the settings popup.
     closePopUp() {
         const themeCheckbox = this.shadowRoot.querySelector('#dark-mode > label.switch > input[type=checkbox]');
 
@@ -71,6 +71,7 @@ class SettingsPopUp extends HTMLElement {
         wrapper.style.display = 'none';
     }
 
+    // Sets all default values and button audios to play on click in the settings popup.
     confirmSettings() {
         let pomoLength = parseInt(this.shadowRoot.getElementById('pomo-length-input').value, 10);
         if (Number.isNaN(pomoLength)) {
@@ -115,11 +116,12 @@ class SettingsPopUp extends HTMLElement {
         // this.closePopUp();
     }
 
+    // Changes theme from light mode to dark mode.
     toggleMode() {
         document.body.classList.toggle('dark-theme');
     }
 
-    // toggles clickState's state
+    // Toggles clickState's state.
     toggleClickSound() {
         if (localStorage.getItem('clickState') === 'off') {
             localStorage.setItem('clickState', 'on');
@@ -128,7 +130,7 @@ class SettingsPopUp extends HTMLElement {
         }
     }
 
-    // toggles alarmState's state
+    // Toggles alarmState's state.
     toggleAlarmSound() {
         if (localStorage.getItem('alarmState') === 'off') {
             localStorage.setItem('alarmState', 'on');
@@ -153,17 +155,20 @@ class SettingsPopUp extends HTMLElement {
         }
     }
 
+    // Sets the volume based on value in settings popup.
     setVolume() {
         const volume = this.shadowRoot.getElementById('range').value;
         localStorage.setItem('volume', `${volume}`);
     }
 
+    // Updates the volume text based on value in settings popup.
     updateVolumeText() {
         const volumeText = this.shadowRoot.getElementById('volume-number');
         const rangeInput = this.shadowRoot.getElementById('range');
         volumeText.textContent = rangeInput.value;
     }
 
+    // Appends the elements of the settings popup to the shadow DOM.
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
@@ -200,6 +205,7 @@ class SettingsPopUp extends HTMLElement {
         });
     }
 
+    // If node is connected, add an on-click listener to the close button.
     connectedCallback() {
         // Guard clause to prevent it from being called when element is disconnected.
         if (!this.isConnected) {
@@ -261,6 +267,7 @@ class SettingsPopUp extends HTMLElement {
         confirmBtn.addEventListener('click', this._bindedConfirmSettings);
     }
 
+    // If node is connected, remove the close button's on-click listener.
     disconnectedCallback() {
         const closeBtn = this.shadowRoot.getElementById('close-icon');
         closeBtn.removeEventListener('click', this._bindedClose);

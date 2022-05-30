@@ -1,22 +1,23 @@
-/** Help documentation modal component */
+/** Help model component. */
+
 /**
- * The class is create a shadow dom and add every elements or detail in the dom and
- * include the style of the web.
- * @constructor The constructor would reset and show everything in pages
+ * This class extends HTMLElement, creates a shadow document object model
+ * (DOM), and adds the elements of the help popup window to the DOM.
  */
 class HelpPopUp extends HTMLElement {
-    /** Opens the modal */
+    // Opens the popup.
     openPopUp() {
         const wrapper = this.shadowRoot.getElementById('help-popup');
         wrapper.style.display = 'block';
     }
 
-    /** Closes the modal */
+    // Closes the popup.
     closePopUp() {
         const wrapper = this.shadowRoot.getElementById('help-popup');
         wrapper.style.display = 'none';
     }
 
+    // Appends the elements of the help popup to the shadow DOM.
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
@@ -35,6 +36,7 @@ class HelpPopUp extends HTMLElement {
         });
     }
 
+    // If node is connected, add an on-click listener to the close button.
     connectedCallback() {
         if (!this.isConnected) {
             return;
@@ -48,6 +50,7 @@ class HelpPopUp extends HTMLElement {
         this.addEventListener('openPopUp', this._bindedOpen);
     }
 
+    // If node is connected, remove the close button's on-click listener.
     disconnectedCallback() {
         const shadow = this.shadowRoot;
 
@@ -82,3 +85,5 @@ if (document.readyState !== 'loading') {
 } else {
     window.addEventListener('DOMContentLoaded', init);
 }
+
+// module.exports = HelpPopUp;

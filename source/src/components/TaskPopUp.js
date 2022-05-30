@@ -1,14 +1,11 @@
-// const TaskItem = require('./TaskItem');
+/** Task model component. */
 
 /**
- * The class is extend the HTMlElement function. The addTask function would be call for
- * add the tasks in the focus mode. the closePopup function would
- * be called for close all pop up windows.
- *
- * @constructor The constructor would reset and show everything in pages
+ * This class extends HTMLElement, creates a shadow document object model
+ * (DOM), and adds the elements of the task popup window to the DOM.
  */
 class TaskPopUp extends HTMLElement {
-    // add TaskItem element to DOM
+    // Add taskItem element to DOM.
     addTask() {
         const tasks = JSON.parse(localStorage.getItem('tasks'));
         const input = this.shadowRoot.getElementById('task-input').value;
@@ -48,7 +45,7 @@ class TaskPopUp extends HTMLElement {
         }
     }
 
-    /** closes popup */
+    // Closes the task popup.
     closePopUp() {
         const wrapper = this.shadowRoot.getElementById('add-task-popup');
         const input = this.shadowRoot.getElementById('task-input');
@@ -56,7 +53,7 @@ class TaskPopUp extends HTMLElement {
         input.value = '';
     }
 
-    /** create popup item to add tasks by building a custom component */
+    // Appends the elements of the task popup to the shadow DOM.
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
@@ -74,6 +71,7 @@ class TaskPopUp extends HTMLElement {
         });
     }
 
+    // If node is connected, add an on-click listener to the close button.
     connectedCallback() {
         if (!this.isConnected) {
             return;
@@ -85,6 +83,7 @@ class TaskPopUp extends HTMLElement {
         addBtn.addEventListener('click', this._bindedAddTask);
     }
 
+    // If node is connected, remove the close button's on-click listener.
     disconnectedCallback() {
         const closeBtn = this.shadowRoot.getElementById('close-icon');
         const addBtn = this.shadowRoot.getElementById('add-task-btn');
