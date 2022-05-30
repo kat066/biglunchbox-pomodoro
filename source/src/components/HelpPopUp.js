@@ -1,23 +1,23 @@
 /** Help model component. */
 
 /**
- * This class extends HTMLElement, creates a shadow document object model 
+ * This class extends HTMLElement, creates a shadow document object model
  * (DOM), and adds the elements of the help popup window to the DOM.
  */
 class HelpPopUp extends HTMLElement {
-    //Opens the popup.
+    // Opens the popup.
     openPopUp() {
         const wrapper = this.shadowRoot.getElementById('help-popup');
         wrapper.style.display = 'block';
     }
     
-    //Closes the popup.
+    // Closes the popup.
     closePopUp() {
         const wrapper = this.shadowRoot.getElementById('help-popup');
         wrapper.style.display = 'none';
     }
 
-    //Appends the elements of the help popup to the shadow DOM.
+    // Appends the elements of the help popup to the shadow DOM.
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
@@ -36,7 +36,7 @@ class HelpPopUp extends HTMLElement {
         });
     }
 
-    //If node is connected, add an on-click listener to the close button.
+    // If node is connected, add an on-click listener to the close button.
     connectedCallback() {
         if (!this.isConnected) {
             return;
@@ -50,7 +50,7 @@ class HelpPopUp extends HTMLElement {
         this.addEventListener('openPopUp', this._bindedOpen);
     }
 
-    //If node is connected, remove the close button's on-click listener.
+    // If node is connected, remove the close button's on-click listener.
     disconnectedCallback() {
         const shadow = this.shadowRoot;
 
@@ -63,7 +63,7 @@ class HelpPopUp extends HTMLElement {
 customElements.define('help-popup', HelpPopUp);
 
 function init() {
-   const helpBtn = document.getElementById('help-button');
+    const helpBtn = document.getElementById('help-button');
     helpBtn.addEventListener('click', () => {
         const helpPopUp = document.querySelector('help-popup');
         const btnSound = new Audio('./icons/btnClick.mp3');
