@@ -10,7 +10,7 @@ class HelpPopUp extends HTMLElement {
         const wrapper = this.shadowRoot.getElementById('help-popup');
         wrapper.style.display = 'block';
     }
-    
+
     // Closes the popup.
     closePopUp() {
         const wrapper = this.shadowRoot.getElementById('help-popup');
