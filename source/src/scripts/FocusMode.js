@@ -32,6 +32,8 @@ function toggleState() {
     }
 }
 
+// export { toggleState as default };
+
 window.addEventListener('DOMContentLoaded', () => {
     const focusBtn = document.getElementById('focus-button');
     focusBtn.addEventListener('click', toggleState);

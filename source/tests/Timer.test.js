@@ -24,6 +24,9 @@ afterEach(() => {
 });
 
 test('start timer function', () => {
+    document.head.innerHTML = `
+        <title id="tab-label">Pomodoro Timer</title>
+    `;
     document.body.innerHTML = `
         <button id = "start-btn">Start</button>
         <div id="timer-display" class="timer-value">
@@ -121,12 +124,155 @@ test('stop() called when localStorage stop value is true', () => {
     expect(localStorage.getItem('stop')).toBe('false');
 });
 
+describe(('update tab label'), () => {
+    beforeEach(() => {
+        jest.useFakeTimers();
+        localStorage.setItem('pomo-length', '3');
+        localStorage.setItem('short-break-length', '1');
+        localStorage.setItem('long-break-length', '2');
+        localStorage.setItem('tab-label', 'on');
+    });
+
+    afterEach(() => {
+        jest.resetModules();
+        jest.clearAllTimers();
+        localStorage.clear();
+    });
+
+    test('reset to text when timer is stopped', () => {
+        document.head.innerHTML = `
+            <title id="tab-label">13:00 - Time to Focus!</title>
+        `;
+        document.body.innerHTML = `
+            <button id = "start-btn">Stop</button>
+            <button id="pomo-btn"> Pomo</button>
+            <button id="break-btn"> Break</button>
+            <button id = "pomo-btn"> Pomo</button>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">13:00</div>
+            </div>
+        `;
+
+        require('../src/scripts/Timer');
+
+        const startButton = document.getElementById('start-btn');
+        const tabLabel = document.getElementById('tab-label');
+
+        startButton.click();
+        jest.advanceTimersByTime(100);
+
+        expect(startButton.innerHTML).toBe('Start');
+        expect(tabLabel.innerHTML).toBe('Pomodoro Timer');
+    });
+
+    test('tab label shows correct time', () => {
+        document.head.innerHTML = `
+            <title id="tab-label">Pomodoro Timer</title>
+        `;
+        document.body.innerHTML = `
+            <button id = "start-btn">Start</button>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">3:00</div>
+            </div>
+            <button id = "pomo-btn"> Pomo</button>
+            <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
+        `;
+
+        require('../src/scripts/Timer');
+
+        const startButton = document.getElementById('start-btn');
+        const tabLabel = document.getElementById('tab-label');
+
+        startButton.click();
+        expect(tabLabel.innerHTML).toBe('3:00 - Time to Focus!');
+        jest.advanceTimersByTime(59000);
+        expect(tabLabel.innerHTML).toBe('2:01 - Time to Focus!');
+        jest.advanceTimersByTime(121000);
+        expect(tabLabel.innerHTML).toBe('0:00 - Time to Focus!');
+    });
+
+    test('tab label shows correct mode', () => {
+        document.head.innerHTML = `
+            <title id="tab-label">Pomodoro Timer</title>
+        `;
+        document.body.innerHTML = `
+            <button id = "start-btn">Start</button>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">3:00</div>
+            </div>
+            <button id = "pomo-btn"> Pomo</button>
+            <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
+        `;
+
+        require('../src/scripts/Timer');
+
+        const startButton = document.getElementById('start-btn');
+        const tabLabel = document.getElementById('tab-label');
+
+        startButton.click();
+        expect(tabLabel.innerHTML).toBe('3:00 - Time to Focus!');
+        // 0
+        jest.advanceTimersByTime(180000);
+        // jest.runOnlyPendingTimers();
+        jest.advanceTimersByTime(60000);
+        expect(tabLabel.innerHTML).toBe('0:00 - Take a break!');
+        // 1
+        jest.advanceTimersByTime(180000);
+        jest.advanceTimersByTime(60000);
+        // 2
+        jest.advanceTimersByTime(180000);
+        jest.advanceTimersByTime(60000);
+        // 3
+        jest.advanceTimersByTime(180000);
+        jest.advanceTimersByTime(60000);
+        expect(tabLabel.innerHTML).toBe('1:00 - Rest a while!');
+    });
+
+    test('shows correct text when setting is disabled', () => {
+        document.head.innerHTML = `
+            <title id="tab-label">Pomodoro Timer</title>
+        `;
+        document.body.innerHTML = `
+            <button id = "start-btn">Start</button>
+            <div id="timer-display" class="timer-value">
+                <div id="timer-display-duration">3:00</div>
+            </div>
+            <button id = "pomo-btn"> Pomo</button>
+            <button style="background-color: #f3606060;" id = "break-btn"> Break</button>
+        `;
+
+        require('../src/scripts/Timer');
+        localStorage.setItem('tab-label', 'off');
+
+        const startButton = document.getElementById('start-btn');
+        const tabLabel = document.getElementById('tab-label');
+
+        startButton.click();
+        expect(tabLabel.innerHTML).toBe('Pomodoro Timer');
+        // 0
+        jest.advanceTimersByTime(180000);
+        jest.runOnlyPendingTimers();
+        expect(tabLabel.innerHTML).toBe('Pomodoro Timer');
+        jest.advanceTimersByTime(60000);
+        // 1
+        jest.advanceTimersByTime(180000);
+        jest.advanceTimersByTime(60000);
+        // 2
+        jest.advanceTimersByTime(180000);
+        jest.advanceTimersByTime(60000);
+        // 3
+        jest.advanceTimersByTime(180000);
+        expect(tabLabel.innerHTML).toBe('Pomodoro Timer');
+    });
+});
+
 describe(('switch mode'), () => {
     beforeEach(() => {
         jest.useFakeTimers();
         localStorage.setItem('pomo-length', '3');
         localStorage.setItem('short-break-length', '1');
         localStorage.setItem('long-break-length', '2');
+        localStorage.setItem('tab-label', 'on');
     });
 
     afterEach(() => {
@@ -149,6 +295,7 @@ describe(('switch mode'), () => {
 
         const startButton = document.getElementById('start-btn');
         const display = document.getElementById('timer-display-duration');
+        const tabLabel = document.getElementById('tab-label');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -158,8 +305,10 @@ describe(('switch mode'), () => {
         startButton.click();
         jest.advanceTimersByTime(180000);
         expect(display.innerHTML).toBe('0:00');
+        expect(tabLabel.innerHTML).toBe('0:00 - Time to Focus!');
         jest.runOnlyPendingTimers();
         expect(display.innerHTML).toBe('0:59');
+        expect(tabLabel.innerHTML).toBe('0:59 - Take a break!');
 
         expect(breakButton.classList).toContain('toggle');
         expect(pomoButton.classList).toContain('toggle');
@@ -179,6 +328,7 @@ describe(('switch mode'), () => {
 
         const startButton = document.getElementById('start-btn');
         const display = document.getElementById('timer-display-duration');
+        const tabLabel = document.getElementById('tab-label');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -188,10 +338,13 @@ describe(('switch mode'), () => {
         startButton.click();
         jest.advanceTimersByTime(180000);
         expect(display.innerHTML).toBe('0:00');
+        expect(tabLabel.innerHTML).toBe('0:00 - Time to Focus!');
         jest.advanceTimersByTime(60000);
         expect(display.innerHTML).toBe('0:00');
+        expect(tabLabel.innerHTML).toBe('0:00 - Take a break!');
         jest.runOnlyPendingTimers();
         expect(display.innerHTML).toBe('2:59');
+        expect(tabLabel.innerHTML).toBe('2:59 - Time to Focus!');
 
         expect(pomoButton.classList).not.toContain('toggle');
         expect(breakButton.classList).not.toContain('toggle');
@@ -211,6 +364,7 @@ describe(('switch mode'), () => {
 
         const startButton = document.getElementById('start-btn');
         const display = document.getElementById('timer-display-duration');
+        const tabLabel = document.getElementById('tab-label');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -236,6 +390,7 @@ describe(('switch mode'), () => {
         jest.runOnlyPendingTimers();
 
         expect(display.innerHTML).toBe('1:59');
+        expect(tabLabel.innerHTML).toBe('1:59 - Rest a while!');
 
         expect(breakButton.classList).toContain('toggle');
         expect(pomoButton.classList).toContain('toggle');
@@ -255,6 +410,7 @@ describe(('switch mode'), () => {
 
         const startButton = document.getElementById('start-btn');
         const display = document.getElementById('timer-display-duration');
+        const tabLabel = document.getElementById('tab-label');
         const pomoButton = document.getElementById('pomo-btn');
         const breakButton = document.getElementById('break-btn');
 
@@ -278,6 +434,7 @@ describe(('switch mode'), () => {
         jest.runOnlyPendingTimers();
 
         expect(display.innerHTML).toBe('1:59');
+        expect(tabLabel.innerHTML).toBe('1:59 - Rest a while!');
 
         expect(breakButton.classList).toContain('toggle');
         expect(pomoButton.classList).toContain('toggle');

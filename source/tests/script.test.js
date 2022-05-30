@@ -59,6 +59,7 @@ test('Initializes localStorage correctly', () => {
     expect(localStorage.getItem('tasks')).toBe('[]');
     expect(localStorage.getItem('id')).toBe('0');
     expect(localStorage.getItem('theme')).toBe('light');
+    expect(localStorage.getItem('tab-label')).toBe('on');
     expect(localStorage.getItem('volume')).toBe('50');
     expect(document.getElementById('task-list-elements').children).toHaveLength(0);
 });

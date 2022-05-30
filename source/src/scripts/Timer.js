@@ -1,3 +1,4 @@
+// import toggleState from '/scripts/FocusMode.js';
 const startButton = document.getElementById('start-btn');
 const timerDisplayDuration = document.getElementById('timer-display-duration');
 const timerBackground = document.getElementById('timer-display');
@@ -48,6 +49,11 @@ function togglePomoButtonOn(pomoButton, breakButton) {
 /** This function is called to update the tab label with the remaining
  * time, if the Tab Label setting is enabled. It can also be used to
  * set the tab label back to normal text by passing null as the argument.
+ * @param { string } tabLabelTime - The string showing the current time
+ * on the timer. It is the same as the time on the timer display.
+ * If this parameter is set to null, the tab label will be set to
+ * the regular text, "Pomodoro Timer", instead of showing a time.
+ * @returns { void }
  */
 function updateTabLabel(tabLabelTime) {
     const tabLabel = document.getElementById('tab-label');
@@ -59,7 +65,7 @@ function updateTabLabel(tabLabelTime) {
 }
 
 /**
- * The sitchMode function would sitch the time mode if the pomo time is over.
+ * The switchMode function would switch the time mode if the pomo time is over.
  * the function would switch short break time mode. After three times of short
  * break time, the function would switch to long break time.
  */

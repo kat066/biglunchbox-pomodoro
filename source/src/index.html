@@ -399,6 +399,16 @@
             outline: none;
             padding: var(--setting-margin) var(--setting-margin);
         }
+        .warning-message {
+            border-style: none; 
+            border-radius: 0.3125vw;
+            color:rgb(85, 85, 85);
+            font-family: 'Quicksand', sans-serif;
+            font-size: var(--pop-up-button-font-size);
+            font-weight: 500;
+            outline: none;
+            padding: var(--setting-margin) var(--setting-margin);
+        }
         .settings-popup-btns:hover {
             filter: brightness(105%);
             transform: scale(1.1);
@@ -485,6 +495,7 @@
             
         </div>
         <div class="button-footer" part="btn-footer">
+            <p class = "warning-message" style="text-align:left" part="volume-number">WARNING: Any changes to settings will reset the timer if running!</p>
             <button id="confirm-settings-btn" class="settings-popup-btns" part="confirm-btn">Confirm</button>
         </div>
     </div>
