@@ -1,9 +1,94 @@
 /* eslint-disable no-restricted-globals */
-let timer;
-let expectedTime;
-let remainingTime;
-let attemptedCorrection = true;
 
+/**
+ * @file Webworker for the pomodoro timer. Used when browser/environment supports
+ * webworkers and maintains driftless intervals.
+ * @author Juhmer Tena
+ * @module Timer.worker.js
+ */
+
+/**
+ * Remaining time in seconds for timerFunction
+ * @type {number}
+ */
+let remainingTime;
+
+let /** @type {AccurateInterval} */ timer;
+
+/**
+ * Class representing a self-correcting interval.
+ * @property {(timeoutID|intervalID)} timer - Maintains timeouts/intervals and checks it
+ *     against the drift.
+ * @property {number} expectedTime - Expected tiemstamp the next tick would be run
+ */
+class AccurateInterval {
+    /**
+     * Creates an accurate interval with an acceptable drift.
+     * @param {function} cb - Callback function
+     * @param {any[]} args - Arguments to the callback function
+     * @param {number} interval - Interval in milliseconds
+     * @param {number} acceptableDrift - Allowed drift in milliseconds
+     */
+    constructor(cb, args, interval, acceptableDrift) {
+        this.cb = cb;
+        this.args = args;
+        this.interval = interval;
+        this.acceptableDrift = acceptableDrift;
+    }
+
+    /**
+     * Starts the accurate interval
+     * @param {boolean} noZeroTick - Checks to see if we want a zerotick callback run.
+     */
+    start(noZeroTick) {
+        if (noZeroTick) {
+            this.expectedTime = Date.now() + this.interval;
+            this.tick();
+        } else {
+            this.tick(true);
+        }
+    }
+
+    /**
+     * Each run of the accurate interval
+     * @param {boolean} attemptedCorrection
+     */
+    tick(attemptedCorrection) {
+        this.cb(...(this.args || []));
+
+        const currentTime = Date.now();
+        if (typeof this.expectedTime === 'undefined') this.expectedTime = currentTime;
+        const drift = currentTime - this.expectedTime;
+
+        this.expectedTime += this.interval;
+
+        // If previousTime was undefined, then first execution. Otherwise, change according to drift
+        if (Math.abs(drift) > this.acceptableDrift) {
+            // If the drift was still larger, then clearing a used setTimeout does nothing
+            clearInterval(this.timer);
+            this.timer = setTimeout(this.tick.bind(this), Math.max(0, this.interval - drift), true);
+        } else if (attemptedCorrection) {
+            // This is a bit counterintuitive but resetting the interval to counteract the drift
+            // results in less drift by predicting future delays.
+            // Over 2 minutes: results in 6 drift corrections instead of 22 on Firefox
+            this.timer = setInterval(this.tick.bind(this),
+                Math.max(0, this.interval - drift), false);
+        }
+    }
+
+    /**
+     * Stops the accurate interval
+     */
+    stop() {
+        clearInterval(this.timer);
+        this.timer = undefined;
+        this.expectedTime = undefined;
+    }
+}
+
+/**
+ * Each tick of the pomodoro timer where worker posts message of the new time.
+ */
 function timerFunction() {
     const remainingMinutes = Math.floor(remainingTime / 60);
     const remainingSeconds = remainingTime % 60;
@@ -15,43 +100,17 @@ function timerFunction() {
 }
 
 /**
- * Creates an accurate interval by calculating drift.
- * @param {function} cb -
- * @param {any} data -
- * @param {number} baseDelay
- * @param {number} acceptableDrift
+ * Listen to messages for the timer webworker.
+ * @listens Worker#message
+ * @param {Event} ev - Message event from main JavaScript thread
  */
-function accurateInterval(cb, data, baseDelay, acceptableDrift) {
-    cb(...(data || []));
-
-    const currentTime = Date.now();
-    if (typeof expectedTime === 'undefined') expectedTime = currentTime;
-    const drift = currentTime - expectedTime;
-
-    // If previousTime was undefined, then first execution. Otherwise, change according to drift
-    if (Math.abs(drift) > acceptableDrift) {
-        // If the drift was still larger, then clearing a used setTimeout does nothing
-        clearInterval(timer);
-        timer = setTimeout(accurateInterval, Math.max(0, baseDelay - drift), cb, data,
-            baseDelay, acceptableDrift);
-        attemptedCorrection = true;
-        console.log('drifted');
-    } else if (attemptedCorrection) {
-        attemptedCorrection = false;
-        timer = setInterval(accurateInterval, Math.max(0, baseDelay - drift), cb, data,
-            baseDelay, acceptableDrift);
-    }
-    expectedTime += baseDelay;
-    return timer;
-}
-
 self.addEventListener('message', (ev) => {
-    clearInterval(timer);
+    if (timer instanceof AccurateInterval) {
+        timer.stop();
+    }
+
     if (ev.data === 'stop') {
         timer = undefined;
-        expectedTime = undefined;
-        attemptedCorrection = true;
-        remainingTime = 0;
         return;
     }
 
@@ -62,5 +121,6 @@ self.addEventListener('message', (ev) => {
     }
 
     remainingTime = totalTime * 60;
-    timer = accurateInterval(timerFunction, null, 1000, 50);
+    timer = new AccurateInterval(timerFunction, null, 1000, 50);
+    timer.start();
 });

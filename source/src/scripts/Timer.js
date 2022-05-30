@@ -1,73 +1,105 @@
-// import toggleState from '/scripts/FocusMode.js';
+/**
+ * @file Main timer logic. Controls the DOM and hotkeys.
+ * @module Timer.js
+ */
+
 const startButton = document.getElementById('start-btn');
 const timerDisplayDuration = document.getElementById('timer-display-duration');
 const timerBackground = document.getElementById('timer-display');
 const btnSound = new Audio('./icons/btnClick.mp3');
 const alarmSound = new Audio('./icons/alarm.mp3');
-const timerWorkerFile = '/scripts/Timer.worker.js';
+const timerWorkerFile = 'scripts/Timer.worker.js';
 const SECOND = 1000;
 
+/**
+ * @type {(Worker|intervalID)}
+ */
 let timer;
+
+/**
+ * Current phase of the timer
+ * @type {('pomo'|'break')}
+ * @default
+ */
 let timerStatus = 'pomo';
+
+/**
+ * Tab label corresponding to the current timer phase
+ * @type {('Rest a while!'|'Take a break!'|'Time to Focus!')}
+ * @default
+ */
 let tabLabelStatus = 'Time to Focus!';
+
+/**
+ * Current break in the pomo cycle
+ * @type {(0|1|2|3)}
+ * @default
+ */
 let breakCounter = 0;
 
 // assign default session lengths to local storage
-if (localStorage.getItem('pomo-length') === null) {
-    localStorage.setItem('pomo-length', '25');
-    localStorage.setItem('short-break-length', '5');
-    localStorage.setItem('long-break-length', '15');
-}
+
+/** @type {number} */
 let pomoTime = localStorage.getItem('pomo-length');
+if (pomoTime === null) {
+    localStorage.setItem('pomo-length', '25');
+    pomoTime = 25;
+}
+
+/** @type {number} */
 let breakTime = localStorage.getItem('short-break-length');
+if (breakTime === null) {
+    localStorage.setItem('short-break-length', '5');
+    breakTime = 5;
+}
+
+/** @type {number} */
 let longBreakTime = localStorage.getItem('long-break-length');
+if (longBreakTime === null) {
+    localStorage.setItem('long-break-length', '15');
+    longBreakTime = 15;
+}
 
 timerDisplayDuration.textContent = `${pomoTime}:00`;
 
 /**
- * This function is used by switchMode() to switch the highlighted button
- * on the UI from pomo to break when switching to break mode.
+ * Used by switchmode() to switch highlighted button on UI from pomo to break mode.
+ * @param {HTMLButtonElement} pomoButton
+ * @param {HTMLButtonElement} breakButton
  */
 function togglePomoButtonOff(pomoButton, breakButton) {
-    if (pomoButton.getAttribute('class') !== 'toggle') {
-        pomoButton.classList.toggle('toggle');
-        breakButton.classList.toggle('toggle');
-    }
+    pomoButton.classList.add('toggle');
+    breakButton.classList.add('toggle');
 }
 
 /**
- * This function is used by switchMode() to switch the highlighted button
- * on the UI from break to pomo when switching to pomo mode.
+ * Used by switchmode() to switch highlighted button on UI from break to pomo mode.
+ * @param {HTMLButtonElement} pomoButton
+ * @param {HTMLButtonElement} breakButton
  */
 function togglePomoButtonOn(pomoButton, breakButton) {
-    if (pomoButton.getAttribute('class') === 'toggle') {
-        pomoButton.classList.toggle('toggle');
-        breakButton.classList.toggle('toggle');
-    }
+    pomoButton.classList.remove('toggle');
+    breakButton.classList.remove('toggle');
 }
 
-/** This function is called to update the tab label with the remaining
- * time, if the Tab Label setting is enabled. It can also be used to
- * set the tab label back to normal text by passing null as the argument.
- * @param { string } tabLabelTime - The string showing the current time
- * on the timer. It is the same as the time on the timer display.
- * If this parameter is set to null, the tab label will be set to
- * the regular text, "Pomodoro Timer", instead of showing a time.
- * @returns { void }
+/**
+ * Updates tab label with the remaining time if the setting is enabled.
+ * Also used to reset tab label back to normal.
+ * @param {(string|null)} tabLabelTime - String adds time to tab label.
+ *     null resets tab label to default.
  */
 function updateTabLabel(tabLabelTime) {
     const tabLabel = document.getElementById('tab-label');
     if (tabLabelTime === null) {
-        tabLabel.innerHTML = 'Pomodoro Timer';
+        tabLabel.textContent = 'Pomodoro Timer';
     } else if (localStorage.getItem('tab-label') === 'on') {
-        tabLabel.innerHTML = `${tabLabelTime} - ${tabLabelStatus}`;
+        tabLabel.textContent = `${tabLabelTime} - ${tabLabelStatus}`;
     }
 }
 
 /**
- * The switchMode function would switch the time mode if the pomo time is over.
- * the function would switch short break time mode. After three times of short
- * break time, the function would switch to long break time.
+ * Switches between pomo and break time mode. After three short breaks, the next
+ * break will be a long break.
  */
 function switchMode() {
     const pomoButton = document.getElementById('pomo-btn');
@@ -75,12 +107,6 @@ function switchMode() {
 
     timerBackground.style.transitionDelay = null;
     timerBackground.classList.remove('work', 'break');
-    /**
-     * Hacky way to reset animations at the cost of some performance without this,
-     * changing between classes is really odd and animations do not get reset
-     */
-    // eslint-disable-next-line no-void
-    // void timerBackground.offsetWidth;
 
     // Length in minutes of the next phase
     let newTime;
@@ -88,6 +114,7 @@ function switchMode() {
     if (timerStatus === 'pomo') {
         togglePomoButtonOff(pomoButton, breakButton);
         timerStatus = 'break';
+        // If we had three short breaks, have a long break
         if (breakCounter >= 3) {
             tabLabelStatus = 'Rest a while!';
             newTime = longBreakTime;
@@ -120,22 +147,20 @@ function switchMode() {
     }
 }
 
-/** Toggle focus mode: remove task list component and only show the Pomodoro timer */
-/** The function is keep track of focus tasks and check if all the
- * tasks are complete.
-  */
+/**
+ * Keep track of focus tasks and check if all tasks are complete.
+ */
 function toggleState() {
     // elements -- popup button, task list div, pomodoro timer div, focus task
-    // const popUpBtn = document.getElementById('popup-button');
     const taskListDiv = document.getElementById('task-list');
     const pomoDiv = document.getElementById('pomodoro-timer');
     const focusTask = document.getElementById('focus-task');
     const button = document.getElementById('header-buttons');
-    // popUpBtn.classList.toggle('state');
     taskListDiv.classList.toggle('state');
     pomoDiv.classList.toggle('state');
     focusTask.classList.toggle('state');
     button.classList.toggle('state');
+
     if (localStorage.getItem('state') === 'default') {
         localStorage.setItem('state', 'focus');
     } else {
@@ -149,8 +174,6 @@ function toggleState() {
 
 /**
  * Updates the transition on tab refocus to prevent transition desync.
- *
- * @function
  * @listens document#visibilitychange
  */
 document.addEventListener('visibilitychange', () => {
@@ -190,9 +213,8 @@ document.addEventListener('visibilitychange', () => {
 });
 
 /**
- * The function would call the switchMode function if the time mode counter
- * down to 0 and the alarm sound would be call. The counter down would be call
- * in this function.
+ * Timer function ran for each tick (one second) to update DOM. Fallback when
+ * workers are unavailable.
  */
 async function timerFunction() {
     let timerText = timerDisplayDuration.innerHTML;
@@ -224,13 +246,13 @@ async function timerFunction() {
     updateTabLabel(newTime);
 }
 
+/**
+ * Creates a webworker to manage the timer function to reduce drift.
+ * @returns {Worker} - Webworker managing the timer function and ticks.
+ */
 function createTimerWorker() {
     const worker = new Worker(timerWorkerFile);
-    /**
-    * The function would call the switchMode function if the time mode counter
-    * down to 0 and the alarm sound would be call. The counter down would be call
-    * in this function.
-    */
+
     worker.addEventListener('message', (event) => {
         const { remainingTime, timerString } = event.data;
         if (remainingTime === -1) {
@@ -251,8 +273,8 @@ function createTimerWorker() {
 // Used to prevent get request every time the start button is clicked
 const timerWorker = (typeof Worker !== 'undefined' ? createTimerWorker() : undefined);
 
-/** The function would be call when the click start button and the stop button
- * would be show in the web.
+/**
+ * Begins the timer and automatically assigns timer type based on webworker support.
  */
 async function start() {
     // automatically get into focus mode when timer is running
@@ -285,8 +307,8 @@ async function start() {
     startButton.textContent = 'Stop';
 }
 
-/** The function would be call when the click stop button the start button
- * would be show in the web. The time would be reset.
+/**
+ * Stops the timer and updates the DOM to the default "waiting" state.
  */
 async function stop() {
     pomoTime = localStorage.getItem('pomo-length');
@@ -315,7 +337,9 @@ async function stop() {
     timerBackground.classList.remove('work', 'break');
 }
 
-/** The function to check if the status stop */
+/**
+ * The function to check if the status stop
+ */
 async function stopChecker() {
     if (localStorage.getItem('stop') === 'true') {
         stop();
@@ -323,11 +347,11 @@ async function stopChecker() {
     }
 }
 
-/** The function check if the start button click then call start function
- * if the stop button click then call stop function. The sound of button would
- * be play.
+/**
+ * Start or stops the timer when the button is clicked.
+ * @listens HTMLButtonElement#click
  */
-async function startAndStopButton() {
+startButton.addEventListener('click', () => {
     btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
     if (localStorage.getItem('clickState') === 'on') {
         btnSound.play(); // only plays sound when enabled
@@ -337,25 +361,32 @@ async function startAndStopButton() {
     } else {
         stop();
     }
-}
+});
 
 // Respond to user feedback in 50ms or less.
 setInterval(stopChecker, 50);
 
-// disableing space keydown
+/**
+ * Disable space keydown.
+ * @listens window#keydown
+ */
 window.addEventListener('keydown', (event) => {
-    if (event.code === 'Space') {
+    const addDis = document.querySelector('task-popup')?.shadowRoot.getElementById('add-task-popup').style.display;
+    if (event.code === 'Space' && (!addDis || addDis === 'none')) {
         event.preventDefault();
     }
 });
 
-startButton.addEventListener('click', startAndStopButton);
-// keyboard event stuff
+/**
+ * Keyboard event shortcuts.
+ * @listens window#keyup
+ * @param {KeyboardEvent} event - Keyboard event and shortcuts
+ */
 window.addEventListener('keyup', (event) => {
-    const addDis = document.querySelector('task-popup').shadowRoot.getElementById('add-task-popup').style.display;
-    const setDis = document.querySelector('settings-popup').shadowRoot.getElementById('settings-confirm-popup').style.display;
-    const resDis = document.querySelector('reset-popup').shadowRoot.getElementById('reset-confirm-popup').style.display;
-    const helpDis = document.querySelector('help-popup').shadowRoot.getElementById('help-popup').style.display;
+    const addDis = document.querySelector('task-popup')?.shadowRoot.getElementById('add-task-popup').style.display;
+    const setDis = document.querySelector('settings-popup')?.shadowRoot.getElementById('settings-confirm-popup').style.display;
+    const resDis = document.querySelector('reset-popup')?.shadowRoot.getElementById('reset-confirm-popup').style.display;
+    const helpDis = document.querySelector('help-popup')?.shadowRoot.getElementById('help-popup').style.display;
     if (!addDis || addDis === 'none') {
         switch (event.code) {
         case 'KeyF':
