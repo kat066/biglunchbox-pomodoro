@@ -79,22 +79,20 @@ class ResetPopUp extends HTMLElement {
 }
 customElements.define('reset-popup', ResetPopUp);
 
-window.addEventListener('DOMContentLoaded', () => {
+function init() {
     const resetPopUp = document.querySelector('reset-popup');
     const resetBtn = document.getElementById('reset-button');
     resetBtn.addEventListener('click', () => {
-        const btnSound = new Audio('./icons/btnClick.mp3');
-        btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
-        if (localStorage.getItem('clickState') === 'on') {
-            btnSound.play(); // only plays sound when enabled
-        }
-        // this makes sure any popup is closed before opening current popup
-        const popups = Array.from(document.getElementsByClassName('popup'));
-        for (let i = 0; i < popups.length; i += 1) {
-            popups[i].closePopUp();
+	@@ -92,12 +95,6 @@ function init() {
         }
         resetPopUp.shadowRoot.getElementById('reset-confirm-popup').setAttribute('style', 'display:block');
     });
-});
+}
+
+if (document.readyState !== 'loading') {
+    init();
+} else {
+    window.addEventListener('DOMContentLoaded', init);
+}
 
 // module.exports = ResetPopUp;
