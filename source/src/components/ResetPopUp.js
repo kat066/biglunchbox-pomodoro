@@ -1,7 +1,7 @@
 /** Reset model component. */
 
 /**
- * This class extends HTMLElement, creates a shadow document object model 
+ * This class extends HTMLElement, creates a shadow document object model
  * (DOM), and adds the elements of the reset popup window to the DOM.
  */
 class ResetPopUp extends HTMLElement {
@@ -27,13 +27,13 @@ class ResetPopUp extends HTMLElement {
         this.closePopUp();
     }
 
-    //Closes the reset popup.
+    // Closes the reset popup.
     closePopUp() {
         const wrapper = this.shadowRoot.getElementById('reset-confirm-popup');
         wrapper.style.display = 'none';
     }
 
-    //Appends the elements of the reset popup to the shadow DOM.
+    // Appends the elements of the reset popup to the shadow DOM.
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: 'open' });
@@ -55,7 +55,7 @@ class ResetPopUp extends HTMLElement {
         });
     }
 
-    //If node is connected, add an on-click listener to the close button.
+    // If node is connected, add an on-click listener to the close button.
     connectedCallback() {
         if (!this.isConnected) {
             return;
@@ -68,7 +68,7 @@ class ResetPopUp extends HTMLElement {
         confirmBtn.addEventListener('click', this._bindedReset);
     }
 
-    //If node is connected, remove the close button's on-click listener.
+    // If node is connected, remove the close button's on-click listener.
     disconnectedCallback() {
         const closeBtn = this.shadowRoot.getElementById('close-icon');
         closeBtn.removeEventListener('click', this._bindedClose);
@@ -83,7 +83,15 @@ function init() {
     const resetPopUp = document.querySelector('reset-popup');
     const resetBtn = document.getElementById('reset-button');
     resetBtn.addEventListener('click', () => {
-	@@ -92,12 +95,6 @@ function init() {
+        const btnSound = new Audio('./icons/btnClick.mp3');
+        btnSound.volume = 0.01 * parseInt(localStorage.getItem('volume'), 10);
+        if (localStorage.getItem('clickState') === 'on') {
+            btnSound.play(); // only plays sound when enabled
+        }
+        // this makes sure any popup is closed before opening current popup
+        const popups = Array.from(document.getElementsByClassName('popup'));
+        for (let i = 0; i < popups.length; i += 1) {
+            popups[i].closePopUp();
         }
         resetPopUp.shadowRoot.getElementById('reset-confirm-popup').setAttribute('style', 'display:block');
     });
