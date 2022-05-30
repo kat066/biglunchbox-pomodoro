@@ -1,7 +1,7 @@
 /** Task item model component. */
 
 /**
- * This class extends HTMLElement, creates a shadow document object model 
+ * This class extends HTMLElement, creates a shadow document object model
  * (DOM), and adds the elements of the task item object to the DOM.
  */
 class TaskItem extends HTMLElement {
