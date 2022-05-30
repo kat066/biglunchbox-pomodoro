@@ -1,3 +1,4 @@
+// import toggleState from '/scripts/FocusMode.js';
 const startButton = document.getElementById('start-btn');
 const timerDisplayDuration = document.getElementById('timer-display-duration');
 const timerBackground = document.getElementById('timer-display');
