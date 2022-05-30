@@ -10,7 +10,7 @@ class SettingsPopUp extends HTMLElement {
         const wrapper = this.shadowRoot.getElementById('settings-confirm-popup');
         wrapper.style.display = 'none';
     }
-    
+
     // Closes the settings popup.
     closePopUp() {
         const themeCheckbox = this.shadowRoot.querySelector('#dark-mode > label.switch > input[type=checkbox]');
