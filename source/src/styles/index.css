@@ -19,17 +19,6 @@
         --button-footer-padding:3px;
         --setting-margin:8px;
         --pop-up-button-font-size:7px;
-        --header-font-size:35px;
-        --top-button-size:30px;
-        --top-button-help-size:25px;
-        --top-button-focus-size:45px;
-        --top-button-width:50px;
-        --top-button-height:45px;
-        --main-font-size:30px;
-        --timer-button-padding-height:6px;
-        --timer-button-padding-width:12px;
-        --timer-marigin:20px;
-        --plus-circle-size:45px;
     }
 }
 @media only screen and (min-width: 600px){
@@ -53,30 +42,10 @@
         --button-footer-padding:12px;
         --setting-margin:15px;
         --pop-up-button-font-size:15px;
-        --header-font-size:50px;
-        --top-button-size:35px;
-        --top-button-help-size:30px;
-        --top-button-focus-size:50px;
-        --top-button-width:60px;
-        --top-button-height:50px;
-        --main-font-size:35px;
-        --timer-button-padding-height:15px;
-        --timer-button-padding-width:30px;
-        --timer-marigin:40px;
-        --plus-circle-size:45px;
-        
     }     
 }
 html {
     height: 100%;
-}
-
-ul{
-    margin-block-start: 0px;
-    margin-block-end: 0px;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 0px;
 }
 
 body {
@@ -91,50 +60,62 @@ body {
 }
 
 #container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    width:90%;
+    margin: auto;
 }
 
 header {
+    margin-top: 1.275vh;
+    margin-bottom: 5.275vh;
     display: flex;
-    flex-direction:row;
-    justify-content:space-around;
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    margin-left: 10%;
-    margin-right: 10%;
+    border-bottom: 1px solid #7b0c0c4f;
 }
 
+main{
+    display: grid;
+    grid-template-columns: 1fr;
+    width:100%;
+    gap: 40px;
+}
+
+
 h1#header-name {
-    display:inline-block;
     color: #f36060;
-    font-size: var(--header-font-size);
+    font-size: 5vw;
     font-weight: 500;
-    justify-content: center;
+    margin-bottom: 1.275vh;
 }
 
 #header-buttons {
-    padding: 0;
-    margin: 0;
+    display: inline-block;
 }
 
+#header-buttons ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 #header-buttons ul li {
     display: inline-block;
+    margin-right: 0.5vw;
 }
 
 .top-buttons {
     cursor: pointer;
     border-style: none;
     border-radius: 10%;
-    text-align: center;
     background-color: #f36060;
     color: #fff;
-    outline: none;
-    height: var(--top-button-height);
-    width: var(--top-button-width);
+    height : 6.125vw;
+    width: 6.125vw;
+    padding: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .top-buttons:hover {
@@ -143,50 +124,80 @@ h1#header-name {
 }
 
 .top-button-img {
-    display: inline-block;
-    vertical-align: middle;
-    width: var(--top-button-size);
-    height:  var(--top-button-size);
+    width: 3.6vw;
+    height: 3.6vw;
 }
 
 img#help {
-    width: var(--top-button-help-size);
-    height: var(--top-button-help-size);
+    width: 3.275vw;
+    height: 3.275vw;
 }
 
 img#focus {
-    width: var(--top-button-focus-size);
-    height: var(--top-button-focus-size);
-}
-header:after {
-    content: ' ';
-    display: block;
-    border-bottom: 1px solid #7b0c0c4f;
-    border-radius: 4px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 1%;
+    width: 4.375vw;
+    height: 4.375vw;
 }
 
-#task-list {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: max-content;
-    max-width: 80%;
-    margin: 0 auto auto auto;
+@media(min-width:768px) {
+    h1#header-name {
+        font-size: 3vw;
+    }
+    main {
+        grid-template-columns: 1fr 1fr;
+    } 
+
+    .top-buttons {
+        height : 3.125vw;
+        width: 3.125vw;
+    }
+
+    .top-button-img {
+        width: 1.6vw;
+        height: 1.6vw;
+    }
+
+    img#help {
+        width: 1.275vw;
+        height: 1.275vw;
+    }
+
+    img#focus {
+        width: 2.375vw;
+        height: 2.375vw;
+    }
 }
+
+
+#task-list {
+    width:100%;
+    margin: auto;
+}
+
+#task-list task-item{
+    height: 5vh;
+    font-size: 3vh;
+}
+
+@media(min-width:768px) {
+    #task-list {
+        margin: unset;
+    }
+    #task-list task-item{
+        min-height: 6vh;
+        font-size: 30px;
+        width:70%;
+    }
+}
+
+#task-list task-item li{
+    width:100%;
+}
+
 menu{
-    margin-block-start: var(--timer-marigin);
-    margin-block-end: var(--timer-marigin);
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 0px;
-    display:table;
-    width: fit-content;
+    display:flex;
+    justify-content: center;
     align-items: center;
+    padding: 0;
 }
 
 menu button{
@@ -195,13 +206,6 @@ menu button{
     -moz-transition: background-color 0.3s ease, filter 0.3s ease;
     -ms-transition: background-color 0.3s ease, filter 0.3s ease;
     -o-transition: background-color 0.3s ease, filter 0.3s ease;
-    color: white;
-    text-align: center;
-    font-weight: 500;
-    font-size: var(--main-font-size);
-    padding: var(--timer-button-padding-height) var(--timer-button-padding-width);
-    border:none;
-    cursor: pointer;
 }
 
 menu button:hover{
@@ -211,46 +215,55 @@ menu button:hover{
 
 #up-next[data-selected = "true"], #completed[data-selected = "true"] {
     background-color: #f36060;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 5.875vw;
+    padding: 2.78125vw 3.875vw;
+    border:none;
+    margin: 0;
+    cursor: pointer;
     margin-right: -1px;
 }
 #up-next[data-selected = "false"], #completed[data-selected = "false"]{
     background-color: #f3606060;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 5.875vw;
+    padding: 2.78125vw 3.875vw;
+    border:none;
+    margin: 0;
+    cursor: pointer;
+}
+
+@media(min-width:768px) {
+    #up-next[data-selected = "true"], #completed[data-selected = "true"] {
+        font-size: 1.875vw;
+        padding: 0.78125vw 1.875vw;
+    }
+    #up-next[data-selected = "false"], #completed[data-selected = "false"]{
+        font-size: 1.875vw;
+        padding: 0.78125vw 1.875vw;
+    }
 
 }
-main {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items:center;
-    margin-left: 10%;
-    margin-right: 10%;
-    height: 100%;
-}
+
 #pomodoro-timer {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: max-content;
-    width: max-content;
-    margin: 0 auto auto auto;
+    width:100%;
 }
 
 #task-list ul {
-    /* list-style-type: none; */
+    list-style-type: none;
     max-height: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
+    overflow: auto;
+    padding: 0;
 }
-
 
 #task-popup-btn {
     cursor: pointer;
-    height: var(--plus-circle-size);
-    width: var(--plus-circle-size);
+    height: 10vw;
+    width: 10vw;
     border-style: none;
     border-radius: 50%;
     text-align: center;
@@ -258,8 +271,15 @@ main {
     font-family: 'Quicksand', sans-serif;
     background-color: #f36060;
     outline: none;
-    margin: auto;
+    margin: 0 auto;
     display: block;
+}
+
+@media(min-width:768px) {
+    #task-popup-btn {
+        height: 4vw;
+        width: 4vw;
+    }
 }
 
 #task-popup-btn:hover {
@@ -268,7 +288,7 @@ main {
 }
 
 #plus {
-    width: var(--main-font-size);
+    width:70%;
     vertical-align: middle;
 }
 
@@ -291,20 +311,22 @@ button {
 }
 .timer-buttons {
     width: fit-content;
+    margin: 0 auto;
+    margin-top: 0.25vh;
     display: table;
-    margin-top:var(--timer-marigin);
 }
 
 .timer-buttons button {
     border: none;
     color: white;
-    padding: var(--timer-button-padding-height) var(--timer-button-padding-width);
-    font-size: var(--main-font-size);
+    padding: 0.78125vw 1.875vw;
+    font-size: 1.5625vw;
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     outline: none;
-    
-
+    display: inline;
+    margin-right: -4.5px;
+    margin-left: -0px;
 }
 
 #pomo-btn {
@@ -334,7 +356,7 @@ div.empty-space-border {
     border-width: thick;
     border-radius: 50px;
     text-align: center;
-    padding: 15px;
+    padding: 0.46875vw;
     opacity: 0;
 }
 
@@ -342,16 +364,20 @@ div.empty-space-border {
 /* CSS for Clock Test and Border Surrounding it */
 
 div.timer-value {
-    font-size: var(--header-font-size);
-    margin-top: var(--timer-marigin);
+    font-size: 15vw;
     color: #fff;
     border-style: solid;
     border-color: #f36060;
     border-width: thick;
-    border-radius: 30px;
+    border-radius: 3.90625vw;
     text-align: center;
-    padding: 50px; 
-    width: 80%; 
+    width:100%;
+}
+
+@media(min-width:768px) {
+    div.timer-value {
+        font-size: 8vw;
+    }
 }
 
 #timer-display {
@@ -370,6 +396,12 @@ div.timer-value {
     -moz-transition: none;
     -ms-transition: none;
     -o-transition: none;
+    box-sizing: border-box;
+    height: 30vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 #timer-display[data-started] {
@@ -385,29 +417,33 @@ div.timer-value {
 #timer-display[data-started].break {
     background-size: 100% calc(100% + 5vh);
 }
-#timer-display-duration {
-    margin: auto;
-}
 
 /* CSS for Start/Reset Buttons */
 
 .timer-control-buttons {
     text-align: center;
-    width: 80%;
 }
 
 .timer-control-buttons button {
-    margin-top: var(--timer-marigin);
+    margin-top: 2.640625vh;
     background-color: #f36060;
     border: none;
     color: white;
-    padding:var(--timer-button-padding-height) var(--timer-button-padding-width);
-    font-size: var(--main-font-size);
+    cursor: pointer;
     font-weight: 500;
-    border-radius: 0.625vw;
+    border-radius: 3.625vw;
     outline: none;
     font-family: 'Quicksand', sans-serif;
-    width: 100%;
+    font-size: 5.875vw;
+    padding: 2.78125vw 6.875vw;
+}
+
+@media(min-width:768px) {
+    .timer-control-buttons button{
+        font-size: 2vw;
+        border-radius: 0.78125vw;
+        padding: 0.78125vh 3.875vw;
+    }
 }
 
 
@@ -436,7 +472,7 @@ body.dark-theme .top-buttons {
     color: #f5f6f7;
 }
 
-body.dark-theme header:after {
+body.dark-theme header {
     border-bottom: solid 1px #9c9c9c;
 }
 
@@ -673,20 +709,20 @@ body.dark-theme #timer-display {
 
 #focus-task {
     text-align: center;
-    width: 100%;
+    /* width: 75%; */
+    margin: 40px auto;
     list-style-type: none;
 }
 
 #select-focus {
     font-weight: 500;
     color: #f36060;
-    font-size: var(--main-font-size);
+    font-size: 1.875vw;
 }
 
 #focus-task task-item {
-    width: 80%;
-    border-left: solid 5px #eaeaea;
-    display: flex;
+    margin: 0 auto;
+    border-left: solid 0.46875vw #eaeaea;
 }
 
 
@@ -711,8 +747,13 @@ body.dark-theme #timer-display {
 }
 
 #pomodoro-timer.state {
+    float: none;
     width: auto;
-    /* margin: auto; */
+    margin-left: auto;
+}
+
+#focus-task.state {
+    width: 40%;
 }
 
 
@@ -731,4 +772,16 @@ footer {
     color: #646363;
     font-weight: 450;
     font-size: medium;
+}
+task-popup #add-task-popup{
+    width:100vw;
+    height: 100vh;
+    background-color:black;
+}
+ task-popup {
+    width: 100vw !important;
+ }
+
+.popup{
+    width:100vw;
 }

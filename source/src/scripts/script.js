@@ -98,6 +98,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const focusDiv = document.getElementById('focus-task');
     const focusDivTitle = document.getElementById('select-focus');
     const tasklist = document.getElementById('task-list-elements');
+    const main = document.getElementById('main')
 
     const taskNodes = buildTaskList();
     taskNodes.forEach((taskNode) => {
@@ -108,6 +109,13 @@ window.addEventListener('DOMContentLoaded', () => {
             tasklist.appendChild(taskNode);
         }
     });
+
+    let state = localStorage.getItem('state')
+    if (state == 'default') {
+        main.style.display = 'grid'
+    } else {
+        main.style.display = 'block'
+    }
 
     // initially hide completed tasks while showing incomplete
     showInComplete();
