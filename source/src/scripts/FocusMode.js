@@ -16,7 +16,9 @@ function toggleState() {
     button.classList.toggle('state');
     if (localStorage.getItem('state') === 'default') {
         localStorage.setItem('state', 'focus');
+        document.querySelector('main').style.display = 'block';
     } else {
+        document.querySelector('main').style.display = 'grid';
         localStorage.setItem('state', 'default');
         const title = document.getElementById('select-focus');
         if (title.innerHTML === 'All tasks complete!') {

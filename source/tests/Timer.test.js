@@ -28,6 +28,7 @@ test('start timer function', () => {
         <title id="tab-label">Pomodoro Timer</title>
     `;
     document.body.innerHTML = `
+        <main id="main"></main>
         <button id = "start-btn">Start</button>
         <div id="timer-display" class="timer-value">
             <div id="timer-display-duration">25:00</div>
@@ -53,6 +54,7 @@ test('Stop and reset function', () => {
         <title id="tab-label">Pomodoro Timer</title>
     `;
     document.body.innerHTML = `
+        <main id="main"></main>
         <button id = "start-btn">Stop</button>
         <button id="pomo-btn"> Pomo</button>
         <button id="break-btn"> Break</button>
@@ -76,6 +78,7 @@ test('Stop and reset function', () => {
 
 test('advance in time', () => {
     document.body.innerHTML = `
+        <main id="main"></main>
         <button id = "start-btn">Start</button>
         <button id = "pomo-btn"> Pomo</button>
         <div id="timer-display" class="timer-value">
@@ -111,6 +114,7 @@ test('advance in time', () => {
 
 test('stop() called when localStorage stop value is true', () => {
     document.body.innerHTML = `
+        <main id="main"></main>
         <button id = "start-btn">Start</button>
         <div id="timer-display" class="timer-value">
             <div id="timer-display-duration">25:00</div>
@@ -144,6 +148,7 @@ describe(('update tab label'), () => {
             <title id="tab-label">13:00 - Time to Focus!</title>
         `;
         document.body.innerHTML = `
+        <main id="main"></main>
             <button id = "start-btn">Stop</button>
             <button id="pomo-btn"> Pomo</button>
             <button id="break-btn"> Break</button>
@@ -170,6 +175,7 @@ describe(('update tab label'), () => {
             <title id="tab-label">Pomodoro Timer</title>
         `;
         document.body.innerHTML = `
+        <main id="main"></main>
             <button id = "start-btn">Start</button>
             <div id="timer-display" class="timer-value">
                 <div id="timer-display-duration">3:00</div>
@@ -196,6 +202,7 @@ describe(('update tab label'), () => {
             <title id="tab-label">Pomodoro Timer</title>
         `;
         document.body.innerHTML = `
+        <main id="main"></main>
             <button id = "start-btn">Start</button>
             <div id="timer-display" class="timer-value">
                 <div id="timer-display-duration">3:00</div>
@@ -233,6 +240,7 @@ describe(('update tab label'), () => {
             <title id="tab-label">Pomodoro Timer</title>
         `;
         document.body.innerHTML = `
+        <main id="main"></main>
             <button id = "start-btn">Start</button>
             <div id="timer-display" class="timer-value">
                 <div id="timer-display-duration">3:00</div>
@@ -352,6 +360,7 @@ describe(('switch mode'), () => {
 
     test('switch to long break when class is not toggle', () => {
         document.body.innerHTML = `
+        <main id="main"></main>
             <button id = "start-btn">Start</button>
             <div id="timer-display" class="timer-value">
                 <div id="timer-display-duration">0:01</div>
@@ -398,6 +407,7 @@ describe(('switch mode'), () => {
 
     test('switch to long break when class is toggle', () => {
         document.body.innerHTML = `
+        <main id="main"></main>
             <button id = "start-btn">Start</button>
             <div id="timer-display" class="timer-value">
                 <div id="timer-display-duration">0:01</div>
@@ -454,6 +464,7 @@ describe(('keyboard input'), () => {
 
         genericPageTemplate = `
             ${templates}
+        <main id="main"></main>
             <ul id="task-list-elements">
             </ul>
             <nav id="header-buttons">
@@ -594,6 +605,7 @@ describe(('keyboard input'), () => {
     test(('key press space stops the timer'), () => {
         document.body.innerHTML = `
             ${templates}
+        <main id="main"></main>
             <button id = "start-btn">Stop</button>
             <div id="timer-display" class="timer-value">
                 <div id="timer-display-duration">25:00</div>

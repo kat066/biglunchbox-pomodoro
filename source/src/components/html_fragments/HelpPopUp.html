@@ -2,92 +2,71 @@
     #accessibility-content li {
         margin-bottom: 0.390625vw;
     }
-    
     #accessibility-content {
         padding: 0;
-        margin-left: 1.875vw;
-        font-size: 1vw;
     }
-    
     #accessibility {
         font-weight: 500;
         color: rgb(85, 85, 85);
     }
-    
     #features-content li {
         margin-bottom: 0.390625vw;
     }
-    
     #features-content {
         padding: 0;
-        margin-left: 1.875vw;
-        font-size: 1vw;
     }
-    
     #features {
         font-weight: 500;
         color: rgb(85, 85, 85);
     }
-    
     #how-to-content li {
         margin-bottom: 0.390625vw;
     }
-    
     #how-to-content {
         padding: 0;
-        margin-left: 1.875vw;
-        font-size: 1vw;
     }
-    
     #how-to {
         font-weight: 500;
         color: rgb(85, 85, 85);
     }
-    
     h4 {
-        font-size: 1.15vw;
         color: rgb(85, 85, 85);
         font-weight: 500;
+        font-size: 25px;
     }
-    
+
     #help-container {
-        width: 85%;
         margin: 0 auto;
         /* height: 80%; */
-        height: 28.125vw;
+        max-height: 60vh;
         overflow: auto;
     }
-    
     #close-icon {
         /* width: 15px; */
-        width: 1.171875vw;
-        /* margin-top: 10px; */
-        /* margin-right: 10px; */
-        margin-top: 0.78125vw;
-        margin-right: 0.78125vw;
-        position: absolute;
-        top: 0;
-        right: 0;
+        width: 20px;
+        position:absolute;
+        top:20px;
+        right:20px;
         cursor: pointer;
         opacity: 0.33;
     }
-    
     #close-icon:hover {
         opacity: 1;
         transform: scale(1.1);
     }
-    
     #help-popup {
+        box-sizing: border-box;
         display: none;
         position: fixed;
         /* width: 30%; */
         /* width: 52%; */
-        width: 51.953125vw;
+        width: 90%;
         /* height: 30%; */
-        height: 35.15625vw;
-        /* border-radius: 4px; */
-        border-radius: 0.3125vw;
-        top: 18%;
+        height: fit-content;
+        /* border-radius: 4px;  */
+        border-radius: 10px;
+        padding: 20px;
+        top:18%;
         /* left: 34%; */
         left: 24%;
         z-index: 999;
@@ -96,9 +75,13 @@
         -webkit-animation-name: animatetop;
         -webkit-animation-duration: 0.3s;
         animation-name: animatetop;
-        animation-duration: 0.3s
+        animation-duration: 0.3s;
+        max-width:600px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-height: 80vh;
     }
-    
     @-webkit-keyframes animatetop {
         from {
             top: -200px;
@@ -109,7 +92,6 @@
             opacity: 1
         }
     }
-    
     @keyframes animatetop {
         from {
             top: -200px;
@@ -120,17 +102,37 @@
             opacity: 1
         }
     }
-    
-    #help-popup>h3 {
-        font-size: 1.6vw;
+    #help-popup > h3{
+        font-size: 30px;
         color: #f36060;
         border-bottom: solid 1px #d2d2d2;
         /* padding-bottom: 5px; */
-        padding-bottom: 0.390625vw;
-        width: 85%;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        width:100%;
         font-weight: 500;
         /* margin: 20px auto 10px auto; */
         margin: 1.5625vw auto 0.78125vw auto;
+    }
+
+    @media(min-width:768px) {
+        #help-popup > h3{
+            font-size: 40px;
+        }
+    }
+
+    ol, ul {
+        margin-left: 20px;
+    }
+
+    ol li{
+        font-size: 18px;
+        margin-left: 10px;
+    }
+
+    ul li{
+        font-size: 18px;
+        margin-left: 10px;
     }
 </style>
 <div id="help-popup" part="popup-wrapper">

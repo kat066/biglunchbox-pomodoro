@@ -2,27 +2,23 @@
     .button-footer {
         background-color: rgb(234 234 234);
         /* padding: 14px 20px; */
-        padding: 1.09375vw 1.5625vw;
+        position:absolute;
+        padding: 20px;
         text-align: right;
-        position: absolute;
-        bottom: 0;
-        right: 0;
         left: 0;
+        right: 0;
+        border-radius: 0 0 15px 15px;
         /* border-bottom-left-radius: 4px; */
         /* border-bottom-right-radius: 4px; */
-        border-bottom-left-radius: 0.3125vw;
-        border-bottom-right-radius: 0.3125vw;
     }
     #close-icon {
         /* width: 15px; */
-        width: 1.171875vw;
+        width: 20px;
         /* margin-top: 10px; */
         /* margin-right: 10px; */
-        margin-top: 0.78125vw;
-        margin-right: 0.78125vw;
         position:absolute;
-        top:0;
-        right:0;
+        top:20px;
+        right:20px;
         cursor: pointer;
         opacity: 0.33;
     }
@@ -31,23 +27,28 @@
         transform: scale(1.1);
     }
     #add-task-popup {
+        box-sizing: border-box;
         display: none;
         position: fixed;
         /* width: 30%; */
-        width: 29.296875vw;
+        width: 90%;
         /* height: 30%; */
-        height: 15.625vw;
+        max-width:600px;
         /* border-radius: 4px; */
-        border-radius: 0.3125vw;
-        top:25%;
-        left: 34%;
+        padding: 20px;
+        border-radius: 10px;
         z-index: 999;
         background-color: whitesmoke;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
         -webkit-animation-name: animatetop; 
         -webkit-animation-duration: 0.3s;
         animation-name: animatetop;
-        animation-duration: 0.3s
+        animation-duration: 0.3s;
+        width: 90%;
+        max-width: 600px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
     @-webkit-keyframes animatetop {
         from {top:-200px; opacity:0} 
@@ -59,19 +60,18 @@
     }
     #task-input {
         font-family: 'Quicksand', sans-serif;
-        font-size: 1.5vw;
+        font-size: 20px;
         font-weight: 600;
         width: 85%;
-        height: 22%;
+        height: 80px;
         background-color: whitesmoke;
         color: rgb(85, 85, 85); 
         border-style: hidden;
         /* border-radius: 5px; */
-        border-radius: 0.390625vw;
         outline: none;
         display: block;
         /* margin: 20px auto 0 auto; */
-        margin: 1.5625vw auto 0 auto;
+        margin-top: 0;
         font-weight: 500;
     }
     input[type='text']::placeholder {
@@ -79,30 +79,30 @@
         /* color: #A7A7A7; */
         color: #c7c7c75e;
     }
+
+
     #add-task-popup > h3{
-        font-size: 1.6vw;
+        font-size: 30px;
         font-weight: 500;
         color: #f36060;
         border-bottom: solid 1px #d2d2d2;
         /* padding-bottom: 5px; */
-        padding-bottom: 0.390625vw;
-        width: 85%;
+        padding-bottom: 10px;
+        width:100%;
+        margin: 0;
         /* margin: 20px auto 10px auto; */
-        margin: 1.5625vw auto 0.78125vw auto;
     }
     .popup-btns {
         cursor: pointer;
         border-style: none;
         /* border-radius: 4px; */
-        border-radius: 0.3125vw;
+        border-radius: 10px;
         text-align: center;
         background-color:#f36060;
         color:#fff;
         font-family: 'Quicksand', sans-serif;
-        height: 17%;
-        width: 20%;
         /* font-size: 1em; */
-        font-size: 1.25vw;
+        font-size: 20px;
         font-weight: 500;
         outline: none;
     }
@@ -112,13 +112,24 @@
     }
     #add-task-btn {
         /* padding: 8px 12px; */
-        padding: 0.625vw 0.9375vw;
+        padding: 10px 40px;
     }
     #cancel-task-btn {
         position: absolute;
         float:right;
         right: 5em;
         bottom: 2em;
+    }
+
+    @media(min-width:900px) {
+        #add-task-popup>h3 {
+            font-size: 40px;
+        }
+
+        #task-input{
+            font-size: 22px;
+        }
+
     }
 </style>
 <div id="add-task-popup" part="popup-wrapper">

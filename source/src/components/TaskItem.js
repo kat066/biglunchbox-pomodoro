@@ -18,7 +18,7 @@ class TaskItem extends HTMLElement {
 
             // toggle display
             if (this.style.display === 'none') {
-                this.style.display = 'flex';
+                this.style.display = 'grid';
             } else {
                 this.style.display = 'none';
             }

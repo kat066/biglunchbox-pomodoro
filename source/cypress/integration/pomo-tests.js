@@ -74,7 +74,7 @@ describe(('task list and timer'), () => {
         cy.get('#timer-display-duration').should('not.have.text', '25:00');
     });
 
-    it(('start the timer while adding the task'), () => {
+    it.skip(('start the timer while adding the task'), () => {
         cy.get('#task-popup-btn').trigger('click');
         cy.get('#start-btn').trigger('click');
         // timer runs without affect

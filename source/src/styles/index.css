@@ -64,65 +64,95 @@
         --timer-button-padding-width:30px;
         --timer-marigin:40px;
         --plus-circle-size:45px;
-        
     }     
 }
 html {
     height: 100%;
 }
 
-ul{
-    margin-block-start: 0px;
-    margin-block-end: 0px;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 0px;
-}
-
 body {
     padding: 0;
+    padding-bottom: 40px;
     margin: 0;
     font-family: 'Quicksand', sans-serif;
     background-color: #ffd5ca;
     box-sizing: border-box;
     min-height: 100%;
-    height: 100%;
     overflow: auto;
 }
 
 #container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    width:90%;
+    margin: auto;
+    max-width:1600px;
 }
 
 header {
+    margin-top: 1.275vh;
+    margin-bottom: 5.275vh;
     display: flex;
-    flex-direction:row;
-    justify-content:space-around;
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    margin-left: 10%;
-    margin-right: 10%;
+    border-bottom: 1px solid #7b0c0c4f;
+    flex-direction: column;
 }
+
+@media(min-width:768px) {
+    header {
+        flex-direction: row;
+    }
+
+    nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+main{
+    display: grid;
+    grid-template-columns: 1fr;
+    width:100%;
+    gap: 40px;
+}
+
 
 h1#header-name {
-    display:inline-block;
     color: #f36060;
-    font-size: var(--header-font-size);
+    font-size: 30px;
     font-weight: 500;
-    justify-content: center;
+    margin-bottom: 1.275vh;
 }
 
-#header-buttons {
+#header-buttons ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 0;
     margin: 0;
+    margin-bottom: 20px;
 }
 
+#header-buttons  button.top-buttons:hover {
+    filter: brightness(105%);
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+@media(min-width:768px) {
+    #header-buttons ul {
+        margin-bottom: 0;
+    }
+}
 
 #header-buttons ul li {
     display: inline-block;
+    margin-right: 10px;
+}
+
+#header-butons li:last-child {
+    margin-right: 0;
 }
 
 #focus-button {
@@ -133,76 +163,105 @@ h1#header-name {
     background-color: #f36060;
     color: #fff;
     outline: none;
-    height: var(--top-button-height);
-    width: var(--top-button-width);
+    height: 50px;
+    width: 50px;
 }
 
 #focus-button:hover {
     transform: scale(1.1);
 }
 
-.top-buttons {
+.top-buttons{
     cursor: pointer;
     border-style: none;
-    border-radius: 10%;
-    text-align: center;
+    border-radius: 10px;
     background-color: #f36060;
+    border:none;
     color: #fff;
-    outline: none;
-    height: var(--top-button-height);
-    width: var(--top-button-width);
+    height : 50px;
+    width: 50px;
+    padding: 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.top-buttons:hover {
-    filter: brightness(105%);
-    transform: scale(1.1);
-}
 
 .top-button-img {
-    display: inline-block;
-    vertical-align: middle;
-    width: var(--top-button-size);
-    height:  var(--top-button-size);
+    width: 25px;
+    height: 25px;
 }
 
 img#help {
-    width: var(--top-button-help-size);
-    height: var(--top-button-help-size);
+    width: 25px;
+    height: 25px;
 }
 
 img#focus {
-    width: var(--top-button-focus-size);
-    height: var(--top-button-focus-size);
-}
-header:after {
-    content: ' ';
-    display: block;
-    border-bottom: 1px solid #7b0c0c4f;
-    border-radius: 4px;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 1%;
+    width: 45px;
+    height: 45px;
 }
 
-#task-list {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: max-content;
-    max-width: 80%;
-    margin: 0 auto auto auto;
+@media(min-width:768px) {
+    h1#header-name {
+        font-size: 40px;
+    }
+    main {
+        grid-template-columns: 1fr 1fr;
+    } 
+
+    .top-buttons, #focus-button {
+        height : 60px;
+        width: 60px;
+    }
+
+    .top-button-img {
+        width: 35px;
+        height: 35px;
+    }
+
+    img#help {
+        width: 35px;
+        height: 35px;
+    }
+
+    img#focus {
+        width: 50px;
+        height: 50px;
+    }
 }
+
+
+#task-list {
+    width:100%;
+    margin: auto;
+}
+
+#task-list task-item{
+    height: 50px;
+    font-size: 18px;
+    max-width:700px;
+}
+
+@media(min-width:768px) {
+    #task-list {
+        margin: unset;
+    }
+    #task-list task-item{
+        font-size: 22px;
+        height: 60px;
+    }
+}
+
+#task-list task-item li{
+    width:100%;
+}
+
 menu{
-    margin-block-start: var(--timer-marigin);
-    margin-block-end: var(--timer-marigin);
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
-    padding-inline-start: 0px;
-    display:table;
-    width: fit-content;
+    display:flex;
+    justify-content: center;
     align-items: center;
+    padding: 0;
 }
 
 menu button{
@@ -211,13 +270,6 @@ menu button{
     -moz-transition: background-color 0.3s ease, filter 0.3s ease;
     -ms-transition: background-color 0.3s ease, filter 0.3s ease;
     -o-transition: background-color 0.3s ease, filter 0.3s ease;
-    color: white;
-    text-align: center;
-    font-weight: 500;
-    font-size: var(--main-font-size);
-    padding: var(--timer-button-padding-height) var(--timer-button-padding-width);
-    border:none;
-    cursor: pointer;
 }
 
 menu button:hover{
@@ -227,46 +279,69 @@ menu button:hover{
 
 #up-next[data-selected = "true"], #completed[data-selected = "true"] {
     background-color: #f36060;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 30px;
+    padding: 10px 20px;
+    border:none;
+    margin: 0;
+    cursor: pointer;
     margin-right: -1px;
+}
+#up-next {
+    border-radius: 10px 0 0 10px;
 }
 #up-next[data-selected = "false"], #completed[data-selected = "false"]{
     background-color: #f3606060;
+    color: white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 30px;
+    padding: 10px 20px;
+    border:none;
+    margin: 0;
+    cursor: pointer;
+}
+
+#completed {
+    border-radius: 0px 10px 10px 0px;
+}
+
+@media(min-width:768px) {
+    #up-next[data-selected = "true"], #completed[data-selected = "true"] {
+        font-size: 20px;
+    }
+    #up-next[data-selected = "false"], #completed[data-selected = "false"]{
+        font-size: 20px;
+    }
 
 }
-main {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    align-items:center;
-    margin-left: 10%;
-    margin-right: 10%;
-    height: 100%;
+
+@media(min-width:1024px) {
+    #up-next[data-selected = "true"], #completed[data-selected = "true"] {
+        font-size: 30px;
+    }
+    #up-next[data-selected = "false"], #completed[data-selected = "false"]{
+        font-size: 30px;
+    }
 }
+
 #pomodoro-timer {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: max-content;
-    width: max-content;
-    margin: 0 auto auto auto;
+    width:100%;
 }
 
 #task-list ul {
-    /* list-style-type: none; */
+    list-style-type: none;
     max-height: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
+    overflow: auto;
+    padding: 0;
 }
-
 
 #task-popup-btn {
     cursor: pointer;
-    height: var(--plus-circle-size);
-    width: var(--plus-circle-size);
+    height: 50px;
+    width: 50px;
     border-style: none;
     border-radius: 50%;
     text-align: center;
@@ -274,8 +349,15 @@ main {
     font-family: 'Quicksand', sans-serif;
     background-color: #f36060;
     outline: none;
-    margin: auto;
+    margin: 0 auto;
     display: block;
+}
+
+@media(min-width:768px) {
+    #task-popup-btn {
+        height: 60px;
+        width: 60px;
+    }
 }
 
 #task-popup-btn:hover {
@@ -284,7 +366,7 @@ main {
 }
 
 #plus {
-    width: var(--main-font-size);
+    width:70%;
     vertical-align: middle;
     aspect-ratio: 1 / 1;
 }
@@ -308,20 +390,23 @@ button {
 }
 .timer-buttons {
     width: fit-content;
+    margin: 0 auto;
+    margin-top: 0.25vh;
+    margin-bottom: 30px;
     display: table;
-    margin-top:var(--timer-marigin);
 }
 
 .timer-buttons button {
     border: none;
     color: white;
-    padding: var(--timer-button-padding-height) var(--timer-button-padding-width);
-    font-size: var(--main-font-size);
+    padding: 0.78125vw 1.875vw;
+    font-size: 1.5625vw;
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     outline: none;
-    
-
+    display: inline;
+    margin-right: -4.5px;
+    margin-left: -0px;
 }
 
 #pomo-btn {
@@ -351,7 +436,7 @@ div.empty-space-border {
     border-width: thick;
     border-radius: 50px;
     text-align: center;
-    padding: 15px;
+    padding: 0.46875vw;
     opacity: 0;
 }
 
@@ -359,16 +444,26 @@ div.empty-space-border {
 /* CSS for Clock Test and Border Surrounding it */
 
 div.timer-value {
-    font-size: var(--header-font-size);
-    margin-top: var(--timer-marigin);
+    font-size: 80px;
     color: #fff;
     border-style: solid;
     border-color: #f36060;
     border-width: thick;
-    border-radius: 30px;
+    border-radius: 40px;
     text-align: center;
-    padding: 50px; 
-    width: 80%; 
+    width:100%;
+}
+
+@media(min-width:768px) {
+    div.timer-value {
+        font-size: 100px;
+    }
+}
+
+@media(min-width:1024px) {
+    div.timer-value {
+        font-size: 130px;
+    }
 }
 
 #timer-display {
@@ -387,6 +482,14 @@ div.timer-value {
     -moz-transition: none;
     -ms-transition: none;
     -o-transition: none;
+    box-sizing: border-box;
+    height: 30vh;
+    max-height: 500px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    max-width: 700px;
 }
 
 #timer-display[data-started] {
@@ -402,29 +505,33 @@ div.timer-value {
 #timer-display[data-started].break {
     background-size: 100% calc(100% + 5vh);
 }
-#timer-display-duration {
-    margin: auto;
-}
 
 /* CSS for Start/Reset Buttons */
 
 .timer-control-buttons {
     text-align: center;
-    width: 80%;
 }
 
 .timer-control-buttons button {
-    margin-top: var(--timer-marigin);
+    margin-top: 2.6vh;
     background-color: #f36060;
     border: none;
     color: white;
-    padding:var(--timer-button-padding-height) var(--timer-button-padding-width);
-    font-size: var(--main-font-size);
+    cursor: pointer;
     font-weight: 500;
-    border-radius: 0.625vw;
+    border-radius: 20px;
     outline: none;
     font-family: 'Quicksand', sans-serif;
-    width: 100%;
+    font-size: 30px;
+    padding: 10px 40px;
+}
+
+@media(min-width:768px) {
+    .timer-control-buttons button{
+        font-size: 40px;
+        border-radius: 30px;
+        padding: 10px 50px;
+    }
 }
 
 
@@ -462,7 +569,7 @@ body.dark-theme .top-buttons {
     color: #f5f6f7;
 }
 
-body.dark-theme header:after {
+body.dark-theme header {
     border-bottom: solid 1px #9c9c9c;
 }
 
@@ -699,20 +806,29 @@ body.dark-theme #timer-display {
 
 #focus-task {
     text-align: center;
-    width: 100%;
+    /* width: 75%; */
+    margin: 40px auto;
     list-style-type: none;
+    max-width: 700px;
 }
 
 #select-focus {
     font-weight: 500;
     color: #f36060;
-    font-size: var(--main-font-size);
+    font-size: 30px;
 }
 
 #focus-task task-item {
-    width: 80%;
-    border-left: solid 5px #eaeaea;
-    display: flex;
+    border-left: solid 0.46875vw #eaeaea;
+    height: 50px;
+    font-size: 18px;
+    text-align: left;
+}
+@media(min-width:768px) {
+    #focus-task task-item {
+        height: 60px;
+        font-size: 22px;
+    }
 }
 
 
@@ -737,9 +853,15 @@ body.dark-theme #timer-display {
 }
 
 #pomodoro-timer.state {
+    float: none;
     width: auto;
-    /* margin: auto; */
+    margin-left: auto;
 }
+
+#focus-task.state {
+    max-width:600px;
+}
+
 
 
 /* Footer CSS left side */
