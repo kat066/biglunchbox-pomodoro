@@ -125,6 +125,22 @@ h1#header-name {
     display: inline-block;
 }
 
+#focus-button {
+    cursor: pointer;
+    border-style: none;
+    border-radius: 10%;
+    text-align: center;
+    background-color: #f36060;
+    color: #fff;
+    outline: none;
+    height: var(--top-button-height);
+    width: var(--top-button-width);
+}
+
+#focus-button:hover {
+    transform: scale(1.1);
+}
+
 .top-buttons {
     cursor: pointer;
     border-style: none;
@@ -428,6 +444,11 @@ body.dark-theme {
 }
 
 body.dark-theme h1#header-name {
+    color: #f5f6f7;
+}
+
+body.dark-theme #focus-button {
+    background-color: #4a5568;
     color: #f5f6f7;
 }
 
