@@ -96,7 +96,6 @@ test('All attributes set correctly', () => {
     expect(shadow.querySelector('button').innerHTML).toBe('Add');
 
     // close icon attributes set correctly
-    expect(shadow.querySelector('img').getAttribute('src')).toBe('icons/close.svg');
     expect(shadow.querySelector('img').getAttribute('id')).toBe('close-icon');
 });
 

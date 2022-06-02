@@ -144,7 +144,7 @@ describe(('focus task'), () => {
     //         </ul>
     //     `;
     //     const task0 = document.getElementById('3');
-    //     task0.shadowRoot.querySelector('img[src="icons/focus.svg"]').click();
+    //     task0.shadowRoot.querySelector('img.focus-icon').click();
 
     //     const taskList = document.getElementById('task-list-elements');
     //     expect(taskList.childElementCount).toBe(2);
@@ -170,14 +170,14 @@ describe(('focus task'), () => {
 
     // test.only(('change focus task to task does not exist in localStorage does nothing'), () => {
     //     const task0 = document.getElementById('0');
-    //     task0.shadowRoot.querySelector('img[src="icons/focus.svg"]').click();
+    //     task0.shadowRoot.querySelector('img.focus-icon').click();
 
     //     const focusDiv = document.getElementById('focus-task');
     //     const focusTask = focusDiv.querySelector('task-item');
     //     focusTask.setAttribute('id', '3');
 
     //     const task1 = document.getElementById('1');
-    //     task1.shadowRoot.querySelector('img[src="icons/focus.svg"]').click();
+    //     task1.shadowRoot.querySelector('img.focus-icon').click();
     //     expect(task0.getAttribute('focused')).toBe('false');
     //     expect(task1.getAttribute('focused')).toBe('true');
 

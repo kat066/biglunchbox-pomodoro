@@ -286,6 +286,7 @@ main {
 #plus {
     width: var(--main-font-size);
     vertical-align: middle;
+    aspect-ratio: 1 / 1;
 }
 
 img#dash {
@@ -434,6 +435,10 @@ div.timer-value {
     filter: brightness(105%);
 }
 
+/* CSS Code for different icons and sizes in sprites */
+::part(close-icon) {
+    aspect-ratio: 1 / 1;
+}
 
 /* Dark Mode Styles */
 

@@ -9,20 +9,21 @@
     "test": "source/tests"
   },
   "scripts": {
-    "start": "http-server source/src -p=5500 -g -c-1",
+    "start": "npm run bundle:icons && http-server source/src -p=5500 -g -c-1",
     "watch": "watch 'npm run instrument' source/src/components source/src/scripts",
     "test": "NODE_ENV=jest jest",
     "test:watch": "npm run test -- --watch",
     "lint:fix": "eslint --fix --fix-type layout source/",
     "lint:verify": "eslint source/",
     "instrument": "nyc instrument --delete --complete-copy source/src source/cypress_build",
-    "cy:build": "npm run instrument",
+    "cy:build": "npm run instrument & npm run bundle:icons",
     "cy:start": "npm run cy:build && http-server source/cypress_build -p=5500",
     "cy:test": "cypress run",
-    "test:init": "rimraf source/test_build/ && cp -a source/src source/test_build/",
+    "bundle:icons": "npx svg-sprite --config \".svg-sprite.json\" \"source/src/icons/*.svg\"",
+    "test:init": "rimraf source/test_build/ && npm run bundle:icons && cp -a source/src source/test_build/",
     "test:gzip": "find source/test_build \\( -name '*.css' -o -name '*.html' -o -name '*.js' -o -name '*.svg' \\) -exec gzip -9 --keep {} \\;",
     "test:build": "npm run test:init && npm run test:gzip",
-    "test:start": "http-server source/test_build -p=5500 -g -c-1"
+    "test:start": "http-server source/test_build -p=5500 -g -c-600"
   },
   "repository": {
     "type": "git",
@@ -55,7 +56,8 @@
     "jest-localstorage-mock": "^2.4.7",
     "jsdoc": "^3.6.6",
     "lint-staged": "^10.5.4",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "svg-sprite": "^1.5.4"
   },
   "jest": {
     "verbose": true,

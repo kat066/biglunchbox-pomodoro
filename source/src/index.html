@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="tab-label">Pomodoro Timer</title>
     
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" as="font">
     <link rel="stylesheet" href="styles/index.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" type="image/x-icon" href="icons/favicon.ico">
 
-    <link ref="preload" href="icons/btnClick.mp3" as="audio">
-    <link ref="preload" href="icons/alarm.mp3" as="audio">
-    <link ref="preload" href="scripts/Timer.worker.js" as="script">
+    <link rel="prefetch" href="assets/icons-cd826e74.svg" as="image">
+    <link rel="preload" href="icons/btnClick.mp3" as="audio">
+    <link rel="preload" href="icons/alarm.mp3" as="audio">
+    <link rel="preload" href="scripts/Timer.worker.js" as="worker">
 
     <script src="scripts/script.js"></script>
     <script src="scripts/Timer.js" type="module"></script>
@@ -36,7 +37,7 @@
     </script>
 <template id="help-popup-template">
     <style>
-        #accessibility-content li{
+        #accessibility-content li {
             margin-bottom: 0.390625vw;
         }
         #accessibility-content {
@@ -91,12 +92,11 @@
             /* margin-right: 10px; */
             margin-top: 0.78125vw;
             margin-right: 0.78125vw;
-            position:absolute;
-            top:0;
-            right:0;
+            position: absolute;
+            top: 0;
+            right: 0;
             cursor: pointer;
             opacity: 0.33;
-            transition: transform .3s ease;
         }
         #close-icon:hover {
             opacity: 1;
@@ -110,28 +110,41 @@
             width: 51.953125vw;
             /* height: 30%; */
             height: 35.15625vw;
-            /* border-radius: 4px;  */
+            /* border-radius: 4px; */
             border-radius: 0.3125vw;
-            top:18%;
+            top: 18%;
             /* left: 34%; */
             left: 24%;
             z-index: 999;
             background-color: whitesmoke;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-            -webkit-animation-name: animatetop; 
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            -webkit-animation-name: animatetop;
             -webkit-animation-duration: 0.3s;
             animation-name: animatetop;
             animation-duration: 0.3s
         }
         @-webkit-keyframes animatetop {
-            from {top:-200px; opacity:0} 
-            to {top:70; opacity:1}
+            from {
+                top: -200px;
+                opacity: 0
+            }
+            to {
+                top: 70;
+                opacity: 1
+            }
         }
         @keyframes animatetop {
-            from {top:-200px; opacity:0}
-            to {top:70; opacity:1}
+            from {
+                top: -200px;
+                opacity: 0
+            }
+            to {
+                top: 70;
+                opacity: 1
+            }
         }
-        #help-popup > h3{
+        
+        #help-popup>h3 {
             font-size: 1.6vw;
             color: #f36060;
             border-bottom: solid 1px #d2d2d2;
@@ -144,7 +157,7 @@
         }
     </style>
     <div id="help-popup" part="popup-wrapper">
-        <img src="icons/close.svg" id="close-icon" part="close-icon">
+        <img src="assets/icons-cd826e74.svg#close" id="close-icon" part="close-icon">
         <h3 part="help-h3">Help</h3>
         <div id="help-container">
             <div id="how-to" part="instructions">
@@ -171,14 +184,14 @@
             <div id="accessibility" part="accessibility">
                 <h4 part="h4">Keyboard Shortcuts</h4>
                 <ul id="accessibility-content">
-                    <li>'h'     - Help page pop up</li>
-                    <li>';'     - Settings pop up</li>
-                    <li>'r'     - Reset pop up</li>
-                    <li>'f'     - Focus mode</li>
-                    <li>'a'     - Add task</li>
+                    <li>'h' - Help page pop up</li>
+                    <li>';' - Settings pop up</li>
+                    <li>'r' - Reset pop up</li>
+                    <li>'f' - Focus mode</li>
+                    <li>'a' - Add task</li>
                     <li>'Space' - Start/stop</li>
                     <li>'Enter' - Confirm/Add</li>
-                    <li>'Esc'   - Cancel/Close</li>
+                    <li>'Esc' - Cancel/Close</li>
                 </ul>
             </div>
         </div>
@@ -187,9 +200,6 @@
 <script src="components/HelpPopUp.js" type="module" async></script>
 <template id="settings-popup-template">
     <style>
-        button {
-            transition: transform .3s ease;
-        }
         h4 {
             font-size: var(--setting-h4);
             color: rgb(85, 85, 85);
@@ -340,13 +350,11 @@
             right:0;
             cursor: pointer;
             opacity: 0.33;
-            transition: transform .3s ease;
         }
         #close-icon:hover {
             opacity: 1;
             transform: scale(1.1);
         }
-        
         #settings-confirm-popup {
             flex-wrap: wrap;
             position:absolute;
@@ -354,7 +362,6 @@
             height:max-content;
             padding-left: 2.5%;
             padding-right: 2.5%;
-            padding-bottom: 0.30625vw;
             border-radius: 0.3125vw;
             top: 50vh;
             left: 50%;
@@ -438,7 +445,7 @@
     </style>
     <!-- Part attributes are set to change the style in a global stylesheet -->
     <div id="settings-confirm-popup" part="settings-confirm-popup">
-        <img src="icons/close.svg" id="close-icon" part="close-icon">
+        <img src="assets/icons-cd826e74.svg#close" id="close-icon" part="close-icon">
         <h3 part="settings-h3">Settings</h3>
         <h4 id="timer-settings" part="timer-settings">Session Length (minutes)</h4>
         <div id="session" class="single-setting">
@@ -496,16 +503,13 @@
         </div>
         <div class="button-footer" part="btn-footer">
             <p class = "warning-message" style="text-align:left" part="volume-number">WARNING: Any changes to settings will reset the timer if running!</p>
-            <button id="confirm-settings-btn" class="settings-popup-btns" part="confirm-btn">Confirm</button>
+            <button class="settings-popup-btns" id="confirm-settings-btn" part="confirm-btn">Confirm</button>
         </div>
     </div>
 </template>
 <script src="components/SettingsPopUp.js" type="module" async></script>
 <template id="reset-popup-template">
     <style>
-        button{
-            transition: transform .3s ease;
-        }
         .button-footer {
             background-color: rgb(234 234 234);
             /* padding: 14px 20px; */
@@ -532,7 +536,6 @@
             right:0;
             cursor: pointer;
             opacity: 0.33;
-            transition: transform .3s ease;
         }
         #close-icon:hover {
             opacity: 1;
@@ -616,7 +619,7 @@
         } */
     </style>
     <div id="reset-confirm-popup" part="popup-wrapper">
-        <img src="icons/close.svg" alt="" id="close-icon" part="close-icon">
+        <img src="assets/icons-cd826e74.svg#close" alt="" id="close-icon" part="close-icon">
         <h3 part="reset-confirm-h3">Are you sure?</h3>
         <h5 id="reset-content" part="reset-content">This will reset your current pomodoro session and wipe out your jotted tasks!</h5>
         <div class="button-footer" part="btn-footer">
@@ -669,7 +672,7 @@
             vertical-align: middle;
             /* width: 20px; */
             /* height: 20px; */
-            width: var(--main-font-size);
+            aspect-ratio: 1 / 1;
             height: var(--main-font-size);
             visibility: hidden;
             margin: 0;
@@ -719,11 +722,12 @@
         }
     </style>
     <li id="li">
-        <img src="icons/check.svg" alt="" part="test" class="check-icon">
+        <img src="assets/icons-cd826e74.svg#check" alt="" part="test" class="check-icon">
         <span id="task-text"></span>
-        <div><img src="icons/focus.svg" alt="" title="Focus on this task" class="focus-icon">
-            <img src="icons/delete.svg" alt="" title="Delete this task" class="delete-icon"></div>
-        
+        <div>
+            <img src="assets/icons-cd826e74.svg#focus" alt="" title="Focus on this task" class="focus-icon">
+            <img src="assets/icons-cd826e74.svg#delete" alt="" title="Delete this task" class="delete-icon">
+        </div>
     </li>
 </template>
 <script src="components/TaskItem.js" type="module" async></script>
@@ -755,7 +759,6 @@
             right:0;
             cursor: pointer;
             opacity: 0.33;
-            transition: transform .3s ease;
         }
         #close-icon:hover {
             opacity: 1;
@@ -836,7 +839,6 @@
             font-size: 1.25vw;
             font-weight: 500;
             outline: none;
-            transition: transform .3s ease;
         }
         .popup-btns:hover {
             filter: brightness(105%);
@@ -854,7 +856,7 @@
         }
     </style>
     <div id="add-task-popup" part="popup-wrapper">
-        <img src="icons/close.svg" alt="" id="close-icon" part="close-icon">
+        <img src="assets/icons-cd826e74.svg#close" alt="" id="close-icon" part="close-icon">
         <h3 part="add-task-h3">Add Task</h3>
         <input type="text" name="" id="task-input" placeholder="What are you working on today?" maxlength="48" spellcheck="false" part="task-input">
         <div class="button-footer" part="btn-footer">
@@ -870,20 +872,22 @@
                 <ul>
                     <li title="Focus">
                         <button id="focus-button">
-                            <img src="icons/half-moon.svg" id="focus" class="top-button-img" alt="Focus">
+                            <img src="assets/icons-cd826e74.svg#half-moon" id="focus" class="top-button-img" alt="Focus">
                         </button>
                     </li>
                     <li title="Reset">
                         <button class="top-buttons" id="reset-button">
-                            <img src="icons/reset.svg" id="reset" class="top-button-img" alt="Reset">
+                            <img src="assets/icons-cd826e74.svg#reset" id="reset" class="top-button-img" alt="Reset">
                         </button>
                     </li>
-                    <li title="Settings"><button class="top-buttons" id="setting-button">
-                            <img src="icons/settings.svg" id="gear" class="top-button-img" alt="Settings">
+                    <li title="Settings">
+                        <button class="top-buttons" id="setting-button">
+                            <img src="assets/icons-cd826e74.svg#settings" id="gear" class="top-button-img" alt="Settings">
                         </button>
                     </li>
-                    <li title="Help"><button class="top-buttons" id="help-button">
-                            <img src="icons/help.svg" id="help" class="top-button-img" alt="Help">
+                    <li title="Help">
+                        <button class="top-buttons" id="help-button">
+                            <img src="assets/icons-cd826e74.svg#help" id="help" class="top-button-img" alt="Help">
                         </button>
                     </li>
                 </ul>
@@ -912,7 +916,9 @@
                 </menu>
                 <ul id="task-list-elements">
                 </ul>
-                <button id="task-popup-btn" title="Add Task"> <img src="icons/plus.svg" id="plus"></button>
+                <button id="task-popup-btn" title="Add Task">
+                    <img src="assets/icons-cd826e74.svg#plus" id="plus">
+                </button>
             </section>
         </main>
         <!-- <footer>
