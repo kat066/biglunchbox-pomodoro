@@ -241,6 +241,7 @@ main {
     margin-left: 10%;
     margin-right: 10%;
     height: 100%;
+
 }
 #pomodoro-timer {
     display: inline-flex;
