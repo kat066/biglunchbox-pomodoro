@@ -313,7 +313,7 @@ button {
 
 .timer-buttons button {
     border: none;
-    color: white;
+    color: #f36060;
     padding: var(--timer-button-padding-height) var(--timer-button-padding-width);
     font-size: var(--main-font-size);
     font-family: 'Quicksand', sans-serif;
@@ -324,19 +324,21 @@ button {
 }
 
 #pomo-btn {
-    background-color: #f36060;
+    background-color: #f3606000;
+    display: inline-block;
 }
 
 #pomo-btn.toggle {
-    background-color: #f3606060;
+    display: none;
 }
 
 #break-btn {
-    background-color: #f3606060;
+    display: none;
 }
 
 #break-btn.toggle {
-    background-color: #f36060;
+    background-color: #f3606000;
+    display: inline-block;
 }
 
 
@@ -466,19 +468,21 @@ body.dark-theme .timer-buttons button {
 }
 
 body.dark-theme #pomo-btn {
-    background-color: #4a5568;
+    background-color: #2d384800;
+    display: inline-block;
 }
 
 body.dark-theme #pomo-btn.toggle {
-    background-color: #2d3848bf;
+    display: none;
 }
 
 body.dark-theme #break-btn {
-    background-color: #2d3848bf;
+    display: none;
 }
 
 body.dark-theme #break-btn.toggle {
-    background-color: #4a5568;
+    background-color: #2d384800;
+    display: inline-block;
 }
 
 body.dark-theme div.empty-space-border {
