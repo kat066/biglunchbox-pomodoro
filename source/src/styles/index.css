@@ -125,6 +125,22 @@ h1#header-name {
     display: inline-block;
 }
 
+#focus-button {
+    cursor: pointer;
+    border-style: none;
+    border-radius: 10%;
+    text-align: center;
+    background-color: #f36060;
+    color: #fff;
+    outline: none;
+    height: var(--top-button-height);
+    width: var(--top-button-width);
+}
+
+#focus-button:hover {
+    transform: scale(1.1);
+}
+
 .top-buttons {
     cursor: pointer;
     border-style: none;
@@ -270,6 +286,7 @@ main {
 #plus {
     width: var(--main-font-size);
     vertical-align: middle;
+    aspect-ratio: 1 / 1;
 }
 
 img#dash {
@@ -418,6 +435,10 @@ div.timer-value {
     filter: brightness(105%);
 }
 
+/* CSS Code for different icons and sizes in sprites */
+::part(close-icon) {
+    aspect-ratio: 1 / 1;
+}
 
 /* Dark Mode Styles */
 
@@ -428,6 +449,11 @@ body.dark-theme {
 }
 
 body.dark-theme h1#header-name {
+    color: #f5f6f7;
+}
+
+body.dark-theme #focus-button {
+    background-color: #4a5568;
     color: #f5f6f7;
 }
 

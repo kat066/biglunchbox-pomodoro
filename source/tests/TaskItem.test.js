@@ -144,7 +144,11 @@ describe(('focus task'), () => {
     //         </ul>
     //     `;
     //     const task0 = document.getElementById('3');
+<<<<<<< HEAD
     //     task0.shadowRoot.querySelector('img[src="icons/focus.svg"]').click();
+=======
+    //     task0.shadowRoot.querySelector('img.focus-icon').click();
+>>>>>>> 96644b2aa075383dc1d697be00ed95e22a244aac
 
     //     const taskList = document.getElementById('task-list-elements');
     //     expect(taskList.childElementCount).toBe(2);
@@ -170,14 +174,22 @@ describe(('focus task'), () => {
 
     // test.only(('change focus task to task does not exist in localStorage does nothing'), () => {
     //     const task0 = document.getElementById('0');
+<<<<<<< HEAD
     //     task0.shadowRoot.querySelector('img[src="icons/focus.svg"]').click();
+=======
+    //     task0.shadowRoot.querySelector('img.focus-icon').click();
+>>>>>>> 96644b2aa075383dc1d697be00ed95e22a244aac
 
     //     const focusDiv = document.getElementById('focus-task');
     //     const focusTask = focusDiv.querySelector('task-item');
     //     focusTask.setAttribute('id', '3');
 
     //     const task1 = document.getElementById('1');
+<<<<<<< HEAD
     //     task1.shadowRoot.querySelector('img[src="icons/focus.svg"]').click();
+=======
+    //     task1.shadowRoot.querySelector('img.focus-icon').click();
+>>>>>>> 96644b2aa075383dc1d697be00ed95e22a244aac
     //     expect(task0.getAttribute('focused')).toBe('false');
     //     expect(task1.getAttribute('focused')).toBe('true');
 

@@ -126,7 +126,7 @@ test('Cancel Button functions as intended', () => {
     shortBreakLength.value = '10';
     longBreakLength.value = '20';
 
-    const cancelBtn = shadow.querySelector("img[src='icons/close.svg']");
+    const cancelBtn = shadow.getElementById('close-icon');
 
     cancelBtn.click();
 
@@ -198,7 +198,6 @@ test('All attributes set correctly', () => {
 
     // cancel icon attributes set correctly
     expect(shadow.querySelector('img').getAttribute('id')).toBe('close-icon');
-    expect(shadow.querySelector('img').getAttribute('src')).toBe('icons/close.svg');
 });
 
 test('Pop up button works correctly', () => {

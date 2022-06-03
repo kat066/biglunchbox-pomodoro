@@ -157,7 +157,7 @@ describe(('interact with exist task list while timer is runing'), () => {
         cy.get('#start-btn').trigger('click');
         cy.get('#focus-button').trigger('click');
         cy.get('#0').shadow()
-            .find('img[src="icons/delete.svg"]').click({ force: true });
+            .find('img.delete-icon').click({ force: true });
         cy.get('#0').should('have.length', 0);
         cy.get('#timer-display-duration').should('not.have.text', '25:00');
     });
