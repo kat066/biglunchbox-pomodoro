@@ -1,6 +1,6 @@
 # Pomodoro Timer
 
-**We are Big Lunchbox!**
+**We are Big Lunchbox! (and Juhmer is testing github actions #1)**
 
 =======
 Adopted and forked from the Pomodoro Timer by [Runtime Terror](https://github.com/Jackie1342/cse110-w21-group13).
