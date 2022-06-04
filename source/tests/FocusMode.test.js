@@ -6,6 +6,7 @@ let pageTemplate;
 
 beforeAll(() => {
     pageTemplate = `
+        <main id="main"></main>
         <nav id="header-buttons">
             <button class='top-buttons' id='focus-button'>
                 <img src="icons/half-moon.svg" id="focus" class="top-button-img" alt="focus">

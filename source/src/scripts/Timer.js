@@ -163,8 +163,10 @@ function toggleState() {
 
     if (localStorage.getItem('state') === 'default') {
         localStorage.setItem('state', 'focus');
+        document.querySelector('main').style.display = 'block';
     } else {
         localStorage.setItem('state', 'default');
+        document.querySelector('main').style.display = 'grid';
         const title = document.getElementById('select-focus');
         if (title.innerHTML === 'All tasks complete!') {
             title.innerHTML = '';

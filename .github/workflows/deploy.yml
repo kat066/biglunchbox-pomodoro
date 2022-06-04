@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: 16
           cache: 'npm'
-      
+
       - name: Cache Cypress installation
         uses: actions/cache@v3
         id: cache-cypress
@@ -32,18 +32,15 @@ jobs:
           path: ~/.cache/Cypress
           key: cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
           restore-keys: |
-            cypress-${{ runner.os }}-cypress-${{ github.ref }}-${{ hashFiles('**/package.json') }}
+            cypress-${{ runner.os }}-cypress-
 
-      - name: Install modules and ready build
-        run: |
-          npm ci
-          mkdir build
-          cp -av source/src/* build
-      
+      - name: Install modules
+        run: npm ci
+
       - name: Build docs
         uses: andstor/jsdoc-action@v1
         with:
-          source_dir: build/
+          source_dir: source/src
           output_dir: build/docs
           template: minami
           front_page: README.md
@@ -59,8 +56,8 @@ jobs:
           browser: chrome
           start: npm run cy:start
 
-      - name: Move coverage reports to build directory
-        run: cp -av source/coverage build/coverage
+      - name: Prepare build
+        run: rsync -a --exclude=html_fragments --exclude=.eslintrc source/src/ build
 
       - name: Deploy build on gh-pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
