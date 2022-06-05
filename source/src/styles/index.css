@@ -89,7 +89,7 @@ body {
 
 header {
     margin-top: 1.275vh;
-    margin-bottom: 5.275vh;
+    margin-bottom: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -100,6 +100,7 @@ header {
 @media(min-width:768px) {
     header {
         flex-direction: row;
+        margin-bottom: 5vh;
     }
 
     nav{
@@ -262,6 +263,7 @@ menu{
     justify-content: center;
     align-items: center;
     padding: 0;
+    margin-bottom: 40px;
 }
 
 menu button{
@@ -382,7 +384,6 @@ img#dash {
 
 /* Code BELOW is for Clock */
 
-
 /* CSS for Pomo/Break button dispaly */
 /* Smoothen Buttons */
 button {
@@ -391,26 +392,37 @@ button {
 .timer-buttons {
     width: fit-content;
     margin: 0 auto;
-    margin-top: 0.25vh;
-    margin-bottom: 30px;
-    display: table;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
 }
 
-.timer-buttons button {
+.timer-buttons h2 {
     border: none;
-    background-color: #f3606000;
-    padding: 0.78125vw 1.875vw;
-    font-size: 1.5625vw;
+    font-size: 30px;
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     outline: none;
     display: inline;
-    margin-right: -4.5px;
-    margin-left: -0px;
 }
+
+@media(min-width:768px) {
+    .timer-buttons h2 {
+        font-size: 35px;
+    }
+}
+
+@media(min-width:1300px) {
+    .timer-buttons h2 {
+        font-size: 45px;
+    }
+}
+
 
 #pomo-btn {
     color: #f36060;
+    margin:0;
 }
 
 #pomo-btn.toggle {
@@ -419,6 +431,7 @@ button {
 
 #break-btn {
     color: #f3606033;
+    margin: 0;
 }
 
 #break-btn.toggle {
