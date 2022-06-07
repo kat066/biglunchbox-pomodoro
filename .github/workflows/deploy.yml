@@ -57,7 +57,9 @@ jobs:
           start: npm run cy:start
 
       - name: Prepare build
-        run: rsync -a --exclude=html_fragments --exclude=.eslintrc source/src/ build
+        run: |
+          rsync -a --exclude=html_fragments --exclude=.eslintrc source/src/ build
+          mv source/coverage build
 
       - name: Deploy build on gh-pages
         uses: JamesIves/github-pages-deploy-action@4.1.0
