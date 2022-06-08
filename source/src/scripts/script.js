@@ -22,6 +22,8 @@
             localStorage.setItem(key, value.toString());
         }
     });
+
+    console.log('demo');
 }());
 
 function getTasks() {
