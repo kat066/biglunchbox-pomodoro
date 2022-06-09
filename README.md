@@ -16,6 +16,8 @@ You can find our app [here!](https://kat066.github.io/biglunchbox-pomodoro/)
 
 **New to the team? Read the [onboarding documentation](https://github.com/kat066/biglunchbox-pomodoro/wiki/Onboarding) in our Wiki!**
 
+**Our meeting notes and other admin docs are now in [this google drive](https://drive.google.com/drive/folders/119w_38hggwadXYFvF0a3qDRQCiQhyodu?usp=sharing) (accessible to anyone with a UCSD email).**
+
 # Keyboard Events
 
 ## Main Page:
